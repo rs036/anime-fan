@@ -1494,3 +1494,75 @@ document.addEventListener(
     refreshFavoriteButtons();
   }
 );
+
+/* =========================================================
+   ANIME FAN V2.4 — REAL POSTER IMAGES
+   Uses Jikan/MyAnimeList public image data
+   ========================================================= */
+
+const animePosterIds = {
+  "one-piece": 21,
+  "jujutsu-kaisen": 40748,
+  "demon-slayer": 38000,
+  "attack-on-titan": 16498,
+  "solo-leveling": 52299,
+  "black-clover": 34572
+};
+
+async function loadAnimePosters() {
+
+  const cards = document.querySelectorAll(".card[data-anime]");
+
+  if (!cards.length) return;
+
+  cards.forEach(cardElement => {
+
+    const id = cardElement.dataset.anime;
+    const malId = animePosterIds[id];
+
+    if (!malId) return;
+
+    fetch(`https://api.jikan.moe/v4/anime/${malId}/full`)
+      .then(response => response.json())
+      .then(data => {
+
+        const image =
+          data?.data?.images?.webp?.large_image_url ||
+          data?.data?.images?.jpg?.large_image_url;
+
+        if (!image) return;
+
+        const poster =
+          cardElement.querySelector(".poster");
+
+        if (!poster) return;
+
+        poster.style.backgroundImage =
+          `linear-gradient(
+            180deg,
+            rgba(0,0,0,0.02) 30%,
+            rgba(0,0,0,0.78) 100%
+          ), url("${image}")`;
+
+        poster.style.backgroundSize = "cover";
+        poster.style.backgroundPosition = "center";
+
+        poster.classList.add("real-poster");
+
+      })
+      .catch(() => {
+        // Keep existing gradient poster if API is unavailable.
+      });
+
+  });
+}
+
+
+/* Load posters after homepage/cards are rendered */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+    setTimeout(loadAnimePosters, 500);
+  }
+);
