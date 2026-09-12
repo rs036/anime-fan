@@ -740,10 +740,14 @@ function renderWatch() {
                 ◀ Previous
               </a>
 
-              <a
-                class="btn primary"
-                href="watch.html?anime=${id}&episode=${Math.min(a.episodes, ep + 1)}"
-              >
+              ${ep < a.episodes ? `
+  <a
+    class="btn primary"
+    href="watch.html?anime=${id}&episode=${ep + 1}"
+  >
+    Next Episode ▶
+  </a>
+` : ""}
                 Next Episode ▶
               </a>
 
