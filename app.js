@@ -749,9 +749,6 @@ function renderWatch() {
               </a>
             ` : ""}
 
-                Next Episode ▶
-              </a>
-
             </div>
 
           </div>
