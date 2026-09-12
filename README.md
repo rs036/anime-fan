@@ -1,6 +1,6 @@
-# Anime Fan v2
+# Anime Fan v2.1
 
-Premium black + red responsive anime website UI.
+Premium black + red responsive anime website UI — purple/blue accents removed.
 
 ## Pages
 - index.html — Home
