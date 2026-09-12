@@ -1,21 +1,15 @@
-# Anime Fan — responsive anime streaming UI
+# Anime Fan v2
 
-A vanilla HTML/CSS/JS starter rebuilt around the requested **Anime Fan** feature set.
+Premium black + red responsive anime website UI.
 
-## Included
-- Dark black/navy + neon purple/blue responsive UI
-- Home: trending, popular genres, continue watching, recently added, Hindi Dub, movies, My List, anime request
-- Anime details: poster/banner-style hero, description, genres, year, status, rating, episodes, languages and season/language selectors
-- Watch page: episode list, language/season selectors, previous/next, like/share/report, comments, download gate UI
-- Browser LocalStorage for Continue Watching, My List, comments and requests (same browser/device only)
-- Admin page with demo admin login, anime/audio/ad management UI, moderation UI and configurable ad schedule
-- No end-user login/signup
+## Pages
+- index.html — Home
+- anime.html — Anime details
+- watch.html — Watch/episode page
+- admin.html — Admin UI
 
-## Demo admin
-Username: `admin`
-Password: `admin123`
+## GitHub Pages
+Upload all files in this folder to the repository root so `index.html` is at the top level.
 
-This credential is only a frontend demo. Production authentication must be implemented server-side with hashed passwords and sessions.
-
-## Production requirements
-Connect a real API/database, authorized/licensed video provider, object storage/CDN, authentication for `/admin`, comment/report moderation, and a server-side ad/download service. Do not use copyrighted anime streams or downloads without permission.
+## Note
+This is a front-end/demo project. Use only authorized/licensed anime content and video sources.
