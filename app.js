@@ -734,7 +734,7 @@ function renderWatch() {
             <div class="hero-actions">
 
               <a
-                class="btn ghost"
+                class="btn ${ep >= a.episodes ? "primary" : "ghost"}"
                 href="watch.html?anime=${id}&episode=${Math.max(1, ep - 1)}"
               >
                 ◀ Previous
