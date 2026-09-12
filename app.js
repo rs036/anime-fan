@@ -1496,8 +1496,8 @@ document.addEventListener(
 );
 
 /* =========================================================
-   ANIME FAN V2.4 — REAL POSTER IMAGES
-   Uses Jikan/MyAnimeList public image data
+   ANIME FAN V2.5 — STABLE POSTER LOADER
+   Sequential loading + retry
    ========================================================= */
 
 const animePosterIds = {
@@ -1509,60 +1509,120 @@ const animePosterIds = {
   "black-clover": 34572
 };
 
-async function loadAnimePosters() {
+function wait(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-  const cards = document.querySelectorAll(".card[data-anime]");
+async function getAnimePoster(malId, retries = 2) {
 
-  if (!cards.length) return;
+  for (let attempt = 0; attempt <= retries; attempt++) {
 
-  cards.forEach(cardElement => {
+    try {
 
-    const id = cardElement.dataset.anime;
-    const malId = animePosterIds[id];
+      const response = await fetch(
+        `https://api.jikan.moe/v4/anime/${malId}/full`
+      );
 
-    if (!malId) return;
+      if (response.status === 429) {
+        await wait(1800);
+        continue;
+      }
 
-    fetch(`https://api.jikan.moe/v4/anime/${malId}/full`)
-      .then(response => response.json())
-      .then(data => {
+      if (!response.ok) {
+        throw new Error("Poster request failed");
+      }
 
-        const image =
-          data?.data?.images?.webp?.large_image_url ||
-          data?.data?.images?.jpg?.large_image_url;
+      const data = await response.json();
 
-        if (!image) return;
+      return (
+        data?.data?.images?.webp?.large_image_url ||
+        data?.data?.images?.jpg?.large_image_url ||
+        ""
+      );
 
-        const poster =
-          cardElement.querySelector(".poster");
+    } catch (error) {
 
-        if (!poster) return;
+      if (attempt < retries) {
+        await wait(1200);
+      }
 
-        poster.style.backgroundImage =
-          `linear-gradient(
-            180deg,
-            rgba(0,0,0,0.02) 30%,
-            rgba(0,0,0,0.78) 100%
-          ), url("${image}")`;
+    }
+  }
 
-        poster.style.backgroundSize = "cover";
-        poster.style.backgroundPosition = "center";
-
-        poster.classList.add("real-poster");
-
-      })
-      .catch(() => {
-        // Keep existing gradient poster if API is unavailable.
-      });
-
-  });
+  return "";
 }
 
 
-/* Load posters after homepage/cards are rendered */
+async function loadAnimePosters() {
+
+  const cards =
+    [...document.querySelectorAll(".card[data-anime]")];
+
+  if (!cards.length) return;
+
+
+  /* Load ONE poster at a time */
+
+  for (const cardElement of cards) {
+
+    const id =
+      cardElement.dataset.anime;
+
+    const malId =
+      animePosterIds[id];
+
+    if (!malId) continue;
+
+
+    const poster =
+      cardElement.querySelector(".poster");
+
+    if (!poster) continue;
+
+
+    const image =
+      await getAnimePoster(malId);
+
+
+    if (image) {
+
+      poster.style.backgroundImage =
+        `linear-gradient(
+          180deg,
+          rgba(0,0,0,0.02) 25%,
+          rgba(0,0,0,0.82) 100%
+        ),
+        url("${image}")`;
+
+      poster.style.backgroundSize =
+        "cover";
+
+      poster.style.backgroundPosition =
+        "center";
+
+      poster.classList.add(
+        "real-poster"
+      );
+    }
+
+
+    /* Small delay prevents API rate-limit */
+
+    await wait(900);
+  }
+}
+
+
+/* Start after cards are rendered */
 
 document.addEventListener(
   "DOMContentLoaded",
   () => {
-    setTimeout(loadAnimePosters, 500);
+
+    setTimeout(
+      loadAnimePosters,
+      700
+    );
+
   }
 );
