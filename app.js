@@ -740,13 +740,15 @@ function renderWatch() {
                 ◀ Previous
               </a>
 
-              ${ep < a.episodes ? `
-  <a
-    class="btn primary"
-    href="watch.html?anime=${id}&episode=${ep + 1}"
-  >
-  </a>
-` : ""}
+             ${ep < a.episodes ? `
+              <a
+                class="btn primary"
+                href="watch.html?anime=${id}&episode=${ep + 1}"
+              >
+                Next Episode ▶
+              </a>
+            ` : ""}
+
                 Next Episode ▶
               </a>
 
