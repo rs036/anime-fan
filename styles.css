@@ -62,3 +62,93 @@ body {
 a:hover, .nav-link:hover, .section-head a:hover {
   color: #ff1744 !important;
 }
+
+/* Anime Fan V2.2 — premium black/red components */
+:root{
+  --red:#ff1744;
+  --red-dark:#b00020;
+  --red-soft:rgba(255,23,68,.16);
+  --panel:#09090b;
+  --panel-2:#0d0d10;
+  --line:rgba(255,23,68,.22);
+}
+
+/* Search */
+.search,
+.search input,
+input[type="search"],
+input[placeholder*="Search"]{
+  background:#08080a !important;
+  border-color:rgba(255,23,68,.28) !important;
+  color:#fff !important;
+}
+.search:focus-within{
+  border-color:var(--red) !important;
+  box-shadow:0 0 0 3px rgba(255,23,68,.10),0 0 22px rgba(255,23,68,.10) !important;
+}
+.search input::placeholder{
+  color:#8d8d95 !important;
+}
+
+/* Anime cards */
+.card{
+  background:linear-gradient(180deg,#101012 0%,#08080a 100%) !important;
+  border:1px solid rgba(255,23,68,.20) !important;
+  overflow:hidden;
+}
+.card::after{
+  content:"";
+  display:block;
+  height:2px;
+  background:linear-gradient(90deg,transparent,#ff1744,transparent);
+  opacity:.55;
+}
+.card:hover{
+  border-color:rgba(255,23,68,.65) !important;
+  box-shadow:0 18px 42px rgba(0,0,0,.5),0 0 24px rgba(255,23,68,.08) !important;
+}
+.card .title,
+.card h3,
+.card h4{
+  color:#fff !important;
+}
+.card .meta,
+.card small{
+  color:#a9a9b2 !important;
+}
+
+/* Bottom navigation */
+.bottom-nav{
+  background:rgba(5,5,7,.98) !important;
+  border-top:1px solid rgba(255,23,68,.20) !important;
+  box-shadow:0 -12px 30px rgba(0,0,0,.35) !important;
+  backdrop-filter:blur(14px);
+}
+.bottom-nav a,
+.bottom-nav button{
+  color:#a9a9b2 !important;
+}
+.bottom-nav a.active,
+.bottom-nav a:hover,
+.bottom-nav button.active,
+.bottom-nav button:hover{
+  color:#ff1744 !important;
+}
+.bottom-nav a.active svg,
+.bottom-nav button.active svg{
+  filter:drop-shadow(0 0 7px rgba(255,23,68,.55));
+}
+
+/* Mobile polish */
+@media (max-width:600px){
+  .search{
+    background:#08080a !important;
+    border:1px solid rgba(255,23,68,.28) !important;
+  }
+  .card{
+    border-radius:16px !important;
+  }
+  .bottom-nav{
+    padding-bottom:max(8px,env(safe-area-inset-bottom)) !important;
+  }
+}
