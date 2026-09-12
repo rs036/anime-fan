@@ -1496,8 +1496,8 @@ document.addEventListener(
 );
 
 /* =========================================================
-   ANIME FAN V2.5 — STABLE POSTER LOADER
-   Sequential loading + retry
+   ANIME FAN V2.6 — STABLE POSTERS
+   Direct images for problematic anime
    ========================================================= */
 
 const animePosterIds = {
@@ -1509,47 +1509,43 @@ const animePosterIds = {
   "black-clover": 34572
 };
 
-function wait(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
 
-async function getAnimePoster(malId, retries = 2) {
+/* Direct poster images */
 
-  for (let attempt = 0; attempt <= retries; attempt++) {
+const directAnimePosters = {
 
-    try {
+  "demon-slayer":
+    "https://cdn.myanimelist.net/images/anime/1286/99889l.jpg",
 
-      const response = await fetch(
-        `https://api.jikan.moe/v4/anime/${malId}/full`
-      );
+  "solo-leveling":
+    "https://cdn.myanimelist.net/images/anime/1801/142390l.jpg",
 
-      if (response.status === 429) {
-        await wait(1800);
-        continue;
-      }
+  "black-clover":
+    "https://api-cdn.myanimelist.net/images/anime/2/88336.jpg"
 
-      if (!response.ok) {
-        throw new Error("Poster request failed");
-      }
+};
 
-      const data = await response.json();
 
-      return (
-        data?.data?.images?.webp?.large_image_url ||
-        data?.data?.images?.jpg?.large_image_url ||
-        ""
-      );
+function setAnimePoster(cardElement, image) {
 
-    } catch (error) {
+  const poster =
+    cardElement.querySelector(".poster");
 
-      if (attempt < retries) {
-        await wait(1200);
-      }
+  if (!poster || !image) return;
 
-    }
-  }
+  poster.style.backgroundImage =
+    `linear-gradient(
+      180deg,
+      rgba(0,0,0,0.02) 25%,
+      rgba(0,0,0,0.80) 100%
+    ),
+    url("${image}")`;
 
-  return "";
+  poster.style.backgroundSize = "cover";
+
+  poster.style.backgroundPosition = "center";
+
+  poster.classList.add("real-poster");
 }
 
 
@@ -1561,12 +1557,26 @@ async function loadAnimePosters() {
   if (!cards.length) return;
 
 
-  /* Load ONE poster at a time */
-
   for (const cardElement of cards) {
 
     const id =
       cardElement.dataset.anime;
+
+
+    /* Direct image first */
+
+    if (directAnimePosters[id]) {
+
+      setAnimePoster(
+        cardElement,
+        directAnimePosters[id]
+      );
+
+      continue;
+    }
+
+
+    /* API fallback for remaining anime */
 
     const malId =
       animePosterIds[id];
@@ -1574,46 +1584,63 @@ async function loadAnimePosters() {
     if (!malId) continue;
 
 
-    const poster =
-      cardElement.querySelector(".poster");
+    try {
 
-    if (!poster) continue;
-
-
-    const image =
-      await getAnimePoster(malId);
+      const response =
+        await fetch(
+          `https://api.jikan.moe/v4/anime/${malId}/full`
+        );
 
 
-    if (image) {
+      if (response.status === 429) {
 
-      poster.style.backgroundImage =
-        `linear-gradient(
-          180deg,
-          rgba(0,0,0,0.02) 25%,
-          rgba(0,0,0,0.82) 100%
-        ),
-        url("${image}")`;
+        await new Promise(
+          resolve => setTimeout(resolve, 1800)
+        );
 
-      poster.style.backgroundSize =
-        "cover";
+        continue;
+      }
 
-      poster.style.backgroundPosition =
-        "center";
 
-      poster.classList.add(
-        "real-poster"
+      if (!response.ok) continue;
+
+
+      const data =
+        await response.json();
+
+
+      const image =
+        data?.data?.images?.webp?.large_image_url ||
+        data?.data?.images?.jpg?.large_image_url;
+
+
+      if (image) {
+
+        setAnimePoster(
+          cardElement,
+          image
+        );
+
+      }
+
+
+      await new Promise(
+        resolve => setTimeout(resolve, 900)
       );
+
+
+    } catch (error) {
+
+      /* Keep gradient fallback */
+
     }
 
-
-    /* Small delay prevents API rate-limit */
-
-    await wait(900);
   }
+
 }
 
 
-/* Start after cards are rendered */
+/* Start after homepage cards render */
 
 document.addEventListener(
   "DOMContentLoaded",
