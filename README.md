@@ -1,9 +1,11 @@
-# Anime-Fan-GitHub-Ready
+# Anime Fan v4
+Reference-based responsive anime website frontend.
 
-Responsive Anime Fan frontend matching the supplied desktop/mobile design direction.
+## Pages
+- index.html — desktop + mobile home
+- anime.html — anime details, language, seasons, episodes
+- watch.html — watch page with authorized embed placeholder
+- admin.html — admin UI demo
 
-Files: index.html, anime.html, watch.html, admin.html, styles.css, app.js.
-
-Current: GitHub Pages frontend prototype. Anime artwork is loaded from AniList at runtime with a local visual fallback. No video files are bundled.
-
-Next: connect Firebase for data/admin/requests/settings and connect an authorized video provider/embed.
+## Later integrations
+GitHub Pages for frontend, Firebase for data/auth/requests/settings, and an authorized video embed provider such as Byse for streaming.
