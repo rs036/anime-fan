@@ -84,3 +84,23 @@ cards.forEach(c => c.addEventListener('click', () => {
     if(watch) watch.addEventListener('click',()=>{const st=read();st.resume=st.resume||{};const key=anime+'|S'+season+'|E'+episode;st.resume[key]=st.resume[key]||0;write(st); alert(st.resume[key]?'Resuming from '+st.resume[key]+' seconds.':'Playback ready — Byse embed will be connected here later.');});
   }
 })();
+
+/* v10 functional polish */
+(function(){
+  const stateKey='animeFanStateV8';
+  function getState(){try{return JSON.parse(localStorage.getItem(stateKey)||'{}')}catch(e){return {}}}
+  function setState(s){localStorage.setItem(stateKey,JSON.stringify(s))}
+  // Search page: live filter cards/results by title.
+  const search=document.querySelector('.search-box');
+  if(search){search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();document.querySelectorAll('.search-results .result-row,.list-grid .card').forEach(el=>{el.style.display=!q||el.textContent.toLowerCase().includes(q)?'':'none'})})}
+  // My List page: render only saved titles when storage has entries.
+  if(location.pathname.endsWith('my-list.html')){
+    const s=getState(), saved=s.myList||[], grid=document.querySelector('.list-grid');
+    if(grid&&saved.length){grid.querySelectorAll('.card').forEach(c=>{const title=c.querySelector('b')?.textContent.trim();c.style.display=saved.includes(title)?'':'none'})}
+  }
+  // Request form: save locally until Firebase is connected.
+  const reqForm=document.querySelector('.admin-form');
+  if(reqForm&&location.pathname.endsWith('request.html')){reqForm.addEventListener('submit',e=>{e.preventDefault();const fields=[...reqForm.querySelectorAll('input,select,textarea')];const s=getState();s.requests=s.requests||[];s.requests.push({anime:fields[0]?.value||'',season:fields[1]?.value||'',episode:fields[2]?.value||'',language:fields[3]?.value||'',message:fields[4]?.value||'',createdAt:new Date().toISOString()});setState(s);alert('Request saved. Firebase will sync it in the backend phase.');reqForm.reset()})}
+  // Watch page: highlight the selected episode from the URL.
+  if(location.pathname.endsWith('watch.html')){const ep=new URLSearchParams(location.search).get('episode')||'1';document.querySelectorAll('.episodes .ep').forEach(a=>a.classList.toggle('selected',a.dataset.episode===ep))}
+})();
