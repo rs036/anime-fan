@@ -31,3 +31,56 @@ const cards = document.querySelectorAll('.card');
 cards.forEach(c => c.addEventListener('click', () => {
   if (c.querySelector('b')) location.href = 'anime.html';
 }));
+
+
+/* v8 interactive starter: navigation, selections, My List and resume state */
+(function(){
+  const STORE='animeFanStateV8';
+  const read=()=>{try{return JSON.parse(localStorage.getItem(STORE)||'{}')}catch(e){return {}}};
+  const write=x=>localStorage.setItem(STORE,JSON.stringify(x));
+  const state=read();
+  const params=new URLSearchParams(location.search);
+  const anime=params.get('anime')||'One Piece';
+  const season=params.get('season')||'1';
+  const episode=params.get('episode')||'1';
+  state.last={anime,season,episode}; write(state);
+
+  function fillSelect(id,value){const el=document.getElementById(id); if(!el)return; const v=String(value); for(const o of el.options){ if(o.textContent.includes('Episode')?o.textContent.replace(/\D/g,'')===v:o.textContent.replace(/\D/g,'')===v){el.value=o.value;break;} }}
+  const epSelect=document.getElementById('episodeSelect');
+  const seasonSelect=document.getElementById('seasonSelect');
+  const langSelect=document.getElementById('languageSelect');
+  if(epSelect){
+    let found=false; for(const o of epSelect.options){if(o.textContent.replace(/\D/g,'')===String(episode)){epSelect.value=o.value;found=true;}}
+    if(!found){const o=document.createElement('option');o.textContent='Episode '+episode;o.value=o.textContent;epSelect.appendChild(o);epSelect.value=o.value;}
+  }
+  if(seasonSelect){for(const o of seasonSelect.options){if(o.textContent.replace(/\D/g,'')===String(season))seasonSelect.value=o.value;}}
+  if(langSelect){const saved=state.language||''; if(saved){for(const o of langSelect.options){if(o.textContent.toLowerCase().includes(saved.toLowerCase())){langSelect.value=o.value;break;}}}}
+
+  function go(ep){
+    const se=seasonSelect?String(seasonSelect.value).replace(/\D/g,'')||'1':season;
+    const la=langSelect?langSelect.value:'';
+    const url='watch.html?anime='+encodeURIComponent(anime)+'&season='+se+'&episode='+encodeURIComponent(ep);
+    state.last={anime,season:se,episode:String(ep),language:la}; write(state); location.href=url;
+  }
+  if(epSelect) epSelect.addEventListener('change',()=>go(String(epSelect.value).replace(/\D/g,'')||'1'));
+  if(seasonSelect) seasonSelect.addEventListener('change',()=>{const se=String(seasonSelect.value).replace(/\D/g,'')||'1'; const ep=episode; location.href='anime.html?anime='+encodeURIComponent(anime)+'&season='+se+'&episode='+ep;});
+  if(langSelect) langSelect.addEventListener('change',()=>{state.language=langSelect.value;write(state);});
+
+  document.querySelectorAll('[data-episode]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();go(this.dataset.episode)}));
+
+  const my=document.getElementById('myListBtn');
+  if(my){
+    const list=state.myList||[]; const exists=list.includes(anime);
+    my.textContent=exists?'✓ Added to My List':'＋ Add to My List';
+    my.addEventListener('click',()=>{const st=read(); st.myList=st.myList||[]; const i=st.myList.indexOf(anime); if(i>=0){st.myList.splice(i,1);my.textContent='＋ Add to My List';}else{st.myList.push(anime);my.textContent='✓ Added to My List';} write(st);});
+  }
+
+  const titleEls=document.querySelectorAll('.video-overlay b, .watch-layout h2');
+  if(location.pathname.endsWith('/watch.html')||location.pathname.endsWith('watch.html')){
+    titleEls.forEach(el=>el.textContent=anime+' — Episode '+episode);
+    const next=document.getElementById('nextEpisode');
+    if(next){const n=Number(episode)+1; next.textContent='Episode '+n+' →'; next.href='watch.html?anime='+encodeURIComponent(anime)+'&season='+season+'&episode='+n;}
+    const watch=document.getElementById('watchNowBtn');
+    if(watch) watch.addEventListener('click',()=>{const st=read();st.resume=st.resume||{};const key=anime+'|S'+season+'|E'+episode;st.resume[key]=st.resume[key]||0;write(st); alert(st.resume[key]?'Resuming from '+st.resume[key]+' seconds.':'Playback ready — Byse embed will be connected here later.');});
+  }
+})();
