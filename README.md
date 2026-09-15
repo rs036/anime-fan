@@ -29,3 +29,11 @@ The layout follows the supplied reference: dark background, red/cyan borders, an
 
 ## No user login
 The frontend intentionally has no normal user login. Admin authentication should be added separately when connecting the backend.
+
+
+## v2 fixes
+- Replaced visible `ANIME` placeholder cards with live AniList cover artwork when available.
+- Added One Piece hero banner and Solo Leveling detail artwork from AniList at runtime.
+- Kept a local gradient fallback if the image API is unavailable.
+- Improved mobile hero/card proportions.
+- No anime video files are bundled.
