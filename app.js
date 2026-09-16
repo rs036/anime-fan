@@ -1,1169 +1,1063 @@
 /* =========================================================
-   ANIME FAN — APP.JS
-   Frontend V2
-========================================================= */
+   ANIME FAN - APP.JS
+   Watch Page + Details + Anime + Movies
+   ========================================================= */
 
 const animeData = {
 
-  trending: [
-    {
-      id: "one-piece",
-      title: "One Piece",
-      year: "1999",
-      type: "TV",
-      rating: "9.2",
-      quality: "HD",
-      episodes: 1000,
-      status: "Ongoing",
-      genres: ["Action", "Adventure", "Fantasy"],
-      languages: ["Hindi Dub", "English Dub", "Japanese"],
-      description: "Follow Monkey D. Luffy and his crew on their legendary journey across the Grand Line in search of the greatest treasure.",
-      image: "assets/one-piece.jpg"
-    },
+  "one-piece": {
+    id: "one-piece",
+    title: "One Piece",
+    poster: "assets/one-piece.jpg",
+    banner: "assets/hero.jpg",
+    description: "Monkey D. Luffy and his crew travel across the Grand Line in search of the legendary One Piece.",
+    genres: "Action, Adventure, Fantasy",
+    year: "1999",
+    status: "Ongoing",
+    rating: "9.0/10",
+    episodes: 10,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "solo-leveling",
-      title: "Solo Leveling",
-      year: "2024",
-      type: "TV",
-      rating: "8.9",
-      quality: "HD",
-      episodes: 24,
-      status: "Completed",
-      genres: ["Action", "Adventure", "Fantasy"],
-      languages: ["Hindi Dub", "English Dub", "Japanese"],
-      description: "Awakening as the weakest hunter, Sung Jin-Woo begins a journey to become one of the strongest hunters.",
-      image: "assets/solo-leveling.jpg"
-    },
+  "solo-leveling": {
+    id: "solo-leveling",
+    title: "Solo Leveling",
+    poster: "assets/solo-leveling.jpg",
+    banner: "assets/solo-leveling.jpg",
+    description: "Sung Jin-Woo begins his journey from the weakest hunter to one of the strongest beings.",
+    genres: "Action, Adventure, Fantasy",
+    year: "2024",
+    status: "Completed",
+    rating: "9.2/10",
+    episodes: 24,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "demon-slayer",
-      title: "Demon Slayer",
-      year: "2019",
-      type: "TV",
-      rating: "8.6",
-      quality: "HD",
-      episodes: 26,
-      status: "Completed",
-      genres: ["Action", "Adventure", "Fantasy"],
-      languages: ["Hindi Dub", "English Dub", "Japanese"],
-      description: "Tanjiro Kamado begins a dangerous journey after his family is attacked and his sister is turned into a demon.",
-      image: "assets/demon-slayer.jpg"
-    },
+  "demon-slayer": {
+    id: "demon-slayer",
+    title: "Demon Slayer",
+    poster: "assets/demon-slayer.jpg",
+    banner: "assets/demon-slayer.jpg",
+    description: "Tanjiro Kamado joins the Demon Slayer Corps after tragedy strikes his family.",
+    genres: "Action, Adventure, Fantasy",
+    year: "2019",
+    status: "Completed",
+    rating: "9.0/10",
+    episodes: 26,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "naruto",
-      title: "Naruto",
-      year: "2002",
-      type: "TV",
-      rating: "8.4",
-      quality: "HD",
-      episodes: 220,
-      status: "Completed",
-      genres: ["Action", "Adventure"],
-      languages: ["Hindi Dub", "English Dub", "Japanese"],
-      description: "Naruto Uzumaki dreams of becoming Hokage while growing stronger alongside his friends and rivals.",
-      image: "assets/naruto.jpg"
-    },
+  "naruto": {
+    id: "naruto",
+    title: "Naruto",
+    poster: "assets/naruto.jpg",
+    banner: "assets/naruto.jpg",
+    description: "Naruto Uzumaki dreams of becoming the strongest ninja and earning the respect of his village.",
+    genres: "Action, Adventure, Ninja",
+    year: "2002",
+    status: "Completed",
+    rating: "8.4/10",
+    episodes: 220,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "black-clover",
-      title: "Black Clover",
-      year: "2017",
-      type: "TV",
-      rating: "8.2",
-      quality: "HD",
-      episodes: 170,
-      status: "Completed",
-      genres: ["Action", "Fantasy", "Adventure"],
-      languages: ["Hindi Dub", "English Dub", "Japanese"],
-      description: "Asta, a boy born without magic, aims to become the Wizard King through determination and hard work.",
-      image: "assets/black-clover.jpg"
-    },
+  "black-clover": {
+    id: "black-clover",
+    title: "Black Clover",
+    poster: "assets/black-clover.jpg",
+    banner: "assets/black-clover.jpg",
+    description: "Asta, a boy without magic, dreams of becoming the Wizard King.",
+    genres: "Action, Adventure, Fantasy",
+    year: "2017",
+    status: "Completed",
+    rating: "8.3/10",
+    episodes: 170,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "jujutsu-kaisen",
-      title: "Jujutsu Kaisen",
-      year: "2020",
-      type: "TV",
-      rating: "8.6",
-      quality: "HD",
-      episodes: 47,
-      status: "Ongoing",
-      genres: ["Action", "Supernatural", "Fantasy"],
-      languages: ["Hindi Dub", "English Dub", "Japanese"],
-      description: "Yuji Itadori enters the world of cursed spirits after becoming involved with a dangerous cursed object.",
-      image: "assets/jujutsu-kaisen.jpg"
-    },
+  "jujutsu-kaisen": {
+    id: "jujutsu-kaisen",
+    title: "Jujutsu Kaisen",
+    poster: "assets/jujutsu-kaisen.jpg",
+    banner: "assets/jujutsu-kaisen.jpg",
+    description: "Yuji Itadori enters the world of cursed spirits and jujutsu sorcerers.",
+    genres: "Action, Supernatural, Fantasy",
+    year: "2020",
+    status: "Ongoing",
+    rating: "8.8/10",
+    episodes: 24,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "attack-on-titan",
-      title: "Attack on Titan",
-      year: "2013",
-      type: "TV",
-      rating: "9.1",
-      quality: "HD",
-      episodes: 89,
-      status: "Completed",
-      genres: ["Action", "Drama", "Fantasy"],
-      languages: ["Hindi Dub", "English Dub", "Japanese"],
-      description: "Humanity fights for survival behind enormous walls while terrifying Titans threaten their existence.",
-      image: "assets/attack-on-titan.jpg"
-    }
-  ],
+  "attack-on-titan": {
+    id: "attack-on-titan",
+    title: "Attack on Titan",
+    poster: "assets/attack-on-titan.jpg",
+    banner: "assets/attack-on-titan.jpg",
+    description: "Humanity fights for survival against terrifying Titans beyond the walls.",
+    genres: "Action, Drama, Fantasy",
+    year: "2013",
+    status: "Completed",
+    rating: "9.1/10",
+    episodes: 25,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-  continueWatching: [
-    {
-      id: "one-piece",
-      title: "One Piece",
-      year: "1999",
-      type: "EP 19",
-      rating: "9.2",
-      quality: "HD",
-      progress: 65,
-      image: "assets/one-piece.jpg"
-    },
+  "kaiju-no-8": {
+    id: "kaiju-no-8",
+    title: "Kaiju No. 8",
+    poster: "assets/kaiju-no-8.jpg",
+    banner: "assets/kaiju-no-8.jpg",
+    description: "Kafka Hibino gets a second chance to achieve his dream of joining the defense force.",
+    genres: "Action, Sci-Fi, Adventure",
+    year: "2024",
+    status: "Ongoing",
+    rating: "8.5/10",
+    episodes: 12,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "demon-slayer",
-      title: "Demon Slayer",
-      year: "2019",
-      type: "EP 12",
-      rating: "8.6",
-      quality: "HD",
-      progress: 38,
-      image: "assets/demon-slayer.jpg"
-    },
+  "blue-lock": {
+    id: "blue-lock",
+    title: "Blue Lock",
+    poster: "assets/blue-lock.jpg",
+    banner: "assets/blue-lock.jpg",
+    description: "Young football players compete in a brutal project designed to create the world's greatest striker.",
+    genres: "Sports, Action, Drama",
+    year: "2022",
+    status: "Ongoing",
+    rating: "8.2/10",
+    episodes: 24,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "solo-leveling",
-      title: "Solo Leveling",
-      year: "2024",
-      type: "EP 7",
-      rating: "8.9",
-      quality: "HD",
-      progress: 72,
-      image: "assets/solo-leveling.jpg"
-    }
-  ],
+  "chainsaw-man": {
+    id: "chainsaw-man",
+    title: "Chainsaw Man",
+    poster: "assets/chainsaw-man.jpg",
+    banner: "assets/chainsaw-man.jpg",
+    description: "Denji becomes Chainsaw Man after merging with his devil companion Pochita.",
+    genres: "Action, Horror, Supernatural",
+    year: "2022",
+    status: "Ongoing",
+    rating: "8.6/10",
+    episodes: 12,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-  recentlyAdded: [
-    {
-      id: "kaiju-no-8",
-      title: "Kaiju No. 8",
-      year: "2024",
-      type: "TV",
-      rating: "8.3",
-      quality: "NEW",
-      episodes: 12,
-      image: "assets/kaiju-no-8.jpg"
-    },
+  "my-hero-academia": {
+    id: "my-hero-academia",
+    title: "My Hero Academia",
+    poster: "assets/my-hero-academia.jpg",
+    banner: "assets/my-hero-academia.jpg",
+    description: "Izuku Midoriya dreams of becoming a hero in a world where superpowers are common.",
+    genres: "Action, Superhero, Fantasy",
+    year: "2016",
+    status: "Completed",
+    rating: "8.3/10",
+    episodes: 13,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "blue-lock",
-      title: "Blue Lock",
-      year: "2022",
-      type: "TV",
-      rating: "8.1",
-      quality: "HD",
-      episodes: 24,
-      image: "assets/blue-lock.jpg"
-    },
+  "wind-breaker": {
+    id: "wind-breaker",
+    title: "Wind Breaker",
+    poster: "assets/wind-breaker.jpg",
+    banner: "assets/wind-breaker.jpg",
+    description: "Haruka Sakura enters a school known for its powerful fighters.",
+    genres: "Action, School, Drama",
+    year: "2024",
+    status: "Ongoing",
+    rating: "8.2/10",
+    episodes: 13,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "chainsaw-man",
-      title: "Chainsaw Man",
-      year: "2022",
-      type: "TV",
-      rating: "8.4",
-      quality: "HD",
-      episodes: 12,
-      image: "assets/chainsaw-man.jpg"
-    },
+  "tbate": {
+    id: "tbate",
+    title: "The Beginning After the End",
+    poster: "assets/tbate.jpg",
+    banner: "assets/tbate.jpg",
+    description: "A powerful king is reincarnated into a magical world and begins a new life.",
+    genres: "Action, Adventure, Fantasy",
+    year: "2025",
+    status: "Ongoing",
+    rating: "8.4/10",
+    episodes: 12,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "my-hero-academia",
-      title: "My Hero Academia",
-      year: "2016",
-      type: "TV",
-      rating: "8.0",
-      quality: "HD",
-      episodes: 159,
-      image: "assets/my-hero-academia.jpg"
-    },
+  "fire-force": {
+    id: "fire-force",
+    title: "Fire Force",
+    poster: "assets/fire-force.jpg",
+    banner: "assets/fire-force.jpg",
+    description: "Special fire soldiers fight mysterious infernals and uncover the truth behind spontaneous combustion.",
+    genres: "Action, Supernatural, Fantasy",
+    year: "2019",
+    status: "Completed",
+    rating: "8.5/10",
+    episodes: 24,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "wind-breaker",
-      title: "Wind Breaker",
-      year: "2024",
-      type: "TV",
-      rating: "8.2",
-      quality: "NEW",
-      episodes: 25,
-      image: "assets/wind-breaker.jpg"
-    },
+  "your-name": {
+    id: "your-name",
+    title: "Your Name",
+    poster: "assets/your-name.jpg",
+    banner: "assets/your-name.jpg",
+    description: "Two teenagers mysteriously begin switching bodies and discover a connection across time.",
+    genres: "Romance, Drama, Fantasy",
+    year: "2016",
+    status: "Movie",
+    rating: "8.8/10",
+    episodes: 1,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "tbate",
-      title: "The Beginning After The End",
-      year: "2025",
-      type: "TV",
-      rating: "8.5",
-      quality: "NEW",
-      episodes: 12,
-      image: "assets/tbate.jpg"
-    },
+  "a-silent-voice": {
+    id: "a-silent-voice",
+    title: "A Silent Voice",
+    poster: "assets/a-silent-voice.jpg",
+    banner: "assets/a-silent-voice.jpg",
+    description: "A former bully tries to reconnect with a deaf girl he once hurt.",
+    genres: "Drama, Romance, School",
+    year: "2016",
+    status: "Movie",
+    rating: "8.9/10",
+    episodes: 1,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "fire-force",
-      title: "Fire Force",
-      year: "2019",
-      type: "TV",
-      rating: "7.8",
-      quality: "HD",
-      episodes: 48,
-      image: "assets/fire-force.jpg"
-    }
-  ],
+  "suzume": {
+    id: "suzume",
+    title: "Suzume",
+    poster: "assets/suzume.jpg",
+    banner: "assets/suzume.jpg",
+    description: "Suzume encounters a mysterious young man and becomes involved in a journey across Japan.",
+    genres: "Adventure, Fantasy, Romance",
+    year: "2022",
+    status: "Movie",
+    rating: "8.4/10",
+    episodes: 1,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-  movies: [
-    {
-      id: "your-name",
-      title: "Your Name",
-      year: "2016",
-      type: "Movie",
-      rating: "8.8",
-      quality: "HD",
-      image: "assets/your-name.jpg"
-    },
+  "weathering-with-you": {
+    id: "weathering-with-you",
+    title: "Weathering With You",
+    poster: "assets/weathering-with-you.jpg",
+    banner: "assets/weathering-with-you.jpg",
+    description: "A runaway boy meets a girl who appears to have the power to control the weather.",
+    genres: "Romance, Fantasy, Drama",
+    year: "2019",
+    status: "Movie",
+    rating: "8.2/10",
+    episodes: 1,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "a-silent-voice",
-      title: "A Silent Voice",
-      year: "2016",
-      type: "Movie",
-      rating: "8.9",
-      quality: "HD",
-      image: "assets/a-silent-voice.jpg"
-    },
+  "jjk-0": {
+    id: "jjk-0",
+    title: "Jujutsu Kaisen 0",
+    poster: "assets/jjk-0.jpg",
+    banner: "assets/jjk-0.jpg",
+    description: "Yuta Okkotsu enters Jujutsu High while haunted by the spirit of his childhood friend.",
+    genres: "Action, Fantasy, Supernatural",
+    year: "2021",
+    status: "Movie",
+    rating: "8.7/10",
+    episodes: 1,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "suzume",
-      title: "Suzume",
-      year: "2022",
-      type: "Movie",
-      rating: "8.1",
-      quality: "HD",
-      image: "assets/suzume.jpg"
-    },
+  "mugen-train": {
+    id: "mugen-train",
+    title: "Demon Slayer: Mugen Train",
+    poster: "assets/mugen-train.jpg",
+    banner: "assets/mugen-train.jpg",
+    description: "Tanjiro and his friends join Flame Hashira Kyojuro Rengoku aboard the Mugen Train.",
+    genres: "Action, Fantasy, Adventure",
+    year: "2020",
+    status: "Movie",
+    rating: "8.6/10",
+    episodes: 1,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "weathering-with-you",
-      title: "Weathering With You",
-      year: "2019",
-      type: "Movie",
-      rating: "8.2",
-      quality: "HD",
-      image: "assets/weathering-with-you.jpg"
-    },
+  "dbs-broly": {
+    id: "dbs-broly",
+    title: "Dragon Ball Super: Broly",
+    poster: "assets/dbs-broly.jpg",
+    banner: "assets/dbs-broly.jpg",
+    description: "Goku and Vegeta face the legendary Saiyan Broly.",
+    genres: "Action, Adventure, Fantasy",
+    year: "2018",
+    status: "Movie",
+    rating: "8.0/10",
+    episodes: 1,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "jjk-0",
-      title: "Jujutsu Kaisen 0",
-      year: "2021",
-      type: "Movie",
-      rating: "8.6",
-      quality: "HD",
-      image: "assets/jjk-0.jpg"
-    },
+  "death-note": {
+    id: "death-note",
+    title: "Death Note",
+    poster: "assets/death-note.jpg",
+    banner: "assets/death-note.jpg",
+    description: "A mysterious notebook gives Light Yagami the power to kill anyone whose name he writes inside it.",
+    genres: "Mystery, Psychological, Supernatural",
+    year: "2006",
+    status: "Completed",
+    rating: "9.0/10",
+    episodes: 37,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "mugen-train",
-      title: "Demon Slayer: Mugen Train",
-      year: "2020",
-      type: "Movie",
-      rating: "8.2",
-      quality: "HD",
-      image: "assets/mugen-train.jpg"
-    },
+  "fullmetal-alchemist": {
+    id: "fullmetal-alchemist",
+    title: "Fullmetal Alchemist",
+    poster: "assets/fullmetal-alchemist.jpg",
+    banner: "assets/fullmetal-alchemist.jpg",
+    description: "Two brothers search for the Philosopher's Stone after a failed attempt at human transmutation.",
+    genres: "Action, Adventure, Fantasy",
+    year: "2003",
+    status: "Completed",
+    rating: "8.9/10",
+    episodes: 51,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  },
 
-    {
-      id: "dbs-broly",
-      title: "Dragon Ball Super: Broly",
-      year: "2018",
-      type: "Movie",
-      rating: "7.7",
-      quality: "HD",
-      image: "assets/dbs-broly.jpg"
-    }
-  ],
+  "hunter-x-hunter": {
+    id: "hunter-x-hunter",
+    title: "Hunter x Hunter",
+    poster: "assets/hunter-x-hunter.jpg",
+    banner: "assets/hunter-x-hunter.jpg",
+    description: "Gon Freecss sets out to become a Hunter and find his father.",
+    genres: "Action, Adventure, Fantasy",
+    year: "2011",
+    status: "Completed",
+    rating: "9.0/10",
+    episodes: 148,
+    languages: ["Hindi Dub", "English Dub", "Original Audio"],
+    byse: {}
+  }
 
-  hindi: [
-    {
-      id: "demon-slayer",
-      title: "Demon Slayer",
-      year: "2019",
-      type: "Hindi Dub",
-      rating: "8.6",
-      quality: "HD",
-      image: "assets/demon-slayer.jpg"
-    },
-
-    {
-      id: "naruto",
-      title: "Naruto",
-      year: "2002",
-      type: "Hindi Dub",
-      rating: "8.4",
-      quality: "HD",
-      image: "assets/naruto.jpg"
-    },
-
-    {
-      id: "one-piece",
-      title: "One Piece",
-      year: "1999",
-      type: "Hindi Dub",
-      rating: "9.2",
-      quality: "HD",
-      image: "assets/one-piece.jpg"
-    },
-
-    {
-      id: "jujutsu-kaisen",
-      title: "Jujutsu Kaisen",
-      year: "2020",
-      type: "Hindi Dub",
-      rating: "8.6",
-      quality: "HD",
-      image: "assets/jujutsu-kaisen.jpg"
-    },
-
-    {
-      id: "black-clover",
-      title: "Black Clover",
-      year: "2017",
-      type: "Hindi Dub",
-      rating: "8.2",
-      quality: "HD",
-      image: "assets/black-clover.jpg"
-    }
-  ],
-
-  top: [
-    {
-      id: "attack-on-titan",
-      title: "Attack on Titan",
-      year: "2013",
-      type: "TV",
-      rating: "9.1",
-      quality: "HD",
-      image: "assets/attack-on-titan.jpg"
-    },
-
-    {
-      id: "one-piece",
-      title: "One Piece",
-      year: "1999",
-      type: "TV",
-      rating: "9.2",
-      quality: "HD",
-      image: "assets/one-piece.jpg"
-    },
-
-    {
-      id: "death-note",
-      title: "Death Note",
-      year: "2006",
-      type: "TV",
-      rating: "8.9",
-      quality: "HD",
-      image: "assets/death-note.jpg"
-    },
-
-    {
-      id: "fullmetal-alchemist",
-      title: "Fullmetal Alchemist",
-      year: "2009",
-      type: "TV",
-      rating: "9.1",
-      quality: "HD",
-      image: "assets/fullmetal-alchemist.jpg"
-    },
-
-    {
-      id: "hunter-x-hunter",
-      title: "Hunter x Hunter",
-      year: "2011",
-      type: "TV",
-      rating: "9.0",
-      quality: "HD",
-      image: "assets/hunter-x-hunter.jpg"
-    },
-
-    {
-      id: "demon-slayer",
-      title: "Demon Slayer",
-      year: "2019",
-      type: "TV",
-      rating: "8.6",
-      quality: "HD",
-      image: "assets/demon-slayer.jpg"
-    },
-
-    {
-      id: "jujutsu-kaisen",
-      title: "Jujutsu Kaisen",
-      year: "2020",
-      type: "TV",
-      rating: "8.6",
-      quality: "HD",
-      image: "assets/jujutsu-kaisen.jpg"
-    }
-  ]
 };
 
 
 /* =========================================================
-   GET ALL ANIME
-========================================================= */
+   ALL ANIME
+   ========================================================= */
 
 function getAllAnime() {
-
-  const all = [
-    ...animeData.trending,
-    ...animeData.recentlyAdded
-  ];
-
-  const unique = [];
-
-  all.forEach(item => {
-
-    if (!unique.some(x => x.id === item.id)) {
-      unique.push(item);
-    }
-
-  });
-
-  return unique;
+  return Object.values(animeData);
 }
 
-
-/* =========================================================
-   FIND ANIME
-========================================================= */
-
-function findAnime(idOrTitle) {
-
-  const all = getAllAnime();
-
-  const value = String(idOrTitle || "").toLowerCase();
-
-  return all.find(anime =>
-    anime.id.toLowerCase() === value ||
-    anime.title.toLowerCase() === value
-  ) || null;
+function findAnime(id) {
+  return animeData[id] || null;
 }
 
 
 /* =========================================================
    IMAGE FALLBACK
-========================================================= */
+   ========================================================= */
 
 function imageFallback(img) {
+  if (!img) return;
 
-  img.onerror = null;
-
-  img.src =
-    "data:image/svg+xml;charset=UTF-8," +
-    encodeURIComponent(`
-      <svg xmlns="http://www.w3.org/2000/svg"
-           width="600"
-           height="900"
-           viewBox="0 0 600 900">
-        <rect width="600" height="900" fill="#161616"/>
-        <text x="300"
-              y="430"
-              text-anchor="middle"
-              fill="#ff2b2b"
-              font-size="42"
-              font-family="Arial">
-          ANIME FAN
-        </text>
-        <text x="300"
-              y="485"
-              text-anchor="middle"
-              fill="#999"
-              font-size="22"
-              font-family="Arial">
-          Image unavailable
-        </text>
-      </svg>
-    `);
+  img.onerror = function () {
+    this.onerror = null;
+    this.src =
+      "data:image/svg+xml;charset=UTF-8," +
+      encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="400"
+             height="600"
+             viewBox="0 0 400 600">
+          <rect width="400" height="600" fill="#111"/>
+          <text x="200"
+                y="290"
+                fill="#aaa"
+                font-size="24"
+                text-anchor="middle">
+            Anime Fan
+          </text>
+        </svg>
+      `);
+  };
 }
 
 
 /* =========================================================
-   CREATE CARD
-========================================================= */
+   ANIME CARD
+   ========================================================= */
 
 function createAnimeCard(anime) {
+  return `
+    <a class="card" href="details.html?anime=${encodeURIComponent(anime.id)}">
 
-  const card = document.createElement("article");
-
-  card.className = "anime-card";
-
-  card.innerHTML = `
-    <a href="details.html?anime=${encodeURIComponent(anime.id)}">
-
-      <div class="anime-poster">
-
+      <div class="card-image">
         <img
-          src="${anime.image || ""}"
+          src="${anime.poster}"
           alt="${anime.title}"
           loading="lazy"
-          decoding="async"
           onerror="imageFallback(this)"
         >
-
-        <span class="card-rating">
-          ⭐ ${anime.rating || "N/A"}
-        </span>
-
-        <span class="card-quality">
-          ${anime.quality || "HD"}
-        </span>
-
       </div>
 
-      <div class="anime-info">
-
-        <h3 class="anime-title">
-          ${anime.title}
-        </h3>
-
-        <div class="anime-meta">
-          <span>${anime.year || ""}</span>
-          <span class="dot">•</span>
-          <span>${anime.type || "TV"}</span>
-        </div>
-
-        ${
-          anime.progress
-            ? `
-              <div class="progress-wrap">
-                <div class="progress-bar">
-                  <div
-                    class="progress-fill"
-                    style="width:${anime.progress}%">
-                  </div>
-                </div>
-              </div>
-            `
-            : ""
-        }
-
+      <div class="card-body">
+        <h3>${anime.title}</h3>
+        <p>${anime.year} • ${anime.rating}</p>
       </div>
 
     </a>
   `;
-
-  return card;
-}
-
-
-/* =========================================================
-   RENDER LIST
-========================================================= */
-
-function renderAnimeList(elementId, list) {
-
-  const container = document.getElementById(elementId);
-
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  if (!list || list.length === 0) {
-
-    container.innerHTML = `
-      <div class="empty-message">
-        No anime found.
-      </div>
-    `;
-
-    return;
-  }
-
-  list.forEach(anime => {
-
-    container.appendChild(
-      createAnimeCard(anime)
-    );
-
-  });
 }
 
 
 /* =========================================================
    HOME PAGE
-========================================================= */
+   ========================================================= */
 
 function loadHomePage() {
 
-  renderAnimeList(
-    "trendingGrid",
-    animeData.trending
-  );
+  const trending = document.getElementById("trendingGrid");
+  const continueGrid = document.getElementById("continueGrid");
+  const recent = document.getElementById("recentGrid");
+  const movies = document.getElementById("moviesGrid");
+  const hindi = document.getElementById("hindiGrid");
+  const top = document.getElementById("topGrid");
 
-  renderAnimeList(
-    "continueGrid",
-    animeData.continueWatching
-  );
+  const list = getAllAnime();
 
-  renderAnimeList(
-    "recentGrid",
-    animeData.recentlyAdded
-  );
+  if (trending) {
+    trending.innerHTML = list.slice(0, 8)
+      .map(createAnimeCard)
+      .join("");
+  }
 
-  renderAnimeList(
-    "moviesGrid",
-    animeData.movies
-  );
+  if (continueGrid) {
+    continueGrid.innerHTML = list.slice(1, 5)
+      .map(createAnimeCard)
+      .join("");
+  }
 
-  renderAnimeList(
-    "hindiGrid",
-    animeData.hindi
-  );
+  if (recent) {
+    recent.innerHTML = list.slice(8, 16)
+      .map(createAnimeCard)
+      .join("");
+  }
 
-  renderAnimeList(
-    "topGrid",
-    animeData.top
-  );
+  if (movies) {
+    movies.innerHTML = list
+      .filter(a => a.status === "Movie")
+      .slice(0, 8)
+      .map(createAnimeCard)
+      .join("");
+  }
+
+  if (hindi) {
+    hindi.innerHTML = list
+      .filter(a => a.languages.includes("Hindi Dub"))
+      .slice(0, 8)
+      .map(createAnimeCard)
+      .join("");
+  }
+
+  if (top) {
+    top.innerHTML = [...list]
+      .sort((a, b) => parseFloat(b.rating) - parseFloat(a.rating))
+      .slice(0, 8)
+      .map(createAnimeCard)
+      .join("");
+  }
 }
 
 
 /* =========================================================
    ANIME PAGE
-========================================================= */
+   ========================================================= */
 
 function loadAnimePage() {
 
-  const container =
-    document.getElementById("allAnime");
+  const container = document.getElementById("allAnime");
 
   if (!container) return;
 
-  const params =
-    new URLSearchParams(window.location.search);
-
-  const query =
-    (params.get("search") || "").trim().toLowerCase();
-
-  let list = getAllAnime();
-
-  if (query) {
-
-    list = list.filter(anime =>
-      anime.title.toLowerCase().includes(query)
-    );
-
-  }
-
-  renderAnimeList(
-    "allAnime",
-    list
-  );
-
-  const heading =
-    document.querySelector(".section-head h1");
-
-  if (heading && query) {
-
-    heading.textContent =
-      `Search Results: ${params.get("search")}`;
-
-  }
-
+  container.innerHTML = getAllAnime()
+    .filter(a => a.status !== "Movie")
+    .map(createAnimeCard)
+    .join("");
 }
 
 
 /* =========================================================
    MOVIES PAGE
-========================================================= */
+   ========================================================= */
 
 function loadMoviesPage() {
 
-  const container =
-    document.getElementById("movieList");
+  const container = document.getElementById("movieList");
 
   if (!container) return;
 
-  renderAnimeList(
-    "movieList",
-    animeData.movies
-  );
+  container.innerHTML = getAllAnime()
+    .filter(a => a.status === "Movie")
+    .map(createAnimeCard)
+    .join("");
 }
 
 
 /* =========================================================
    DETAILS PAGE
-========================================================= */
+   ========================================================= */
 
 function loadDetailsPage() {
 
-  const titleElement =
-    document.getElementById("title");
+  if (!document.body.classList.contains("details") &&
+      !document.querySelector(".details")) {
+    return;
+  }
 
-  if (!titleElement) return;
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("anime");
 
-  const params =
-    new URLSearchParams(window.location.search);
+  const anime = findAnime(id);
 
-  const animeId =
-    params.get("anime");
-
-  const anime =
-    findAnime(animeId);
+  const title = document.getElementById("title");
+  const episodeContainer = document.getElementById("episodes");
 
   if (!anime) {
 
-    document.title =
-      "Anime Not Found - Anime Fan";
+    if (title) {
+      title.textContent = "Anime Not Found";
+    }
 
-    document.querySelector(".details").innerHTML = `
-      <div class="empty-message">
-        <h1>Anime Not Found</h1>
-        <p>This anime is not available.</p>
-        <a href="anime.html">← Back to Anime</a>
-      </div>
-    `;
+    if (episodeContainer) {
+      episodeContainer.innerHTML =
+        `<p>Anime information could not be found.</p>`;
+    }
 
     return;
   }
 
-  document.title =
-    `${anime.title} - Anime Fan`;
 
-  titleElement.textContent =
-    anime.title;
+  document.title = `${anime.title} - Anime Fan`;
 
-  const banner =
-    document.querySelector(".detail-banner");
 
-  if (banner) {
-
-    banner.style.backgroundImage =
-      `linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.95)),
-       url("${anime.image}")`;
-
-    banner.style.backgroundSize =
-      "cover";
-
-    banner.style.backgroundPosition =
-      "center";
+  if (title) {
+    title.textContent = anime.title;
   }
 
-  const poster =
-    document.querySelector(".poster");
+
+  const banner = document.querySelector(".detail-banner");
+
+  if (banner) {
+    banner.style.backgroundImage =
+      `url("${anime.banner || anime.poster}")`;
+  }
+
+
+  const poster = document.querySelector(".poster");
 
   if (poster) {
 
     poster.innerHTML = `
       <img
-        src="${anime.image}"
+        src="${anime.poster}"
         alt="${anime.title}"
-        loading="eager"
         onerror="imageFallback(this)"
       >
     `;
+
   }
 
-  const info =
-    document.querySelector(".detail-info > div:last-child");
+
+  const info = document.querySelector(".detail-info");
 
   if (info) {
 
-    info.innerHTML = `
+    const content = info.querySelector("div:last-child");
 
-      <h1 id="title">
-        ${anime.title}
-      </h1>
+    if (content) {
 
-      <div class="stars">
-        ⭐ ${anime.rating || "N/A"}/10
-        &nbsp; • &nbsp;
-        ${anime.type || "TV"}
-        &nbsp; • &nbsp;
-        ${anime.year || ""}
-        &nbsp; • &nbsp;
-        ${anime.status || "Ongoing"}
-      </div>
+      const meta = content.querySelector(".stars");
 
-      <p>
-        ${anime.description || "Anime details coming soon."}
-      </p>
+      if (meta) {
+        meta.textContent =
+          `★ ${anime.rating}  •  ${anime.year}  •  ${anime.status}`;
+      }
 
-      <p>
-        <b>Genres:</b>
-        ${(anime.genres || []).join(", ")}
-      </p>
+      const paragraphs = content.querySelectorAll("p");
 
-      <p>
-        <b>Episodes:</b>
-        ${anime.episodes || "TBA"}
-        &nbsp;
-        <b>Languages:</b>
-        ${(anime.languages || ["Japanese"]).join(", ")}
-      </p>
+      if (paragraphs[0]) {
+        paragraphs[0].textContent = anime.description;
+      }
 
-      <div class="detail-buttons">
+      if (paragraphs[1]) {
+        paragraphs[1].innerHTML =
+          `<b>Genres:</b> ${anime.genres}`;
+      }
 
+      if (paragraphs[2]) {
+        paragraphs[2].innerHTML =
+          `<b>Episodes:</b> ${anime.episodes}
+           &nbsp; <b>Languages:</b>
+           ${anime.languages.join(", ")}`;
+      }
+
+      const watchButton =
+        content.querySelector(".primary");
+
+      if (watchButton) {
+        watchButton.href =
+          `watch.html?anime=${anime.id}&episode=1`;
+      }
+
+    }
+
+  }
+
+
+  if (episodeContainer) {
+
+    let html = "";
+
+    for (let i = 1; i <= anime.episodes; i++) {
+
+      html += `
         <a
-          class="primary"
-          href="watch.html?anime=${encodeURIComponent(anime.id)}&episode=1">
-          ▶ Watch Now
+          class="episode"
+          href="watch.html?anime=${encodeURIComponent(anime.id)}&episode=${i}"
+        >
+          Episode ${i}
         </a>
+      `;
 
-        <button
-          class="secondary"
-          id="myListBtn"
-          type="button">
-          ＋ Add to My List
-        </button>
+    }
 
-      </div>
-    `;
+    episodeContainer.innerHTML = html;
   }
 
-  createEpisodeList(
-    "episodes",
-    anime
-  );
 
-  setupMyList(
-    anime
-  );
-}
+  setupMyListButton(anime);
 
-
-/* =========================================================
-   EPISODE LIST
-========================================================= */
-
-function createEpisodeList(
-  elementId,
-  anime
-) {
-
-  const container =
-    document.getElementById(elementId);
-
-  if (!container) return;
-
-  const total =
-    Number(anime.episodes) || 0;
-
-  if (!total) {
-
-    container.innerHTML = `
-      <div class="empty-message">
-        Episodes will be added soon.
-      </div>
-    `;
-
-    return;
-  }
-
-  const maxForDemo =
-    Math.min(total, 1000);
-
-  container.innerHTML = "";
-
-  for (let i = 1; i <= maxForDemo; i++) {
-
-    const link =
-      document.createElement("a");
-
-    link.href =
-      `watch.html?anime=${encodeURIComponent(anime.id)}&episode=${i}`;
-
-    link.textContent =
-      `Episode ${i}`;
-
-    link.className =
-      "episode-item";
-
-    container.appendChild(link);
-  }
 }
 
 
 /* =========================================================
    MY LIST
-========================================================= */
+   ========================================================= */
 
-function getMyList() {
+function setupMyListButton(anime) {
 
-  try {
-
-    return JSON.parse(
-      localStorage.getItem("animeFanMyList") || "[]"
-    );
-
-  } catch {
-
-    return [];
-
-  }
-}
-
-
-function saveMyList(list) {
-
-  localStorage.setItem(
-    "animeFanMyList",
-    JSON.stringify(list)
-  );
-}
-
-
-function setupMyList(anime) {
-
-  const button =
-    document.getElementById("myListBtn");
+  const button = document.getElementById("myListBtn");
 
   if (!button) return;
 
-  let list =
-    getMyList();
+  const key = "animeFanMyList";
 
-  const exists =
-    list.some(item => item.id === anime.id);
+  let saved = JSON.parse(
+    localStorage.getItem(key) || "[]"
+  );
+
+  const isSaved = saved.includes(anime.id);
 
   button.textContent =
-    exists
-      ? "✓ In My List"
-      : "＋ Add to My List";
+    isSaved ? "✓ Added to My List" : "＋ Add to My List";
 
-  button.addEventListener("click", () => {
 
-    list =
-      getMyList();
+  button.onclick = function () {
 
-    const index =
-      list.findIndex(
-        item => item.id === anime.id
-      );
+    saved = JSON.parse(
+      localStorage.getItem(key) || "[]"
+    );
 
-    if (index >= 0) {
+    if (saved.includes(anime.id)) {
 
-      list.splice(index, 1);
+      saved = saved.filter(id => id !== anime.id);
 
-      button.textContent =
-        "＋ Add to My List";
+      button.textContent = "＋ Add to My List";
 
     } else {
 
-      list.push({
-        id: anime.id,
-        title: anime.title,
-        image: anime.image
-      });
+      saved.push(anime.id);
 
-      button.textContent =
-        "✓ In My List";
+      button.textContent = "✓ Added to My List";
     }
 
-    saveMyList(list);
-  });
+    localStorage.setItem(
+      key,
+      JSON.stringify(saved)
+    );
+
+  };
+
 }
 
 
 /* =========================================================
    WATCH PAGE
-========================================================= */
+   ========================================================= */
 
 function loadWatchPage() {
 
-  const label =
-    document.getElementById("episodeLabel");
+  const player = document.getElementById("videoPlayer");
 
-  if (!label) return;
+  if (!player) return;
 
-  const params =
-    new URLSearchParams(window.location.search);
 
-  const animeId =
-    params.get("anime");
+  const params = new URLSearchParams(
+    window.location.search
+  );
 
-  const requestedEpisode =
-    Number(params.get("episode")) || 1;
+  const animeId = params.get("anime");
 
-  const anime =
-    findAnime(animeId);
+  let episode =
+    parseInt(params.get("episode") || "1", 10);
+
+
+  const anime = findAnime(animeId);
+
 
   if (!anime) {
 
-    label.textContent =
-      "Anime not found";
+    player.innerHTML = `
+      <div class="watch-error">
+        <h2>Anime Not Found</h2>
+        <p>The requested anime could not be found.</p>
+        <a href="index.html">← Back to Home</a>
+      </div>
+    `;
 
     return;
   }
 
-  const totalEpisodes =
-    Number(anime.episodes) || 1;
 
-  let episode =
-    Math.max(
-      1,
-      Math.min(
-        requestedEpisode,
-        totalEpisodes
-      )
-    );
+  /* Safety */
+
+  if (episode < 1) {
+    episode = 1;
+  }
+
+  if (episode > anime.episodes) {
+    episode = anime.episodes;
+  }
+
 
   document.title =
-    `${anime.title} - Episode ${episode} - Anime Fan`;
+    `${anime.title} Episode ${episode} - Anime Fan`;
 
-  label.textContent =
-    `${anime.title} — Episode ${episode}`;
 
-  const player =
-    document.querySelector(".video");
+  const title =
+    document.getElementById("watchTitle");
 
-  if (player) {
+  const label =
+    document.getElementById("episodeLabel");
 
-    player.innerHTML = `
-      <div class="video-placeholder">
 
-        <div class="play-icon">
-          ▶
-        </div>
-
-        <h2>
-          ${anime.title}
-        </h2>
-
-        <p>
-          Episode ${episode}
-        </p>
-
-        <small>
-          Video player will use the authorized Byse embed URL later.
-        </small>
-
-      </div>
-    `;
+  if (title) {
+    title.textContent = anime.title;
   }
+
+  if (label) {
+    label.textContent =
+      `Episode ${episode}`;
+  }
+
+
+  /* Language */
+
+  const languageSelect =
+    document.getElementById("languageSelect");
+
+
+  if (languageSelect) {
+
+    languageSelect.innerHTML =
+      anime.languages
+        .map((language, index) => {
+
+          const flag =
+            language === "Hindi Dub"
+              ? "🇮🇳"
+              : language === "English Dub"
+              ? "🇬🇧"
+              : "🇯🇵";
+
+          return `
+            <option value="${language}" ${index === 0 ? "selected" : ""}>
+              ${flag} ${language}
+            </option>
+          `;
+
+        })
+        .join("");
+
+  }
+
+
+  /* Season */
+
+  const seasonSelect =
+    document.getElementById("seasonSelect");
+
+
+  if (seasonSelect) {
+
+    seasonSelect.innerHTML = `
+      <option value="1">Season 01</option>
+    `;
+
+  }
+
+
+  /* Player */
+
+  renderVideoPlayer(
+    player,
+    anime,
+    episode
+  );
+
+
+  /* Previous */
 
   const prev =
     document.getElementById("prev");
 
-  const next =
-    document.getElementById("next");
-
-  /* PREVIOUS */
 
   if (prev) {
 
-    if (episode > 1) {
+    if (episode <= 1) {
 
-      prev.style.display =
-        "inline-flex";
-
-      prev.textContent =
-        "◀ Previous";
-
-      prev.onclick = () => {
-
-        window.location.href =
-          `watch.html?anime=${encodeURIComponent(anime.id)}&episode=${episode - 1}`;
-
-      };
+      prev.style.display = "none";
 
     } else {
 
-      prev.style.display =
-        "none";
+      prev.style.display = "";
+
+      prev.onclick = function () {
+
+        goToEpisode(
+          anime.id,
+          episode - 1
+        );
+
+      };
 
     }
+
   }
 
-  /* NEXT */
+
+  /* Next */
+
+  const next =
+    document.getElementById("next");
+
 
   if (next) {
 
-    if (episode < totalEpisodes) {
+    if (episode >= anime.episodes) {
 
-      next.style.display =
-        "inline-flex";
-
-      next.textContent =
-        "Next ▶";
-
-      next.onclick = () => {
-
-        window.location.href =
-          `watch.html?anime=${encodeURIComponent(anime.id)}&episode=${episode + 1}`;
-
-      };
+      next.style.display = "none";
 
     } else {
 
-      /* LAST EPISODE — NO NEXT BUTTON */
+      next.style.display = "";
 
-      next.style.display =
-        "none";
+      next.onclick = function () {
+
+        goToEpisode(
+          anime.id,
+          episode + 1
+        );
+
+      };
+
     }
+
   }
+
+
+  /* Episode count */
+
+  const episodeCount =
+    document.getElementById("episodeCount");
+
+  if (episodeCount) {
+    episodeCount.textContent =
+      `${anime.episodes} Episodes`;
+  }
+
+
+  /* Episode list */
 
   createWatchEpisodeList(
     anime,
     episode
   );
 
-  const languageSelect =
-    document.getElementById("languageSelect");
+
+  /* Language change */
 
   if (languageSelect) {
 
-    languageSelect.innerHTML = "";
+    languageSelect.onchange = function () {
 
-    (anime.languages || ["Japanese"])
-      .forEach(language => {
+      renderVideoPlayer(
+        player,
+        anime,
+        episode,
+        this.value
+      );
 
-        const option =
-          document.createElement("option");
+    };
 
-        option.value =
-          language;
-
-        option.textContent =
-          language === "Hindi Dub"
-            ? "🇮🇳 Hindi Dub"
-            : language === "English Dub"
-              ? "🇬🇧 English Dub"
-              : "🇯🇵 Original Audio";
-
-        languageSelect.appendChild(option);
-      });
   }
 
-  const seasonSelect =
-    document.getElementById("seasonSelect");
+
+  /* Season change */
 
   if (seasonSelect) {
 
-    seasonSelect.innerHTML =
-      `<option value="1">Season 01</option>`;
+    seasonSelect.onchange = function () {
+
+      const selectedSeason =
+        this.value;
+
+      window.location.href =
+        `watch.html?anime=${encodeURIComponent(anime.id)}&episode=1&season=${encodeURIComponent(selectedSeason)}`;
+
+    };
+
   }
+
 }
 
 
 /* =========================================================
-   WATCH EPISODES
-========================================================= */
+   VIDEO PLAYER
+   ========================================================= */
+
+function renderVideoPlayer(
+  player,
+  anime,
+  episode,
+  language
+) {
+
+  const selectedLanguage =
+    language || anime.languages[0];
+
+
+  /*
+    BYSE EMBED SUPPORT
+
+    Add your authorized Byse embed URL like this:
+
+    byse: {
+      "1": "YOUR-BYSE-EMBED-URL"
+    }
+
+    Or per language:
+
+    byse: {
+      "Hindi Dub": {
+        "1": "YOUR-BYSE-EMBED-URL"
+      }
+    }
+
+    Until a URL is added, the player will show
+    "Video not available yet".
+  */
+
+
+  let embedUrl = "";
+
+
+  if (anime.byse) {
+
+    if (
+      anime.byse[selectedLanguage] &&
+      anime.byse[selectedLanguage][episode]
+    ) {
+
+      embedUrl =
+        anime.byse[selectedLanguage][episode];
+
+    } else if (
+      anime.byse[episode]
+    ) {
+
+      embedUrl =
+        anime.byse[episode];
+
+    }
+
+  }
+
+
+  if (embedUrl) {
+
+    player.innerHTML = `
+      <iframe
+        src="${escapeHtml(embedUrl)}"
+        title="${escapeHtml(anime.title)} Episode ${episode}"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer"
+      ></iframe>
+    `;
+
+  } else {
+
+    player.innerHTML = `
+      <div class="player-message">
+        <div class="play-icon">▶</div>
+        <h2>${escapeHtml(anime.title)}</h2>
+        <p>
+          Episode ${episode} • ${escapeHtml(selectedLanguage)}
+        </p>
+        <p style="margin-top:10px;">
+          Video is not available yet.
+        </p>
+      </div>
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   EPISODE LIST
+   ========================================================= */
 
 function createWatchEpisodeList(
   anime,
@@ -1175,272 +1069,222 @@ function createWatchEpisodeList(
 
   if (!container) return;
 
-  const total =
-    Number(anime.episodes) || 0;
 
-  container.innerHTML = "";
+  let html = "";
 
-  const max =
-    Math.min(total, 1000);
 
-  for (let i = 1; i <= max; i++) {
+  for (
+    let i = 1;
+    i <= anime.episodes;
+    i++
+  ) {
 
-    const link =
-      document.createElement("a");
+    html += `
+      <a
+        class="watch-episode ${i === currentEpisode ? "active" : ""}"
+        href="watch.html?anime=${encodeURIComponent(anime.id)}&episode=${i}"
+      >
+        ${i}
+      </a>
+    `;
 
-    link.href =
-      `watch.html?anime=${encodeURIComponent(anime.id)}&episode=${i}`;
-
-    link.textContent =
-      `EP ${i}`;
-
-    link.className =
-      "episode-item";
-
-    if (i === currentEpisode) {
-
-      link.classList.add("active");
-
-    }
-
-    container.appendChild(link);
   }
+
+
+  container.innerHTML = html;
+
 }
 
 
 /* =========================================================
-   MOBILE MENU
-========================================================= */
+   GO TO EPISODE
+   ========================================================= */
 
-function setupMobileMenu() {
+function goToEpisode(
+  animeId,
+  episode
+) {
 
-  const menuBtn =
-    document.getElementById("menuBtn");
+  window.location.href =
+    `watch.html?anime=${encodeURIComponent(animeId)}&episode=${episode}`;
 
-  const closeMenu =
-    document.getElementById("closeMenu");
+}
 
-  const mobileMenu =
-    document.getElementById("mobileMenu");
 
-  const overlay =
-    document.getElementById("menuOverlay");
+/* =========================================================
+   ESCAPE HTML
+   ========================================================= */
 
-  function openMenu() {
+function escapeHtml(value) {
 
-    if (!mobileMenu) return;
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
-    mobileMenu.classList.add("open");
-    overlay?.classList.add("open");
-
-    document.body.style.overflow =
-      "hidden";
-  }
-
-  function closeMenuFn() {
-
-    if (!mobileMenu) return;
-
-    mobileMenu.classList.remove("open");
-    overlay?.classList.remove("open");
-
-    document.body.style.overflow =
-      "";
-  }
-
-  menuBtn?.addEventListener(
-    "click",
-    openMenu
-  );
-
-  closeMenu?.addEventListener(
-    "click",
-    closeMenuFn
-  );
-
-  overlay?.addEventListener(
-    "click",
-    closeMenuFn
-  );
 }
 
 
 /* =========================================================
    SEARCH
-========================================================= */
+   ========================================================= */
 
 function setupSearch() {
 
-  const searchBtn =
-    document.getElementById("searchBtn");
+  const inputs =
+    document.querySelectorAll(
+      "#search, #mobileSearch"
+    );
 
-  const mobileSearch =
-    document.getElementById("mobileSearch");
 
-  const searchInput =
-    document.getElementById("searchInput");
+  inputs.forEach(input => {
 
-  const searchSubmit =
-    document.getElementById("searchSubmit");
+    input.addEventListener(
+      "keydown",
+      function (event) {
 
-  searchBtn?.addEventListener(
-    "click",
-    () => {
+        if (event.key !== "Enter") {
+          return;
+        }
 
-      mobileSearch?.classList.toggle(
-        "open"
-      );
+        const query =
+          this.value.trim();
 
-      if (
-        mobileSearch?.classList.contains("open")
-      ) {
+        if (!query) {
+          return;
+        }
 
-        setTimeout(
-          () => searchInput?.focus(),
-          100
-        );
+        window.location.href =
+          `anime.html?search=${encodeURIComponent(query)}`;
 
       }
+    );
 
-    }
-  );
+  });
 
-  function performSearch() {
-
-    const query =
-      searchInput?.value.trim();
-
-    if (!query) {
-
-      window.location.href =
-        "anime.html";
-
-      return;
-    }
-
-    window.location.href =
-      "anime.html?search=" +
-      encodeURIComponent(query);
-  }
-
-  searchSubmit?.addEventListener(
-    "click",
-    performSearch
-  );
-
-  searchInput?.addEventListener(
-    "keydown",
-    event => {
-
-      if (event.key === "Enter") {
-
-        performSearch();
-
-      }
-
-    }
-  );
 }
 
 
 /* =========================================================
-   OLD SEARCH INPUTS — ANIME/MOVIES PAGE
-========================================================= */
+   ANIME PAGE SEARCH
+   ========================================================= */
 
-function setupPageSearch() {
+function setupAnimeSearch() {
 
-  const input =
-    document.getElementById("search");
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
 
-  if (!input) return;
+  const query =
+    params.get("search");
 
-  input.addEventListener(
-    "keydown",
-    event => {
 
-      if (event.key === "Enter") {
+  if (!query) return;
 
-        const query =
-          input.value.trim();
 
-        if (
-          window.location.pathname.endsWith(
-            "movies.html"
-          )
-        ) {
+  const container =
+    document.getElementById("allAnime");
 
-          return;
+  if (!container) return;
 
-        }
 
-        window.location.href =
-          "anime.html?search=" +
-          encodeURIComponent(query);
-      }
+  const q =
+    query.toLowerCase();
+
+
+  const results =
+    getAllAnime().filter(anime =>
+      anime.title
+        .toLowerCase()
+        .includes(q)
+    );
+
+
+  if (!results.length) {
+
+    container.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:40px 10px;">
+        <h2>No Anime Found</h2>
+        <p>Try another search.</p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML =
+    results.map(createAnimeCard).join("");
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+   ========================================================= */
+
+function setupMobileMenu() {
+
+  const menuButton =
+    document.getElementById("menuBtn");
+
+  const menu =
+    document.getElementById("mobileMenu");
+
+
+  if (!menuButton || !menu) {
+    return;
+  }
+
+
+  menuButton.addEventListener(
+    "click",
+    function () {
+
+      menu.classList.toggle("open");
 
     }
   );
+
 }
 
 
 /* =========================================================
    THEME
-========================================================= */
+   ========================================================= */
 
 function setupTheme() {
 
-  const themeBtn =
+  const button =
     document.getElementById("themeBtn");
 
-  if (!themeBtn) return;
+  if (!button) return;
 
-  themeBtn.addEventListener(
+
+  button.addEventListener(
     "click",
-    () => {
+    function () {
 
       document.body.classList.toggle(
         "light-theme"
       );
 
-      const light =
-        document.body.classList.contains(
-          "light-theme"
-        );
-
-      localStorage.setItem(
-        "animeFanTheme",
-        light ? "light" : "dark"
-      );
-
-      themeBtn.textContent =
-        light ? "☀" : "☾";
     }
   );
 
-  const saved =
-    localStorage.getItem(
-      "animeFanTheme"
-    );
-
-  if (saved === "light") {
-
-    document.body.classList.add(
-      "light-theme"
-    );
-
-    themeBtn.textContent =
-      "☀";
-  }
 }
 
 
 /* =========================================================
    INIT
-========================================================= */
+   ========================================================= */
 
 document.addEventListener(
   "DOMContentLoaded",
-  () => {
+  function () {
 
     loadHomePage();
 
@@ -1452,11 +1296,11 @@ document.addEventListener(
 
     loadWatchPage();
 
-    setupMobileMenu();
-
     setupSearch();
 
-    setupPageSearch();
+    setupAnimeSearch();
+
+    setupMobileMenu();
 
     setupTheme();
 
