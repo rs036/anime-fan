@@ -1,11 +1,13 @@
-# Anime Fan v4
-Reference-based responsive anime website frontend.
+# Anime Fan V4
+A responsive front-end prototype based on the supplied Anime Fan desktop/mobile reference images.
 
-## Pages
-- index.html — desktop + mobile home
-- anime.html — anime details, language, seasons, episodes
-- watch.html — watch page with authorized embed placeholder
-- admin.html — admin UI demo
+Included:
+- Responsive desktop + mobile homepage
+- Left navigation and mobile bottom navigation
+- Hero, trending, continue watching, recent, genres, movies, my list, request
+- Admin dashboard, add anime and episode management mockup
+- Reference images in `assets/`
+- No backend credentials or video URLs included
 
-## Later integrations
-GitHub Pages for frontend, Firebase for data/auth/requests/settings, and an authorized video embed provider such as Byse for streaming.
+Next integration:
+Firebase for database/admin authentication/requests, and authorized Byse embed URLs for episodes.
