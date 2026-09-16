@@ -1,4 +1,154 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Watch - Anime Fan</title><link rel="stylesheet" href="styles.css"></head>
-<body><header class="topbar"><div class="brand">✹ Anime <b>Fan</b></div><nav><a href="index.html">⌂ Home</a><a href="anime.html">▣ Anime</a></nav></header>
-<main class="watch page"><div class="video"><div>▶</div></div><div class="watch-controls"><select><option>🇮🇳 Hindi Dub</option><option>🇬🇧 English Dub</option><option>🇯🇵 Original Audio</option></select><select><option>Season 01</option></select><span id="episodeLabel"></span></div><div class="watch-nav"><button id="prev">◀ Previous</button><button id="next" class="primary">Next ▶</button></div><h2>Episode List</h2><div class="episodes" id="watchEpisodes"></div></main><script src="app.js"></script></body></html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>
+    Watch - Anime Fan
+  </title>
+
+  <meta
+    name="description"
+    content="Watch anime on Anime Fan">
+
+  <link
+    rel="stylesheet"
+    href="styles.css">
+
+</head>
+
+<body>
+
+  <header class="topbar">
+
+    <div class="brand">
+      ✹ Anime <b>Fan</b>
+    </div>
+
+    <nav>
+
+      <a href="index.html">
+        ⌂ Home
+      </a>
+
+      <a href="anime.html">
+        ▣ Anime
+      </a>
+
+      <a href="movies.html">
+        ▤ Movies
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <main class="watch page">
+
+
+    <!-- VIDEO PLAYER -->
+
+    <div class="video">
+
+      <div class="video-placeholder">
+
+        <div class="play-icon">
+          ▶
+        </div>
+
+        <h2>
+          Loading...
+        </h2>
+
+        <p>
+          Loading episode...
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- CONTROLS -->
+
+    <div class="watch-controls">
+
+
+      <select
+        id="languageSelect"
+        aria-label="Language">
+
+        <option>
+          🇮🇳 Hindi Dub
+        </option>
+
+      </select>
+
+
+      <select
+        id="seasonSelect"
+        aria-label="Season">
+
+        <option value="1">
+          Season 01
+        </option>
+
+      </select>
+
+
+      <span id="episodeLabel">
+        Loading...
+      </span>
+
+    </div>
+
+
+    <!-- PREVIOUS / NEXT -->
+
+    <div class="watch-nav">
+
+      <button
+        id="prev"
+        type="button">
+        ◀ Previous
+      </button>
+
+
+      <button
+        id="next"
+        class="primary"
+        type="button">
+        Next ▶
+      </button>
+
+    </div>
+
+
+    <!-- EPISODES -->
+
+    <h2>
+      Episode List
+    </h2>
+
+
+    <div
+      class="episodes"
+      id="watchEpisodes">
+    </div>
+
+
+  </main>
+
+
+  <script src="app.js"></script>
+
+</body>
+
+</html>
