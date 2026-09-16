@@ -1,13 +1,64 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anime Fan — V5</title><link rel="stylesheet" href="styles.css"></head><body>
-<div class="topbar">Hindi Dub <span>•</span> English Dub <span>•</span> Original Audio <span>•</span> Fan Dub</div>
-<header class="header"><a class="brand" href="index.html"><span>✦</span> Anime Fan</a><nav><a class="active" href="index.html">Home</a><a href="#anime">Anime</a><a href="#movies">Movies</a><a href="#genres">Genres</a><a href="#trending">Trending</a><a href="#mylist">My List</a><a href="#request">Request</a></nav><div class="actions"><input id="search" placeholder="Search anime..."><button id="themeBtn">☾</button><button id="menuBtn">☰</button></div></header>
-<div class="layout"><aside class="sidebar"><h5>MENU</h5><a class="active">⌂ Home</a><a href="#anime">▦ Anime</a><a href="#movies">▤ Movies</a><a href="#genres">◇ Genres</a><a href="#mylist">♡ My List</a><a href="#continue">◷ Continue Watching</a><a href="#request">♙ Request</a><a href="#report">▣ Report</a><h5>QUICK GENRES</h5><div class="quick"><a>⚔ Action</a><a>✦ Adventure</a><a>● Comedy</a><a>◆ Drama</a><a>✦ Fantasy</a><a>☠ Horror</a><a>♥ Romance</a><a>◉ Sci-Fi</a><a>⚽ Sports</a><a>✦ Mystery</a></div></aside>
-<main class="container"><section class="hero"><div class="hero-copy"><span class="pill">FEATURED</span><h1>One Piece</h1><p>Follow Monkey D. Luffy and the Straw Hat Pirates as they search for the legendary One Piece and the title of Pirate King.</p><div class="meta"><b>★ 9.1/10</b><span>TV</span><span>Adventure</span><span>Action</span><span>1120+ Episodes</span></div><div class="hero-actions"><a class="btn primary" href="anime.html?anime=one-piece">▶ Watch Now</a><button class="btn ghost" onclick="saveAnime('one-piece')">＋ Add to My List</button></div></div><div class="hero-art"><div class="sun"></div><div class="character">☠</div></div></section>
-<section id="trending" class="section"><div class="head"><h2>🔥 Trending Now</h2><a>View All</a></div><div class="cards" id="trendingCards"></div></section>
-<div class="split"><section id="continue" class="section"><div class="head"><h2>▶ Continue Watching</h2><a>View All</a></div><div class="continue-box" id="continueBox"></div></section><aside class="side"><div class="panel"><div class="head"><h3>🏆 Top Anime</h3><a>View All</a></div><p>01　Solo Leveling ↗</p><p>02　One Piece —</p><p>03　Jujutsu Kaisen ↗</p><p>04　Demon Slayer ↓</p><p>05　Naruto Shippuden ↗</p></div><div class="panel"><div class="head"><h3>▣ Upcoming Schedule</h3></div><p><b>14 Sep</b>　One Piece · Ep 1120</p><p><b>15 Sep</b>　Demon Slayer · Ep 56</p><p><b>16 Sep</b>　Jujutsu Kaisen · Ep 48</p><p><b>17 Sep</b>　Naruto · Ep 501</p></div><div class="request-mini"><b>Anime Request</b><p>Didn't find your favorite anime?</p><a class="btn primary" href="#request">✈ Request Now</a></div></aside></div>
-<section id="anime" class="section"><div class="head"><h2>🔥 Recently Added</h2><a>View All</a></div><div class="cards" id="recentCards"></div></section>
-<section id="genres" class="section"><div class="head"><h2>◇ Browse by Genre</h2></div><div class="genres" id="genreGrid"></div></section>
-<section id="movies" class="section"><div class="head"><h2>🎬 Movies</h2><a>View All</a></div><div class="cards" id="movieCards"></div></section>
-<section id="mylist" class="section panel"><div class="head"><h2>♡ My List</h2></div><div id="myListBox">Your saved anime will appear here.</div></section>
-<section id="request" class="section request"><div><span class="pill">REQUEST</span><h2>Didn't find your favorite anime?</h2><p>Tell us what you want and we'll add it.</p></div><form onsubmit="submitRequest(event)"><input required placeholder="Anime Name"><select><option>Season 1</option><option>Season 2</option><option>Season 3</option></select><select><option>Hindi Dub</option><option>English Dub</option><option>Original Audio</option><option>Fan Dub</option></select><textarea placeholder="Your request message"></textarea><button class="btn primary">✈ Submit Request</button><small id="status"></small></form></section>
-</main></div><footer><div class="brand"><span>✦</span> Anime Fan</div><small>ANIME · MOVIES · SERIES · MORE</small><p>1200+ Anime　500+ Movies　50K+ Members</p><p>About Us　 Contact　 Privacy Policy　 Terms & Conditions　 DMCA</p></footer><div class="mobile-nav"><a href="index.html">⌂<small>Home</small></a><a href="#anime">▦<small>Anime</small></a><a href="#movies">▤<small>Movies</small></a><a href="#genres">◇<small>Genres</small></a><a href="#mylist">♡<small>My List</small></a></div><script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Fan India</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">✹</span><span>Anime <b>Fan</b></span></div>
+    <nav>
+      <a class="active" href="index.html">⌂ Home</a>
+      <a href="anime.html">▣ Anime</a>
+      <a href="movies.html">▤ Movies</a>
+      <a href="#">◇ Genres</a>
+      <a href="#">✦ Trending</a>
+      <a href="#">♡ My List</a>
+      <a href="#">➤ Request</a>
+    </nav>
+    <div class="top-actions"><input id="search" placeholder="Search anime, movies, genres..."><button>☾</button><button>☰</button></div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <a class="active" href="index.html">⌂ Home</a>
+      <a href="anime.html">▣ Anime</a><a href="movies.html">▤ Movies</a><a href="#">☷ Genres</a>
+      <a href="#">★ My List</a><a href="#">◉ Continue Watching</a><a href="#">♙ Request</a><a href="#">⚑ Report</a>
+      <h4>QUICK GENRES</h4>
+      <a href="#">★ Action</a><a href="#">★ Adventure</a><a href="#">◉ Comedy</a><a href="#">▣ Drama</a>
+      <a href="#">✦ Fantasy</a><a href="#">☠ Horror</a><a href="#">♥ Romance</a><a href="#">◌ Sci-Fi</a>
+      <a href="#">⚽ Sports</a><a href="#">♟ Slice of Life</a><a href="#">✦ Supernatural</a><a href="#">◆ Mystery</a>
+      <div class="request-card"><b>Watch Your Favorite Anime Anytime!</b><small>👑 AniFan India</small></div>
+    </aside>
+
+    <section class="content">
+      <section class="hero">
+        <div>
+          <span class="pill">FEATURED</span>
+          <h1>One Piece</h1>
+          <p>Follow Monkey D. Luffy and his crew, the Straw Hat Pirates, as they search for the legendary One Piece and the title of Pirate King.</p>
+          <div class="stars">★ 9.1/10 &nbsp; ● TV &nbsp; • Adventure &nbsp; • Action &nbsp; • 1120+ Episodes</div>
+          <button class="primary" onclick="location.href='details.html?id=one-piece'">▶ Watch Now</button>
+          <button class="secondary">＋ Add to My List</button>
+        </div>
+      </section>
+
+      <section><div class="section-head"><h2>🔥 Trending Now</h2><a href="#">View All</a></div><div class="cards" id="trending"></div></section>
+      <section><div class="section-head"><h2>▶ Continue Watching</h2><a href="#">View All</a></div><div class="cards" id="continue"></div></section>
+      <section><div class="section-head"><h2>♛ Recently Added</h2><a href="#">View All</a></div><div class="cards" id="recent"></div></section>
+      <section><div class="section-head"><h2>🎬 Movies</h2><a href="movies.html">View All</a></div><div class="cards" id="movies"></div></section>
+    </section>
+
+    <aside class="rightbar">
+      <div class="panel"><div class="section-head"><h3>🏆 Top Anime</h3><a href="#">View All</a></div><ol id="top"></ol></div>
+      <div class="panel"><div class="section-head"><h3>📅 Upcoming Schedule</h3><a href="#">View All</a></div><div class="schedule">14 Sep — One Piece<br>15 Sep — Demon Slayer<br>16 Sep — Jujutsu Kaisen<br>17 Sep — Naruto Shippuden</div></div>
+      <div class="panel request"><h3>Anime Request</h3><p>Didn't find your favorite anime?</p><button class="primary">➤ Request Now</button></div>
+    </aside>
+  </main>
+
+  <footer><div class="brand">✹ Anime <b>Fan</b></div><span>ANIME • MOVIES • SERIES • MORE</span><span>1200+ Anime</span><span>500+ Movies</span><span>50K+ Members</span></footer>
+  <script src="app.js"></script>
+</body>
+</html>

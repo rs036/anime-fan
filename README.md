@@ -1,12 +1,20 @@
-# Anime Fan V5
+# Anime Fan India — V1
 
-Premium responsive black/red Anime Fan frontend package.
+This is a clean restart based on the supplied reference design.
 
-Included:
-- Home, Anime Details, Watch Page and Admin Dashboard
-- Desktop sidebar + mobile bottom navigation
-- Search, My List (localStorage), request form
-- Episode navigation with last-episode button behavior
-- Ready for later Firebase database + authorized Byse embed integration
+## Files
+- `index.html` — Home
+- `anime.html` — Anime listing
+- `movies.html` — Movies listing
+- `details.html` — Anime details
+- `watch.html` — Watch page
+- `styles.css` — Responsive red/black UI
+- `app.js` — Demo data, search, episode navigation
 
-This V5 package is a frontend build. Firebase/Byse credentials and backend endpoints are intentionally not included.
+## Next build stages
+1. Replace demo images/data with real project assets.
+2. Connect anime metadata/database.
+3. Connect Cloudflare R2 for permitted media/assets.
+4. Add authentication, My List and Continue Watching.
+5. Build admin panel.
+6. Final mobile/desktop polish.
