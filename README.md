@@ -1,13 +1,12 @@
-# Anime Fan V4
-A responsive front-end prototype based on the supplied Anime Fan desktop/mobile reference images.
+# Anime Fan V5
+
+Premium responsive black/red Anime Fan frontend package.
 
 Included:
-- Responsive desktop + mobile homepage
-- Left navigation and mobile bottom navigation
-- Hero, trending, continue watching, recent, genres, movies, my list, request
-- Admin dashboard, add anime and episode management mockup
-- Reference images in `assets/`
-- No backend credentials or video URLs included
+- Home, Anime Details, Watch Page and Admin Dashboard
+- Desktop sidebar + mobile bottom navigation
+- Search, My List (localStorage), request form
+- Episode navigation with last-episode button behavior
+- Ready for later Firebase database + authorized Byse embed integration
 
-Next integration:
-Firebase for database/admin authentication/requests, and authorized Byse embed URLs for episodes.
+This V5 package is a frontend build. Firebase/Byse credentials and backend endpoints are intentionally not included.
