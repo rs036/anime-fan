@@ -851,48 +851,35 @@ function loadDetailsPage() {
    EPISODE LIST
 ========================================================= */
 
-function createEpisodeList(
-  elementId,
-  anime
-) {
+function createEpisodeList(elementId, anime) {
 
-  const container =
-    document.getElementById(elementId);
+  const container = document.getElementById(elementId);
 
   if (!container) return;
 
-  const total =
-    Number(anime.episodes) || 0;
+  container.innerHTML = "";
 
-  if (!total) {
+  const totalEpisodes = Number(anime.episodes || 0);
 
+  if (!totalEpisodes) {
     container.innerHTML = `
       <div class="empty-message">
-        Episodes will be added soon.
+        Episodes coming soon.
       </div>
     `;
-
     return;
   }
 
-  const maxForDemo =
-    Math.min(total, 1000);
+  for (let i = 1; i <= totalEpisodes; i++) {
 
-  container.innerHTML = "";
+    const link = document.createElement("a");
 
-  for (let i = 1; i <= maxForDemo; i++) {
-
-    const link =
-      document.createElement("a");
+    link.className = "episode-item";
 
     link.href =
       `watch.html?anime=${encodeURIComponent(anime.id)}&episode=${i}`;
 
-    link.textContent =
-      `Episode ${i}`;
-
-    link.className =
-      "episode-item";
+    link.textContent = `Episode ${i}`;
 
     container.appendChild(link);
   }
