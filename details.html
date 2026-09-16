@@ -1,99 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Anime Details - Anime Fan</title>
-
-  <meta
-    name="description"
-    content="Anime details - Anime Fan">
-
-  <link
-    rel="stylesheet"
-    href="styles.css">
-
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <header class="topbar">
+<header class="topbar">
 
-    <div class="brand">
-      ✹ Anime <b>Fan</b>
-    </div>
+  <div class="brand">
+    ✹ Anime <b>Fan</b>
+  </div>
 
-    <nav>
+  <nav>
+    <a href="index.html">⌂ Home</a>
+    <a href="anime.html">▣ Anime</a>
+    <a href="movies.html">▤ Movies</a>
+  </nav>
 
-      <a href="index.html">
-        ⌂ Home
-      </a>
-
-      <a href="anime.html">
-        ▣ Anime
-      </a>
-
-      <a href="movies.html">
-        ▤ Movies
-      </a>
-
-    </nav>
-
-  </header>
+</header>
 
 
-  <main class="details page">
+<main class="details page">
 
-    <div class="detail-banner"></div>
-
-
-    <div class="detail-info">
-
-      <div class="poster"></div>
+  <!-- Breadcrumb -->
+  <div class="detail-breadcrumb">
+    Home / Anime / <span id="breadcrumbTitle">Anime</span>
+  </div>
 
 
-      <div>
+  <!-- Anime Hero -->
+  <section class="detail-hero">
 
-        <h1 id="title">
-          Loading...
-        </h1>
+    <div class="detail-inner">
 
-        <div class="stars">
-          Loading...
+      <!-- Poster -->
+      <div class="detail-poster-wrap">
+        <img
+          id="animePoster"
+          class="detail-poster-img"
+          src="assets/solo-leveling.jpg"
+          alt="Anime Poster"
+        >
+      </div>
+
+
+      <!-- Information -->
+      <div class="detail-copy">
+
+        <div class="detail-badge">
+          🇮🇳 Hindi Dub
         </div>
 
-        <p>
-          Loading anime information...
+        <h1 id="title">Solo Leveling</h1>
+
+        <div class="detail-rating">
+          ⭐ <span id="rating">8.9</span>
+          <span class="detail-dot">•</span>
+          <span id="year">2024</span>
+          <span class="detail-dot">•</span>
+          <span>TV</span>
+        </div>
+
+
+        <p id="description">
+          Awakening as the weakest hunter, Sung Jin-Woo
+          embarks on a journey to become the strongest and
+          uncover the secrets of the system.
         </p>
 
-        <p>
-          <b>Genres:</b>
-          Loading...
-        </p>
 
-        <p>
-          <b>Episodes:</b>
-          Loading...
-        </p>
+        <!-- Genres -->
+        <div class="chips" id="genres">
 
-        <div class="detail-buttons">
+          <span class="chip">Action</span>
+          <span class="chip">Adventure</span>
+          <span class="chip">Fantasy</span>
+
+        </div>
+
+
+        <!-- Stats -->
+        <div class="stats">
+
+          <div>
+            <small>Status</small>
+            <b id="status">Completed</b>
+          </div>
+
+          <div>
+            <small>Episodes</small>
+            <b id="episodeCount">24</b>
+          </div>
+
+          <div>
+            <small>Language</small>
+            <b>Hindi Dub</b>
+          </div>
+
+        </div>
+
+
+        <!-- Buttons -->
+        <div class="detail-actions">
 
           <a
+            id="watchBtn"
             class="primary"
-            href="#">
+            href="watch.html?anime=solo-leveling&episode=1"
+          >
             ▶ Watch Now
           </a>
 
           <button
-            class="secondary"
             id="myListBtn"
-            type="button">
+            class="secondary"
+            type="button"
+          >
             ＋ Add to My List
           </button>
 
@@ -103,21 +130,51 @@
 
     </div>
 
+  </section>
 
-    <h2>
-      Episodes
-    </h2>
 
-    <div
-      class="episodes"
-      id="episodes">
+  <!-- Seasons -->
+  <section class="season-section">
+
+    <div class="section-head">
+      <h2>Seasons</h2>
     </div>
 
-  </main>
+    <div class="season-tabs">
+
+      <button class="season-tab active">
+        Season 01
+      </button>
+
+    </div>
+
+  </section>
 
 
-  <script src="app.js"></script>
+  <!-- Episodes -->
+  <section class="episode-section">
+
+    <div class="section-head">
+
+      <h2>Episodes</h2>
+
+      <span id="episodeTotal">
+        24 Episodes
+      </span>
+
+    </div>
+
+    <div
+      class="episode-grid"
+      id="episodes"
+    ></div>
+
+  </section>
+
+</main>
+
+
+<script src="app.js"></script>
 
 </body>
-
 </html>
