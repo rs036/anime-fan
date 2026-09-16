@@ -1201,3 +1201,362 @@ body.light-theme .mobile-menu-header strong {
 body.light-theme .anime-card {
   box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
 }
+
+/* =========================================================
+   ANIME FAN — DETAILS PAGE POLISH
+   Safe patch — Home page ko change nahi karega
+========================================================= */
+
+.detail-breadcrumb{
+  margin:18px 0 12px;
+  color:#8f8f9d;
+  font-size:13px;
+}
+
+.detail-breadcrumb span{
+  color:#fff;
+}
+
+.detail-hero{
+  position:relative;
+  overflow:hidden;
+  margin-top:10px;
+  border:1px solid rgba(255,23,68,.22);
+  border-radius:20px;
+  background:
+    radial-gradient(circle at 80% 20%,rgba(255,23,68,.12),transparent 35%),
+    linear-gradient(135deg,#0b0b10,#090909);
+}
+
+.detail-inner{
+  display:flex;
+  align-items:center;
+  gap:30px;
+  padding:38px;
+}
+
+.detail-poster-wrap{
+  flex:none;
+}
+
+.detail-poster-img{
+  display:block;
+  width:220px;
+  height:315px;
+  object-fit:cover;
+  border-radius:15px;
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 18px 45px rgba(0,0,0,.55);
+  background:#111;
+}
+
+.detail-copy{
+  max-width:700px;
+}
+
+.detail-badge{
+  display:inline-flex;
+  align-items:center;
+  padding:7px 12px;
+  margin-bottom:10px;
+  border-radius:7px;
+  background:#ff1744;
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  box-shadow:0 6px 20px rgba(255,23,68,.20);
+}
+
+.detail-copy h1{
+  margin:4px 0 9px;
+  font-size:44px;
+  line-height:1.1;
+}
+
+.detail-rating{
+  margin-bottom:15px;
+  color:#ddd;
+  font-size:14px;
+}
+
+.detail-dot{
+  margin:0 7px;
+  color:#666;
+}
+
+.detail-copy p{
+  color:#b9b9c4;
+  line-height:1.7;
+  margin:10px 0;
+}
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin:15px 0;
+}
+
+.chip{
+  padding:6px 10px;
+  border:1px solid #303038;
+  border-radius:7px;
+  background:#121216;
+  color:#ddd;
+  font-size:12px;
+}
+
+.stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:18px 0;
+}
+
+.stats > div{
+  min-width:105px;
+  padding:10px 13px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:9px;
+  background:#0d0d11;
+}
+
+.stats small{
+  display:block;
+  margin-bottom:4px;
+  color:#888;
+  font-size:10px;
+}
+
+.stats b{
+  color:#fff;
+  font-size:13px;
+}
+
+.detail-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.detail-actions .primary,
+.detail-actions .secondary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:0 17px;
+  border-radius:8px;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.detail-actions .primary{
+  background:#ff1744;
+  color:#fff;
+  border:1px solid #ff1744;
+  font-weight:700;
+  box-shadow:0 8px 24px rgba(255,23,68,.18);
+}
+
+.detail-actions .secondary{
+  background:#15151a;
+  color:#fff;
+  border:1px solid #36363e;
+}
+
+.detail-actions .primary:hover{
+  filter:brightness(1.1);
+}
+
+.detail-actions .secondary:hover{
+  border-color:#ff1744;
+}
+
+.season-section,
+.episode-section{
+  margin-top:28px;
+}
+
+.season-tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.season-tab{
+  padding:10px 15px;
+  border:1px solid #33333a;
+  border-radius:8px;
+  background:#111116;
+  color:#ddd;
+  cursor:pointer;
+}
+
+.season-tab.active{
+  background:#ff1744;
+  border-color:#ff1744;
+  color:#fff;
+  font-weight:700;
+}
+
+.episode-section .section-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+#episodeTotal{
+  color:#888;
+  font-size:12px;
+}
+
+.episode-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:9px;
+  margin-top:14px;
+}
+
+.episode-grid button{
+  min-height:44px;
+  padding:8px;
+  border:1px solid #292930;
+  border-radius:8px;
+  background:#101014;
+  color:#ddd;
+  cursor:pointer;
+  font-size:12px;
+  transition:.18s ease;
+}
+
+.episode-grid button:hover{
+  transform:translateY(-2px);
+  border-color:#ff1744;
+  color:#fff;
+}
+
+.episode-grid button.active{
+  background:#ff1744;
+  border-color:#ff1744;
+  color:#fff;
+  box-shadow:0 6px 18px rgba(255,23,68,.15);
+}
+
+
+/* =========================
+   MOBILE DETAILS
+========================= */
+
+@media(max-width:700px){
+
+  .detail-breadcrumb{
+    margin:12px 0 8px;
+    font-size:11px;
+  }
+
+  .detail-hero{
+    border-radius:14px;
+  }
+
+  .detail-inner{
+    display:block;
+    padding:18px;
+  }
+
+  .detail-poster-wrap{
+    text-align:center;
+  }
+
+  .detail-poster-img{
+    width:145px;
+    height:205px;
+    margin:0 auto 17px;
+    border-radius:10px;
+  }
+
+  .detail-copy{
+    max-width:none;
+  }
+
+  .detail-badge{
+    font-size:11px;
+    padding:6px 10px;
+  }
+
+  .detail-copy h1{
+    font-size:29px;
+    line-height:1.15;
+  }
+
+  .detail-rating{
+    font-size:12px;
+  }
+
+  .detail-copy p{
+    font-size:13px;
+    line-height:1.6;
+  }
+
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stats > div{
+    min-width:0;
+  }
+
+  .detail-actions{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+
+  .detail-actions .primary,
+  .detail-actions .secondary{
+    width:100%;
+    box-sizing:border-box;
+  }
+
+  .episode-grid{
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+  }
+
+  .episode-grid button{
+    min-height:40px;
+    font-size:11px;
+  }
+
+  .episode-section .section-head{
+    align-items:center;
+  }
+
+  #episodeTotal{
+    font-size:10px;
+  }
+}
+
+
+/* Very small phones */
+@media(max-width:390px){
+
+  .detail-inner{
+    padding:15px;
+  }
+
+  .detail-poster-img{
+    width:135px;
+    height:190px;
+  }
+
+  .detail-copy h1{
+    font-size:26px;
+  }
+
+  .episode-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
