@@ -1,123 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Anime Details - Anime Fan</title>
 
-  <meta
-    name="description"
-    content="Anime details - Anime Fan">
-
-  <link
-    rel="stylesheet"
-    href="styles.css">
-
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <header class="topbar">
+<header class="topbar">
 
-    <div class="brand">
-      ✹ Anime <b>Fan</b>
-    </div>
+  <div class="brand">
+    ✹ Anime <b>Fan</b>
+  </div>
 
-    <nav>
+  <nav>
+    <a href="index.html">⌂ Home</a>
+    <a href="anime.html">▣ Anime</a>
+    <a href="movies.html">▤ Movies</a>
+  </nav>
 
-      <a href="index.html">
-        ⌂ Home
-      </a>
+  <div class="top-actions">
+    <input id="search" type="search" placeholder="Search anime...">
+    ☰
+  </div>
 
-      <a href="anime.html">
-        ▣ Anime
-      </a>
-
-      <a href="movies.html">
-        ▤ Movies
-      </a>
-
-    </nav>
-
-  </header>
+</header>
 
 
-  <main class="details page">
+<main class="details page">
 
-    <div class="detail-banner"></div>
-
-
-    <div class="detail-info">
-
-      <div class="poster"></div>
+  <!-- Banner -->
+  <div class="detail-banner"></div>
 
 
-      <div>
+  <!-- Anime Information -->
+  <div class="detail-info">
 
-        <h1 id="title">
-          Loading...
-        </h1>
+    <div class="poster"></div>
 
-        <div class="stars">
-          Loading...
-        </div>
+    <div>
 
-        <p>
-          Loading anime information...
-        </p>
+      <h1 id="title">Loading...</h1>
 
-        <p>
-          <b>Genres:</b>
-          Loading...
-        </p>
-
-        <p>
-          <b>Episodes:</b>
-          Loading...
-        </p>
-
-        <div class="detail-buttons">
-
-          <a
-            class="primary"
-            href="#">
-            ▶ Watch Now
-          </a>
-
-          <button
-            class="secondary"
-            id="myListBtn"
-            type="button">
-            ＋ Add to My List
-          </button>
-
-        </div>
-
+      <div class="stars">
+        Loading...
       </div>
 
+      <p>
+        Loading anime information...
+      </p>
+
     </div>
 
-
-    <h2>
-      Episodes
-    </h2>
-
-    <div
-      class="episodes"
-      id="episodes">
-    </div>
-
-  </main>
+  </div>
 
 
-  <script src="app.js"></script>
+  <!-- Episodes -->
+  <h2>Episodes</h2>
+
+  <div
+    class="episodes"
+    id="episodes">
+  </div>
+
+</main>
+
+
+<script src="app.js"></script>
 
 </body>
-
 </html>
