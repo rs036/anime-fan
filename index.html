@@ -4,307 +4,521 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Anime Fan - Watch Anime Online</title>
-  <meta name="description" content="Anime Fan - Watch your favourite anime, movies and series.">
+  <title>Anime Fan - Watch Anime in Hindi Dub</title>
 
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
+<!-- ================= HEADER ================= -->
 
-    <div class="header-left">
+<header class="header">
 
-      <button class="menu-btn" id="menuBtn" aria-label="Open menu">
-        ☰
-      </button>
-
-      <a href="index.html" class="logo">
-        <span class="logo-anime">ANIME</span>
-        <span class="logo-fan">FAN</span>
-      </a>
-
-    </div>
-
-    <!-- DESKTOP NAV -->
-    <nav class="desktop-nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="anime.html">Anime</a>
-      <a href="movies.html">Movies</a>
-      <a href="#">Genres</a>
-      <a href="#">Trending</a>
-      <a href="#">My List</a>
-      <a href="#">Request</a>
-    </nav>
-
-    <div class="header-actions">
-
-      <button class="icon-btn" id="searchBtn" aria-label="Search">
-        🔍
-      </button>
-
-      <button class="icon-btn" id="themeBtn" aria-label="Theme">
-        ☾
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- MOBILE SEARCH -->
-  <div class="mobile-search" id="mobileSearch">
-    <input
-      type="search"
-      id="searchInput"
-      placeholder="Search anime..."
-      autocomplete="off"
-    >
-    <button id="searchSubmit">Search</button>
+  <div class="logo">
+    <span class="logo-icon">☯</span>
+    <span>Anime <b>Fan</b></span>
   </div>
 
+  <nav class="desktop-nav">
 
-  <!-- MOBILE MENU -->
-  <aside class="mobile-menu" id="mobileMenu">
+    <a class="active" href="index.html">🏠 Home</a>
+    <a href="anime.html">▣ Anime</a>
+    <a href="movies.html">▣ Movies</a>
+    <a href="genres.html">◇ Genres</a>
+    <a href="#trending">✦ Trending</a>
+    <a href="my-list.html">♡ My List</a>
+    <a href="request.html">➤ Request</a>
 
-    <div class="mobile-menu-header">
-      <strong>Anime Fan</strong>
+  </nav>
 
-      <button id="closeMenu">
-        ✕
-      </button>
+  <div class="header-right">
+
+    <div class="search-box">
+      🔍
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Search anime, movies, genres..."
+      >
     </div>
 
-    <a href="index.html">🏠 Home</a>
-    <a href="anime.html">🎬 Anime</a>
-    <a href="movies.html">🎞️ Movies</a>
-    <a href="#">📚 Genres</a>
-    <a href="#">🔥 Trending</a>
-    <a href="#">❤️ My List</a>
-    <a href="#">📩 Anime Request</a>
+    <button class="icon-btn">●</button>
+    <button class="icon-btn">☾</button>
+    <button class="menu-btn">☰</button>
 
-  </aside>
+  </div>
+
+</header>
 
 
-  <!-- OVERLAY -->
-  <div class="menu-overlay" id="menuOverlay"></div>
+<!-- ================= MOBILE MENU ================= -->
+
+<div class="mobile-menu" id="mobileMenu">
+
+  <a href="index.html">🏠 Home</a>
+  <a href="anime.html">▣ Anime</a>
+  <a href="movies.html">▣ Movies</a>
+  <a href="genres.html">◇ Genres</a>
+  <a href="#trending">✦ Trending</a>
+  <a href="my-list.html">♡ My List</a>
+  <a href="request.html">➤ Request</a>
+
+</div>
 
 
-  <main>
+<!-- ================= MAIN ================= -->
 
-    <!-- HERO -->
-    <section class="hero">
+<main class="home-container">
 
-      <div class="hero-content">
 
-        <span class="hero-badge">
-          🔥 #1 TRENDING
-        </span>
+<!-- ================= HERO ================= -->
 
-        <h1>One Piece</h1>
+<section class="hero">
 
-        <p class="hero-meta">
-          ⭐ 9.2 &nbsp; • &nbsp; 1999 &nbsp; • &nbsp; TV &nbsp; • &nbsp; 1000+ Episodes
-        </p>
+  <div class="hero-content">
 
-        <p class="hero-description">
-          Follow Monkey D. Luffy and his crew on their legendary journey
-          across the Grand Line in search of the greatest treasure.
-        </p>
+    <span class="featured">FEATURED</span>
 
-        <div class="hero-buttons">
+    <h1>One Piece</h1>
 
-          <a href="#" class="btn btn-primary">
-            ▶ Watch Now
-          </a>
+    <p>
+      Follow Monkey D. Luffy and his crew, the Straw Hat Pirates,
+      as they search for the ultimate treasure and become the
+      greatest pirates on the Grand Line.
+    </p>
 
-          <button class="btn btn-secondary">
-            + My List
-          </button>
+    <div class="hero-info">
 
-        </div>
+      <span>⭐ 9.1/10</span>
+      <span>TV</span>
+      <span>Adventure</span>
+      <span>Action</span>
+      <span>1120+ Episodes</span>
+
+    </div>
+
+    <div class="hero-buttons">
+
+      <a
+        href="details.html?anime=one-piece"
+        class="watch-btn"
+      >
+        ▶ Watch Now
+      </a>
+
+      <button class="list-btn">
+        ＋ Add to My List
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="hero-image">
+
+    <img
+      src="assets/one-piece.jpg"
+      alt="One Piece"
+    >
+
+  </div>
+
+</section>
+
+
+<!-- ================= TRENDING ================= -->
+
+<section class="content-section" id="trending">
+
+  <div class="section-title">
+
+    <h2>🔥 Trending Now</h2>
+
+    <a href="anime.html">View All</a>
+
+  </div>
+
+  <div class="anime-grid">
+
+    <article class="anime-card">
+
+      <img src="assets/solo-leveling.jpg">
+
+      <div class="card-info">
+
+        <h3>Solo Leveling</h3>
+
+        <p>TV • 24 Episodes</p>
+
+        <span>⭐ 9.2</span>
 
       </div>
 
-    </section>
+    </article>
 
 
-    <!-- PAGE CONTENT -->
-    <div class="page-container">
+    <article class="anime-card">
 
+      <img src="assets/one-piece.jpg">
 
-      <!-- TRENDING -->
-      <section class="content-section">
+      <div class="card-info">
 
-        <div class="section-heading">
+        <h3>One Piece</h3>
 
-          <div>
-            <span class="section-line"></span>
-            <h2>Trending Now</h2>
-          </div>
+        <p>TV • 1120+ Episodes</p>
 
-          <a href="#">View All →</a>
+        <span>⭐ 9.1</span>
 
-        </div>
+      </div>
 
-        <div class="anime-grid" id="trendingGrid"></div>
+    </article>
 
-      </section>
 
+    <article class="anime-card">
 
-      <!-- CONTINUE WATCHING -->
-      <section class="content-section" id="continueSection">
+      <img src="assets/naruto.jpg">
 
-        <div class="section-heading">
+      <div class="card-info">
 
-          <div>
-            <span class="section-line"></span>
-            <h2>Continue Watching</h2>
-          </div>
+        <h3>Naruto Shippuden</h3>
 
-          <a href="#">View All →</a>
+        <p>TV • 500 Episodes</p>
 
-        </div>
+        <span>⭐ 8.9</span>
 
-        <div class="anime-grid" id="continueGrid"></div>
+      </div>
 
-      </section>
+    </article>
 
 
-      <!-- RECENTLY ADDED -->
-      <section class="content-section">
+    <article class="anime-card">
 
-        <div class="section-heading">
+      <img src="assets/demon-slayer.jpg">
 
-          <div>
-            <span class="section-line"></span>
-            <h2>Recently Added</h2>
-          </div>
+      <div class="card-info">
 
-          <a href="#">View All →</a>
+        <h3>Demon Slayer</h3>
 
-        </div>
+        <p>TV • 55 Episodes</p>
 
-        <div class="anime-grid" id="recentGrid"></div>
+        <span>⭐ 9.0</span>
 
-      </section>
+      </div>
 
+    </article>
 
-      <!-- MOVIES -->
-      <section class="content-section">
 
-        <div class="section-heading">
+    <article class="anime-card">
 
-          <div>
-            <span class="section-line"></span>
-            <h2>Anime Movies</h2>
-          </div>
+      <img src="assets/jujutsu-kaisen.jpg">
 
-          <a href="movies.html">View All →</a>
+      <div class="card-info">
 
-        </div>
+        <h3>Jujutsu Kaisen</h3>
 
-        <div class="anime-grid" id="moviesGrid"></div>
+        <p>TV • 47 Episodes</p>
 
-      </section>
+        <span>⭐ 8.8</span>
 
+      </div>
 
-      <!-- HINDI DUB -->
-      <section class="content-section">
+    </article>
 
-        <div class="section-heading">
 
-          <div>
-            <span class="section-line"></span>
-            <h2>🇮🇳 Hindi Dub</h2>
-          </div>
+    <article class="anime-card">
 
-          <a href="#">View All →</a>
+      <img src="assets/attack-on-titan.jpg">
 
-        </div>
+      <div class="card-info">
 
-        <div class="anime-grid" id="hindiGrid"></div>
+        <h3>Attack on Titan</h3>
 
-      </section>
+        <p>TV • 89 Episodes</p>
 
+        <span>⭐ 9.1</span>
 
-      <!-- TOP ANIME -->
-      <section class="content-section">
+      </div>
 
-        <div class="section-heading">
+    </article>
 
-          <div>
-            <span class="section-line"></span>
-            <h2>Top Anime</h2>
-          </div>
+  </div>
 
-          <a href="#">View All →</a>
+</section>
 
-        </div>
 
-        <div class="anime-grid" id="topGrid"></div>
+<!-- ================= CONTINUE WATCHING ================= -->
 
-      </section>
+<section class="content-section">
 
+  <div class="section-title">
 
-      <!-- REQUEST -->
-      <section class="request-box">
+    <h2>▶ Continue Watching</h2>
 
-        <div>
+    <a href="#">View All</a>
 
-          <span class="request-icon">📩</span>
+  </div>
 
-          <div>
-            <h2>Can't find your anime?</h2>
 
-            <p>
-              Request your favourite anime and we'll add it to Anime Fan.
-            </p>
-          </div>
+  <div class="anime-grid">
 
-        </div>
+    <article class="anime-card">
 
-        <a href="#" class="btn btn-primary">
-          Request Anime
-        </a>
+      <img src="assets/solo-leveling.jpg">
 
-      </section>
+      <div class="progress">
+        <span style="width:65%"></span>
+      </div>
 
+      <div class="card-info">
 
-    </div>
+        <h3>Solo Leveling</h3>
 
-  </main>
+        <p>S1 • EP 12</p>
 
+        <small>12:34 / 24:16</small>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
+      </div>
 
-    <div class="footer-logo">
-      <span>ANIME</span> FAN
-    </div>
+    </article>
+
+
+    <article class="anime-card">
+
+      <img src="assets/one-piece.jpg">
+
+      <div class="progress">
+        <span style="width:35%"></span>
+      </div>
+
+      <div class="card-info">
+
+        <h3>One Piece</h3>
+
+        <p>S1 • EP 1120</p>
+
+        <small>17:23 / 24:00</small>
+
+      </div>
+
+    </article>
+
+
+    <article class="anime-card">
+
+      <img src="assets/demon-slayer.jpg">
+
+      <div class="progress">
+        <span style="width:48%"></span>
+      </div>
+
+      <div class="card-info">
+
+        <h3>Demon Slayer</h3>
+
+        <p>S2 • EP 10</p>
+
+        <small>09:12 / 23:40</small>
+
+      </div>
+
+    </article>
+
+
+    <article class="anime-card">
+
+      <img src="assets/jujutsu-kaisen.jpg">
+
+      <div class="progress">
+        <span style="width:70%"></span>
+      </div>
+
+      <div class="card-info">
+
+        <h3>Jujutsu Kaisen</h3>
+
+        <p>S1 • EP 16</p>
+
+        <small>16:45 / 23:30</small>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- ================= RECENTLY ADDED ================= -->
+
+<section class="content-section">
+
+  <div class="section-title">
+
+    <h2>🆕 Recently Added</h2>
+
+    <a href="anime.html">View All</a>
+
+  </div>
+
+  <div class="anime-grid">
+
+    <article class="anime-card">
+      <img src="assets/jujutsu-kaisen.jpg">
+      <div class="card-info">
+        <h3>Jujutsu Kaisen</h3>
+        <p>S2 • 24 Episodes</p>
+      </div>
+    </article>
+
+    <article class="anime-card">
+      <img src="assets/demon-slayer.jpg">
+      <div class="card-info">
+        <h3>Demon Slayer</h3>
+        <p>S3 • 11 Episodes</p>
+      </div>
+    </article>
+
+    <article class="anime-card">
+      <img src="assets/attack-on-titan.jpg">
+      <div class="card-info">
+        <h3>Attack on Titan</h3>
+        <p>S4 • 30 Episodes</p>
+      </div>
+    </article>
+
+    <article class="anime-card">
+      <img src="assets/solo-leveling.jpg">
+      <div class="card-info">
+        <h3>Solo Leveling</h3>
+        <p>S2 • 13 Episodes</p>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- ================= MOVIES ================= -->
+
+<section class="content-section">
+
+  <div class="section-title">
+
+    <h2>🎬 Movies</h2>
+
+    <a href="movies.html">View All</a>
+
+  </div>
+
+  <div class="anime-grid">
+
+    <article class="anime-card">
+
+      <img src="assets/your-name.jpg">
+
+      <div class="card-info">
+
+        <h3>Your Name</h3>
+
+        <p>Movie • 1h 46m</p>
+
+      </div>
+
+    </article>
+
+
+    <article class="anime-card">
+
+      <img src="assets/weathering-with-you.jpg">
+
+      <div class="card-info">
+
+        <h3>Weathering With You</h3>
+
+        <p>Movie • 1h 52m</p>
+
+      </div>
+
+    </article>
+
+
+    <article class="anime-card">
+
+      <img src="assets/spirited-away.jpg">
+
+      <div class="card-info">
+
+        <h3>Spirited Away</h3>
+
+        <p>Movie • 2h 5m</p>
+
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- ================= REQUEST ================= -->
+
+<section class="request-box">
+
+  <div>
+
+    <h2>Anime Request</h2>
 
     <p>
-      Your ultimate destination for anime, movies and more.
+      Didn't find your favorite anime?
+      Tell us and we'll add it!
     </p>
 
-    <div class="footer-links">
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-      <a href="#">DMCA</a>
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-    </div>
+  </div>
 
-    <p class="copyright">
-      © 2026 Anime Fan. All rights reserved.
-    </p>
+  <a href="request.html">
+    ➤ Request Now
+  </a>
 
-  </footer>
+</section>
 
 
-  <script src="app.js"></script>
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+  <div class="footer-logo">
+    ☯ Anime <b>Fan</b>
+  </div>
+
+  <p>
+    ANIME • MOVIES • SERIES • MORE
+  </p>
+
+  <div class="footer-links">
+
+    <a href="#">About Us</a>
+    <a href="#">Contact</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms & Conditions</a>
+    <a href="#">DMCA</a>
+
+  </div>
+
+  <p class="copyright">
+    Made with ❤️ for Anime Fans
+  </p>
+
+</footer>
+
+
+<script src="app.js"></script>
 
 </body>
 </html>
