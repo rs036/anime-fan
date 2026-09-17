@@ -836,11 +836,6 @@ function loadDetailsPage() {
     `;
   }
 
-  createEpisodeList(
-    "episodes",
-    anime
-  );
-
   setupMyList(
     anime
   );
