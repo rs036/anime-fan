@@ -2173,39 +2173,115 @@ body.light-theme .anime-card {
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
 
-  /* HOME MOBILE — TRENDING ONLY 3 CARDS */
-  #trendingGrid .anime-card:nth-child(n+4) {
+  /* =====================================
+     HOME MOBILE - TRENDING ONLY 3 CARDS
+  ===================================== */
+
+  #trendingGrid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 7px !important;
+  }
+
+  #trendingGrid > article:nth-child(n+4) {
     display: none !important;
   }
 
-  /* Keep Trending compact */
-  #trendingGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
+  #trendingGrid > .anime-card:nth-child(n+4) {
+    display: none !important;
   }
 
-  /* Compact featured hero */
-  .hero {
-    min-height: 0;
+  /* =====================================
+     COMPACT TRENDING CARDS
+  ===================================== */
+
+  #trendingGrid > article {
+    width: 100% !important;
+    min-width: 0 !important;
   }
 
-  .hero-content {
-    padding-top: 17px;
-    padding-bottom: 25px;
+  #trendingGrid .anime-poster {
+    width: 100% !important;
+    aspect-ratio: 4 / 5 !important;
   }
 
-  .hero h1 {
-    font-size: 29px;
+  #trendingGrid .anime-info {
+    padding: 5px !important;
   }
 
-  .hero-description {
-    max-width: 280px;
+  #trendingGrid .anime-title {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
 
-  /* Continue Watching should appear immediately */
+  #trendingGrid .anime-meta {
+    font-size: 7px !important;
+    margin-top: 3px !important;
+  }
+
+  #trendingGrid .card-rating {
+    font-size: 7px !important;
+    padding: 3px 4px !important;
+  }
+
+  #trendingGrid .card-quality {
+    font-size: 6px !important;
+    padding: 3px 4px !important;
+  }
+
+  /* =====================================
+     CONTINUE WATCHING
+  ===================================== */
+
+  #continueSection {
+    display: block !important;
+    margin-top: 22px !important;
+  }
+
   #continueGrid {
-    margin-top: 0;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 7px !important;
   }
+
+  #continueGrid .anime-card {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  #continueGrid .anime-card > a {
+    display: grid !important;
+    grid-template-columns: 90px minmax(0, 1fr) !important;
+    min-height: 70px !important;
+  }
+
+  #continueGrid .anime-poster {
+    width: 90px !important;
+    height: 70px !important;
+    aspect-ratio: auto !important;
+  }
+
+  #continueGrid .anime-info {
+    padding: 7px 9px !important;
+  }
+
+  #continueGrid .anime-title {
+    font-size: 10px !important;
+  }
+
+  #continueGrid .anime-meta {
+    font-size: 7px !important;
+  }
+
+  #continueGrid .progress-wrap {
+    margin-top: 5px !important;
+  }
+
 }
