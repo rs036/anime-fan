@@ -2172,3 +2172,40 @@ body.light-theme .anime-card {
     height: 61px;
   }
 }
+
+@media (max-width: 768px) {
+
+  /* HOME MOBILE — TRENDING ONLY 3 CARDS */
+  #trendingGrid .anime-card:nth-child(n+4) {
+    display: none !important;
+  }
+
+  /* Keep Trending compact */
+  #trendingGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  /* Compact featured hero */
+  .hero {
+    min-height: 0;
+  }
+
+  .hero-content {
+    padding-top: 17px;
+    padding-bottom: 25px;
+  }
+
+  .hero h1 {
+    font-size: 29px;
+  }
+
+  .hero-description {
+    max-width: 280px;
+  }
+
+  /* Continue Watching should appear immediately */
+  #continueGrid {
+    margin-top: 0;
+  }
+}
