@@ -1446,3 +1446,322 @@ body.light-theme .anime-card {
     grid-template-columns:repeat(2,1fr);
   }
 }
+
+
+/* =========================================================
+   HOME MOBILE APP UI — REFERENCE DESIGN
+   Only applies to the Home page at <= 768px.
+========================================================= */
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 66px;
+    background:
+      radial-gradient(circle at 50% -5%, rgba(255, 31, 61, .10), transparent 34%),
+      #02070b;
+  }
+
+  .site-header {
+    height: 56px;
+    padding: 0 12px;
+    background: rgba(2, 7, 11, .96);
+    border-bottom: 1px solid rgba(36, 166, 220, .28);
+    box-shadow: 0 4px 18px rgba(0,0,0,.35);
+  }
+
+  .header-left { gap: 0; }
+  .logo {
+    font-size: 18px;
+    font-style: italic;
+    letter-spacing: -.6px;
+  }
+  .logo-anime::before { content: '✹ '; color: var(--red); font-style: normal; }
+  .logo-anime { color: #fff; }
+  .logo-fan { color: var(--red); }
+
+  .header-actions { gap: 2px; }
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 18px;
+    background: transparent;
+  }
+  .icon-btn:hover { background: transparent; }
+
+  .mobile-search {
+    position: relative;
+    z-index: 1100;
+    padding: 8px 10px;
+    background: #02070b;
+    border-bottom: 1px solid rgba(36,166,220,.25);
+  }
+
+  main { width: 100%; }
+
+  .hero {
+    min-height: 0;
+    height: 286px;
+    margin: 7px 8px 0;
+    width: calc(100% - 16px);
+    align-items: flex-end;
+    border-radius: 13px;
+    border: 1px solid rgba(35, 160, 215, .62);
+    box-shadow: 0 0 0 1px rgba(255,31,61,.10), 0 0 22px rgba(0,125,190,.12);
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.04) 8%, rgba(0,0,0,.18) 30%, rgba(0,0,0,.94) 100%),
+      linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.08) 68%, rgba(0,0,0,.28)),
+      url("assets/hero.jpg");
+    background-position: center;
+    background-size: cover;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 13px;
+    pointer-events: none;
+    box-shadow: inset 0 0 30px rgba(255, 31, 61, .08);
+  }
+
+  .hero-content {
+    width: 100%;
+    margin: 0;
+    padding: 0 12px 13px;
+  }
+
+  .hero-badge {
+    margin-bottom: 6px;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 8px;
+    letter-spacing: .5px;
+  }
+
+  .hero h1 {
+    margin-bottom: 4px;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .hero-meta {
+    margin-bottom: 5px;
+    font-size: 9px;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+
+  .hero-description {
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 9px;
+    line-height: 1.35;
+    color: #d1d1d6;
+  }
+
+  .hero-buttons {
+    gap: 7px;
+    margin-top: 9px;
+  }
+
+  .hero-buttons .btn {
+    min-height: 31px;
+    padding: 0 12px;
+    border-radius: 7px;
+    font-size: 10px;
+  }
+
+  .hero-buttons .btn-secondary {
+    background: rgba(2,8,12,.68);
+    border-color: rgba(65, 183, 228, .72);
+  }
+
+  .hero::before {
+    background: radial-gradient(circle at 75% 30%, rgba(255,31,61,.12), transparent 38%);
+  }
+
+  .page-container {
+    width: 100%;
+    padding: 0 8px 20px;
+  }
+
+  .content-section {
+    margin-top: 14px;
+  }
+
+  .section-heading {
+    margin: 0 4px 7px;
+  }
+
+  .section-heading > div { gap: 7px; }
+  .section-line {
+    width: 3px;
+    height: 17px;
+    box-shadow: 0 0 9px rgba(255,31,61,.55);
+  }
+  .section-heading h2 {
+    font-size: 14px;
+    letter-spacing: -.2px;
+  }
+  .section-heading > a {
+    font-size: 8px;
+    color: #00aeea;
+  }
+
+  /* Three compact cards like the reference Home screen */
+  #trendingGrid, #recentGrid, #moviesGrid, #hindiGrid, #topGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .anime-card {
+    border-radius: 7px;
+    border-color: rgba(35, 160, 215, .42);
+    background: linear-gradient(180deg, #07131b, #061016);
+    box-shadow: 0 0 8px rgba(0, 150, 220, .06);
+  }
+
+  .anime-card:hover {
+    transform: none;
+    border-color: rgba(35, 160, 215, .72);
+    box-shadow: 0 0 10px rgba(0,150,220,.10);
+  }
+
+  .anime-poster {
+    aspect-ratio: 4 / 5;
+  }
+
+  .card-rating {
+    top: 4px;
+    left: 4px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 7px;
+  }
+
+  .card-quality {
+    bottom: 4px;
+    right: 4px;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 6px;
+  }
+
+  .anime-info { padding: 5px 5px 6px; }
+  .anime-title {
+    font-size: 8px;
+    line-height: 1.25;
+  }
+  .anime-meta {
+    gap: 3px;
+    margin-top: 3px;
+    font-size: 6.5px;
+  }
+  .progress-wrap { margin-top: 4px; }
+  .progress-bar { height: 2px; }
+
+  /* Continue Watching becomes a compact horizontal player row */
+  #continueGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  #continueGrid .anime-card {
+    width: 100%;
+    min-height: 67px;
+  }
+
+  #continueGrid .anime-card > a {
+    display: grid;
+    grid-template-columns: 82px minmax(0,1fr);
+    min-height: 67px;
+  }
+
+  #continueGrid .anime-poster {
+    width: 82px;
+    height: 67px;
+    aspect-ratio: auto;
+  }
+
+  #continueGrid .anime-poster img { object-fit: cover; }
+  #continueGrid .card-rating, #continueGrid .card-quality { display: none; }
+  #continueGrid .anime-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6px 8px;
+  }
+  #continueGrid .anime-title { font-size: 9px; }
+  #continueGrid .anime-meta { font-size: 7px; margin-top: 3px; }
+  #continueGrid .progress-wrap { margin-top: 6px; }
+
+  .request-box {
+    margin: 16px 0 0;
+    padding: 12px;
+    border-radius: 9px;
+  }
+  .request-box > div { gap: 8px; }
+  .request-icon { width: 32px; height: 32px; font-size: 16px; }
+  .request-box h2 { font-size: 12px; }
+  .request-box p { font-size: 8px; }
+  .request-box .btn { min-height: 30px; padding: 0 9px; font-size: 8px; }
+
+  .site-footer { padding: 25px 12px 15px; }
+  .footer-logo { font-size: 17px; }
+  .site-footer > p, .footer-links, .copyright { font-size: 8px; }
+
+  /* Fixed app-style bottom navigation */
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 4000;
+    height: 62px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    padding: 4px 5px calc(4px + env(safe-area-inset-bottom));
+    background: rgba(2, 7, 11, .98);
+    border-top: 1px solid rgba(36, 166, 220, .34);
+    box-shadow: 0 -7px 22px rgba(0,0,0,.45);
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-nav-item {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    color: #89939b;
+    font-size: 7px;
+    font-weight: 600;
+  }
+
+  .mobile-nav-icon {
+    height: 24px;
+    display: grid;
+    place-items: center;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .mobile-nav-item.active,
+  .mobile-nav-item:hover {
+    color: var(--red);
+  }
+
+  .mobile-nav-item.active .mobile-nav-icon {
+    text-shadow: 0 0 10px rgba(255,31,61,.7);
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-bottom-nav { display: none; }
+}
