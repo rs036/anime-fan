@@ -1562,51 +1562,6 @@ body.light-theme .anime-card {
 }
 
 /* ================================
-   EPISODE BUTTON FIX
-================================ */
-
-.episode-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.episode-grid .episode-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 10px 8px;
-
-  background: #15151a;
-  color: #ffffff;
-
-  border: 1px solid #292930;
-  border-radius: 8px;
-
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-
-  transition: all 0.2s ease;
-}
-
-.episode-grid .episode-item:hover {
-  background: #e50914;
-  border-color: #e50914;
-  color: #ffffff;
-  transform: translateY(-2px);
-}
-
-.episode-grid .episode-item.active {
-  background: #e50914;
-  border-color: #e50914;
-  color: #ffffff;
-}
-
-
-/* ================================
    MOBILE
 ================================ */
 
