@@ -5,520 +5,744 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Anime Fan - Watch Anime in Hindi Dub</title>
+  <meta name="description" content="Watch Anime in Hindi Dub, English Dub and Original Audio.">
 
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+  <!-- ================= HEADER ================= -->
+  <header class="top-header">
 
-<header class="header">
+    <div class="brand">
+      <span class="brand-icon">☯</span>
+      <span>Anime Fan</span>
+    </div>
 
-  <div class="logo">
-    <span class="logo-icon">☯</span>
-    <span>Anime <b>Fan</b></span>
-  </div>
+    <nav class="main-nav">
+      <a href="index.html" class="active">🏠 Home</a>
+      <a href="anime.html">▣ Anime</a>
+      <a href="movies.html">🎬 Movies</a>
+      <a href="genres.html">◇ Genres</a>
+      <a href="anime.html">✦ Trending</a>
+      <a href="my-list.html">♡ My List</a>
+      <a href="request.html">➤ Request</a>
+    </nav>
 
-  <nav class="desktop-nav">
+    <div class="header-actions">
 
-    <a class="active" href="index.html">🏠 Home</a>
+      <div class="search-box">
+        <span>🔍</span>
+        <input
+          type="search"
+          id="homeSearch"
+          placeholder="Search anime, movies, genres..."
+        >
+      </div>
+
+      <button class="icon-btn" title="Notifications">●</button>
+      <button class="icon-btn" id="themeToggle" title="Dark Mode">☾</button>
+      <button class="menu-btn" id="menuBtn">☰</button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================= MOBILE MENU ================= -->
+  <div class="mobile-menu" id="mobileMenu">
+
+    <a href="index.html">🏠 Home</a>
     <a href="anime.html">▣ Anime</a>
-    <a href="movies.html">▣ Movies</a>
+    <a href="movies.html">🎬 Movies</a>
     <a href="genres.html">◇ Genres</a>
-    <a href="#trending">✦ Trending</a>
+    <a href="anime.html">✦ Trending</a>
     <a href="my-list.html">♡ My List</a>
     <a href="request.html">➤ Request</a>
 
-  </nav>
-
-  <div class="header-right">
-
-    <div class="search-box">
-      🔍
-      <input
-        id="searchInput"
-        type="text"
-        placeholder="Search anime, movies, genres..."
-      >
-    </div>
-
-    <button class="icon-btn">●</button>
-    <button class="icon-btn">☾</button>
-    <button class="menu-btn">☰</button>
-
   </div>
 
-</header>
 
+  <!-- ================= LAYOUT ================= -->
+  <div class="page-layout">
 
-<!-- ================= MOBILE MENU ================= -->
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
 
-<div class="mobile-menu" id="mobileMenu">
+      <div class="sidebar-title">MENU</div>
 
-  <a href="index.html">🏠 Home</a>
-  <a href="anime.html">▣ Anime</a>
-  <a href="movies.html">▣ Movies</a>
-  <a href="genres.html">◇ Genres</a>
-  <a href="#trending">✦ Trending</a>
-  <a href="my-list.html">♡ My List</a>
-  <a href="request.html">➤ Request</a>
-
-</div>
-
-
-<!-- ================= MAIN ================= -->
-
-<main class="home-container">
-
-
-<!-- ================= HERO ================= -->
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <span class="featured">FEATURED</span>
-
-    <h1>One Piece</h1>
-
-    <p>
-      Follow Monkey D. Luffy and his crew, the Straw Hat Pirates,
-      as they search for the ultimate treasure and become the
-      greatest pirates on the Grand Line.
-    </p>
-
-    <div class="hero-info">
-
-      <span>⭐ 9.1/10</span>
-      <span>TV</span>
-      <span>Adventure</span>
-      <span>Action</span>
-      <span>1120+ Episodes</span>
-
-    </div>
-
-    <div class="hero-buttons">
-
-      <a
-        href="details.html?anime=one-piece"
-        class="watch-btn"
-      >
-        ▶ Watch Now
+      <a href="index.html" class="side-link active">
+        <span>🏠</span> Home
       </a>
 
-      <button class="list-btn">
-        ＋ Add to My List
-      </button>
+      <a href="anime.html" class="side-link">
+        <span>▣</span> Anime
+      </a>
+
+      <a href="movies.html" class="side-link">
+        <span>🎬</span> Movies
+      </a>
+
+      <a href="genres.html" class="side-link">
+        <span>◇</span> Genres
+      </a>
+
+      <a href="my-list.html" class="side-link">
+        <span>♡</span> My List
+      </a>
+
+      <a href="index.html#continue" class="side-link">
+        <span>▶</span> Continue Watching
+      </a>
+
+      <a href="request.html" class="side-link">
+        <span>➤</span> Request
+      </a>
+
+      <a href="#" class="side-link">
+        <span>⚠</span> Report
+      </a>
+
+
+      <div class="sidebar-title quick-title">
+        QUICK GENRES
+      </div>
+
+      <div class="quick-genres">
+
+        <a href="genres.html">Action</a>
+        <a href="genres.html">Adventure</a>
+        <a href="genres.html">Comedy</a>
+        <a href="genres.html">Drama</a>
+        <a href="genres.html">Fantasy</a>
+        <a href="genres.html">Romance</a>
+        <a href="genres.html">School</a>
+        <a href="genres.html">Isekai</a>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="main-content">
+
+
+      <!-- ================= HERO ================= -->
+      <section class="hero">
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+          <div class="hero-badge">
+            #1 TRENDING
+          </div>
+
+          <h1>One Piece</h1>
+
+          <p class="hero-description">
+            Follow Monkey D. Luffy and his crew, the Straw Hat Pirates,
+            as they search for the ultimate treasure and become the
+            greatest pirates on the Grand Line.
+          </p>
+
+          <div class="hero-meta">
+            <span>⭐ 9.1/10</span>
+            <span>TV</span>
+            <span>Adventure</span>
+            <span>Action</span>
+            <span>1120+ Episodes</span>
+          </div>
+
+          <div class="hero-buttons">
+
+            <a href="anime.html" class="watch-btn">
+              ▶ Watch Now
+            </a>
+
+            <button class="list-btn">
+              ＋ Add to My List
+            </button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= TRENDING ================= -->
+      <section class="content-section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-small">POPULAR</span>
+            <h2>🔥 Trending Now</h2>
+          </div>
+
+          <a href="anime.html">View All →</a>
+
+        </div>
+
+
+        <div class="anime-grid">
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder solo">SOLO<br>LEVELING</div>
+              <span class="quality">HD</span>
+            </div>
+            <div class="card-info">
+              <h3>Solo Leveling</h3>
+              <p>TV • 24 Episodes</p>
+              <span>⭐ 9.2</span>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder onepiece">ONE<br>PIECE</div>
+              <span class="quality">HD</span>
+            </div>
+            <div class="card-info">
+              <h3>One Piece</h3>
+              <p>TV • 1120+ Episodes</p>
+              <span>⭐ 9.1</span>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder naruto">NARUTO<br>SHIPPUDEN</div>
+              <span class="quality">HD</span>
+            </div>
+            <div class="card-info">
+              <h3>Naruto Shippuden</h3>
+              <p>TV • 500 Episodes</p>
+              <span>⭐ 8.9</span>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder demon">DEMON<br>SLAYER</div>
+              <span class="quality">HD</span>
+            </div>
+            <div class="card-info">
+              <h3>Demon Slayer</h3>
+              <p>TV • 55 Episodes</p>
+              <span>⭐ 9.0</span>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder jjk">JUJUTSU<br>KAISEN</div>
+              <span class="quality">HD</span>
+            </div>
+            <div class="card-info">
+              <h3>Jujutsu Kaisen</h3>
+              <p>TV • 47 Episodes</p>
+              <span>⭐ 8.8</span>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder aot">ATTACK<br>ON TITAN</div>
+              <span class="quality">HD</span>
+            </div>
+            <div class="card-info">
+              <h3>Attack on Titan</h3>
+              <p>TV • 89 Episodes</p>
+              <span>⭐ 9.1</span>
+            </div>
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= CONTINUE WATCHING ================= -->
+      <section class="content-section" id="continue">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-small">YOUR PROGRESS</span>
+            <h2>▶ Continue Watching</h2>
+          </div>
+
+          <a href="#">View All →</a>
+
+        </div>
+
+
+        <div class="continue-grid">
+
+          <div class="continue-card">
+
+            <div class="continue-poster solo">
+              SOLO LEVELING
+            </div>
+
+            <div class="continue-info">
+
+              <h3>Solo Leveling</h3>
+
+              <p>S1 • EP 12</p>
+
+              <div class="progress">
+                <span style="width:52%"></span>
+              </div>
+
+              <small>12:34 / 24:16</small>
+
+            </div>
+
+            <button class="continue-play">▶</button>
+
+          </div>
+
+
+          <div class="continue-card">
+
+            <div class="continue-poster onepiece">
+              ONE PIECE
+            </div>
+
+            <div class="continue-info">
+
+              <h3>One Piece</h3>
+
+              <p>EP 1120</p>
+
+              <div class="progress">
+                <span style="width:72%"></span>
+              </div>
+
+              <small>17:23 / 24:00</small>
+
+            </div>
+
+            <button class="continue-play">▶</button>
+
+          </div>
+
+
+          <div class="continue-card">
+
+            <div class="continue-poster demon">
+              DEMON SLAYER
+            </div>
+
+            <div class="continue-info">
+
+              <h3>Demon Slayer</h3>
+
+              <p>S2 • EP 10</p>
+
+              <div class="progress">
+                <span style="width:38%"></span>
+              </div>
+
+              <small>09:12 / 23:40</small>
+
+            </div>
+
+            <button class="continue-play">▶</button>
+
+          </div>
+
+
+          <div class="continue-card">
+
+            <div class="continue-poster jjk">
+              JUJUTSU KAISEN
+            </div>
+
+            <div class="continue-info">
+
+              <h3>Jujutsu Kaisen</h3>
+
+              <p>S1 • EP 16</p>
+
+              <div class="progress">
+                <span style="width:65%"></span>
+              </div>
+
+              <small>16:45 / 23:30</small>
+
+            </div>
+
+            <button class="continue-play">▶</button>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= RECENTLY ADDED ================= -->
+      <section class="content-section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-small">NEW RELEASES</span>
+            <h2>🆕 Recently Added</h2>
+          </div>
+
+          <a href="anime.html">View All →</a>
+
+        </div>
+
+
+        <div class="anime-grid compact-grid">
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder jjk">JUJUTSU<br>KAISEN</div>
+              <span class="dub">HINDI DUB</span>
+            </div>
+            <div class="card-info">
+              <h3>Jujutsu Kaisen</h3>
+              <p>S2 • 24 Episodes</p>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder demon">DEMON<br>SLAYER</div>
+              <span class="dub">HINDI DUB</span>
+            </div>
+            <div class="card-info">
+              <h3>Demon Slayer</h3>
+              <p>S3 • 11 Episodes</p>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder aot">ATTACK<br>ON TITAN</div>
+              <span class="dub">HINDI DUB</span>
+            </div>
+            <div class="card-info">
+              <h3>Attack on Titan</h3>
+              <p>S4 • 30 Episodes</p>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder solo">SOLO<br>LEVELING</div>
+              <span class="dub">HINDI DUB</span>
+            </div>
+            <div class="card-info">
+              <h3>Solo Leveling</h3>
+              <p>S2 • 13 Episodes</p>
+            </div>
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= MOVIES ================= -->
+      <section class="content-section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-small">WATCH MOVIES</span>
+            <h2>🎬 Anime Movies</h2>
+          </div>
+
+          <a href="movies.html">View All →</a>
+
+        </div>
+
+
+        <div class="movie-grid">
+
+          <a href="movies.html" class="movie-card">
+            <div class="movie-poster yourname">
+              <span>Your Name</span>
+            </div>
+            <div>
+              <h3>Your Name</h3>
+              <p>Movie • 1h 46m</p>
+            </div>
+          </a>
+
+
+          <a href="movies.html" class="movie-card">
+            <div class="movie-poster weather">
+              <span>Weathering<br>With You</span>
+            </div>
+            <div>
+              <h3>Weathering With You</h3>
+              <p>Movie • 1h 52m</p>
+            </div>
+          </a>
+
+
+          <a href="movies.html" class="movie-card">
+            <div class="movie-poster spirited">
+              <span>Spirited<br>Away</span>
+            </div>
+            <div>
+              <h3>Spirited Away</h3>
+              <p>Movie • 2h 5m</p>
+            </div>
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= HINDI DUB ================= -->
+      <section class="content-section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-small">DUBBED ANIME</span>
+            <h2>🇮🇳 Hindi Dub</h2>
+          </div>
+
+          <a href="anime.html">View All →</a>
+
+        </div>
+
+
+        <div class="anime-grid">
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder onepiece">ONE<br>PIECE</div>
+              <span class="dub">HINDI DUB</span>
+            </div>
+            <div class="card-info">
+              <h3>One Piece</h3>
+              <p>Hindi Dub • TV</p>
+              <span>⭐ 9.1</span>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder demon">DEMON<br>SLAYER</div>
+              <span class="dub">HINDI DUB</span>
+            </div>
+            <div class="card-info">
+              <h3>Demon Slayer</h3>
+              <p>Hindi Dub • TV</p>
+              <span>⭐ 9.0</span>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder naruto">NARUTO<br>SHIPPUDEN</div>
+              <span class="dub">HINDI DUB</span>
+            </div>
+            <div class="card-info">
+              <h3>Naruto Shippuden</h3>
+              <p>Hindi Dub • TV</p>
+              <span>⭐ 8.9</span>
+            </div>
+          </a>
+
+
+          <a href="anime-detail.html" class="anime-card">
+            <div class="poster">
+              <div class="poster-placeholder solo">SOLO<br>LEVELING</div>
+              <span class="dub">HINDI DUB</span>
+            </div>
+            <div class="card-info">
+              <h3>Solo Leveling</h3>
+              <p>Hindi Dub • TV</p>
+              <span>⭐ 9.2</span>
+            </div>
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= TOP ANIME ================= -->
+      <section class="content-section">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-small">RANKING</span>
+            <h2>🏆 Top Anime</h2>
+          </div>
+
+          <a href="anime.html">View All →</a>
+
+        </div>
+
+
+        <div class="top-list">
+
+          <div class="top-item">
+            <span class="rank">01</span>
+            <div class="top-thumb onepiece">ONE PIECE</div>
+            <div class="top-info">
+              <h3>One Piece</h3>
+              <p>TV • 1120+ Episodes</p>
+            </div>
+            <strong>⭐ 9.1</strong>
+          </div>
+
+
+          <div class="top-item">
+            <span class="rank">02</span>
+            <div class="top-thumb solo">SOLO LEVELING</div>
+            <div class="top-info">
+              <h3>Solo Leveling</h3>
+              <p>TV • 24 Episodes</p>
+            </div>
+            <strong>⭐ 9.2</strong>
+          </div>
+
+
+          <div class="top-item">
+            <span class="rank">03</span>
+            <div class="top-thumb aot">ATTACK ON TITAN</div>
+            <div class="top-info">
+              <h3>Attack on Titan</h3>
+              <p>TV • 89 Episodes</p>
+            </div>
+            <strong>⭐ 9.1</strong>
+          </div>
+
+
+          <div class="top-item">
+            <span class="rank">04</span>
+            <div class="top-thumb demon">DEMON SLAYER</div>
+            <div class="top-info">
+              <h3>Demon Slayer</h3>
+              <p>TV • 55 Episodes</p>
+            </div>
+            <strong>⭐ 9.0</strong>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ================= REQUEST ================= -->
+      <section class="request-banner">
+
+        <div>
+
+          <span class="request-icon">➤</span>
+
+          <div>
+            <span class="section-small">CAN'T FIND AN ANIME?</span>
+            <h2>Request Your Favorite Anime</h2>
+            <p>
+              Didn't find your favorite anime? Tell us and we'll add it!
+            </p>
+          </div>
+
+        </div>
+
+        <a href="request.html" class="request-btn">
+          Request Now →
+        </a>
+
+      </section>
+
+
+    </main>
+
+  </div>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+
+    <div class="footer-brand">
+      <div class="brand">
+        <span class="brand-icon">☯</span>
+        <span>Anime Fan</span>
+      </div>
+
+      <p>
+        ANIME • MOVIES • SERIES • MORE
+      </p>
+
+      <small>
+        Made with ❤️ for Anime Fans
+      </small>
+    </div>
+
+
+    <div class="footer-links">
+
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">DMCA</a>
 
     </div>
 
-  </div>
+  </footer>
 
-  <div class="hero-image">
 
-    <img
-      src="assets/one-piece.jpg"
-      alt="One Piece"
-    >
+  <!-- ================= SIMPLE MOBILE MENU JS ================= -->
+  <script>
 
-  </div>
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
 
-</section>
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("show");
+      });
+    }
 
 
-<!-- ================= TRENDING ================= -->
+    const themeToggle = document.getElementById("themeToggle");
 
-<section class="content-section" id="trending">
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
 
-  <div class="section-title">
+        if (document.body.classList.contains("light-mode")) {
+          themeToggle.textContent = "☀";
+        } else {
+          themeToggle.textContent = "☾";
+        }
+      });
+    }
 
-    <h2>🔥 Trending Now</h2>
-
-    <a href="anime.html">View All</a>
-
-  </div>
-
-  <div class="anime-grid">
-
-    <article class="anime-card">
-
-      <img src="assets/solo-leveling.jpg">
-
-      <div class="card-info">
-
-        <h3>Solo Leveling</h3>
-
-        <p>TV • 24 Episodes</p>
-
-        <span>⭐ 9.2</span>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/one-piece.jpg">
-
-      <div class="card-info">
-
-        <h3>One Piece</h3>
-
-        <p>TV • 1120+ Episodes</p>
-
-        <span>⭐ 9.1</span>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/naruto.jpg">
-
-      <div class="card-info">
-
-        <h3>Naruto Shippuden</h3>
-
-        <p>TV • 500 Episodes</p>
-
-        <span>⭐ 8.9</span>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/demon-slayer.jpg">
-
-      <div class="card-info">
-
-        <h3>Demon Slayer</h3>
-
-        <p>TV • 55 Episodes</p>
-
-        <span>⭐ 9.0</span>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/jujutsu-kaisen.jpg">
-
-      <div class="card-info">
-
-        <h3>Jujutsu Kaisen</h3>
-
-        <p>TV • 47 Episodes</p>
-
-        <span>⭐ 8.8</span>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/attack-on-titan.jpg">
-
-      <div class="card-info">
-
-        <h3>Attack on Titan</h3>
-
-        <p>TV • 89 Episodes</p>
-
-        <span>⭐ 9.1</span>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- ================= CONTINUE WATCHING ================= -->
-
-<section class="content-section">
-
-  <div class="section-title">
-
-    <h2>▶ Continue Watching</h2>
-
-    <a href="#">View All</a>
-
-  </div>
-
-
-  <div class="anime-grid">
-
-    <article class="anime-card">
-
-      <img src="assets/solo-leveling.jpg">
-
-      <div class="progress">
-        <span style="width:65%"></span>
-      </div>
-
-      <div class="card-info">
-
-        <h3>Solo Leveling</h3>
-
-        <p>S1 • EP 12</p>
-
-        <small>12:34 / 24:16</small>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/one-piece.jpg">
-
-      <div class="progress">
-        <span style="width:35%"></span>
-      </div>
-
-      <div class="card-info">
-
-        <h3>One Piece</h3>
-
-        <p>S1 • EP 1120</p>
-
-        <small>17:23 / 24:00</small>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/demon-slayer.jpg">
-
-      <div class="progress">
-        <span style="width:48%"></span>
-      </div>
-
-      <div class="card-info">
-
-        <h3>Demon Slayer</h3>
-
-        <p>S2 • EP 10</p>
-
-        <small>09:12 / 23:40</small>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/jujutsu-kaisen.jpg">
-
-      <div class="progress">
-        <span style="width:70%"></span>
-      </div>
-
-      <div class="card-info">
-
-        <h3>Jujutsu Kaisen</h3>
-
-        <p>S1 • EP 16</p>
-
-        <small>16:45 / 23:30</small>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- ================= RECENTLY ADDED ================= -->
-
-<section class="content-section">
-
-  <div class="section-title">
-
-    <h2>🆕 Recently Added</h2>
-
-    <a href="anime.html">View All</a>
-
-  </div>
-
-  <div class="anime-grid">
-
-    <article class="anime-card">
-      <img src="assets/jujutsu-kaisen.jpg">
-      <div class="card-info">
-        <h3>Jujutsu Kaisen</h3>
-        <p>S2 • 24 Episodes</p>
-      </div>
-    </article>
-
-    <article class="anime-card">
-      <img src="assets/demon-slayer.jpg">
-      <div class="card-info">
-        <h3>Demon Slayer</h3>
-        <p>S3 • 11 Episodes</p>
-      </div>
-    </article>
-
-    <article class="anime-card">
-      <img src="assets/attack-on-titan.jpg">
-      <div class="card-info">
-        <h3>Attack on Titan</h3>
-        <p>S4 • 30 Episodes</p>
-      </div>
-    </article>
-
-    <article class="anime-card">
-      <img src="assets/solo-leveling.jpg">
-      <div class="card-info">
-        <h3>Solo Leveling</h3>
-        <p>S2 • 13 Episodes</p>
-      </div>
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- ================= MOVIES ================= -->
-
-<section class="content-section">
-
-  <div class="section-title">
-
-    <h2>🎬 Movies</h2>
-
-    <a href="movies.html">View All</a>
-
-  </div>
-
-  <div class="anime-grid">
-
-    <article class="anime-card">
-
-      <img src="assets/your-name.jpg">
-
-      <div class="card-info">
-
-        <h3>Your Name</h3>
-
-        <p>Movie • 1h 46m</p>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/weathering-with-you.jpg">
-
-      <div class="card-info">
-
-        <h3>Weathering With You</h3>
-
-        <p>Movie • 1h 52m</p>
-
-      </div>
-
-    </article>
-
-
-    <article class="anime-card">
-
-      <img src="assets/spirited-away.jpg">
-
-      <div class="card-info">
-
-        <h3>Spirited Away</h3>
-
-        <p>Movie • 2h 5m</p>
-
-      </div>
-
-    </article>
-
-  </div>
-
-</section>
-
-
-<!-- ================= REQUEST ================= -->
-
-<section class="request-box">
-
-  <div>
-
-    <h2>Anime Request</h2>
-
-    <p>
-      Didn't find your favorite anime?
-      Tell us and we'll add it!
-    </p>
-
-  </div>
-
-  <a href="request.html">
-    ➤ Request Now
-  </a>
-
-</section>
-
-
-</main>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-  <div class="footer-logo">
-    ☯ Anime <b>Fan</b>
-  </div>
-
-  <p>
-    ANIME • MOVIES • SERIES • MORE
-  </p>
-
-  <div class="footer-links">
-
-    <a href="#">About Us</a>
-    <a href="#">Contact</a>
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms & Conditions</a>
-    <a href="#">DMCA</a>
-
-  </div>
-
-  <p class="copyright">
-    Made with ❤️ for Anime Fans
-  </p>
-
-</footer>
-
-
-<script src="app.js"></script>
+  </script>
 
 </body>
 </html>
