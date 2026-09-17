@@ -1592,3 +1592,906 @@ body.light-theme .anime-card {
   }
 
 }
+
+/* ==================================================
+   ANIME FAN HOME DESIGN
+================================================== */
+
+:root {
+  --bg: #05070b;
+  --card: #0c1017;
+  --card2: #10151e;
+  --red: #ff1744;
+  --red-dark: #b8002d;
+  --text: #ffffff;
+  --muted: #9da4b2;
+  --border: rgba(255,255,255,.12);
+}
+
+
+/* ================= HEADER ================= */
+
+.header {
+
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 18px;
+
+  background: #03060a;
+
+  border-bottom: 1px solid #222936;
+
+  position: sticky;
+  top: 0;
+
+  z-index: 999;
+
+}
+
+
+.logo {
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 150px;
+
+  font-size: 20px;
+  font-weight: 900;
+
+  color: white;
+
+}
+
+.logo b {
+  color: var(--red);
+}
+
+.logo-icon {
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--red);
+
+  font-size: 25px;
+
+}
+
+
+.desktop-nav {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  flex: 1;
+
+}
+
+
+.desktop-nav a {
+
+  color: #cbd0da;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  padding: 9px 12px;
+
+  border-radius: 8px;
+
+}
+
+
+.desktop-nav a:hover,
+.desktop-nav a.active {
+
+  background: var(--red);
+
+  color: white;
+
+}
+
+
+.header-right {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+}
+
+
+.search-box {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  width: 210px;
+
+  height: 34px;
+
+  padding: 0 10px;
+
+  border: 1px solid #1671a5;
+
+  border-radius: 20px;
+
+  background: #07101a;
+
+}
+
+
+.search-box input {
+
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 11px;
+
+}
+
+
+.icon-btn,
+.menu-btn {
+
+  background: none;
+
+  border: none;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 18px;
+
+}
+
+
+.menu-btn {
+  display: none;
+}
+
+
+/* ================= HOME ================= */
+
+.home-container {
+
+  width: 100%;
+
+  max-width: 1500px;
+
+  margin: auto;
+
+  padding: 10px;
+
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+
+  min-height: 270px;
+
+  display: flex;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid var(--red);
+
+  border-radius: 12px;
+
+  background:
+    radial-gradient(
+      circle at 70% 50%,
+      rgba(255,23,68,.25),
+      transparent 50%
+    ),
+    #090b10;
+
+}
+
+
+.hero-content {
+
+  width: 52%;
+
+  padding: 35px 30px;
+
+  position: relative;
+
+  z-index: 2;
+
+}
+
+
+.featured {
+
+  display: inline-block;
+
+  padding: 5px 12px;
+
+  background: var(--red);
+
+  border-radius: 20px;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+}
+
+
+.hero h1 {
+
+  font-size: 46px;
+
+  margin: 15px 0 8px;
+
+  font-weight: 900;
+
+  font-style: italic;
+
+}
+
+
+.hero p {
+
+  max-width: 520px;
+
+  color: #d4d7dd;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+}
+
+
+.hero-info {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 12px;
+
+  color: #ddd;
+
+  font-size: 11px;
+
+}
+
+
+.hero-buttons {
+
+  display: flex;
+
+  gap: 10px;
+
+  margin-top: 18px;
+
+}
+
+
+.watch-btn {
+
+  padding: 11px 22px;
+
+  border-radius: 8px;
+
+  background: var(--red);
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+}
+
+
+.list-btn {
+
+  padding: 11px 18px;
+
+  border-radius: 8px;
+
+  border: 1px solid white;
+
+  background: rgba(0,0,0,.4);
+
+  color: white;
+
+}
+
+
+.hero-image {
+
+  position: absolute;
+
+  right: 0;
+
+  top: 0;
+
+  width: 58%;
+
+  height: 100%;
+
+}
+
+
+.hero-image::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      #090b10 0%,
+      transparent 45%
+    );
+
+}
+
+
+.hero-image img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+
+}
+
+
+/* ================= SECTIONS ================= */
+
+.content-section {
+
+  margin-top: 18px;
+
+}
+
+
+.section-title {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 10px;
+
+}
+
+
+.section-title h2 {
+
+  margin: 0;
+
+  font-size: 17px;
+
+}
+
+
+.section-title a {
+
+  color: #23a9ff;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+}
+
+
+/* ================= CARDS ================= */
+
+.anime-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(6, 1fr);
+
+  gap: 10px;
+
+}
+
+
+.anime-card {
+
+  overflow: hidden;
+
+  background: var(--card);
+
+  border: 1px solid #273040;
+
+  border-radius: 7px;
+
+  transition: .2s;
+
+}
+
+
+.anime-card:hover {
+
+  transform: translateY(-4px);
+
+  border-color: var(--red);
+
+}
+
+
+.anime-card img {
+
+  width: 100%;
+
+  aspect-ratio: 16 / 9;
+
+  object-fit: cover;
+
+  display: block;
+
+}
+
+
+.card-info {
+
+  padding: 7px;
+
+}
+
+
+.card-info h3 {
+
+  margin: 0 0 4px;
+
+  color: white;
+
+  font-size: 11px;
+
+}
+
+
+.card-info p {
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 9px;
+
+}
+
+
+.card-info span {
+
+  color: #ffd43b;
+
+  font-size: 9px;
+
+}
+
+
+.card-info small {
+
+  color: #7e8796;
+
+  font-size: 8px;
+
+}
+
+
+/* ================= PROGRESS ================= */
+
+.progress {
+
+  height: 3px;
+
+  background: #252b34;
+
+}
+
+
+.progress span {
+
+  display: block;
+
+  height: 100%;
+
+  background: var(--red);
+
+}
+
+
+/* ================= REQUEST ================= */
+
+.request-box {
+
+  margin-top: 20px;
+
+  padding: 20px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  border: 1px solid var(--red);
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #19070c,
+      #0b0e14
+    );
+
+}
+
+
+.request-box h2 {
+
+  margin: 0 0 5px;
+
+}
+
+
+.request-box p {
+
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+
+}
+
+
+.request-box a {
+
+  padding: 10px 20px;
+
+  border-radius: 8px;
+
+  background: var(--red);
+
+  color: white;
+
+  text-decoration: none;
+
+  font-weight: 700;
+
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+
+  margin-top: 35px;
+
+  padding: 30px 20px;
+
+  text-align: center;
+
+  border-top: 1px solid #252a33;
+
+  background: #03060a;
+
+}
+
+
+.footer-logo {
+
+  font-size: 25px;
+
+  font-weight: 900;
+
+}
+
+
+.footer-logo b {
+
+  color: var(--red);
+
+}
+
+
+footer p {
+
+  color: var(--muted);
+
+  font-size: 10px;
+
+}
+
+
+.footer-links {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 25px;
+
+  margin: 20px 0;
+
+}
+
+
+.footer-links a {
+
+  color: #9da4b2;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+}
+
+
+/* ================= MOBILE MENU ================= */
+
+.mobile-menu {
+
+  display: none;
+
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 768px) {
+
+  .header {
+
+    height: 58px;
+
+    padding: 0 10px;
+
+  }
+
+
+  .logo {
+
+    min-width: auto;
+
+    font-size: 16px;
+
+  }
+
+
+  .desktop-nav {
+
+    display: none;
+
+  }
+
+
+  .search-box {
+
+    width: 145px;
+
+  }
+
+
+  .menu-btn {
+
+    display: block;
+
+  }
+
+
+  .home-container {
+
+    padding: 6px;
+
+  }
+
+
+  .hero {
+
+    min-height: 360px;
+
+  }
+
+
+  .hero-content {
+
+    width: 100%;
+
+    padding: 22px 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+  }
+
+
+  .hero-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    opacity: .55;
+
+  }
+
+
+  .hero-image::after {
+
+    background:
+      linear-gradient(
+        0deg,
+        #090b10 5%,
+        transparent 75%
+      );
+
+  }
+
+
+  .hero h1 {
+
+    font-size: 34px;
+
+  }
+
+
+  .hero p {
+
+    font-size: 11px;
+
+  }
+
+
+  .hero-info {
+
+    font-size: 9px;
+
+  }
+
+
+  .anime-grid {
+
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 8px;
+
+  }
+
+
+  .section-title h2 {
+
+    font-size: 16px;
+
+  }
+
+
+  .request-box {
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+
+  }
+
+
+  .request-box a {
+
+    width: 100%;
+
+    text-align: center;
+
+  }
+
+
+  footer {
+
+    padding-bottom: 80px;
+
+  }
+
+
+  .footer-links {
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+  }
+
+}
+
+
+/* ================= SMALL MOBILE ================= */
+
+@media (max-width: 400px) {
+
+  .search-box {
+
+    width: 115px;
+
+  }
+
+
+  .hero {
+
+    min-height: 340px;
+
+  }
+
+
+  .hero h1 {
+
+    font-size: 30px;
+
+  }
+
+
+  .hero-buttons {
+
+    flex-direction: column;
+
+  }
+
+
+  .watch-btn,
+  .list-btn {
+
+    width: 100%;
+
+    text-align: center;
+
+  }
+
+}
