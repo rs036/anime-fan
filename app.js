@@ -597,6 +597,124 @@ function createAnimeCard(anime) {
 }
 
 
+
+/* =========================================================
+   HERO CAROUSEL — 10 SLIDES / EXACTLY 5 DOTS
+========================================================= */
+
+const heroSlides = [
+  ...animeData.trending,
+  ...animeData.recentlyAdded
+].filter((anime, index, list) =>
+  list.findIndex(item => item.id === anime.id) === index
+).slice(0, 10);
+
+let heroIndex = 0;
+let heroDotStart = 0;
+const HERO_VISIBLE_DOTS = 5;
+
+function updateHero() {
+  const hero = document.getElementById("heroSection");
+  const dots = document.getElementById("heroDots");
+  if (!hero || !dots || !heroSlides.length) return;
+
+  const anime = heroSlides[heroIndex];
+  const total = heroSlides.length;
+  const visibleDots = Math.min(HERO_VISIBLE_DOTS, total);
+  const maxStart = Math.max(0, total - visibleDots);
+
+  heroDotStart = Math.max(0, Math.min(heroDotStart, maxStart));
+
+  const badge = hero.querySelector(".hero-badge");
+  const title = hero.querySelector("h1");
+  const meta = hero.querySelector(".hero-meta");
+  const description = hero.querySelector(".hero-description");
+
+  if (badge) badge.textContent = `🔥 #${heroIndex + 1} TRENDING`;
+  if (title) title.textContent = anime.title;
+  if (meta) meta.innerHTML = `⭐ ${anime.rating} &nbsp; • &nbsp; ${anime.year} &nbsp; • &nbsp; ${anime.type} &nbsp; • &nbsp; ${anime.episodes ? anime.episodes + (anime.episodes >= 100 ? "+ Episodes" : " Episodes") : "Movie"}`;
+  if (description) description.textContent = anime.description || `Watch ${anime.title} on Anime Fan.`;
+
+  hero.style.setProperty("--hero-image", `url("${anime.image}")`);
+
+  const watch = document.getElementById("heroWatchBtn");
+  if (watch) watch.href = `details.html?anime=${encodeURIComponent(anime.id)}`;
+
+  // IMPORTANT: render ONLY 5 dots. Never render all 10.
+  dots.innerHTML = "";
+  for (let i = 0; i < visibleDots; i++) {
+    const slideIndex = heroDotStart + i;
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-dot" + (slideIndex === heroIndex ? " active" : "");
+    dot.setAttribute("aria-label", `Go to anime ${slideIndex + 1}`);
+    dot.setAttribute("aria-current", slideIndex === heroIndex ? "true" : "false");
+
+    dot.addEventListener("click", () => {
+      heroIndex = slideIndex;
+      // Clicking a dot keeps the active slide inside the visible 5-dot window.
+      if (heroIndex < heroDotStart) heroDotStart = heroIndex;
+      if (heroIndex >= heroDotStart + visibleDots) {
+        heroDotStart = Math.min(heroIndex - visibleDots + 1, maxStart);
+      }
+      updateHero();
+    });
+
+    dots.appendChild(dot);
+  }
+}
+
+function moveHero(direction) {
+  if (!heroSlides.length) return;
+
+  const nextIndex = heroIndex + direction;
+  if (nextIndex < 0 || nextIndex >= heroSlides.length) return;
+
+  heroIndex = nextIndex;
+  const visibleDots = Math.min(HERO_VISIBLE_DOTS, heroSlides.length);
+  const maxStart = Math.max(0, heroSlides.length - visibleDots);
+
+  // Forward: only slide the 5-dot window when the active dot moves past
+  // the 5th visible dot.
+  if (direction > 0 && heroIndex > heroDotStart + visibleDots - 1) {
+    heroDotStart = Math.min(heroDotStart + 1, maxStart);
+  }
+
+  // Backward: do NOT move the window until the active slide goes before
+  // the 1st visible dot.
+  if (direction < 0 && heroIndex < heroDotStart) {
+    heroDotStart = Math.max(heroDotStart - 1, 0);
+  }
+
+  updateHero();
+}
+
+function initHeroCarousel() {
+  const hero = document.getElementById("heroSection");
+  if (!hero || !heroSlides.length) return;
+
+  updateHero();
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  hero.addEventListener("touchstart", event => {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  hero.addEventListener("touchend", event => {
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    moveHero(dx < 0 ? 1 : -1);
+  }, { passive: true });
+}
+
+document.addEventListener("DOMContentLoaded", initHeroCarousel);
+
 /* =========================================================
    RENDER LIST
 ========================================================= */
@@ -627,102 +745,6 @@ function renderAnimeList(elementId, list) {
     );
 
   });
-}
-
-
-/* =========================================================
-   MOBILE HERO CAROUSEL — 10 ANIME
-   Uses existing anime data; desktop hero stays unchanged.
-========================================================= */
-
-let heroIndex = 0;
-let heroSlides = [];
-let heroTouchStartX = 0;
-let heroTouchStartY = 0;
-
-function getHeroSlides() {
-  const source = [
-    ...(animeData.trending || []),
-    ...(animeData.recentlyAdded || []),
-    ...(animeData.top || [])
-  ];
-
-  const unique = [];
-  source.forEach(item => {
-    if (item && item.id && !unique.some(x => x.id === item.id)) {
-      unique.push(item);
-    }
-  });
-
-  return unique.slice(0, 10);
-}
-
-function setupMobileHero() {
-  const hero = document.querySelector('.hero');
-  const dots = document.getElementById('heroDots');
-  if (!hero || !dots) return;
-
-  heroSlides = getHeroSlides();
-  if (!heroSlides.length) return;
-
-  dots.innerHTML = heroSlides.map((_, i) =>
-    `<button type="button" class="hero-dot${i === 0 ? ' active' : ''}" aria-label="Slide ${i + 1}"></button>`
-  ).join('');
-
-  dots.querySelectorAll('.hero-dot').forEach((dot, i) => {
-    dot.addEventListener('click', () => showHeroSlide(i));
-  });
-
-  hero.addEventListener('touchstart', e => {
-    const t = e.changedTouches[0];
-    heroTouchStartX = t.clientX;
-    heroTouchStartY = t.clientY;
-  }, {passive: true});
-
-  hero.addEventListener('touchend', e => {
-    const t = e.changedTouches[0];
-    const dx = t.clientX - heroTouchStartX;
-    const dy = t.clientY - heroTouchStartY;
-    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
-      if (dx < 0) showHeroSlide(heroIndex + 1);
-      else showHeroSlide(heroIndex - 1);
-    }
-  }, {passive: true});
-
-  showHeroSlide(0);
-}
-
-function showHeroSlide(index) {
-  if (!heroSlides.length) return;
-
-  heroIndex = (index + heroSlides.length) % heroSlides.length;
-  const anime = heroSlides[heroIndex];
-  const hero = document.querySelector('.hero');
-  if (!hero) return;
-
-  const title = hero.querySelector('h1');
-  const meta = hero.querySelector('.hero-meta');
-  const desc = hero.querySelector('.hero-description');
-  const badge = hero.querySelector('.hero-badge');
-  const watch = document.getElementById('heroWatchBtn');
-  const dots = document.getElementById('heroDots');
-
-  const isFirst = heroIndex === 0;
-  if (title) title.textContent = anime.title || '';
-  if (meta) {
-    meta.innerHTML = `⭐ ${anime.rating || 'N/A'} &nbsp; • &nbsp; ${anime.year || ''} &nbsp; • &nbsp; ${anime.type || 'TV'} &nbsp; • &nbsp; ${anime.episodes ? anime.episodes + '+ Episodes' : (anime.status || '')}`;
-  }
-  if (desc) desc.textContent = anime.description || `Watch ${anime.title || 'anime'} on Anime Fan.`;
-  if (badge) badge.textContent = isFirst ? '🔥 #1 TRENDING' : '🔥 FEATURED';
-  if (watch) watch.href = `details.html?anime=${encodeURIComponent(anime.id)}`;
-
-  hero.style.backgroundImage = `linear-gradient(180deg, rgba(0,0,0,.04) 8%, rgba(0,0,0,.18) 30%, rgba(0,0,0,.94) 100%), linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.08) 68%, rgba(0,0,0,.28)), url("${anime.image || 'assets/hero.jpg'}")`;
-
-  if (dots) {
-    dots.querySelectorAll('.hero-dot').forEach((dot, i) => {
-      dot.classList.toggle('active', i === heroIndex);
-    });
-  }
 }
 
 
@@ -766,8 +788,6 @@ function loadHomePage() {
   renderAnimeList("webseriesGrid", animeData.webseries);
   renderAnimeList("fanDubGrid", animeData.fanDub);
   renderAnimeList("completedGrid", animeData.completed);
-
-  setupMobileHero();
 }
 
 
