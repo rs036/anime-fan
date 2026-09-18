@@ -2128,3 +2128,80 @@ body.light-theme .anime-card {
   }
 
 }
+
+/* =====================================================
+   MOBILE BOTTOM NAVIGATION
+===================================================== */
+
+@media screen and (max-width: 768px) {
+
+  .mobile-bottom-nav,
+  .bottom-nav,
+  #bottomNav {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+
+    width: 100% !important;
+    height: 64px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-around !important;
+
+    z-index: 99999 !important;
+
+    background: rgba(8, 9, 13, 0.98) !important;
+
+    border-top: 1px solid rgba(0, 210, 255, 0.25) !important;
+
+    box-shadow:
+      0 -5px 20px rgba(0, 0, 0, 0.45) !important;
+
+    padding: 4px 4px !important;
+  }
+
+
+  .mobile-bottom-nav a,
+  .bottom-nav a,
+  #bottomNav a {
+    flex: 1 !important;
+
+    height: 56px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    gap: 3px !important;
+
+    text-decoration: none !important;
+
+    color: #888 !important;
+
+    font-size: 9px !important;
+  }
+
+
+  .mobile-bottom-nav a.active,
+  .bottom-nav a.active,
+  #bottomNav a.active {
+    color: #ff1744 !important;
+  }
+
+
+  .mobile-bottom-nav a span,
+  .bottom-nav a span,
+  #bottomNav a span {
+    display: block !important;
+  }
+
+
+  /* Content should stay above bottom bar */
+  body {
+    padding-bottom: 75px !important;
+  }
+}
