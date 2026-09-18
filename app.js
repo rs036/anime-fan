@@ -597,6 +597,124 @@ function createAnimeCard(anime) {
 }
 
 
+
+/* =========================================================
+   HERO CAROUSEL — 10 SLIDES / EXACTLY 5 DOTS
+========================================================= */
+
+const heroSlides = [
+  ...animeData.trending,
+  ...animeData.recentlyAdded
+].filter((anime, index, list) =>
+  list.findIndex(item => item.id === anime.id) === index
+).slice(0, 10);
+
+let heroIndex = 0;
+let heroDotStart = 0;
+const HERO_VISIBLE_DOTS = 5;
+
+function updateHero() {
+  const hero = document.getElementById("heroSection");
+  const dots = document.getElementById("heroDots");
+  if (!hero || !dots || !heroSlides.length) return;
+
+  const anime = heroSlides[heroIndex];
+  const total = heroSlides.length;
+  const visibleDots = Math.min(HERO_VISIBLE_DOTS, total);
+  const maxStart = Math.max(0, total - visibleDots);
+
+  heroDotStart = Math.max(0, Math.min(heroDotStart, maxStart));
+
+  const badge = hero.querySelector(".hero-badge");
+  const title = hero.querySelector("h1");
+  const meta = hero.querySelector(".hero-meta");
+  const description = hero.querySelector(".hero-description");
+
+  if (badge) badge.textContent = `🔥 #${heroIndex + 1} TRENDING`;
+  if (title) title.textContent = anime.title;
+  if (meta) meta.innerHTML = `⭐ ${anime.rating} &nbsp; • &nbsp; ${anime.year} &nbsp; • &nbsp; ${anime.type} &nbsp; • &nbsp; ${anime.episodes ? anime.episodes + (anime.episodes >= 100 ? "+ Episodes" : " Episodes") : "Movie"}`;
+  if (description) description.textContent = anime.description || `Watch ${anime.title} on Anime Fan.`;
+
+  hero.style.setProperty("--hero-image", `url("${anime.image}")`);
+
+  const watch = document.getElementById("heroWatchBtn");
+  if (watch) watch.href = `details.html?anime=${encodeURIComponent(anime.id)}`;
+
+  // IMPORTANT: render ONLY 5 dots. Never render all 10.
+  dots.innerHTML = "";
+  for (let i = 0; i < visibleDots; i++) {
+    const slideIndex = heroDotStart + i;
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "hero-dot" + (slideIndex === heroIndex ? " active" : "");
+    dot.setAttribute("aria-label", `Go to anime ${slideIndex + 1}`);
+    dot.setAttribute("aria-current", slideIndex === heroIndex ? "true" : "false");
+
+    dot.addEventListener("click", () => {
+      heroIndex = slideIndex;
+      // Clicking a dot keeps the active slide inside the visible 5-dot window.
+      if (heroIndex < heroDotStart) heroDotStart = heroIndex;
+      if (heroIndex >= heroDotStart + visibleDots) {
+        heroDotStart = Math.min(heroIndex - visibleDots + 1, maxStart);
+      }
+      updateHero();
+    });
+
+    dots.appendChild(dot);
+  }
+}
+
+function moveHero(direction) {
+  if (!heroSlides.length) return;
+
+  const nextIndex = heroIndex + direction;
+  if (nextIndex < 0 || nextIndex >= heroSlides.length) return;
+
+  heroIndex = nextIndex;
+  const visibleDots = Math.min(HERO_VISIBLE_DOTS, heroSlides.length);
+  const maxStart = Math.max(0, heroSlides.length - visibleDots);
+
+  // Forward: only slide the 5-dot window when the active dot moves past
+  // the 5th visible dot.
+  if (direction > 0 && heroIndex > heroDotStart + visibleDots - 1) {
+    heroDotStart = Math.min(heroDotStart + 1, maxStart);
+  }
+
+  // Backward: do NOT move the window until the active slide goes before
+  // the 1st visible dot.
+  if (direction < 0 && heroIndex < heroDotStart) {
+    heroDotStart = Math.max(heroDotStart - 1, 0);
+  }
+
+  updateHero();
+}
+
+function initHeroCarousel() {
+  const hero = document.getElementById("heroSection");
+  if (!hero || !heroSlides.length) return;
+
+  updateHero();
+
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  hero.addEventListener("touchstart", event => {
+    const touch = event.changedTouches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+  }, { passive: true });
+
+  hero.addEventListener("touchend", event => {
+    const touch = event.changedTouches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+    if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+    moveHero(dx < 0 ? 1 : -1);
+  }, { passive: true });
+}
+
+document.addEventListener("DOMContentLoaded", initHeroCarousel);
+
 /* =========================================================
    RENDER LIST
 ========================================================= */

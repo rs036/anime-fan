@@ -2007,104 +2007,141 @@ body.light-theme .anime-card {
   }
 }
 
+
 /* =========================================================
-   MOBILE CONTINUE WATCHING — POSTER CARD FIX
-   Keep Continue Watching identical to the other 3-column
-   poster sections, while retaining the progress bar.
+   HERO CAROUSEL — SCREENSHOT STYLE 5-DOT INDICATOR
 ========================================================= */
-@media screen and (max-width: 768px) {
-  #continueGrid > .anime-card {
-    display: block !important;
-    flex: 0 0 calc((100% - 16px) / 3) !important;
-    width: calc((100% - 16px) / 3) !important;
-    min-width: calc((100% - 16px) / 3) !important;
-    max-width: calc((100% - 16px) / 3) !important;
-    height: auto !important;
-    overflow: hidden !important;
-    border-radius: 9px !important;
-    box-sizing: border-box !important;
+.hero {
+  --hero-image: url("assets/hero.jpg");
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,.04) 8%, rgba(0,0,0,.18) 30%, rgba(0,0,0,.94) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.65), rgba(0,0,0,.08) 68%, rgba(0,0,0,.28)),
+    var(--hero-image) !important;
+  background-position: center !important;
+  background-size: cover !important;
+  transition: background-image .25s ease;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.hero-dots {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 11px !important;
+  height: 10px;
+  margin-top: 12px !important;
+}
+
+.hero-dot {
+  width: 6px !important;
+  height: 6px !important;
+  min-width: 6px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(255,255,255,.55) !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  opacity: .9;
+  box-shadow: none !important;
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+
+.hero-dot.active {
+  background: rgba(255,255,255,.88) !important;
+  border-color: rgba(255,255,255,.88) !important;
+  transform: scale(1.08);
+}
+
+@media (max-width: 768px) {
+  .hero-dots {
+    gap: 11px !important;
+    margin-top: 12px !important;
   }
 
-  #continueGrid > .anime-card > a {
-    display: block !important;
-    width: 100% !important;
-    height: auto !important;
-  }
-
-  #continueGrid .anime-poster {
-    display: block !important;
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 4 / 5 !important;
-    overflow: hidden !important;
-  }
-
-  #continueGrid .anime-poster img {
-    display: block !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-
-  #continueGrid .anime-info {
-    display: block !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    padding: 6px !important;
-    box-sizing: border-box !important;
-    background: #090b0f !important;
-  }
-
-  #continueGrid .anime-title {
-    display: block !important;
-    width: 100% !important;
-    font-size: 9px !important;
-    line-height: 1.25 !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    margin: 0 !important;
-  }
-
-  #continueGrid .anime-meta {
-    display: flex !important;
-    align-items: center !important;
-    gap: 3px !important;
-    margin-top: 4px !important;
-    font-size: 7px !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-  }
-
-  #continueGrid .progress-wrap {
-    display: block !important;
-    width: 100% !important;
-    margin-top: 5px !important;
-  }
-
-  #continueGrid .progress-bar {
-    display: block !important;
-    width: 100% !important;
-    height: 3px !important;
-    border-radius: 99px !important;
-    overflow: hidden !important;
-    background: rgba(255,255,255,.14) !important;
-  }
-
-  #continueGrid .progress-fill {
-    display: block !important;
-    height: 100% !important;
-    border-radius: inherit !important;
-    background: #ff1744 !important;
+  .hero-dot {
+    width: 6px !important;
+    height: 6px !important;
+    min-width: 6px !important;
   }
 }
 
-@media screen and (max-width: 390px) {
-  #continueGrid > .anime-card {
-    flex-basis: calc((100% - 12px) / 3) !important;
-    width: calc((100% - 12px) / 3) !important;
-    min-width: calc((100% - 12px) / 3) !important;
-    max-width: calc((100% - 12px) / 3) !important;
+/* FINAL HERO DOT OVERRIDE — exactly five visible dots */
+.hero-dots {
+  display: flex !important;
+  width: 100%;
+  min-height: 8px;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 11px !important;
+  overflow: hidden !important;
+}
+.hero-dot {
+  flex: 0 0 6px !important;
+  width: 6px !important;
+  height: 6px !important;
+  min-width: 6px !important;
+  max-width: 6px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255,255,255,.55) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.hero-dot.active {
+  background: rgba(255,255,255,.92) !important;
+  border-color: rgba(255,255,255,.92) !important;
+  transform: none !important;
+}
+
+/* CONTINUE WATCHING — same 3-poster card layout as Trending */
+@media screen and (max-width: 768px) {
+  #continueGrid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    width: 100% !important;
+    gap: 8px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 2px 1px 10px !important;
+    margin: 0 !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  #continueGrid::-webkit-scrollbar { display:none; }
+  #continueGrid > .anime-card {
+    display:block !important;
+    flex:0 0 calc((100% - 16px)/3) !important;
+    width:calc((100% - 16px)/3) !important;
+    min-width:calc((100% - 16px)/3) !important;
+    max-width:calc((100% - 16px)/3) !important;
+    height:auto !important;
+    margin:0 !important;
+    scroll-snap-align:start;
+    overflow:hidden !important;
+    border-radius:9px !important;
+    box-sizing:border-box !important;
+  }
+  #continueGrid > .anime-card > a { display:block !important; width:100% !important; height:auto !important; }
+  #continueGrid .anime-poster {
+    display:block !important;
+    position:relative !important;
+    width:100% !important;
+    height:auto !important;
+    aspect-ratio:4/5 !important;
+    overflow:hidden !important;
+  }
+  #continueGrid .anime-poster img { width:100% !important; height:100% !important; object-fit:cover !important; display:block !important; }
+  #continueGrid .anime-info { display:block !important; width:100% !important; min-width:0 !important; padding:6px !important; box-sizing:border-box !important; }
+  #continueGrid .anime-title { display:block !important; width:100% !important; font-size:9px !important; line-height:1.25 !important; white-space:nowrap !important; overflow:hidden !important; text-overflow:ellipsis !important; margin:0 !important; }
+  #continueGrid .anime-meta { display:flex !important; align-items:center !important; gap:3px !important; margin-top:4px !important; font-size:7px !important; white-space:nowrap !important; overflow:hidden !important; }
+  #continueGrid .progress-wrap { display:block !important; width:100% !important; margin-top:5px !important; }
+  #continueGrid .progress-bar { display:block !important; width:100% !important; height:3px !important; border-radius:99px !important; overflow:hidden !important; background:rgba(255,255,255,.14) !important; }
+  #continueGrid .progress-fill { display:block !important; height:100% !important; border-radius:inherit !important; background:#ff1744 !important; }
+}
+@media screen and (max-width:390px) {
+  #continueGrid { gap:6px !important; }
+  #continueGrid > .anime-card { flex-basis:calc((100% - 12px)/3) !important; width:calc((100% - 12px)/3) !important; min-width:calc((100% - 12px)/3) !important; max-width:calc((100% - 12px)/3) !important; }
 }
