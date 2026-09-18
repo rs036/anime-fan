@@ -1774,359 +1774,323 @@ body.light-theme .anime-card {
     color: #7d7d86;
   }
 
-  /* =====================================================
-     TRENDING — 3 COMPACT CARDS
-  ===================================================== */
+/* =========================================================
+   ANIME FAN - HOME MOBILE SLIDERS
+   3 CARDS VISIBLE + SWIPE FOR MORE
+   Desktop is not affected
+========================================================= */
 
-  #trendingGrid {
-    display: grid;
+@media screen and (max-width: 768px) {
 
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
+  /* ================================
+     GLOBAL MOBILE
+  ================================= */
 
-    gap: 8px;
-
-    width: 100%;
+  body {
+    overflow-x: hidden;
+    padding-bottom: 70px;
   }
 
-  #trendingGrid .anime-card {
-    border-radius: 9px;
 
-    border-color:
-      rgba(0, 210, 255, 0.18);
+  /* ================================
+     ALL HOME ANIME SECTIONS
+  ================================= */
 
-    background: #0d0d11;
-
-    box-shadow:
-      0 7px 18px rgba(0, 0, 0, 0.35);
-  }
-
-  #trendingGrid .anime-poster {
-    aspect-ratio: 2 / 3;
-  }
-
-  #trendingGrid .anime-info {
-    padding: 6px 6px 7px;
-  }
-
-  #trendingGrid .anime-title {
-    font-size: 9px;
-    line-height: 1.25;
-
-    -webkit-line-clamp: 1;
-  }
-
-  #trendingGrid .anime-meta {
-    margin-top: 4px;
-
-    font-size: 7px;
-  }
-
-  #trendingGrid .card-rating {
-    top: 4px;
-    left: 4px;
-
-    padding: 3px 4px;
-
-    font-size: 7px;
-  }
-
-  #trendingGrid .card-quality {
-    right: 4px;
-    bottom: 4px;
-
-    padding: 3px 4px;
-
-    font-size: 6px;
-  }
-
-  /* ---------- CONTINUE WATCHING ---------- */
-
-  #continueGrid {
-    display: flex;
-
-    width: 100%;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    gap: 9px;
-
-    padding-bottom: 3px;
-
-    scroll-snap-type: x mandatory;
-
-    scrollbar-width: none;
-  }
-
-  #continueGrid::-webkit-scrollbar {
-    display: none;
-  }
-
-  #continueGrid .anime-card {
-    flex: 0 0 86%;
-
-    min-width: 0;
-
-    border-radius: 12px;
-
-    border-color:
-      rgba(0, 210, 255, 0.22);
-
-    scroll-snap-align: start;
-
-    background:
-      linear-gradient(
-        135deg,
-        rgba(255, 23, 68, 0.05),
-        rgba(0, 210, 255, 0.025)
-      ),
-      #0d0d11;
-  }
-
-  #continueGrid .anime-card > a {
-    display: flex;
-    align-items: stretch;
-  }
-
-  #continueGrid .anime-poster {
-    width: 112px;
-    min-width: 112px;
-
-    aspect-ratio: auto;
-    height: 158px;
-  }
-
-  #continueGrid .anime-info {
-    flex: 1;
-
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    padding: 12px;
-  }
-
-  #continueGrid .anime-title {
-    font-size: 13px;
-
-    -webkit-line-clamp: 2;
-  }
-
-  #continueGrid .anime-meta {
-    margin-top: 6px;
-
-    font-size: 9px;
-  }
-
-  #continueGrid .progress-wrap {
-    margin-top: 12px;
-  }
-
-  #continueGrid .progress-bar {
-    height: 4px;
-  }
-
-  /* ---------- OTHER HOME GRIDS ---------- */
-
+  #trendingGrid,
+  #continueGrid,
   #recentGrid,
   #moviesGrid,
   #hindiGrid,
   #topGrid {
-    display: grid;
 
-    grid-template-columns:
-      repeat(3, minmax(0, 1fr));
+    display: flex !important;
 
-    gap: 8px;
+    flex-direction: row !important;
+
+    flex-wrap: nowrap !important;
+
+    width: 100% !important;
+
+    gap: 8px !important;
+
+    overflow-x: auto !important;
+
+    overflow-y: hidden !important;
+
+    padding: 2px 1px 10px !important;
+
+    margin: 0 !important;
+
+    scroll-snap-type: x mandatory;
+
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
   }
 
+
+  /* Hide scrollbar Chrome / Android */
+  #trendingGrid::-webkit-scrollbar,
+  #continueGrid::-webkit-scrollbar,
+  #recentGrid::-webkit-scrollbar,
+  #moviesGrid::-webkit-scrollbar,
+  #hindiGrid::-webkit-scrollbar,
+  #topGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+
+  /* ================================
+     EXACTLY 3 CARDS VISIBLE
+  ================================= */
+
+  #trendingGrid > .anime-card,
+  #continueGrid > .anime-card,
+  #recentGrid > .anime-card,
+  #moviesGrid > .anime-card,
+  #hindiGrid > .anime-card,
+  #topGrid > .anime-card {
+
+    display: block !important;
+
+    flex: 0 0 calc((100% - 16px) / 3) !important;
+
+    width: calc((100% - 16px) / 3) !important;
+
+    min-width: calc((100% - 16px) / 3) !important;
+
+    max-width: calc((100% - 16px) / 3) !important;
+
+    margin: 0 !important;
+
+    scroll-snap-align: start;
+
+    box-sizing: border-box;
+  }
+
+
+  /* ================================
+     POSTER
+  ================================= */
+
+  #trendingGrid .anime-poster,
+  #continueGrid .anime-poster,
+  #recentGrid .anime-poster,
+  #moviesGrid .anime-poster,
+  #hindiGrid .anime-poster,
+  #topGrid .anime-poster {
+
+    width: 100% !important;
+
+    height: auto !important;
+
+    aspect-ratio: 4 / 5 !important;
+
+    overflow: hidden;
+  }
+
+
+  #trendingGrid .anime-poster img,
+  #continueGrid .anime-poster img,
+  #recentGrid .anime-poster img,
+  #moviesGrid .anime-poster img,
+  #hindiGrid .anime-poster img,
+  #topGrid .anime-poster img {
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    object-fit: cover !important;
+  }
+
+
+  /* ================================
+     CARD
+  ================================= */
+
+  #trendingGrid .anime-card,
+  #continueGrid .anime-card,
   #recentGrid .anime-card,
   #moviesGrid .anime-card,
   #hindiGrid .anime-card,
   #topGrid .anime-card {
-    border-radius: 9px;
+
+    border-radius: 9px !important;
+
+    overflow: hidden !important;
+
+    background: #090b0f !important;
+
+    border: 1px solid rgba(0, 210, 255, 0.22) !important;
+
+    box-sizing: border-box;
+
+    box-shadow:
+      0 5px 14px rgba(0, 0, 0, 0.35);
   }
 
+
+  /* ================================
+     CARD INFO
+  ================================= */
+
+  #trendingGrid .anime-info,
+  #continueGrid .anime-info,
   #recentGrid .anime-info,
   #moviesGrid .anime-info,
   #hindiGrid .anime-info,
   #topGrid .anime-info {
-    padding: 6px;
+
+    padding: 6px !important;
+
+    min-width: 0;
   }
 
+
+  /* ================================
+     TITLE
+  ================================= */
+
+  #trendingGrid .anime-title,
+  #continueGrid .anime-title,
   #recentGrid .anime-title,
   #moviesGrid .anime-title,
   #hindiGrid .anime-title,
   #topGrid .anime-title {
-    font-size: 9px;
 
-    -webkit-line-clamp: 1;
+    font-size: 9px !important;
+
+    line-height: 1.25 !important;
+
+    white-space: nowrap !important;
+
+    overflow: hidden !important;
+
+    text-overflow: ellipsis !important;
+
+    margin: 0 !important;
   }
 
+
+  /* ================================
+     META
+  ================================= */
+
+  #trendingGrid .anime-meta,
+  #continueGrid .anime-meta,
   #recentGrid .anime-meta,
   #moviesGrid .anime-meta,
   #hindiGrid .anime-meta,
   #topGrid .anime-meta {
-    font-size: 7px;
-    margin-top: 4px;
+
+    font-size: 7px !important;
+
+    gap: 3px !important;
+
+    margin-top: 4px !important;
+
+    white-space: nowrap;
   }
 
-  /* ---------- REQUEST ---------- */
 
-  .request-box {
-    margin-top: 26px;
+  /* ================================
+     RATING
+  ================================= */
 
-    padding: 15px;
+  #trendingGrid .card-rating,
+  #continueGrid .card-rating,
+  #recentGrid .card-rating,
+  #moviesGrid .card-rating,
+  #hindiGrid .card-rating,
+  #topGrid .card-rating {
 
-    border-radius: 12px;
+    top: 4px !important;
 
-    border-color:
-      rgba(0, 210, 255, 0.15);
+    left: 4px !important;
+
+    padding: 3px 4px !important;
+
+    font-size: 7px !important;
+
+    border-radius: 4px !important;
   }
 
-  .request-box > div {
-    gap: 10px;
+
+  /* ================================
+     HD BADGE
+  ================================= */
+
+  #trendingGrid .card-quality,
+  #continueGrid .card-quality,
+  #recentGrid .card-quality,
+  #moviesGrid .card-quality,
+  #hindiGrid .card-quality,
+  #topGrid .card-quality {
+
+    right: 4px !important;
+
+    bottom: 4px !important;
+
+    padding: 3px 4px !important;
+
+    font-size: 6px !important;
+
+    border-radius: 3px !important;
   }
 
-  .request-icon {
-    width: 38px;
-    height: 38px;
 
-    font-size: 17px;
+  /* ================================
+     PROGRESS BAR
+  ================================= */
+
+  #trendingGrid .progress-wrap,
+  #continueGrid .progress-wrap,
+  #recentGrid .progress-wrap,
+  #moviesGrid .progress-wrap,
+  #hindiGrid .progress-wrap,
+  #topGrid .progress-wrap {
+
+    margin-top: 5px !important;
   }
 
-  .request-box h2 {
-    font-size: 13px;
+
+  #trendingGrid .progress-bar,
+  #continueGrid .progress-bar,
+  #recentGrid .progress-bar,
+  #moviesGrid .progress-bar,
+  #hindiGrid .progress-bar,
+  #topGrid .progress-bar {
+
+    height: 3px !important;
   }
 
-  .request-box p {
-    font-size: 9px;
-    line-height: 1.4;
+
+  /* ================================
+     SECTION SPACING
+  ================================= */
+
+  .content-section {
+    margin-top: 20px !important;
   }
 
-  .request-box .btn {
-    min-height: 34px;
 
-    padding: 0 12px;
+  /* ================================
+     SECTION TITLE
+  ================================= */
 
-    font-size: 10px;
+  .section-heading {
+    margin-bottom: 9px !important;
   }
 
-  /* ---------- FOOTER ---------- */
-
-  .site-footer {
-    padding:
-      30px 15px
-      90px;
-
-    margin-top: 25px;
+  .section-heading h2 {
+    font-size: 14px !important;
   }
 
-  .footer-logo {
-    font-size: 19px;
+  .section-heading > a {
+    font-size: 8px !important;
   }
 
-  /* =====================================================
-     FIXED MOBILE BOTTOM NAV
-  ===================================================== */
-
-  .mobile-bottom-nav {
-    position: fixed;
-
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 64px;
-
-    z-index: 9999;
-
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-
-    padding:
-      6px 5px
-      env(safe-area-inset-bottom);
-
-    background:
-      linear-gradient(
-        180deg,
-        rgba(9, 9, 12, 0.94),
-        rgba(4, 4, 6, 0.99)
-      );
-
-    border-top:
-      1px solid rgba(0, 210, 255, 0.16);
-
-    box-shadow:
-      0 -8px 25px rgba(0, 0, 0, 0.55);
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-  }
-
-  .mobile-nav-item {
-    min-width: 0;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    gap: 3px;
-
-    color: #777780;
-
-    font-size: 8px;
-    font-weight: 700;
-
-    transition: 0.2s ease;
-  }
-
-  .mobile-nav-icon {
-    display: grid;
-    place-items: center;
-
-    width: 27px;
-    height: 27px;
-
-    border-radius: 9px;
-
-    font-size: 16px;
-
-    color: #898992;
-
-    transition: 0.2s ease;
-  }
-
-  .mobile-nav-item.active {
-    color: #ff3155;
-  }
-
-  .mobile-nav-item.active .mobile-nav-icon {
-    color: #ff1744;
-
-    background:
-      rgba(255, 23, 68, 0.10);
-
-    box-shadow:
-      0 0 13px rgba(255, 23, 68, 0.16);
-  }
-
-  .mobile-nav-item:active {
-    transform: scale(0.92);
-  }
-
-  /* ---------- HIDE OLD MOBILE MENU IF PRESENT ---------- */
-
-  #mobileMenu,
-  #menuOverlay {
-    display: none !important;
-  }
 }
 
 
@@ -2134,154 +2098,33 @@ body.light-theme .anime-card {
    SMALL PHONES
 ========================================================= */
 
-@media (max-width: 390px) {
-
-  .hero {
-    margin-left: 10px;
-    margin-right: 10px;
-  }
-
-  .page-container {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
+@media screen and (max-width: 390px) {
 
   #trendingGrid,
+  #continueGrid,
   #recentGrid,
   #moviesGrid,
   #hindiGrid,
   #topGrid {
-    gap: 6px;
+
+    gap: 6px !important;
   }
 
-  #continueGrid .anime-poster {
-    width: 100px;
-    min-width: 100px;
-    height: 145px;
-  }
 
-  #continueGrid .anime-info {
-    padding: 10px;
-  }
+  #trendingGrid > .anime-card,
+  #continueGrid > .anime-card,
+  #recentGrid > .anime-card,
+  #moviesGrid > .anime-card,
+  #hindiGrid > .anime-card,
+  #topGrid > .anime-card {
 
-  #continueGrid .anime-title {
-    font-size: 12px;
-  }
+    flex-basis: calc((100% - 12px) / 3) !important;
 
-  .mobile-bottom-nav {
-    height: 61px;
-  }
-}
+    width: calc((100% - 12px) / 3) !important;
 
-@media screen and (max-width: 768px) {
+    min-width: calc((100% - 12px) / 3) !important;
 
-  /* =====================================
-     HOME MOBILE - TRENDING ONLY 3 CARDS
-  ===================================== */
-
-  #trendingGrid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 7px !important;
-  }
-
-  #trendingGrid > article:nth-child(n+4) {
-    display: none !important;
-  }
-
-  #trendingGrid > .anime-card:nth-child(n+4) {
-    display: none !important;
-  }
-
-  /* =====================================
-     COMPACT TRENDING CARDS
-  ===================================== */
-
-  #trendingGrid > article {
-    width: 100% !important;
-    min-width: 0 !important;
-  }
-
-  #trendingGrid .anime-poster {
-    width: 100% !important;
-    aspect-ratio: 4 / 5 !important;
-  }
-
-  #trendingGrid .anime-info {
-    padding: 5px !important;
-  }
-
-  #trendingGrid .anime-title {
-    font-size: 9px !important;
-    line-height: 1.2 !important;
-
-    display: -webkit-box !important;
-    -webkit-line-clamp: 1 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-  }
-
-  #trendingGrid .anime-meta {
-    font-size: 7px !important;
-    margin-top: 3px !important;
-  }
-
-  #trendingGrid .card-rating {
-    font-size: 7px !important;
-    padding: 3px 4px !important;
-  }
-
-  #trendingGrid .card-quality {
-    font-size: 6px !important;
-    padding: 3px 4px !important;
-  }
-
-  /* =====================================
-     CONTINUE WATCHING
-  ===================================== */
-
-  #continueSection {
-    display: block !important;
-    margin-top: 22px !important;
-  }
-
-  #continueGrid {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 7px !important;
-  }
-
-  #continueGrid .anime-card {
-    display: block !important;
-    width: 100% !important;
-  }
-
-  #continueGrid .anime-card > a {
-    display: grid !important;
-    grid-template-columns: 90px minmax(0, 1fr) !important;
-    min-height: 70px !important;
-  }
-
-  #continueGrid .anime-poster {
-    width: 90px !important;
-    height: 70px !important;
-    aspect-ratio: auto !important;
-  }
-
-  #continueGrid .anime-info {
-    padding: 7px 9px !important;
-  }
-
-  #continueGrid .anime-title {
-    font-size: 10px !important;
-  }
-
-  #continueGrid .anime-meta {
-    font-size: 7px !important;
-  }
-
-  #continueGrid .progress-wrap {
-    margin-top: 5px !important;
+    max-width: calc((100% - 12px) / 3) !important;
   }
 
 }
