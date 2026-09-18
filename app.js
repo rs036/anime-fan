@@ -350,6 +350,31 @@ const animeData = {
     }
   ],
 
+  upcoming: [
+    { id: "tbate", title: "The Beginning After The End", year: "2025", type: "Coming Soon", rating: "8.5", quality: "NEW", image: "assets/tbate.jpg" },
+    { id: "wind-breaker", title: "Wind Breaker", year: "2024", type: "Coming Soon", rating: "8.2", quality: "NEW", image: "assets/wind-breaker.jpg" },
+    { id: "fire-force", title: "Fire Force", year: "2019", type: "Coming Soon", rating: "7.8", quality: "NEW", image: "assets/fire-force.jpg" }
+  ],
+
+  webseries: [
+    { id: "solo-leveling", title: "Solo Leveling", year: "2024", type: "WebSeries", rating: "8.9", quality: "HD", image: "assets/solo-leveling.jpg" },
+    { id: "jujutsu-kaisen", title: "Jujutsu Kaisen", year: "2020", type: "WebSeries", rating: "8.6", quality: "HD", image: "assets/jujutsu-kaisen.jpg" },
+    { id: "chainsaw-man", title: "Chainsaw Man", year: "2022", type: "WebSeries", rating: "8.4", quality: "HD", image: "assets/chainsaw-man.jpg" }
+  ],
+
+  fanDub: [
+    { id: "one-piece", title: "One Piece", year: "1999", type: "Fan Dub", rating: "9.2", quality: "HD", image: "assets/one-piece.jpg" },
+    { id: "naruto", title: "Naruto", year: "2002", type: "Fan Dub", rating: "8.4", quality: "HD", image: "assets/naruto.jpg" },
+    { id: "black-clover", title: "Black Clover", year: "2017", type: "Fan Dub", rating: "8.2", quality: "HD", image: "assets/black-clover.jpg" }
+  ],
+
+  completed: [
+    { id: "demon-slayer", title: "Demon Slayer", year: "2019", type: "Completed", rating: "8.6", quality: "HD", image: "assets/demon-slayer.jpg" },
+    { id: "naruto", title: "Naruto", year: "2002", type: "Completed", rating: "8.4", quality: "HD", image: "assets/naruto.jpg" },
+    { id: "attack-on-titan", title: "Attack on Titan", year: "2013", type: "Completed", rating: "9.1", quality: "HD", image: "assets/attack-on-titan.jpg" },
+    { id: "death-note", title: "Death Note", year: "2006", type: "Completed", rating: "8.9", quality: "HD", image: "assets/death-note.jpg" }
+  ],
+
   top: [
     {
       id: "attack-on-titan",
@@ -640,6 +665,11 @@ function loadHomePage() {
     "topGrid",
     animeData.top
   );
+
+  renderAnimeList("upcomingGrid", animeData.upcoming);
+  renderAnimeList("webseriesGrid", animeData.webseries);
+  renderAnimeList("fanDubGrid", animeData.fanDub);
+  renderAnimeList("completedGrid", animeData.completed);
 }
 
 
@@ -836,6 +866,11 @@ function loadDetailsPage() {
     `;
   }
 
+  createEpisodeList(
+    "episodes",
+    anime
+  );
+
   setupMyList(
     anime
   );
@@ -846,35 +881,48 @@ function loadDetailsPage() {
    EPISODE LIST
 ========================================================= */
 
-function createEpisodeList(elementId, anime) {
+function createEpisodeList(
+  elementId,
+  anime
+) {
 
-  const container = document.getElementById(elementId);
+  const container =
+    document.getElementById(elementId);
 
   if (!container) return;
 
-  container.innerHTML = "";
+  const total =
+    Number(anime.episodes) || 0;
 
-  const totalEpisodes = Number(anime.episodes || 0);
+  if (!total) {
 
-  if (!totalEpisodes) {
     container.innerHTML = `
       <div class="empty-message">
-        Episodes coming soon.
+        Episodes will be added soon.
       </div>
     `;
+
     return;
   }
 
-  for (let i = 1; i <= totalEpisodes; i++) {
+  const maxForDemo =
+    Math.min(total, 1000);
 
-    const link = document.createElement("a");
+  container.innerHTML = "";
 
-    link.className = "episode-item";
+  for (let i = 1; i <= maxForDemo; i++) {
+
+    const link =
+      document.createElement("a");
 
     link.href =
       `watch.html?anime=${encodeURIComponent(anime.id)}&episode=${i}`;
 
-    link.textContent = `Episode ${i}`;
+    link.textContent =
+      `Episode ${i}`;
+
+    link.className =
+      "episode-item";
 
     container.appendChild(link);
   }
