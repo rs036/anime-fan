@@ -2065,3 +2065,96 @@ body.light-theme .anime-card {
     border-color: rgba(65, 183, 228, .72) !important;
   }
 }
+
+
+/* =========================================================
+   HOME MOBILE FINAL FIX — HERO DOTS + CONTINUE CARDS
+========================================================= */
+@media screen and (max-width: 768px) {
+  .hero {
+    touch-action: pan-y;
+  }
+
+  .hero-dots {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 8px;
+    min-height: 8px;
+    position: relative;
+    z-index: 5;
+  }
+
+  .hero-dot {
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 50%;
+    background: transparent;
+    opacity: .75;
+  }
+
+  .hero-dot.active {
+    width: 7px;
+    height: 7px;
+    background: #ff1744;
+    border-color: #ff1744;
+    box-shadow: 0 0 8px rgba(255,23,68,.75);
+    opacity: 1;
+  }
+
+  /* Continue Watching must use the same 3-card poster layout as Trending. */
+  #continueGrid .anime-card > a {
+    display: block !important;
+    min-height: 0 !important;
+  }
+
+  #continueGrid .anime-poster {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 4 / 5 !important;
+  }
+
+  #continueGrid .anime-poster img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  #continueGrid .card-rating,
+  #continueGrid .card-quality {
+    display: block !important;
+  }
+
+  #continueGrid .anime-info {
+    display: block !important;
+    padding: 6px !important;
+  }
+
+  #continueGrid .anime-title {
+    font-size: 9px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  #continueGrid .anime-meta {
+    font-size: 7px !important;
+    margin-top: 4px !important;
+  }
+
+  #continueGrid .progress-wrap {
+    margin-top: 5px !important;
+  }
+
+  #continueGrid .progress-bar {
+    height: 3px !important;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .hero-dots { display: none !important; }
+}
