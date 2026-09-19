@@ -94,20 +94,14 @@ button {
 .logo {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
-
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: -0.7px;
+  text-decoration: none;
 }
 
-.logo-anime {
-  color: var(--white);
-}
-
-.logo-fan {
-  color: var(--red);
-  text-shadow: 0 0 16px rgba(255, 31, 61, 0.45);
+.logo img {
+  display: block;
+  width: 180px;
+  height: auto;
+  object-fit: contain;
 }
 
 /* =========================
