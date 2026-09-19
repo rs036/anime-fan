@@ -2329,3 +2329,66 @@ body.light-theme .anime-card {
 .site-header .icon-btn:hover {
     color: #ff4444 !important;
 }
+
+/* ===== RED SEARCH + NOTIFICATION ICONS ===== */
+
+.header-icon,
+.search-icon,
+.bell-icon {
+    color: #ff2b2b !important;
+}
+
+/* Search */
+.search-icon {
+    display: block;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #ff2b2b;
+    border-radius: 50%;
+    position: relative;
+}
+
+.search-icon::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 2px;
+    background: #ff2b2b;
+    right: -5px;
+    bottom: -3px;
+    transform: rotate(45deg);
+    border-radius: 2px;
+}
+
+/* Notification */
+.bell-icon {
+    display: block;
+    width: 15px;
+    height: 16px;
+    border: 2px solid #ff2b2b;
+    border-radius: 9px 9px 5px 5px;
+    position: relative;
+    border-bottom: 0;
+}
+
+.bell-icon::before {
+    content: "";
+    position: absolute;
+    width: 19px;
+    height: 2px;
+    background: #ff2b2b;
+    left: -4px;
+    bottom: -2px;
+    border-radius: 2px;
+}
+
+.bell-icon::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 3px;
+    background: #ff2b2b;
+    border-radius: 50%;
+    left: 3px;
+    bottom: -7px;
+}
