@@ -2153,47 +2153,14 @@ body.light-theme .anime-card {
   display: block;
 }
 
-/* ===== HEADER LOGO POSITION ===== */
-
-.site-header .logo {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-shrink: 0;
-    width: auto;
-    height: 42px;
-    margin: 0;
-    padding: 0;
-}
-
-.site-header .logo img {
-    display: block;
-    width: 175px;
-    height: 42px;
-    object-fit: contain;
-    object-position: left center;
-}
-
-/* Mobile header */
-@media (max-width: 768px) {
-    .site-header .logo {
-        height: 38px;
-    }
-
-    .site-header .logo img {
-        width: 145px;
-        height: 38px;
-    }
-}
-
 /* ===== MOBILE HEADER LOGO - 2ND PIC SIZE ===== */
 @media (max-width: 768px) {
 
     .site-header .logo {
         display: flex;
         align-items: center;
-        width: 108px;
-        height: 30px;
+        width: 112px;
+        height: 33px;
         margin: 0;
         padding: 0;
         flex-shrink: 0;
@@ -2201,8 +2168,8 @@ body.light-theme .anime-card {
 
     .site-header .logo img {
         display: block;
-        width: 108px;
-        height: 30px;
+        width: 112px;
+        height: 33px;
         object-fit: contain;
         object-position: left center;
     }
