@@ -2148,4 +2148,39 @@ body.light-theme .anime-card {
     }
 }
 
- 
+/* ===== FINAL ANIME FAN LOGO ===== */
+
+.site-header .logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 105px;
+    height: 34px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.site-header .logo img {
+    display: block;
+    width: 105px;
+    height: 34px;
+    object-fit: contain;
+    object-position: left center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .site-header .logo {
+        width: 105px;
+        height: 34px;
+    }
+
+    .site-header .logo img {
+        width: 105px;
+        height: 34px;
+    }
+}
