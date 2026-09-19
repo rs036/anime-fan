@@ -2306,113 +2306,91 @@ body.light-theme .anime-card {
     }
 }
 
-/* ===== HEADER SEARCH + NOTIFICATION RED ===== */
+/* ===== RED SEARCH + NOTIFICATION ===== */
 
 .site-header .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    display: flex !important;
+    align-items: center !important;
+    gap: 14px !important;
 }
 
 .site-header .icon-btn {
-    color: #ff2b2b !important;
+    width: 38px !important;
+    height: 38px !important;
+    padding: 0 !important;
+    border: 0 !important;
     background: transparent !important;
-    border: none !important;
-    font-size: 20px !important;
-    width: 38px;
-    height: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    color: #ff1744 !important;
 }
 
-.site-header .icon-btn:hover {
-    color: #ff4444 !important;
-}
-
-/* ===== RED SEARCH + NOTIFICATION ICONS ===== */
-
-.header-icon,
-.search-icon,{
-    color: #ff2b2b !important;
-}
-
-/* Search */
+/* SEARCH */
 .search-icon {
-    display: block;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #ff2b2b;
-    border-radius: 50%;
     position: relative;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ff1744;
+    border-radius: 50%;
+    box-sizing: border-box;
 }
 
 .search-icon::after {
     content: "";
     position: absolute;
-    width: 7px;
+    width: 8px;
     height: 2px;
-    background: #ff2b2b;
-    right: -5px;
+    background: #ff1744;
+    border-radius: 2px;
+    right: -6px;
     bottom: -3px;
     transform: rotate(45deg);
-    border-radius: 2px;
 }
 
-/* ===== RED NOTIFICATION BELL ===== */
-
-.notification-btn {
-    position: relative !important;
-    color: #ff2b2b !important;
-    background: transparent !important;
-    border: none !important;
-    width: 38px !important;
-    height: 38px !important;
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-}
-
-.notification-bell {
+/* NOTIFICATION BELL */
+.notification-icon {
     position: relative;
     display: block;
-    width: 17px;
-    height: 18px;
-    border: 2px solid #ff2b2b;
+    width: 18px;
+    height: 19px;
+    border: 2px solid #ff1744;
     border-bottom: 0;
     border-radius: 10px 10px 3px 3px;
     box-sizing: border-box;
 }
 
-.notification-bell::before {
+.notification-icon::before {
     content: "";
     position: absolute;
     left: -4px;
-    bottom: -2px;
-    width: 21px;
+    bottom: -3px;
+    width: 22px;
     height: 2px;
-    background: #ff2b2b;
+    background: #ff1744;
     border-radius: 3px;
 }
 
-.notification-clapper {
+.notification-icon::after {
+    content: "";
     position: absolute;
-    left: 5px;
-    bottom: -6px;
-    width: 5px;
-    height: 5px;
-    background: #ff2b2b;
+    left: 6px;
+    bottom: -7px;
+    width: 4px;
+    height: 4px;
+    background: #ff1744;
     border-radius: 50%;
 }
 
+/* RED NOTIFICATION DOT */
 .notification-dot {
     position: absolute;
-    top: -5px;
-    right: -5px;
+    top: -6px;
+    right: -6px;
     width: 7px;
     height: 7px;
-    background: #ff2b2b;
+    background: #ff1744;
     border: 2px solid #02070b;
     border-radius: 50%;
 }
