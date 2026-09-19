@@ -1463,15 +1463,10 @@ body.light-theme .anime-card {
   }
 
   .header-left { gap: 0; }
-  .logo {
-    font-size: 18px;
-    font-style: italic;
-    letter-spacing: -.6px;
-  }
-  .logo-anime::before { content: '✹ '; color: var(--red); font-style: normal; }
-  .logo-anime { color: #fff; }
-  .logo-fan { color: var(--red); }
-
+  .logo img {
+  width: 145px;
+  height: auto;
+}
   .header-actions { gap: 2px; }
   .icon-btn {
     width: 38px;
