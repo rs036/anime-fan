@@ -2148,39 +2148,43 @@ body.light-theme .anime-card {
     }
 }
 
-/* ===== FINAL ANIME FAN LOGO ===== */
+/* ===== ANIME FAN LOGO - FINAL SIZE ===== */
 
 .site-header .logo {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    width: 105px;
-    height: 34px;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    flex-shrink: 0;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 145px !important;
+    height: 42px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    flex-shrink: 0 !important;
 }
 
 .site-header .logo img {
-    display: block;
-    width: 105px;
-    height: 34px;
-    object-fit: contain;
-    object-position: left center;
-    margin: 0;
-    padding: 0;
+    display: block !important;
+    width: 145px !important;
+    height: auto !important;
+    max-width: 145px !important;
+    max-height: 42px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 /* Mobile */
 @media (max-width: 768px) {
     .site-header .logo {
-        width: 105px;
-        height: 34px;
+        width: 145px !important;
+        height: 42px !important;
     }
 
     .site-header .logo img {
-        width: 105px;
-        height: 34px;
+        width: 145px !important;
+        max-width: 145px !important;
+        height: auto !important;
+        max-height: 42px !important;
     }
 }
