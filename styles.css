@@ -2306,3 +2306,26 @@ body.light-theme .anime-card {
     }
 }
 
+/* ===== HEADER SEARCH + NOTIFICATION RED ===== */
+
+.site-header .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-header .icon-btn {
+    color: #ff2b2b !important;
+    background: transparent !important;
+    border: none !important;
+    font-size: 20px !important;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.site-header .icon-btn:hover {
+    color: #ff4444 !important;
+}
