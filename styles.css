@@ -2305,3 +2305,35 @@ body.light-theme .anime-card {
         display: none !important;
     }
 }
+
+/* ===== FOOTER LOGO FIX ===== */
+
+.site-footer .footer-logo {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 0 auto 15px !important;
+    padding: 0 !important;
+}
+
+.site-footer .footer-logo img {
+    display: block !important;
+    width: 180px !important;
+    height: auto !important;
+    max-width: 80% !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    margin: 0 auto !important;
+}
+
+
+/* ===== FOOTER LOGO MOBILE ===== */
+
+@media (max-width: 768px) {
+    .site-footer .footer-logo img {
+        width: 170px !important;
+        max-width: 75% !important;
+        height: auto !important;
+    }
+}
