@@ -2238,29 +2238,70 @@ body.light-theme .anime-card {
     }
 }
 
-/* ===== LOGO LEFT OF SEARCH ===== */
+/* ===== FINAL MOBILE HEADER POSITION ===== */
 
 @media (max-width: 768px) {
+
     .site-header {
+        position: relative !important;
         display: flex !important;
         align-items: center !important;
-        justify-content: space-between !important;
+        justify-content: flex-end !important;
+        height: 62px !important;
+        padding: 0 14px !important;
     }
 
+    /* LOGO - LEFT */
     .site-header .logo {
-        order: 1 !important;
-        margin-left: 0 !important;
-        margin-right: auto !important;
+        position: absolute !important;
+        left: 14px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+
+        display: flex !important;
+        align-items: center !important;
+
+        width: 150px !important;
+        height: 50px !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+
+        z-index: 10 !important;
+    }
+
+    .site-header .logo img {
+        display: block !important;
+
+        width: 150px !important;
+        height: auto !important;
+
+        max-width: none !important;
+        max-height: 50px !important;
+
+        object-fit: contain !important;
+        object-position: left center !important;
+
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* SEARCH + MOON - RIGHT */
+    .site-header .header-actions {
+        position: absolute !important;
+        right: 12px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+
+        margin: 0 !important;
+        z-index: 20 !important;
     }
 
     .site-header .desktop-nav {
         display: none !important;
-    }
-
-    .site-header .header-actions {
-        order: 2 !important;
-        display: flex !important;
-        align-items: center !important;
-        margin-left: auto !important;
     }
 }
