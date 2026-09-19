@@ -2333,8 +2333,7 @@ body.light-theme .anime-card {
 /* ===== RED SEARCH + NOTIFICATION ICONS ===== */
 
 .header-icon,
-.search-icon,
-.bell-icon {
+.search-icon,{
     color: #ff2b2b !important;
 }
 
@@ -2360,35 +2359,60 @@ body.light-theme .anime-card {
     border-radius: 2px;
 }
 
-/* Notification */
-.bell-icon {
-    display: block;
-    width: 15px;
-    height: 16px;
-    border: 2px solid #ff2b2b;
-    border-radius: 9px 9px 5px 5px;
-    position: relative;
-    border-bottom: 0;
+/* ===== RED NOTIFICATION BELL ===== */
+
+.notification-btn {
+    position: relative !important;
+    color: #ff2b2b !important;
+    background: transparent !important;
+    border: none !important;
+    width: 38px !important;
+    height: 38px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
-.bell-icon::before {
+.notification-bell {
+    position: relative;
+    display: block;
+    width: 17px;
+    height: 18px;
+    border: 2px solid #ff2b2b;
+    border-bottom: 0;
+    border-radius: 10px 10px 3px 3px;
+    box-sizing: border-box;
+}
+
+.notification-bell::before {
     content: "";
     position: absolute;
-    width: 19px;
-    height: 2px;
-    background: #ff2b2b;
     left: -4px;
     bottom: -2px;
-    border-radius: 2px;
+    width: 21px;
+    height: 2px;
+    background: #ff2b2b;
+    border-radius: 3px;
 }
 
-.bell-icon::after {
-    content: "";
+.notification-clapper {
     position: absolute;
-    width: 4px;
-    height: 3px;
+    left: 5px;
+    bottom: -6px;
+    width: 5px;
+    height: 5px;
     background: #ff2b2b;
     border-radius: 50%;
-    left: 3px;
-    bottom: -7px;
+}
+
+.notification-dot {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 7px;
+    height: 7px;
+    background: #ff2b2b;
+    border: 2px solid #02070b;
+    border-radius: 50%;
 }
