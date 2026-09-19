@@ -2237,3 +2237,30 @@ body.light-theme .anime-card {
         max-height: none !important;
     }
 }
+
+/* ===== LOGO LEFT OF SEARCH ===== */
+
+@media (max-width: 768px) {
+    .site-header {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+
+    .site-header .logo {
+        order: 1 !important;
+        margin-left: 0 !important;
+        margin-right: auto !important;
+    }
+
+    .site-header .desktop-nav {
+        display: none !important;
+    }
+
+    .site-header .header-actions {
+        order: 2 !important;
+        display: flex !important;
+        align-items: center !important;
+        margin-left: auto !important;
+    }
+}
