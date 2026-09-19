@@ -88,23 +88,6 @@ button {
 }
 
 /* =========================
-   LOGO
-========================= */
-
-.logo {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.logo img {
-  display: block;
-  width: 180px;
-  height: auto;
-  object-fit: contain;
-}
-
-/* =========================
    NAVIGATION
 ========================= */
 
@@ -756,10 +739,6 @@ button {
     gap: 8px;
   }
 
-  .logo {
-    font-size: 20px;
-  }
-
   .desktop-nav {
     display: none;
   }
@@ -1020,10 +999,6 @@ button {
 
   .site-header {
     padding: 0 9px;
-  }
-
-  .logo {
-    font-size: 18px;
   }
 
   .hero {
@@ -1462,11 +1437,6 @@ body.light-theme .anime-card {
     box-shadow: 0 4px 18px rgba(0,0,0,.35);
   }
 
-  .header-left { gap: 0; }
-  .logo img {
-  width: 145px;
-  height: auto;
-}
   .header-actions { gap: 2px; }
   .icon-btn {
     width: 38px;
@@ -2153,29 +2123,6 @@ body.light-theme .anime-card {
   display: block;
 }
 
-/* ===== MOBILE HEADER LOGO - 2ND PIC SIZE ===== */
-@media (max-width: 768px) {
-
-    .site-header .logo {
-        display: flex;
-        align-items: center;
-        width: 112px;
-        height: 33px;
-        margin: 0;
-        padding: 0;
-        flex-shrink: 0;
-    }
-
-    .site-header .logo img {
-        display: block;
-        width: 112px;
-        height: 33px;
-        object-fit: contain;
-        object-position: left center;
-    }
-
-}
-
 /* ===== FOOTER LOGO POSITION ===== */
 
 .footer-logo {
@@ -2201,57 +2148,4 @@ body.light-theme .anime-card {
     }
 }
 
-/* ===== FINAL ANIME FAN HEADER LOGO ===== */
-
-.site-header .logo {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    width: 105px !important;
-    min-width: 105px !important;
-    max-width: 105px !important;
-    height: 34px !important;
-    min-height: 34px !important;
-    max-height: 34px !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    flex-shrink: 0 !important;
-}
-
-.site-header .logo img {
-    display: block !important;
-    width: 105px !important;
-    min-width: 105px !important;
-    max-width: 105px !important;
-    height: 34px !important;
-    min-height: 34px !important;
-    max-height: 34px !important;
-    object-fit: contain !important;
-    object-position: left center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-
-/* MOBILE — 2nd screenshot jaisa compact */
-@media (max-width: 768px) {
-
-    .site-header .logo {
-        width: 105px !important;
-        min-width: 105px !important;
-        max-width: 105px !important;
-        height: 34px !important;
-        min-height: 34px !important;
-        max-height: 34px !important;
-    }
-
-    .site-header .logo img {
-        width: 105px !important;
-        min-width: 105px !important;
-        max-width: 105px !important;
-        height: 34px !important;
-        min-height: 34px !important;
-        max-height: 34px !important;
-    }
-}
+ 
