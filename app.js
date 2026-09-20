@@ -760,14 +760,38 @@ function loadHomePage() {
   );
 
   renderAnimeList(
-    "continueGrid",
-    animeData.continueWatching
-  );
+  "continueGrid",
+  animeData.continueWatching
+);
 
-  renderAnimeList(
-    "recentGrid",
-    animeData.recentlyAdded
-  );
+
+/* ONGOING ANIME */
+const ongoingAnime = [
+  ...animeData.trending
+].filter(anime => anime.status === "Ongoing");
+
+renderAnimeList(
+  "ongoingGrid",
+  ongoingAnime
+);
+
+
+/* LATEST EPISODE */
+const latestEpisode = [
+  ...animeData.continueWatching
+];
+
+renderAnimeList(
+  "latestEpisodeGrid",
+  latestEpisode
+);
+
+
+/* RECENTLY ADDED */
+renderAnimeList(
+  "recentGrid",
+  animeData.recentlyAdded
+);
 
   renderAnimeList(
     "moviesGrid",
