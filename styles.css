@@ -2779,3 +2779,104 @@ body.light-theme .anime-card {
   }
 
 }
+
+/* =========================================================
+   ANIME POSTER — 1024 x 1448 FULL IMAGE
+   NO CROP
+========================================================= */
+
+@media (max-width: 768px) {
+
+  /* All anime cards */
+  .anime-card .anime-poster {
+    width: 100% !important;
+    aspect-ratio: 1024 / 1448 !important;
+    height: auto !important;
+
+    overflow: hidden !important;
+    background: #05090d !important;
+  }
+
+  /* Poster image */
+  .anime-card .anime-poster img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: contain !important;
+    object-position: center !important;
+
+    display: block !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    transform: none !important;
+  }
+
+  /* Prevent old hover zoom */
+  .anime-card:hover .anime-poster img {
+    transform: none !important;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  #trendingGrid,
+  #continueGrid,
+  #ongoingGrid,
+  #latestEpisodeGrid,
+  #recentGrid,
+  #upcomingGrid,
+  #webseriesGrid,
+  #moviesGrid,
+  #hindiGrid,
+  #fanDubGrid,
+  #topGrid,
+  #completedGrid {
+
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+
+    gap: 8px !important;
+
+    scrollbar-width: none !important;
+  }
+
+  #trendingGrid::-webkit-scrollbar,
+  #continueGrid::-webkit-scrollbar,
+  #ongoingGrid::-webkit-scrollbar,
+  #latestEpisodeGrid::-webkit-scrollbar,
+  #recentGrid::-webkit-scrollbar,
+  #upcomingGrid::-webkit-scrollbar,
+  #webseriesGrid::-webkit-scrollbar,
+  #moviesGrid::-webkit-scrollbar,
+  #hindiGrid::-webkit-scrollbar,
+  #fanDubGrid::-webkit-scrollbar,
+  #topGrid::-webkit-scrollbar,
+  #completedGrid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  #trendingGrid .anime-card,
+  #continueGrid .anime-card,
+  #ongoingGrid .anime-card,
+  #latestEpisodeGrid .anime-card,
+  #recentGrid .anime-card,
+  #upcomingGrid .anime-card,
+  #webseriesGrid .anime-card,
+  #moviesGrid .anime-card,
+  #hindiGrid .anime-card,
+  #fanDubGrid .anime-card,
+  #topGrid .anime-card,
+  #completedGrid .anime-card {
+
+    flex: 0 0 calc((100% - 16px) / 3) !important;
+
+    width: calc((100% - 16px) / 3) !important;
+    min-width: calc((100% - 16px) / 3) !important;
+    max-width: calc((100% - 16px) / 3) !important;
+  }
+
+}
