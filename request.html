@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+  <title>Request Anime - Anime Fan</title>
+
+  <link
+    rel="stylesheet"
+    href="styles (2).css">
+
+  <style>
+
+    /* =====================================================
+       REQUEST PAGE
+    ===================================================== */
+
+    .request-page {
+      min-height: calc(100vh - 72px);
+
+      padding:
+        35px
+        28px
+        80px;
+    }
+
+
+    .request-container {
+
+      width: min(1050px, 100%);
+
+      margin: 0 auto;
+
+      display: grid;
+
+      grid-template-columns:
+        42% 58%;
+
+      overflow: hidden;
+
+      border-radius: 24px;
+
+      border:
+        1px solid
+        rgba(0,190,255,.30);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(8,17,27,.98),
+          rgba(3,8,14,.98)
+        );
+
+      box-shadow:
+        0 25px 80px rgba(0,0,0,.55),
+        0 0 35px rgba(0,180,255,.07);
+
+    }
+
+
+    /* LEFT */
+
+    .request-visual {
+
+      min-height: 620px;
+
+      padding: 40px 30px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: flex-end;
+
+      position: relative;
+
+      overflow: hidden;
+
+      background:
+
+        linear-gradient(
+          0deg,
+          rgba(3,7,12,.98) 3%,
+          rgba(3,7,12,.35) 55%,
+          rgba(3,7,12,.05) 100%
+        ),
+
+        url("assets/hero.jpg");
+
+      background-size: cover;
+
+      background-position: center;
+
+    }
+
+
+    .request-visual::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,0,50,.16),
+          transparent 45%,
+          rgba(0,190,255,.10)
+        );
+
+      pointer-events: none;
+
+    }
+
+
+    .request-label {
+
+      position: relative;
+
+      z-index: 2;
+
+      display: inline-flex;
+
+      width: fit-content;
+
+      padding:
+        7px 12px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(255,23,68,.16);
+
+      border:
+        1px solid
+        rgba(255,23,68,.45);
+
+      color: #fff;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      letter-spacing: .8px;
+
+    }
+
+
+    .request-visual h1 {
+
+      position: relative;
+
+      z-index: 2;
+
+      margin:
+        13px 0 8px;
+
+      color: #fff;
+
+      font-size: 42px;
+
+      line-height: 1;
+
+    }
+
+
+    .request-visual h1 span {
+
+      color: #ff1744;
+
+      text-shadow:
+        0 0 18px
+        rgba(255,23,68,.35);
+
+    }
+
+
+    .request-visual p {
+
+      position: relative;
+
+      z-index: 2;
+
+      max-width: 340px;
+
+      margin: 0;
+
+      color: #aab4bc;
+
+      font-size: 13px;
+
+      line-height: 1.6;
+
+    }
+
+
+    /* RIGHT FORM */
+
+    .request-form-area {
+
+      padding: 42px;
+
+    }
+
+
+    .request-form-head {
+
+      margin-bottom: 28px;
+
+    }
+
+
+    .request-form-head small {
+
+      color: #00bfff;
+
+      font-size: 10px;
+
+      font-weight: 700;
+
+      letter-spacing: 1.2px;
+
+    }
+
+
+    .request-form-head h2 {
+
+      margin: 7px 0;
+
+      color: #fff;
+
+      font-size: 28px;
+
+    }
+
+
+    .request-form-head p {
+
+      margin: 0;
+
+      color: #7e8a94;
+
+      font-size: 12px;
+
+    }
+
+
+    .request-field {
+
+      margin-bottom: 20px;
+
+    }
+
+
+    .request-field label {
+
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #dbe2e7;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+    }
+
+
+    .request-input,
+    .request-textarea {
+
+      width: 100%;
+
+      box-sizing: border-box;
+
+      border:
+        1px solid
+        rgba(0,180,255,.25);
+
+      border-radius: 10px;
+
+      background:
+        rgba(2,10,17,.85);
+
+      color: #fff;
+
+      outline: none;
+
+      font-family: inherit;
+
+      transition: .2s ease;
+
+    }
+
+
+    .request-input {
+
+      height: 48px;
+
+      padding: 0 14px;
+
+    }
+
+
+    .request-textarea {
+
+      min-height: 150px;
+
+      padding: 14px;
+
+      resize: vertical;
+
+      line-height: 1.5;
+
+    }
+
+
+    .request-input:focus,
+    .request-textarea:focus {
+
+      border-color: #ff1744;
+
+      box-shadow:
+        0 0 0 3px
+        rgba(255,23,68,.08),
+        0 0 18px
+        rgba(255,23,68,.08);
+
+    }
+
+
+    .request-submit {
+
+      width: 100%;
+
+      height: 50px;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      cursor: pointer;
+
+      color: #fff;
+
+      font-weight: 800;
+
+      font-size: 13px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ff1744,
+          #d90032
+        );
+
+      box-shadow:
+        0 10px 28px
+        rgba(255,23,68,.22);
+
+      transition: .2s ease;
+
+    }
+
+
+    .request-submit:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 14px 32px
+        rgba(255,23,68,.30);
+
+    }
+
+
+    /* FEATURES */
+
+    .request-features {
+
+      width: min(1050px,100%);
+
+      margin:
+        18px auto 0;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3,1fr);
+
+      gap: 12px;
+
+    }
+
+
+    .request-feature {
+
+      padding: 17px;
+
+      border:
+        1px solid
+        rgba(0,180,255,.16);
+
+      border-radius: 12px;
+
+      background:
+        rgba(5,13,21,.72);
+
+    }
+
+
+    .request-feature strong {
+
+      display: block;
+
+      color: #fff;
+
+      font-size: 11px;
+
+      margin-bottom: 4px;
+
+    }
+
+
+    .request-feature span {
+
+      color: #6f7c85;
+
+      font-size: 9px;
+
+    }
+
+
+    /* SUCCESS */
+
+    .request-success {
+
+      display: none;
+
+      text-align: center;
+
+      padding: 25px 10px;
+
+    }
+
+
+    .request-success.show {
+
+      display: block;
+
+    }
+
+
+    .success-icon {
+
+      width: 55px;
+      height: 55px;
+
+      margin: 0 auto 15px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: rgba(0,210,130,.12);
+
+      border:
+        1px solid
+        rgba(0,210,130,.4);
+
+      color: #00d889;
+
+      font-size: 25px;
+
+    }
+
+
+    .request-success h2 {
+
+      color: #fff;
+
+      margin: 0 0 7px;
+
+      font-size: 21px;
+
+    }
+
+
+    .request-success p {
+
+      color: #7d8992;
+
+      font-size: 11px;
+
+      line-height: 1.5;
+
+    }
+
+
+    /* MOBILE */
+
+    @media (max-width: 768px) {
+
+      .request-page {
+
+        padding:
+          14px
+          12px
+          85px;
+
+      }
+
+
+      .request-container {
+
+        display: block;
+
+        border-radius: 16px;
+
+      }
+
+
+      .request-visual {
+
+        min-height: 230px;
+
+        padding:
+          22px
+          18px;
+
+        justify-content: flex-end;
+
+        background-position:
+          center center;
+
+      }
+
+
+      .request-visual h1 {
+
+        font-size: 29px;
+
+      }
+
+
+      .request-visual p {
+
+        font-size: 10px;
+
+        max-width: 280px;
+
+      }
+
+
+      .request-form-area {
+
+        padding: 22px 16px;
+
+      }
+
+
+      .request-form-head {
+
+        margin-bottom: 20px;
+
+      }
+
+
+      .request-form-head h2 {
+
+        font-size: 21px;
+
+      }
+
+
+      .request-input {
+
+        height: 45px;
+
+      }
+
+
+      .request-textarea {
+
+        min-height: 120px;
+
+      }
+
+
+      .request-features {
+
+        grid-template-columns: 1fr;
+
+        margin-top: 12px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- HEADER -->
+
+  <header class="site-header">
+
+    <a
+      href="index.html"
+      class="logo">
+
+      <img
+        src="assets/logo-header-transparent.png"
+        alt="Anime Fan">
+
+    </a>
+
+
+    <nav class="desktop-nav">
+
+      <a
+        href="index.html"
+        class="nav-btn">
+
+        <span class="nav-icon">⌂</span>
+        <span>Home</span>
+
+      </a>
+
+      <a
+        href="anime.html"
+        class="nav-btn">
+
+        <span class="nav-icon">♧</span>
+        <span>Anime</span>
+
+      </a>
+
+      <a
+        href="movies.html"
+        class="nav-btn">
+
+        <span class="nav-icon">▣</span>
+        <span>Movies</span>
+
+      </a>
+
+      <a
+        href="genres.html"
+        class="nav-btn">
+
+        <span class="nav-icon">▦</span>
+        <span>Genres</span>
+
+      </a>
+
+      <a
+        href="#"
+        class="nav-btn">
+
+        <span class="nav-icon">✦</span>
+        <span>Trending</span>
+
+      </a>
+
+      <a
+        href="my-list.html"
+        class="nav-btn">
+
+        <span class="nav-icon">♡</span>
+        <span>My List</span>
+
+      </a>
+
+      <a
+        href="request.html"
+        class="nav-btn request-nav-btn active">
+
+        <span class="nav-icon">➤</span>
+        <span>Request</span>
+
+      </a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+      <button
+        class="icon-btn"
+        id="searchBtn"
+        aria-label="Search">
+
+        <svg
+          class="header-icon search-svg"
+          viewBox="0 0 24 24"
+          fill="none">
+
+          <circle
+            cx="11"
+            cy="11"
+            r="7.5"/>
+
+          <path
+            d="M16.5 16.5L22 22"/>
+
+        </svg>
+
+      </button>
+
+
+      <button
+        class="icon-btn"
+        id="notificationBtn"
+        aria-label="Notifications">
+
+        <svg
+          class="header-icon notification-svg"
+          viewBox="0 0 24 24"
+          fill="none">
+
+          <path
+            d="M18 9C18 5.69 15.31 3 12 3C8.69 3 6 5.69 6 9V14L4 17H20L18 14V9Z"/>
+
+          <path
+            d="M10 20C10.45 20.61 11.15 21 12 21C12.85 21 13.55 20.61 14 20"/>
+
+        </svg>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- REQUEST PAGE -->
+
+  <main class="request-page">
+
+    <div class="request-container">
+
+
+      <section class="request-visual">
+
+        <div class="request-label">
+          📩 REQUEST ANIME
+        </div>
+
+        <h1>
+          Request <span>Anime</span>
+        </h1>
+
+        <p>
+          Didn't find your favorite anime?
+          Tell us and we'll add it to Anime Fan.
+        </p>
+
+      </section>
+
+
+      <section class="request-form-area">
+
+        <div class="request-form-head">
+
+          <small>
+            ANIME FAN • REQUEST CENTER
+          </small>
+
+          <h2>
+            Tell us what you want to watch
+          </h2>
+
+          <p>
+            Send us an anime request and we'll review it.
+          </p>
+
+        </div>
+
+
+        <form id="animeRequestForm">
+
+
+          <div class="request-field">
+
+            <label>
+              Anime Name
+            </label>
+
+            <input
+              class="request-input"
+              id="requestAnimeName"
+              type="text"
+              placeholder="e.g. One Piece"
+              required>
+
+          </div>
+
+
+          <div class="request-field">
+
+            <label>
+              Your Request Message
+            </label>
+
+            <textarea
+              class="request-textarea"
+              id="requestMessage"
+              placeholder="Tell us more about the anime, dub language, etc..."
+              required></textarea>
+
+          </div>
+
+
+          <button
+            class="request-submit"
+            type="submit">
+
+            ➤ Submit Request
+
+          </button>
+
+        </form>
+
+
+        <div
+          class="request-success"
+          id="requestSuccess">
+
+          <div class="success-icon">
+            ✓
+          </div>
+
+          <h2>
+            Request Submitted!
+          </h2>
+
+          <p>
+            Your anime request has been saved.
+            We'll review it soon!
+          </p>
+
+        </div>
+
+      </section>
+
+    </div>
+
+
+    <div class="request-features">
+
+      <div class="request-feature">
+
+        <strong>
+          ⭐ Your Request Matters
+        </strong>
+
+        <span>
+          Help us grow our anime library.
+        </span>
+
+      </div>
+
+
+      <div class="request-feature">
+
+        <strong>
+          ⚡ Quick Support
+        </strong>
+
+        <span>
+          We review all requests.
+        </span>
+
+      </div>
+
+
+      <div class="request-feature">
+
+        <strong>
+          ♥ More Anime
+        </strong>
+
+        <span>
+          Your favorite anime, our priority.
+        </span>
+
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- MOBILE BOTTOM NAV -->
+
+  <nav
+    class="mobile-bottom-nav"
+    aria-label="Mobile navigation">
+
+    <a
+      href="index.html"
+      class="mobile-nav-item">
+
+      <span class="mobile-nav-icon">⌂</span>
+      <span>Home</span>
+
+    </a>
+
+    <a
+      href="anime.html"
+      class="mobile-nav-item">
+
+      <span class="mobile-nav-icon">◈</span>
+      <span>Anime</span>
+
+    </a>
+
+    <a
+      href="movies.html"
+      class="mobile-nav-item">
+
+      <span class="mobile-nav-icon">▣</span>
+      <span>Movies</span>
+
+    </a>
+
+    <a
+      href="genres.html"
+      class="mobile-nav-item">
+
+      <span class="mobile-nav-icon">☷</span>
+      <span>Genres</span>
+
+    </a>
+
+    <a
+      href="my-list.html"
+      class="mobile-nav-item">
+
+      <span class="mobile-nav-icon">♡</span>
+      <span>My List</span>
+
+    </a>
+
+  </nav>
+
+
+  <script src="app.js"></script>
+
+
+  <script>
+
+    /* REQUEST SUBMIT */
+
+    document
+      .getElementById("animeRequestForm")
+      ?.addEventListener(
+        "submit",
+        function(event) {
+
+          event.preventDefault();
+
+          const name =
+            document
+              .getElementById(
+                "requestAnimeName"
+              )
+              .value
+              .trim();
+
+          const message =
+            document
+              .getElementById(
+                "requestMessage"
+              )
+              .value
+              .trim();
+
+
+          if (!name || !message) {
+            return;
+          }
+
+
+          const requests =
+            JSON.parse(
+              localStorage.getItem(
+                "animeFanRequests"
+              ) || "[]"
+            );
+
+
+          requests.push({
+
+            id: Date.now(),
+
+            animeName: name,
+
+            message: message,
+
+            date:
+              new Date()
+                .toLocaleString(),
+
+            status:
+              "Pending"
+
+          });
+
+
+          localStorage.setItem(
+            "animeFanRequests",
+            JSON.stringify(requests)
+          );
+
+
+          document
+            .getElementById(
+              "animeRequestForm"
+            )
+            .style.display =
+              "none";
+
+
+          document
+            .getElementById(
+              "requestSuccess"
+            )
+            .classList.add("show");
+
+        }
+      );
+
+  </script>
+
+</body>
+
+</html>
