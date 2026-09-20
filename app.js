@@ -1634,3 +1634,265 @@ document.addEventListener(
 
   }
 );
+
+/* =========================================================
+   HERO CAROUSEL — INFINITE LOOP
+   10 SLIDES
+   10 -> 1
+   1 -> 10
+========================================================= */
+
+(function initHeroCarousel() {
+
+  const hero = document.getElementById("heroSection");
+  const dotsBox = document.getElementById("heroDots");
+
+  if (!hero || !dotsBox || typeof animeData === "undefined") {
+    return;
+  }
+
+  /* 10 unique anime */
+  const heroSlides = [
+    ...(animeData.trending || []),
+    ...(animeData.recentlyAdded || [])
+  ]
+    .filter((anime, index, arr) =>
+      arr.findIndex(x => x.id === anime.id) === index
+    )
+    .slice(0, 10);
+
+  if (!heroSlides.length) return;
+
+  let heroIndex = 0;
+  let heroDotStart = 0;
+
+  const heroBadge = hero.querySelector(".hero-badge");
+  const heroTitle = hero.querySelector("h1");
+  const heroMeta = hero.querySelector(".hero-meta");
+  const heroDescription = hero.querySelector(".hero-description");
+  const heroWatchBtn = document.getElementById("heroWatchBtn");
+
+  /* ---------------------------------------------------------
+     DOT WINDOW
+  --------------------------------------------------------- */
+
+  function updateDotWindow() {
+
+    const total = heroSlides.length;
+
+    if (total <= 5) {
+      heroDotStart = 0;
+      return;
+    }
+
+    if (heroIndex > heroDotStart + 4) {
+      heroDotStart = heroIndex - 4;
+    }
+
+    if (heroIndex < heroDotStart) {
+      heroDotStart = heroIndex;
+    }
+
+    if (heroDotStart > total - 5) {
+      heroDotStart = total - 5;
+    }
+
+    if (heroDotStart < 0) {
+      heroDotStart = 0;
+    }
+  }
+
+
+  /* ---------------------------------------------------------
+     RENDER DOTS
+  --------------------------------------------------------- */
+
+  function renderDots() {
+
+    updateDotWindow();
+
+    dotsBox.innerHTML = "";
+
+    const total = heroSlides.length;
+
+    for (let i = 0; i < Math.min(5, total); i++) {
+
+      const actualIndex =
+        (heroDotStart + i) % total;
+
+      const dot = document.createElement("button");
+
+      dot.type = "button";
+      dot.className = "hero-dot";
+
+      dot.setAttribute(
+        "aria-label",
+        `Go to anime ${actualIndex + 1}`
+      );
+
+      if (actualIndex === heroIndex) {
+        dot.classList.add("active");
+        dot.setAttribute("aria-current", "true");
+      }
+
+      dot.addEventListener("click", () => {
+
+        heroIndex = actualIndex;
+
+        renderHero();
+
+      });
+
+      dotsBox.appendChild(dot);
+    }
+  }
+
+
+  /* ---------------------------------------------------------
+     RENDER HERO
+  --------------------------------------------------------- */
+
+  function renderHero() {
+
+    const anime = heroSlides[heroIndex];
+
+    if (!anime) return;
+
+    hero.style.setProperty(
+      "--hero-image",
+      `url("${anime.image}")`
+    );
+
+    if (heroTitle) {
+      heroTitle.textContent = anime.title;
+    }
+
+    if (heroMeta) {
+      heroMeta.innerHTML =
+        `⭐ ${anime.rating || ""} &nbsp; • &nbsp; ` +
+        `${anime.year || ""} &nbsp; • &nbsp; ` +
+        `${anime.type || "TV"} &nbsp; • &nbsp; ` +
+        `${anime.episodes ? anime.episodes + " Episodes" : ""}`;
+    }
+
+    if (heroDescription) {
+      heroDescription.textContent =
+        anime.description || "";
+    }
+
+    if (heroBadge) {
+      heroBadge.textContent =
+        `🔥 #${heroIndex + 1} TRENDING`;
+    }
+
+    if (heroWatchBtn && anime.id) {
+      heroWatchBtn.href =
+        `anime-detail.html?anime=${encodeURIComponent(anime.id)}`;
+    }
+
+    renderDots();
+  }
+
+
+  /* ---------------------------------------------------------
+     NEXT
+     10 -> 1
+  --------------------------------------------------------- */
+
+  window.nextHero = function () {
+
+    heroIndex++;
+
+    if (heroIndex >= heroSlides.length) {
+      heroIndex = 0;
+      heroDotStart = 0;
+    }
+
+    renderHero();
+  };
+
+
+  /* ---------------------------------------------------------
+     PREVIOUS
+     1 -> 10
+  --------------------------------------------------------- */
+
+  window.prevHero = function () {
+
+    heroIndex--;
+
+    if (heroIndex < 0) {
+      heroIndex = heroSlides.length - 1;
+      heroDotStart = Math.max(0, heroSlides.length - 5);
+    }
+
+    renderHero();
+  };
+
+
+  /* ---------------------------------------------------------
+     SWIPE
+  --------------------------------------------------------- */
+
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  hero.addEventListener(
+    "touchstart",
+    function (e) {
+
+      touchStartX =
+        e.changedTouches[0].screenX;
+
+    },
+    { passive: true }
+  );
+
+
+  hero.addEventListener(
+    "touchend",
+    function (e) {
+
+      touchEndX =
+        e.changedTouches[0].screenX;
+
+      const distance =
+        touchStartX - touchEndX;
+
+      if (Math.abs(distance) < 45) return;
+
+      if (distance > 0) {
+        nextHero();
+      } else {
+        prevHero();
+      }
+
+    },
+    { passive: true }
+  );
+
+
+  /* ---------------------------------------------------------
+     AUTO SLIDE
+  --------------------------------------------------------- */
+
+  let heroTimer =
+    setInterval(nextHero, 5000);
+
+
+  hero.addEventListener("mouseenter", () => {
+    clearInterval(heroTimer);
+  });
+
+
+  hero.addEventListener("mouseleave", () => {
+    heroTimer =
+      setInterval(nextHero, 5000);
+  });
+
+
+  /* FIRST LOAD */
+
+  renderHero();
+
+})();
