@@ -17,6 +17,52 @@
 
   <style>
 
+.request-type-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.request-type-option {
+  position: relative;
+
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+
+  padding: 13px 14px;
+
+  border: 1px solid rgba(0,190,255,.22);
+  border-radius: 10px;
+
+  background: rgba(2,10,17,.85);
+
+  color: #9da9b2 !important;
+
+  cursor: pointer;
+
+  transition: .2s ease;
+}
+
+.request-type-option input {
+  accent-color: #ff1744;
+}
+
+.request-type-option:has(input:checked) {
+  border-color: #ff1744;
+  background: rgba(255,23,68,.10);
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(255,23,68,.08);
+}
+
+@media (max-width: 768px) {
+
+  .request-type-options {
+    grid-template-columns: 1fr 1fr;
+  }
+
+}
+    
     /* =====================================================
        REQUEST PAGE
     ===================================================== */
@@ -1021,6 +1067,11 @@
               .value
               .trim();
 
+          const animeType =
+  document.querySelector(
+    'input[name="animeType"]:checked'
+  )?.value || "WebSeries";
+
 
           if (!name || !message) {
             return;
@@ -1037,20 +1088,19 @@
 
           requests.push({
 
-            id: Date.now(),
+  id: Date.now(),
 
-            animeName: name,
+  animeName: name,
 
-            message: message,
+  animeType: animeType,
 
-            date:
-              new Date()
-                .toLocaleString(),
+  message: message,
 
-            status:
-              "Pending"
+  date: new Date().toLocaleString(),
 
-          });
+  status: "Pending"
+
+});
 
 
           localStorage.setItem(
