@@ -2449,3 +2449,124 @@ body.light-theme .anime-card {
         height: 7px !important;
     }
 }
+
+/* =========================================================
+   DESKTOP NAV — ANIME FAN BUTTON STYLE
+========================================================= */
+
+@media (min-width: 769px) {
+
+  .site-header {
+    gap: 18px !important;
+    padding: 0 28px !important;
+  }
+
+  .desktop-nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 7px !important;
+    flex: 1 !important;
+  }
+
+  .desktop-nav .nav-btn {
+    height: 38px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 7px !important;
+
+    padding: 0 13px !important;
+
+    color: #d7d7d7 !important;
+    background: rgba(8, 15, 21, 0.72) !important;
+
+    border: 1px solid rgba(36, 166, 220, 0.18) !important;
+    border-radius: 11px !important;
+
+    font-size: 12px !important;
+    font-weight: 600 !important;
+
+    white-space: nowrap !important;
+
+    transition:
+      background .2s ease,
+      border-color .2s ease,
+      color .2s ease,
+      box-shadow .2s ease,
+      transform .2s ease !important;
+  }
+
+  .desktop-nav .nav-icon {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    width: 16px !important;
+    height: 16px !important;
+
+    font-size: 14px !important;
+    line-height: 1 !important;
+    color: #dce5ea !important;
+  }
+
+  /* HOVER */
+
+  .desktop-nav .nav-btn:hover {
+    color: #fff !important;
+    background: rgba(255, 31, 61, 0.10) !important;
+    border-color: rgba(255, 31, 61, 0.55) !important;
+
+    box-shadow:
+      0 0 12px rgba(255, 31, 61, 0.16) !important;
+
+    transform: translateY(-1px) !important;
+  }
+
+  .desktop-nav .nav-btn:hover .nav-icon {
+    color: #ff1f3d !important;
+  }
+
+  /* ACTIVE HOME BUTTON */
+
+  .desktop-nav .nav-btn.active {
+    color: #fff !important;
+
+    background:
+      linear-gradient(
+        135deg,
+        #ff1f3d,
+        #e51232
+      ) !important;
+
+    border-color: #ff1f3d !important;
+
+    box-shadow:
+      0 0 14px rgba(255, 31, 61, 0.35),
+      inset 0 1px 0 rgba(255,255,255,.12) !important;
+  }
+
+  .desktop-nav .nav-btn.active .nav-icon {
+    color: #fff !important;
+  }
+
+  /* REMOVE OLD UNDERLINE */
+
+  .desktop-nav .nav-btn.active::after {
+    display: none !important;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE — KEEP BOTTOM NAV, HIDE DESKTOP BUTTONS
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .desktop-nav {
+    display: none !important;
+  }
+
+}
