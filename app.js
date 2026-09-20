@@ -1794,40 +1794,24 @@ document.addEventListener(
   }
 
 
-  /* ---------------------------------------------------------
-     NEXT
-     10 -> 1
-  --------------------------------------------------------- */
+  /* NEXT — 10 ke baad 1 */
+window.nextHero = function () {
 
-  window.nextHero = function () {
+  heroIndex = (heroIndex + 1) % heroSlides.length;
 
-    heroIndex++;
-
-    if (heroIndex >= heroSlides.length) {
-      heroIndex = 0;
-      heroDotStart = 0;
-    }
-
-    renderHero();
-  };
+  renderHero();
+};
 
 
-  /* ---------------------------------------------------------
-     PREVIOUS
-     1 -> 10
-  --------------------------------------------------------- */
+/* PREVIOUS — 1 se pehle 10 */
+window.prevHero = function () {
 
-  window.prevHero = function () {
+  heroIndex =
+    (heroIndex - 1 + heroSlides.length) %
+    heroSlides.length;
 
-    heroIndex--;
-
-    if (heroIndex < 0) {
-      heroIndex = heroSlides.length - 1;
-      heroDotStart = Math.max(0, heroSlides.length - 5);
-    }
-
-    renderHero();
-  };
+  renderHero();
+};
 
 
   /* ---------------------------------------------------------
