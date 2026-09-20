@@ -2570,3 +2570,112 @@ body.light-theme .anime-card {
   }
 
 }
+
+/* =========================================================
+   ONGOING + LATEST EPISODE
+   SAME MOBILE 3-CARD HORIZONTAL STYLE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  #ongoingGrid,
+  #latestEpisodeGrid {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+
+    width: 100% !important;
+
+    gap: 8px !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    padding: 2px 1px 10px !important;
+    margin: 0 !important;
+
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none;
+  }
+
+  #ongoingGrid::-webkit-scrollbar,
+  #latestEpisodeGrid::-webkit-scrollbar {
+    display: none;
+  }
+
+  #ongoingGrid > .anime-card,
+  #latestEpisodeGrid > .anime-card {
+    display: block !important;
+
+    flex: 0 0 calc((100% - 16px) / 3) !important;
+
+    width: calc((100% - 16px) / 3) !important;
+    min-width: calc((100% - 16px) / 3) !important;
+    max-width: calc((100% - 16px) / 3) !important;
+
+    margin: 0 !important;
+
+    scroll-snap-align: start;
+
+    border-radius: 9px !important;
+    overflow: hidden !important;
+
+    background: #090b0f !important;
+
+    border: 1px solid rgba(0, 210, 255, 0.22) !important;
+
+    box-shadow: 0 5px 14px rgba(0,0,0,.35);
+  }
+
+  #ongoingGrid .anime-poster,
+  #latestEpisodeGrid .anime-poster {
+    width: 100% !important;
+    height: auto !important;
+
+    aspect-ratio: 4 / 5 !important;
+
+    overflow: hidden !important;
+  }
+
+  #ongoingGrid .anime-poster img,
+  #latestEpisodeGrid .anime-poster img {
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+
+    display: block !important;
+  }
+
+  #ongoingGrid .anime-info,
+  #latestEpisodeGrid .anime-info {
+    padding: 6px !important;
+    min-width: 0 !important;
+  }
+
+  #ongoingGrid .anime-title,
+  #latestEpisodeGrid .anime-title {
+    font-size: 9px !important;
+    line-height: 1.25 !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+
+    margin: 0 !important;
+  }
+
+  #ongoingGrid .anime-meta,
+  #latestEpisodeGrid .anime-meta {
+    font-size: 7px !important;
+
+    gap: 3px !important;
+    margin-top: 4px !important;
+
+    white-space: nowrap !important;
+    overflow: hidden !important;
+  }
+
+}
