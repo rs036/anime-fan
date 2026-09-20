@@ -2696,3 +2696,86 @@ body.light-theme .anime-card {
   }
 
 }
+
+/* =========================================================
+   MOBILE POSTER FIX
+   FULL IMAGE — NO CROPPING
+========================================================= */
+
+@media screen and (max-width: 768px) {
+
+  #trendingGrid .anime-poster,
+  #continueGrid .anime-poster,
+  #ongoingGrid .anime-poster,
+  #latestEpisodeGrid .anime-poster,
+  #recentGrid .anime-poster,
+  #upcomingGrid .anime-poster,
+  #webseriesGrid .anime-poster,
+  #moviesGrid .anime-poster,
+  #hindiGrid .anime-poster,
+  #fanDubGrid .anime-poster,
+  #topGrid .anime-poster,
+  #completedGrid .anime-poster {
+
+    width: 100% !important;
+
+    /* Original anime poster shape */
+    aspect-ratio: 2 / 3 !important;
+
+    height: auto !important;
+
+    overflow: hidden !important;
+
+    background: #05090d !important;
+  }
+
+
+  #trendingGrid .anime-poster img,
+  #continueGrid .anime-poster img,
+  #ongoingGrid .anime-poster img,
+  #latestEpisodeGrid .anime-poster img,
+  #recentGrid .anime-poster img,
+  #upcomingGrid .anime-poster img,
+  #webseriesGrid .anime-poster img,
+  #moviesGrid .anime-poster img,
+  #hindiGrid .anime-poster img,
+  #fanDubGrid .anime-poster img,
+  #topGrid .anime-poster img,
+  #completedGrid .anime-poster img {
+
+    width: 100% !important;
+
+    height: 100% !important;
+
+    display: block !important;
+
+    /* FULL IMAGE */
+    object-fit: contain !important;
+
+    object-position: center center !important;
+
+    background: #05090d !important;
+
+    transform: none !important;
+  }
+
+
+  /* Don't zoom image on mobile */
+
+  #trendingGrid .anime-card:hover .anime-poster img,
+  #continueGrid .anime-card:hover .anime-poster img,
+  #ongoingGrid .anime-card:hover .anime-poster img,
+  #latestEpisodeGrid .anime-card:hover .anime-poster img,
+  #recentGrid .anime-card:hover .anime-poster img,
+  #upcomingGrid .anime-card:hover .anime-poster img,
+  #webseriesGrid .anime-card:hover .anime-poster img,
+  #moviesGrid .anime-card:hover .anime-poster img,
+  #hindiGrid .anime-card:hover .anime-poster img,
+  #fanDubGrid .anime-card:hover .anime-poster img,
+  #topGrid .anime-card:hover .anime-poster img,
+  #completedGrid .anime-card:hover .anime-poster img {
+
+    transform: none !important;
+  }
+
+}
