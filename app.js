@@ -1880,3 +1880,216 @@ window.prevHero = function () {
   renderHero();
 
 })();
+
+/* =========================================================
+   NOTIFICATIONS
+========================================================= */
+
+function setupNotifications() {
+
+  const button =
+    document.getElementById("notificationBtn");
+
+  if (!button) return;
+
+
+  /* Create panel only once */
+
+  let panel =
+    document.getElementById("notificationPanel");
+
+
+  if (!panel) {
+
+    panel =
+      document.createElement("div");
+
+    panel.id =
+      "notificationPanel";
+
+    panel.className =
+      "notification-panel";
+
+
+    panel.innerHTML = `
+
+      <div class="notification-head">
+
+        <h3>
+          Notifications
+        </h3>
+
+        <button
+          type="button"
+          id="clearNotifications">
+          Clear
+        </button>
+
+      </div>
+
+
+      <div id="notificationList">
+
+        <div class="notification-item">
+
+          <div class="notification-icon">
+            🔥
+          </div>
+
+          <div class="notification-content">
+
+            <strong>
+              New Anime Added
+            </strong>
+
+            <p>
+              New anime has been added to Anime Fan.
+            </p>
+
+            <span class="notification-time">
+              Just now
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="notification-item">
+
+          <div class="notification-icon">
+            ▶
+          </div>
+
+          <div class="notification-content">
+
+            <strong>
+              Latest Episode
+            </strong>
+
+            <p>
+              A new episode is available to watch.
+            </p>
+
+            <span class="notification-time">
+              1 hour ago
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="notification-item">
+
+          <div class="notification-icon">
+            📩
+          </div>
+
+          <div class="notification-content">
+
+            <strong>
+              Request Anime
+            </strong>
+
+            <p>
+              You can request your favorite anime.
+            </p>
+
+            <span class="notification-time">
+              Today
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+    `;
+
+
+    document.body.appendChild(panel);
+
+  }
+
+
+  function closeNotification() {
+
+    panel.classList.remove("open");
+
+  }
+
+
+  button.addEventListener(
+    "click",
+    function(event) {
+
+      event.stopPropagation();
+
+      panel.classList.toggle("open");
+
+    }
+  );
+
+
+  panel.addEventListener(
+    "click",
+    function(event) {
+
+      event.stopPropagation();
+
+    }
+  );
+
+
+  document.addEventListener(
+    "click",
+    closeNotification
+  );
+
+
+  const clearBtn =
+    document.getElementById(
+      "clearNotifications"
+    );
+
+
+  clearBtn?.addEventListener(
+    "click",
+    function() {
+
+      const list =
+        document.getElementById(
+          "notificationList"
+        );
+
+      if (!list) return;
+
+      list.innerHTML = `
+
+        <div class="notification-empty">
+
+          ✓ You're all caught up
+
+        </div>
+
+      `;
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   INIT NOTIFICATIONS
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
+
+    setupNotifications();
+
+  }
+);
