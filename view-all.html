@@ -11,6 +11,420 @@
   >
 
   <link rel="stylesheet" href="styles.css">
+
+<style>
+/* =========================================================
+   VIEW ALL / BROWSE PAGE — SELF CONTAINED FIX
+   ========================================================= */
+
+.browse-mobile-header{
+  display:none !important;
+}
+
+.browse-page{
+  width:100%;
+  max-width:1440px;
+  margin:0 auto;
+  padding:0 24px 90px;
+  box-sizing:border-box;
+}
+
+.browse-hero{
+  position:relative;
+  min-height:210px;
+  display:flex;
+  align-items:center;
+  padding:42px 34px;
+  margin:18px 0 0;
+  border:1px solid rgba(0,210,255,.22);
+  border-radius:18px;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 78% 35%,rgba(255,31,61,.16),transparent 35%),
+    linear-gradient(135deg,#070a0f,#0b0e13);
+  box-sizing:border-box;
+}
+
+.browse-hero::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.25),transparent 70%);
+}
+
+.browse-hero > div{
+  position:relative;
+  z-index:1;
+}
+
+.browse-hero-icon{
+  display:block;
+  width:44px;
+  height:44px;
+  margin-bottom:8px;
+}
+
+.browse-hero-icon::before{
+  content:"👑";
+  font-size:38px;
+}
+
+.browse-hero h1{
+  margin:0;
+  color:#fff;
+  font-size:48px;
+  line-height:1.05;
+  font-weight:900;
+  letter-spacing:-1.5px;
+}
+
+.browse-hero h1::first-letter{
+  color:#ff1744;
+}
+
+.browse-hero p{
+  margin:12px 0 0;
+  color:#9da3ad;
+  font-size:18px;
+}
+
+.browse-filter-wrap{
+  width:100%;
+  margin:18px 0 0;
+  overflow:hidden;
+}
+
+.browse-filters{
+  display:flex;
+  gap:10px;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:4px 2px 10px;
+  scrollbar-width:none;
+  -webkit-overflow-scrolling:touch;
+}
+
+.browse-filters::-webkit-scrollbar{
+  display:none;
+}
+
+.browse-filters a{
+  flex:0 0 auto;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:0 19px;
+  border:1px solid rgba(0,210,255,.32);
+  border-radius:999px;
+  color:#d7dbe1;
+  background:#080d12;
+  text-decoration:none;
+  font-size:14px;
+  font-weight:700;
+  white-space:nowrap;
+  box-sizing:border-box;
+}
+
+.browse-filters a.active{
+  color:#fff;
+  background:#ff1744;
+  border-color:#ff1744;
+  box-shadow:0 7px 22px rgba(255,23,68,.22);
+}
+
+.browse-content{
+  width:100%;
+  margin-top:22px;
+}
+
+.browse-heading{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:0 0 16px;
+}
+
+.browse-heading > div{
+  display:flex;
+  align-items:center;
+  min-width:0;
+  gap:10px;
+}
+
+.browse-heading .section-line{
+  flex:0 0 4px;
+}
+
+.browse-heading h2{
+  margin:0;
+  color:#fff;
+  font-size:27px;
+  line-height:1.2;
+  font-weight:900;
+}
+
+.browse-count{
+  flex:0 0 auto;
+  color:#8e96a2;
+  font-size:14px;
+}
+
+.browse-grid{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:16px;
+  width:100%;
+  align-items:start;
+}
+
+.browse-grid .anime-card{
+  min-width:0;
+  width:100%;
+  margin:0;
+  padding:0;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(0,210,255,.22);
+  border-radius:10px;
+  background:#090b0f;
+  box-shadow:0 7px 20px rgba(0,0,0,.28);
+}
+
+.browse-grid .anime-card > a{
+  display:block;
+  color:inherit;
+  text-decoration:none;
+}
+
+.browse-grid .anime-poster{
+  position:relative;
+  width:100%;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  background:#0b0e13;
+}
+
+.browse-grid .anime-poster img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+}
+
+.browse-grid .anime-info{
+  width:100%;
+  padding:9px;
+  box-sizing:border-box;
+}
+
+.browse-grid .anime-title{
+  display:block;
+  width:100%;
+  margin:0;
+  color:#fff;
+  font-size:14px;
+  line-height:1.3;
+  font-weight:800;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.browse-grid .anime-meta{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-top:6px;
+  color:#8d96a2;
+  font-size:11px;
+  white-space:nowrap;
+  overflow:hidden;
+}
+
+.browse-grid .card-rating{
+  position:absolute;
+  top:7px;
+  left:7px;
+  z-index:2;
+  padding:4px 6px;
+  border-radius:5px;
+  color:#111;
+  background:rgba(255,255,255,.92);
+  font-size:10px;
+  font-weight:900;
+}
+
+.browse-grid .card-quality{
+  position:absolute;
+  right:7px;
+  bottom:7px;
+  z-index:2;
+  padding:4px 6px;
+  border-radius:5px;
+  color:#fff;
+  background:#ff1744;
+  font-size:9px;
+  font-weight:900;
+}
+
+.no-more-content{
+  display:block;
+  width:100%;
+  margin-top:35px;
+  padding:24px 10px 10px;
+  box-sizing:border-box;
+  text-align:center;
+  color:#6e7680;
+  font-size:13px;
+}
+
+.browse-empty{
+  grid-column:1/-1;
+  padding:55px 20px;
+  border:1px dashed rgba(0,210,255,.2);
+  border-radius:12px;
+  text-align:center;
+  color:#7f8792;
+  background:#080b0f;
+}
+
+@media (max-width:1200px){
+  .browse-grid{
+    grid-template-columns:repeat(5,minmax(0,1fr));
+  }
+}
+
+@media (max-width:768px){
+  .browse-page{
+    padding:0 14px 88px;
+  }
+
+  .browse-hero{
+    min-height:180px;
+    margin:0;
+    padding:28px 16px;
+    border-radius:0 0 16px 16px;
+    border-left:0;
+    border-right:0;
+  }
+
+  .browse-hero-icon{
+    width:34px;
+    height:34px;
+  }
+
+  .browse-hero-icon::before{
+    font-size:30px;
+  }
+
+  .browse-hero h1{
+    font-size:38px;
+    letter-spacing:-1px;
+  }
+
+  .browse-hero p{
+    max-width:280px;
+    margin-top:10px;
+    font-size:14px;
+    line-height:1.4;
+  }
+
+  .browse-filter-wrap{
+    margin-top:12px;
+  }
+
+  .browse-filters{
+    gap:8px;
+    padding-bottom:7px;
+  }
+
+  .browse-filters a{
+    min-height:42px;
+    padding:0 16px;
+    font-size:13px;
+  }
+
+  .browse-content{
+    margin-top:20px;
+  }
+
+  .browse-heading{
+    margin-bottom:13px;
+  }
+
+  .browse-heading h2{
+    font-size:22px;
+  }
+
+  .browse-count{
+    font-size:12px;
+  }
+
+  .browse-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+
+  .browse-grid .anime-info{
+    padding:8px;
+  }
+
+  .browse-grid .anime-title{
+    font-size:12px;
+  }
+
+  .browse-grid .anime-meta{
+    font-size:9px;
+    gap:4px;
+  }
+
+  .browse-grid .card-rating{
+    top:6px;
+    left:6px;
+    font-size:9px;
+  }
+
+  .browse-grid .card-quality{
+    right:6px;
+    bottom:6px;
+    font-size:8px;
+  }
+
+  .no-more-content{
+    margin-top:28px;
+    padding-bottom:18px;
+  }
+}
+
+@media (max-width:390px){
+  .browse-page{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .browse-grid{
+    gap:9px;
+  }
+
+  .browse-grid .anime-info{
+    padding:7px;
+  }
+
+  .browse-grid .anime-title{
+    font-size:11px;
+  }
+
+  .browse-grid .anime-meta{
+    font-size:8px;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -85,10 +499,6 @@
     </div>
 
   </header>
-
-
-  <!-- MOBILE TOP -->
-  <div class="browse-mobile-header">
 
 
 
@@ -351,6 +761,217 @@
 
 
   <script src="app.js"></script>
+
+<script>
+/* =========================================================
+   VIEW ALL / BROWSE PAGE LOGIC
+   Uses the existing animeData from app.js.
+   ========================================================= */
+
+(function () {
+  "use strict";
+
+  const params = new URLSearchParams(window.location.search);
+  const requested = (params.get("category") || "all").toLowerCase();
+
+  const config = {
+    all:       { title: "All Anime",       subtitle: "Browse all available anime", countMax: Infinity },
+    trending:  { title: "Trending Now",    subtitle: "Top Trending Anime Right Now", countMax: 100 },
+    ongoing:   { title: "Ongoing Anime",   subtitle: "Anime currently ongoing", countMax: Infinity },
+    latest:    { title: "Latest Episode",  subtitle: "Latest available episodes", countMax: Infinity },
+    recent:    { title: "Recently Added",  subtitle: "Recently added anime", countMax: Infinity },
+    upcoming:  { title: "Upcoming",        subtitle: "Upcoming anime", countMax: Infinity },
+    tv:        { title: "TV Series",       subtitle: "Anime TV series", countMax: Infinity },
+    movies:    { title: "Anime Movies",    subtitle: "Anime movies", countMax: Infinity },
+    hindi:     { title: "Hindi Dub",       subtitle: "Hindi dubbed anime", countMax: Infinity },
+    fandub:    { title: "Fan Dub",         subtitle: "Fan dubbed anime", countMax: Infinity },
+    "top-rated": { title: "Top Rated",     subtitle: "Top Rated Anime", countMax: 100 },
+    completed: { title: "Completed Anime",  subtitle: "Completed anime", countMax: Infinity }
+  };
+
+  const active = config[requested] || config.all;
+
+  const titleEl = document.getElementById("browseTitle");
+  const subtitleEl = document.getElementById("browseSubtitle");
+  const listTitleEl = document.getElementById("browseListTitle");
+  const countEl = document.getElementById("browseCount");
+  const grid = document.getElementById("browseGrid");
+  const noMore = document.getElementById("noMoreContent");
+
+  if (!titleEl || !subtitleEl || !listTitleEl || !countEl || !grid) return;
+
+  titleEl.textContent = active.title;
+  subtitleEl.textContent = active.subtitle;
+  listTitleEl.textContent = active.title;
+
+  document.title = active.title + " - Anime Fan";
+
+  document.querySelectorAll("#browseFilters a").forEach(function (link) {
+    const linkUrl = new URL(link.href, window.location.href);
+    const category = (linkUrl.searchParams.get("category") || "all").toLowerCase();
+
+    if (category === requested || (requested === "all" && category === "all")) {
+      link.classList.add("active");
+    }
+  });
+
+  function unique(items) {
+    const seen = new Set();
+    return (items || []).filter(function (item) {
+      if (!item || !item.id || seen.has(item.id)) return false;
+      seen.add(item.id);
+      return true;
+    });
+  }
+
+  function getSource() {
+    const data = window.animeData || (typeof animeData !== "undefined" ? animeData : null);
+
+    if (!data) return [];
+
+    const all = unique([
+      ...(data.trending || []),
+      ...(data.continueWatching || []),
+      ...(data.recentlyAdded || []),
+      ...(data.movies || []),
+      ...(data.hindi || []),
+      ...(data.top || [])
+    ]);
+
+    switch (requested) {
+      case "all":
+        return all;
+
+      case "trending":
+        return unique(data.trending).slice(0, 100);
+
+      case "ongoing":
+        return all.filter(function (a) {
+          return String(a.status || "").toLowerCase() === "ongoing";
+        });
+
+      case "latest":
+        return unique(data.recentlyAdded || []);
+
+      case "recent":
+        return unique(data.recentlyAdded || []);
+
+      case "upcoming":
+        /* No upcoming collection exists in the current app.js data. */
+        return [];
+
+      case "tv":
+        return all.filter(function (a) {
+          return String(a.type || "").toLowerCase() === "tv";
+        });
+
+      case "movies":
+        return unique(data.movies || []);
+
+      case "hindi":
+        return all.filter(function (a) {
+          const type = String(a.type || "").toLowerCase();
+          const languages = (a.languages || []).map(function (x) {
+            return String(x).toLowerCase();
+          });
+          return type === "hindi dub" || languages.includes("hindi dub");
+        });
+
+      case "fandub":
+        return all.filter(function (a) {
+          const type = String(a.type || "").toLowerCase();
+          const languages = (a.languages || []).map(function (x) {
+            return String(x).toLowerCase();
+          });
+          return type === "fan dub" || languages.includes("fan dub");
+        });
+
+      case "top-rated":
+        return all
+          .slice()
+          .sort(function (a, b) {
+            return Number(b.rating || 0) - Number(a.rating || 0);
+          })
+          .slice(0, 100);
+
+      case "completed":
+        return all.filter(function (a) {
+          return String(a.status || "").toLowerCase() === "completed";
+        });
+
+      default:
+        return all;
+    }
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? "" : value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function card(anime) {
+    const id = encodeURIComponent(anime.id || anime.title || "");
+    const title = escapeHtml(anime.title || "Unknown Anime");
+    const image = escapeHtml(anime.image || "");
+    const rating = escapeHtml(anime.rating || "N/A");
+    const quality = escapeHtml(anime.quality || "HD");
+    const year = escapeHtml(anime.year || "");
+    const type = escapeHtml(anime.type || "TV");
+
+    return `
+      <article class="anime-card">
+        <a href="details.html?anime=${id}">
+          <div class="anime-poster">
+            <img
+              src="${image}"
+              alt="${title}"
+              loading="lazy"
+              decoding="async"
+              onerror="this.onerror=null;this.src='assets/logo-header-transparent.png';"
+            >
+            <span class="card-rating">⭐ ${rating}</span>
+            <span class="card-quality">${quality}</span>
+          </div>
+
+          <div class="anime-info">
+            <h3 class="anime-title">${title}</h3>
+            <div class="anime-meta">
+              <span>${year}</span>
+              <span>•</span>
+              <span>${type}</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    `;
+  }
+
+  const source = getSource().slice(0, active.countMax);
+
+  countEl.textContent = source.length + (source.length === 1 ? " Anime" : " Anime");
+
+  if (!source.length) {
+    grid.innerHTML = `
+      <div class="browse-empty">
+        <strong>No Anime Found</strong>
+        <div style="margin-top:6px">
+          Content will appear here when it is added.
+        </div>
+      </div>
+    `;
+  } else {
+    grid.innerHTML = source.map(card).join("");
+  }
+
+  if (noMore) {
+    noMore.textContent = "— No More Content —";
+  }
+})();
+</script>
 
 </body>
   </html>
