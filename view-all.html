@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Anime Fan - Browse</title>
+
   <meta
     name="description"
     content="Browse anime on Anime Fan."
@@ -12,432 +13,829 @@
 
   <link rel="stylesheet" href="styles.css">
 
-<style>
-/* =========================================================
-   VIEW ALL / BROWSE PAGE — SELF CONTAINED FIX
-   ========================================================= */
+  <!-- =====================================================
+       VIEW ALL FIX
+       Original design preserved
+       ===================================================== -->
+  <style>
 
-.browse-mobile-header{
-  display:none !important;
-}
+    /* ==============================
+       MOBILE TOP HIDDEN
+       ============================== */
 
-.browse-page{
-  width:100%;
-  max-width:1440px;
-  margin:0 auto;
-  padding:0 24px 90px;
-  box-sizing:border-box;
-}
+    .browse-mobile-header{
+      display:none !important;
+    }
 
-.browse-hero{
-  position:relative;
-  min-height:210px;
-  display:flex;
-  align-items:center;
-  padding:42px 34px;
-  margin:18px 0 0;
-  border:1px solid rgba(0,210,255,.22);
-  border-radius:18px;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 78% 35%,rgba(255,31,61,.16),transparent 35%),
-    linear-gradient(135deg,#070a0f,#0b0e13);
-  box-sizing:border-box;
-}
 
-.browse-hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  background:linear-gradient(90deg,rgba(0,0,0,.25),transparent 70%);
-}
+    /* ==============================
+       BROWSE PAGE
+       ============================== */
 
-.browse-hero > div{
-  position:relative;
-  z-index:1;
-}
+    .browse-page{
+      width:100%;
+      max-width:1440px;
+      margin:0 auto;
+      padding:0 24px 100px;
+      box-sizing:border-box;
+    }
 
-.browse-hero-icon{
-  display:block;
-  width:44px;
-  height:44px;
-  margin-bottom:8px;
-}
 
-.browse-hero-icon::before{
-  content:"👑";
-  font-size:38px;
-}
+    /* ==============================
+       HERO
+       ============================== */
 
-.browse-hero h1{
-  margin:0;
-  color:#fff;
-  font-size:48px;
-  line-height:1.05;
-  font-weight:900;
-  letter-spacing:-1.5px;
-}
+    .browse-hero{
+      position:relative;
+      min-height:210px;
 
-.browse-hero h1::first-letter{
-  color:#ff1744;
-}
+      display:flex;
+      align-items:center;
 
-.browse-hero p{
-  margin:12px 0 0;
-  color:#9da3ad;
-  font-size:18px;
-}
+      margin:18px 0 0;
+      padding:42px 34px;
 
-.browse-filter-wrap{
-  width:100%;
-  margin:18px 0 0;
-  overflow:hidden;
-}
+      border:1px solid rgba(0,210,255,.22);
+      border-radius:18px;
 
-.browse-filters{
-  display:flex;
-  gap:10px;
-  width:100%;
-  overflow-x:auto;
-  overflow-y:hidden;
-  padding:4px 2px 10px;
-  scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
-}
+      overflow:hidden;
 
-.browse-filters::-webkit-scrollbar{
-  display:none;
-}
+      background:
+        radial-gradient(
+          circle at 78% 35%,
+          rgba(255,31,61,.16),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          #070a0f,
+          #0b0e13
+        );
 
-.browse-filters a{
-  flex:0 0 auto;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:44px;
-  padding:0 19px;
-  border:1px solid rgba(0,210,255,.32);
-  border-radius:999px;
-  color:#d7dbe1;
-  background:#080d12;
-  text-decoration:none;
-  font-size:14px;
-  font-weight:700;
-  white-space:nowrap;
-  box-sizing:border-box;
-}
+      box-sizing:border-box;
+    }
 
-.browse-filters a.active{
-  color:#fff;
-  background:#ff1744;
-  border-color:#ff1744;
-  box-shadow:0 7px 22px rgba(255,23,68,.22);
-}
+    .browse-hero::after{
+      content:"";
 
-.browse-content{
-  width:100%;
-  margin-top:22px;
-}
+      position:absolute;
+      inset:0;
 
-.browse-heading{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin:0 0 16px;
-}
+      pointer-events:none;
 
-.browse-heading > div{
-  display:flex;
-  align-items:center;
-  min-width:0;
-  gap:10px;
-}
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,.25),
+          transparent 70%
+        );
+    }
 
-.browse-heading .section-line{
-  flex:0 0 4px;
-}
+    .browse-hero > div{
+      position:relative;
+      z-index:1;
+    }
 
-.browse-heading h2{
-  margin:0;
-  color:#fff;
-  font-size:27px;
-  line-height:1.2;
-  font-weight:900;
-}
+    .browse-hero-icon{
+      display:block;
 
-.browse-count{
-  flex:0 0 auto;
-  color:#8e96a2;
-  font-size:14px;
-}
+      width:44px;
+      height:44px;
 
-.browse-grid{
-  display:grid;
-  grid-template-columns:repeat(7,minmax(0,1fr));
-  gap:16px;
-  width:100%;
-  align-items:start;
-}
+      margin-bottom:8px;
+    }
 
-.browse-grid .anime-card{
-  min-width:0;
-  width:100%;
-  margin:0;
-  padding:0;
-  position:relative;
-  overflow:hidden;
-  border:1px solid rgba(0,210,255,.22);
-  border-radius:10px;
-  background:#090b0f;
-  box-shadow:0 7px 20px rgba(0,0,0,.28);
-}
+    .browse-hero-icon::before{
+      content:"👑";
 
-.browse-grid .anime-card > a{
-  display:block;
-  color:inherit;
-  text-decoration:none;
-}
+      font-size:38px;
+    }
 
-.browse-grid .anime-poster{
-  position:relative;
-  width:100%;
-  aspect-ratio:2/3;
-  overflow:hidden;
-  background:#0b0e13;
-}
+    .browse-hero h1{
+      margin:0;
 
-.browse-grid .anime-poster img{
-  display:block;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:center;
-}
+      color:#fff;
 
-.browse-grid .anime-info{
-  width:100%;
-  padding:9px;
-  box-sizing:border-box;
-}
+      font-size:48px;
+      line-height:1.05;
 
-.browse-grid .anime-title{
-  display:block;
-  width:100%;
-  margin:0;
-  color:#fff;
-  font-size:14px;
-  line-height:1.3;
-  font-weight:800;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
+      font-weight:900;
 
-.browse-grid .anime-meta{
-  display:flex;
-  align-items:center;
-  gap:6px;
-  margin-top:6px;
-  color:#8d96a2;
-  font-size:11px;
-  white-space:nowrap;
-  overflow:hidden;
-}
+      letter-spacing:-1.5px;
+    }
 
-.browse-grid .card-rating{
-  position:absolute;
-  top:7px;
-  left:7px;
-  z-index:2;
-  padding:4px 6px;
-  border-radius:5px;
-  color:#111;
-  background:rgba(255,255,255,.92);
-  font-size:10px;
-  font-weight:900;
-}
+    .browse-hero h1::first-letter{
+      color:#ff1744;
+    }
 
-.browse-grid .card-quality{
-  position:absolute;
-  right:7px;
-  bottom:7px;
-  z-index:2;
-  padding:4px 6px;
-  border-radius:5px;
-  color:#fff;
-  background:#ff1744;
-  font-size:9px;
-  font-weight:900;
-}
+    .browse-hero p{
+      margin:12px 0 0;
 
-.no-more-content{
-  display:block;
-  width:100%;
-  margin-top:35px;
-  padding:24px 10px 10px;
-  box-sizing:border-box;
-  text-align:center;
-  color:#6e7680;
-  font-size:13px;
-}
+      color:#9da3ad;
 
-.browse-empty{
-  grid-column:1/-1;
-  padding:55px 20px;
-  border:1px dashed rgba(0,210,255,.2);
-  border-radius:12px;
-  text-align:center;
-  color:#7f8792;
-  background:#080b0f;
-}
+      font-size:18px;
+      line-height:1.4;
+    }
 
-@media (max-width:1200px){
-  .browse-grid{
-    grid-template-columns:repeat(5,minmax(0,1fr));
-  }
-}
 
-@media (max-width:768px){
-  .browse-page{
-    padding:0 14px 88px;
-  }
+    /* ==============================
+       FILTERS
+       ============================== */
 
-  .browse-hero{
-    min-height:180px;
-    margin:0;
-    padding:28px 16px;
-    border-radius:0 0 16px 16px;
-    border-left:0;
-    border-right:0;
-  }
+    .browse-filter-wrap{
+      width:100%;
 
-  .browse-hero-icon{
-    width:34px;
-    height:34px;
-  }
+      margin:18px 0 0;
 
-  .browse-hero-icon::before{
-    font-size:30px;
-  }
+      overflow:hidden;
+    }
 
-  .browse-hero h1{
-    font-size:38px;
-    letter-spacing:-1px;
-  }
+    .browse-filters{
+      display:flex;
 
-  .browse-hero p{
-    max-width:280px;
-    margin-top:10px;
-    font-size:14px;
-    line-height:1.4;
-  }
+      gap:10px;
 
-  .browse-filter-wrap{
-    margin-top:12px;
-  }
+      width:100%;
 
-  .browse-filters{
-    gap:8px;
-    padding-bottom:7px;
-  }
+      overflow-x:auto;
+      overflow-y:hidden;
 
-  .browse-filters a{
-    min-height:42px;
-    padding:0 16px;
-    font-size:13px;
-  }
+      padding:4px 2px 10px;
 
-  .browse-content{
-    margin-top:20px;
-  }
+      scrollbar-width:none;
 
-  .browse-heading{
-    margin-bottom:13px;
-  }
+      -webkit-overflow-scrolling:touch;
+    }
 
-  .browse-heading h2{
-    font-size:22px;
-  }
+    .browse-filters::-webkit-scrollbar{
+      display:none;
+    }
 
-  .browse-count{
-    font-size:12px;
-  }
+    .browse-filters a{
+      flex:0 0 auto;
 
-  .browse-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:12px;
-  }
+      display:inline-flex;
 
-  .browse-grid .anime-info{
-    padding:8px;
-  }
+      align-items:center;
+      justify-content:center;
 
-  .browse-grid .anime-title{
-    font-size:12px;
-  }
+      min-height:44px;
 
-  .browse-grid .anime-meta{
-    font-size:9px;
-    gap:4px;
-  }
+      padding:0 19px;
 
-  .browse-grid .card-rating{
-    top:6px;
-    left:6px;
-    font-size:9px;
-  }
+      border:1px solid rgba(0,210,255,.32);
 
-  .browse-grid .card-quality{
-    right:6px;
-    bottom:6px;
-    font-size:8px;
-  }
+      border-radius:999px;
 
-  .no-more-content{
-    margin-top:28px;
-    padding-bottom:18px;
-  }
-}
+      color:#d7dbe1;
 
-@media (max-width:390px){
-  .browse-page{
-    padding-left:10px;
-    padding-right:10px;
-  }
+      background:#080d12;
 
-  .browse-grid{
-    gap:9px;
-  }
+      text-decoration:none;
 
-  .browse-grid .anime-info{
-    padding:7px;
-  }
+      font-size:14px;
 
-  .browse-grid .anime-title{
-    font-size:11px;
-  }
+      font-weight:700;
 
-  .browse-grid .anime-meta{
-    font-size:8px;
-  }
-}
-</style>
+      white-space:nowrap;
+
+      box-sizing:border-box;
+
+      transition:
+        background .2s ease,
+        border-color .2s ease,
+        transform .2s ease;
+    }
+
+    .browse-filters a:hover{
+      transform:translateY(-1px);
+      border-color:rgba(0,210,255,.6);
+    }
+
+    .browse-filters a.active{
+      color:#fff;
+
+      background:#ff1744;
+
+      border-color:#ff1744;
+
+      box-shadow:
+        0 7px 22px
+        rgba(255,23,68,.22);
+    }
+
+
+    /* ==============================
+       CONTENT
+       ============================== */
+
+    .browse-content{
+      width:100%;
+
+      margin-top:22px;
+    }
+
+    .browse-heading{
+      display:flex;
+
+      align-items:center;
+      justify-content:space-between;
+
+      gap:12px;
+
+      margin:0 0 16px;
+    }
+
+    .browse-heading > div{
+      display:flex;
+
+      align-items:center;
+
+      min-width:0;
+
+      gap:10px;
+    }
+
+    .browse-heading .section-line{
+      flex:0 0 4px;
+    }
+
+    .browse-heading h2{
+      margin:0;
+
+      color:#fff;
+
+      font-size:27px;
+      line-height:1.2;
+
+      font-weight:900;
+    }
+
+    .browse-count{
+      flex:0 0 auto;
+
+      color:#8e96a2;
+
+      font-size:14px;
+    }
+
+
+    /* =================================================
+       IMPORTANT CARD GRID FIX
+       ================================================= */
+
+    .browse-grid{
+      display:grid !important;
+
+      width:100% !important;
+
+      grid-template-columns:
+        repeat(7,minmax(0,1fr)) !important;
+
+      gap:16px !important;
+
+      align-items:start !important;
+
+      box-sizing:border-box !important;
+    }
+
+
+    /* ==============================
+       CARD
+       ============================== */
+
+    .browse-grid .anime-card{
+      display:block !important;
+
+      position:relative !important;
+
+      width:100% !important;
+
+      min-width:0 !important;
+
+      height:auto !important;
+
+      margin:0 !important;
+
+      padding:0 !important;
+
+      overflow:hidden !important;
+
+      border:1px solid
+        rgba(0,210,255,.22) !important;
+
+      border-radius:10px !important;
+
+      background:#090b0f !important;
+
+      box-shadow:
+        0 7px 20px
+        rgba(0,0,0,.28) !important;
+
+      box-sizing:border-box !important;
+    }
+
+    .browse-grid .anime-card > a{
+      display:block !important;
+
+      width:100% !important;
+
+      color:inherit !important;
+
+      text-decoration:none !important;
+    }
+
+
+    /* ==============================
+       POSTER
+       ============================== */
+
+    .browse-grid .anime-poster{
+      position:relative !important;
+
+      display:block !important;
+
+      width:100% !important;
+
+      height:auto !important;
+
+      aspect-ratio:2 / 3 !important;
+
+      overflow:hidden !important;
+
+      background:#0b0e13 !important;
+
+      box-sizing:border-box !important;
+    }
+
+    .browse-grid .anime-poster img{
+      display:block !important;
+
+      width:100% !important;
+
+      height:100% !important;
+
+      min-width:100% !important;
+
+      min-height:100% !important;
+
+      object-fit:cover !important;
+
+      object-position:center !important;
+    }
+
+
+    /* ==============================
+       CARD INFO
+       ============================== */
+
+    .browse-grid .anime-info{
+      display:block !important;
+
+      width:100% !important;
+
+      height:auto !important;
+
+      padding:9px !important;
+
+      box-sizing:border-box !important;
+    }
+
+    .browse-grid .anime-title{
+      display:block !important;
+
+      width:100% !important;
+
+      margin:0 !important;
+
+      color:#fff !important;
+
+      font-size:14px !important;
+
+      line-height:1.3 !important;
+
+      font-weight:800 !important;
+
+      white-space:nowrap !important;
+
+      overflow:hidden !important;
+
+      text-overflow:ellipsis !important;
+    }
+
+    .browse-grid .anime-meta{
+      display:flex !important;
+
+      align-items:center !important;
+
+      gap:6px !important;
+
+      width:100% !important;
+
+      margin-top:6px !important;
+
+      color:#8d96a2 !important;
+
+      font-size:11px !important;
+
+      line-height:1.3 !important;
+
+      white-space:nowrap !important;
+
+      overflow:hidden !important;
+
+      text-overflow:ellipsis !important;
+    }
+
+
+    /* ==============================
+       RATING
+       ============================== */
+
+    .browse-grid .card-rating{
+      position:absolute !important;
+
+      top:7px !important;
+      left:7px !important;
+
+      z-index:3 !important;
+
+      padding:4px 6px !important;
+
+      border-radius:5px !important;
+
+      color:#111 !important;
+
+      background:rgba(255,255,255,.92) !important;
+
+      font-size:10px !important;
+
+      font-weight:900 !important;
+
+      line-height:1 !important;
+    }
+
+
+    /* ==============================
+       QUALITY
+       ============================== */
+
+    .browse-grid .card-quality{
+      position:absolute !important;
+
+      right:7px !important;
+      bottom:7px !important;
+
+      z-index:3 !important;
+
+      padding:4px 6px !important;
+
+      border-radius:5px !important;
+
+      color:#fff !important;
+
+      background:#ff1744 !important;
+
+      font-size:9px !important;
+
+      font-weight:900 !important;
+
+      line-height:1 !important;
+    }
+
+
+    /* ==============================
+       EMPTY
+       ============================== */
+
+    .browse-empty{
+      grid-column:1 / -1 !important;
+
+      width:100% !important;
+
+      padding:55px 20px !important;
+
+      border:1px dashed
+        rgba(0,210,255,.2) !important;
+
+      border-radius:12px !important;
+
+      text-align:center !important;
+
+      color:#7f8792 !important;
+
+      background:#080b0f !important;
+
+      box-sizing:border-box !important;
+    }
+
+
+    /* ==============================
+       NO MORE CONTENT
+       ============================== */
+
+    .no-more-content{
+      display:block;
+
+      width:100%;
+
+      margin-top:35px;
+
+      padding:24px 10px 10px;
+
+      box-sizing:border-box;
+
+      text-align:center;
+
+      color:#6e7680;
+
+      font-size:13px;
+    }
+
+
+    /* =================================================
+       TABLET
+       ================================================= */
+
+    @media (max-width:1200px){
+
+      .browse-grid{
+        grid-template-columns:
+          repeat(5,minmax(0,1fr)) !important;
+
+        gap:14px !important;
+      }
+
+    }
+
+
+    /* =================================================
+       MOBILE
+       ================================================= */
+
+    @media (max-width:768px){
+
+      .browse-page{
+        width:100% !important;
+
+        padding:
+          0 12px 90px !important;
+
+        box-sizing:border-box !important;
+      }
+
+
+      /* HERO */
+
+      .browse-hero{
+        min-height:180px !important;
+
+        margin:0 !important;
+
+        padding:28px 16px !important;
+
+        border-radius:
+          0 0 16px 16px !important;
+
+        border-left:0 !important;
+
+        border-right:0 !important;
+      }
+
+      .browse-hero-icon{
+        width:34px !important;
+
+        height:34px !important;
+      }
+
+      .browse-hero-icon::before{
+        font-size:30px !important;
+      }
+
+      .browse-hero h1{
+        font-size:38px !important;
+
+        letter-spacing:-1px !important;
+      }
+
+      .browse-hero p{
+        max-width:280px !important;
+
+        margin-top:10px !important;
+
+        font-size:14px !important;
+
+        line-height:1.4 !important;
+      }
+
+
+      /* FILTER */
+
+      .browse-filter-wrap{
+        margin-top:12px !important;
+      }
+
+      .browse-filters{
+        display:flex !important;
+
+        flex-wrap:nowrap !important;
+
+        gap:8px !important;
+
+        overflow-x:auto !important;
+
+        overflow-y:hidden !important;
+
+        padding-bottom:7px !important;
+      }
+
+      .browse-filters a{
+        flex:0 0 auto !important;
+
+        min-height:42px !important;
+
+        padding:0 16px !important;
+
+        font-size:13px !important;
+
+        white-space:nowrap !important;
+      }
+
+
+      /* CONTENT */
+
+      .browse-content{
+        margin-top:20px !important;
+      }
+
+      .browse-heading{
+        display:flex !important;
+
+        align-items:center !important;
+
+        justify-content:space-between !important;
+
+        gap:8px !important;
+
+        margin-bottom:13px !important;
+      }
+
+      .browse-heading h2{
+        font-size:22px !important;
+      }
+
+      .browse-count{
+        font-size:12px !important;
+      }
+
+
+      /* MOBILE GRID */
+
+      .browse-grid{
+        display:grid !important;
+
+        grid-template-columns:
+          repeat(2,minmax(0,1fr)) !important;
+
+        gap:12px !important;
+
+        width:100% !important;
+      }
+
+
+      /* MOBILE CARD */
+
+      .browse-grid .anime-card{
+        width:100% !important;
+
+        min-width:0 !important;
+
+        border-radius:9px !important;
+      }
+
+
+      /* MOBILE POSTER */
+
+      .browse-grid .anime-poster{
+        width:100% !important;
+
+        aspect-ratio:2 / 3 !important;
+
+        height:auto !important;
+
+        overflow:hidden !important;
+      }
+
+      .browse-grid .anime-poster img{
+        display:block !important;
+
+        width:100% !important;
+
+        height:100% !important;
+
+        object-fit:cover !important;
+
+        object-position:center !important;
+      }
+
+
+      /* MOBILE INFO */
+
+      .browse-grid .anime-info{
+        padding:8px !important;
+      }
+
+      .browse-grid .anime-title{
+        font-size:12px !important;
+
+        line-height:1.3 !important;
+      }
+
+      .browse-grid .anime-meta{
+        font-size:9px !important;
+
+        gap:4px !important;
+      }
+
+      .browse-grid .card-rating{
+        top:6px !important;
+
+        left:6px !important;
+
+        font-size:9px !important;
+      }
+
+      .browse-grid .card-quality{
+        right:6px !important;
+
+        bottom:6px !important;
+
+        font-size:8px !important;
+      }
+
+
+      .no-more-content{
+        margin-top:28px !important;
+
+        padding-bottom:18px !important;
+      }
+
+    }
+
+
+    /* =================================================
+       SMALL MOBILE
+       ================================================= */
+
+    @media (max-width:390px){
+
+      .browse-page{
+        padding-left:10px !important;
+
+        padding-right:10px !important;
+      }
+
+      .browse-grid{
+        gap:9px !important;
+      }
+
+      .browse-grid .anime-info{
+        padding:7px !important;
+      }
+
+      .browse-grid .anime-title{
+        font-size:11px !important;
+      }
+
+      .browse-grid .anime-meta{
+        font-size:8px !important;
+      }
+
+    }
+
+  </style>
 
 </head>
 
+
 <body>
 
-  <!-- HEADER -->
+
+  <!-- =================================================
+       HEADER
+       ================================================= -->
+
   <header class="site-header">
 
     <a href="index.html" class="logo">
+
       <img
         src="assets/logo-header-transparent.png"
         alt="Anime Fan"
       >
+
     </a>
+
 
     <nav class="desktop-nav">
 
@@ -471,51 +869,92 @@
 
     </nav>
 
+
+    <!-- HEADER ACTIONS -->
+
     <div class="header-actions">
 
-      <button class="icon-btn" id="searchBtn" aria-label="Search">
-        <svg class="header-icon search-svg"
-             viewBox="0 0 24 24"
-             fill="none"
-             xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11" cy="11" r="7.5"/>
-            <path d="M16.5 16.5L22 22"/>
-        </svg>
-    </button>
+      <!-- SEARCH -->
 
-    <!-- NOTIFICATION -->
-    <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
-        <svg class="header-icon notification-svg"
-             viewBox="0 0 24 24"
-             fill="none"
-             xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 9C18 5.69 15.31 3 12 3C8.69 3 6 5.69 6 9V14L4 17H20L18 14V9Z"/>
-            <path d="M10 20C10.45 20.61 11.15 21 12 21C12.85 21 13.55 20.61 14 20"/>
+      <button
+        class="icon-btn"
+        id="searchBtn"
+        aria-label="Search"
+      >
+
+        <svg
+          class="header-icon search-svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+
+          <circle
+            cx="11"
+            cy="11"
+            r="7.5"
+          />
+
+          <path
+            d="M16.5 16.5L22 22"
+          />
+
+        </svg>
+
+      </button>
+
+
+      <!-- NOTIFICATION -->
+
+      <button
+        class="icon-btn"
+        id="notificationBtn"
+        aria-label="Notifications"
+      >
+
+        <svg
+          class="header-icon notification-svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+
+          <path
+            d="M18 9C18 5.69 15.31 3 12 3C8.69 3 6 5.69 6 9V14L4 17H20L18 14V9Z"
+          />
+
+          <path
+            d="M10 20C10.45 20.61 11.15 21 12 21C12.85 21 13.55 20.61 14 20"
+          />
+
         </svg>
 
         <span class="notification-dot"></span>
-    </button>
+
+      </button>
 
     </div>
 
   </header>
 
 
+  <!-- =================================================
+       MAIN
+       ================================================= -->
 
-  <!-- MAIN -->
   <main class="browse-page">
 
+
     <!-- HERO -->
+
     <section class="browse-hero">
 
       <div>
 
-        <span class="browse-hero-icon">
-          
-        </span>
+        <span class="browse-hero-icon"></span>
 
         <h1 id="browseTitle">
-          Anime 
+          Anime
         </h1>
 
         <p id="browseSubtitle">
@@ -527,12 +966,16 @@
     </section>
 
 
-    <!-- FILTERS -->
+    <!-- =================================================
+         FILTERS
+         ================================================= -->
+
     <div class="browse-filter-wrap">
 
       <div
         class="browse-filters"
-        id="browseFilters">
+        id="browseFilters"
+      >
 
         <a href="view-all.html?category=all">
           All
@@ -587,8 +1030,14 @@
     </div>
 
 
-    <!-- CONTENT -->
+    <!-- =================================================
+         CONTENT
+         ================================================= -->
+
     <section class="browse-content">
+
+
+      <!-- HEADING -->
 
       <div class="browse-heading">
 
@@ -602,29 +1051,37 @@
 
         </div>
 
+
         <span
           class="browse-count"
-          id="browseCount">
+          id="browseCount"
+        >
           0 Anime
         </span>
 
       </div>
 
 
-      <!-- ANIME LIST -->
+      <!-- =================================================
+           ANIME GRID
+           ================================================= -->
+
       <div
         class="browse-grid"
-        id="browseGrid">
+        id="browseGrid"
+      >
       </div>
 
 
-      <!-- NO MORE -->
+      <!-- =================================================
+           NO MORE
+           ================================================= -->
+
       <div
         class="no-more-content"
-        id="noMoreContent">
-
+        id="noMoreContent"
+      >
         — No More Content —
-
       </div>
 
     </section>
@@ -632,14 +1089,22 @@
   </main>
 
 
-  <!-- MOBILE BOTTOM NAV -->
+  <!-- =================================================
+       MOBILE BOTTOM NAV
+       ================================================= -->
+
   <nav
     class="mobile-bottom-nav"
-    aria-label="Mobile navigation">
+    aria-label="Mobile navigation"
+  >
+
+
+    <!-- HOME -->
 
     <a
       href="index.html"
-      class="mobile-nav-item">
+      class="mobile-nav-item"
+    >
 
       <span class="mobile-nav-icon">
         ⌂
@@ -652,9 +1117,12 @@
     </a>
 
 
+    <!-- ANIME -->
+
     <a
       href="anime.html"
-      class="mobile-nav-item active">
+      class="mobile-nav-item active"
+    >
 
       <span class="mobile-nav-icon">
         ◈
@@ -667,9 +1135,12 @@
     </a>
 
 
+    <!-- MOVIES -->
+
     <a
       href="movies.html"
-      class="mobile-nav-item">
+      class="mobile-nav-item"
+    >
 
       <span class="mobile-nav-icon">
         ▣
@@ -682,9 +1153,12 @@
     </a>
 
 
+    <!-- GENRES -->
+
     <a
       href="genres.html"
-      class="mobile-nav-item">
+      class="mobile-nav-item"
+    >
 
       <span class="mobile-nav-icon">
         ☷
@@ -697,9 +1171,12 @@
     </a>
 
 
+    <!-- MY LIST -->
+
     <a
       href="my-list.html"
-      class="mobile-nav-item">
+      class="mobile-nav-item"
+    >
 
       <span class="mobile-nav-icon">
         ♡
@@ -714,20 +1191,27 @@
   </nav>
 
 
-  <!-- FOOTER -->
+  <!-- =================================================
+       FOOTER
+       ================================================= -->
+
   <footer class="site-footer">
 
     <div class="footer-logo">
 
       <img
         src="assets/logo-footer.jpg"
-        alt="Anime Fan">
+        alt="Anime Fan"
+      >
 
     </div>
 
+
     <p>
-      Your ultimate destination for anime, movies and more.
+      Your ultimate destination for anime,
+      movies and more.
     </p>
+
 
     <div class="footer-links">
 
@@ -753,6 +1237,7 @@
 
     </div>
 
+
     <p class="copyright">
       © 2026 Anime Fan. All rights reserved.
     </p>
@@ -760,218 +1245,732 @@
   </footer>
 
 
+  <!-- =================================================
+       MAIN APP
+       ================================================= -->
+
   <script src="app.js"></script>
 
-<script>
-/* =========================================================
-   VIEW ALL / BROWSE PAGE LOGIC
-   Uses the existing animeData from app.js.
-   ========================================================= */
 
-(function () {
-  "use strict";
+  <!-- =================================================
+       VIEW ALL PAGE LOGIC
+       ================================================= -->
 
-  const params = new URLSearchParams(window.location.search);
-  const requested = (params.get("category") || "all").toLowerCase();
+  <script>
 
-  const config = {
-    all:       { title: "All Anime",       subtitle: "Browse all available anime", countMax: Infinity },
-    trending:  { title: "Trending Now",    subtitle: "Top Trending Anime Right Now", countMax: 100 },
-    ongoing:   { title: "Ongoing Anime",   subtitle: "Anime currently ongoing", countMax: Infinity },
-    latest:    { title: "Latest Episode",  subtitle: "Latest available episodes", countMax: Infinity },
-    recent:    { title: "Recently Added",  subtitle: "Recently added anime", countMax: Infinity },
-    upcoming:  { title: "Upcoming",        subtitle: "Upcoming anime", countMax: Infinity },
-    tv:        { title: "TV Series",       subtitle: "Anime TV series", countMax: Infinity },
-    movies:    { title: "Anime Movies",    subtitle: "Anime movies", countMax: Infinity },
-    hindi:     { title: "Hindi Dub",       subtitle: "Hindi dubbed anime", countMax: Infinity },
-    fandub:    { title: "Fan Dub",         subtitle: "Fan dubbed anime", countMax: Infinity },
-    "top-rated": { title: "Top Rated",     subtitle: "Top Rated Anime", countMax: 100 },
-    completed: { title: "Completed Anime",  subtitle: "Completed anime", countMax: Infinity }
-  };
+  (function(){
 
-  const active = config[requested] || config.all;
+    "use strict";
 
-  const titleEl = document.getElementById("browseTitle");
-  const subtitleEl = document.getElementById("browseSubtitle");
-  const listTitleEl = document.getElementById("browseListTitle");
-  const countEl = document.getElementById("browseCount");
-  const grid = document.getElementById("browseGrid");
-  const noMore = document.getElementById("noMoreContent");
 
-  if (!titleEl || !subtitleEl || !listTitleEl || !countEl || !grid) return;
+    /* ==============================
+       URL CATEGORY
+       ============================== */
 
-  titleEl.textContent = active.title;
-  subtitleEl.textContent = active.subtitle;
-  listTitleEl.textContent = active.title;
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
 
-  document.title = active.title + " - Anime Fan";
+    const requested =
+      (
+        params.get("category") ||
+        "all"
+      ).toLowerCase();
 
-  document.querySelectorAll("#browseFilters a").forEach(function (link) {
-    const linkUrl = new URL(link.href, window.location.href);
-    const category = (linkUrl.searchParams.get("category") || "all").toLowerCase();
 
-    if (category === requested || (requested === "all" && category === "all")) {
-      link.classList.add("active");
+    /* ==============================
+       CATEGORY CONFIG
+       ============================== */
+
+    const config = {
+
+      all:{
+        title:"All Anime",
+        subtitle:"Browse all available anime",
+        countMax:Infinity
+      },
+
+      trending:{
+        title:"Trending Now",
+        subtitle:"Top Trending Anime Right Now",
+        countMax:100
+      },
+
+      ongoing:{
+        title:"Ongoing Anime",
+        subtitle:"Anime currently ongoing",
+        countMax:Infinity
+      },
+
+      latest:{
+        title:"Latest Episode",
+        subtitle:"Latest available episodes",
+        countMax:Infinity
+      },
+
+      recent:{
+        title:"Recently Added",
+        subtitle:"Recently added anime",
+        countMax:Infinity
+      },
+
+      upcoming:{
+        title:"Upcoming",
+        subtitle:"Upcoming anime",
+        countMax:Infinity
+      },
+
+      tv:{
+        title:"TV Series",
+        subtitle:"Anime TV series",
+        countMax:Infinity
+      },
+
+      movies:{
+        title:"Anime Movies",
+        subtitle:"Anime movies",
+        countMax:Infinity
+      },
+
+      hindi:{
+        title:"Hindi Dub",
+        subtitle:"Hindi dubbed anime",
+        countMax:Infinity
+      },
+
+      fandub:{
+        title:"Fan Dub",
+        subtitle:"Fan dubbed anime",
+        countMax:Infinity
+      },
+
+      "top-rated":{
+        title:"Top Rated",
+        subtitle:"Top Rated Anime",
+        countMax:100
+      },
+
+      completed:{
+        title:"Completed Anime",
+        subtitle:"Completed anime",
+        countMax:Infinity
+      }
+
+    };
+
+
+    const active =
+      config[requested] ||
+      config.all;
+
+
+    /* ==============================
+       ELEMENTS
+       ============================== */
+
+    const titleEl =
+      document.getElementById(
+        "browseTitle"
+      );
+
+    const subtitleEl =
+      document.getElementById(
+        "browseSubtitle"
+      );
+
+    const listTitleEl =
+      document.getElementById(
+        "browseListTitle"
+      );
+
+    const countEl =
+      document.getElementById(
+        "browseCount"
+      );
+
+    const grid =
+      document.getElementById(
+        "browseGrid"
+      );
+
+    const noMore =
+      document.getElementById(
+        "noMoreContent"
+      );
+
+
+    if(
+      !titleEl ||
+      !subtitleEl ||
+      !listTitleEl ||
+      !countEl ||
+      !grid
+    ){
+
+      return;
+
     }
-  });
 
-  function unique(items) {
-    const seen = new Set();
-    return (items || []).filter(function (item) {
-      if (!item || !item.id || seen.has(item.id)) return false;
-      seen.add(item.id);
-      return true;
-    });
-  }
 
-  function getSource() {
-    const data = window.animeData || (typeof animeData !== "undefined" ? animeData : null);
+    /* ==============================
+       PAGE TITLE
+       ============================== */
 
-    if (!data) return [];
+    titleEl.textContent =
+      active.title;
 
-    const all = unique([
-      ...(data.trending || []),
-      ...(data.continueWatching || []),
-      ...(data.recentlyAdded || []),
-      ...(data.movies || []),
-      ...(data.hindi || []),
-      ...(data.top || [])
-    ]);
+    subtitleEl.textContent =
+      active.subtitle;
 
-    switch (requested) {
-      case "all":
-        return all;
+    listTitleEl.textContent =
+      active.title;
 
-      case "trending":
-        return unique(data.trending).slice(0, 100);
+    document.title =
+      active.title +
+      " - Anime Fan";
 
-      case "ongoing":
-        return all.filter(function (a) {
-          return String(a.status || "").toLowerCase() === "ongoing";
-        });
 
-      case "latest":
-        return unique(data.recentlyAdded || []);
+    /* ==============================
+       ACTIVE FILTER
+       ============================== */
 
-      case "recent":
-        return unique(data.recentlyAdded || []);
+    document
+      .querySelectorAll(
+        "#browseFilters a"
+      )
+      .forEach(function(link){
 
-      case "upcoming":
-        /* No upcoming collection exists in the current app.js data. */
+        const linkUrl =
+          new URL(
+            link.href,
+            window.location.href
+          );
+
+        const category =
+          (
+            linkUrl.searchParams
+              .get("category") ||
+            "all"
+          ).toLowerCase();
+
+        if(
+          category === requested ||
+          (
+            requested === "all" &&
+            category === "all"
+          )
+        ){
+
+          link.classList.add(
+            "active"
+          );
+
+        }
+
+      });
+
+
+    /* ==============================
+       UNIQUE
+       ============================== */
+
+    function unique(items){
+
+      const seen =
+        new Set();
+
+      return (
+        items || []
+      ).filter(function(item){
+
+        if(
+          !item ||
+          !item.id ||
+          seen.has(item.id)
+        ){
+
+          return false;
+
+        }
+
+        seen.add(item.id);
+
+        return true;
+
+      });
+
+    }
+
+
+    /* ==============================
+       DATA SOURCE
+       ============================== */
+
+    function getSource(){
+
+      const data =
+        window.animeData ||
+        (
+          typeof animeData !==
+          "undefined"
+            ? animeData
+            : null
+        );
+
+
+      if(!data){
+
         return [];
 
-      case "tv":
-        return all.filter(function (a) {
-          return String(a.type || "").toLowerCase() === "tv";
-        });
+      }
 
-      case "movies":
-        return unique(data.movies || []);
 
-      case "hindi":
-        return all.filter(function (a) {
-          const type = String(a.type || "").toLowerCase();
-          const languages = (a.languages || []).map(function (x) {
-            return String(x).toLowerCase();
-          });
-          return type === "hindi dub" || languages.includes("hindi dub");
-        });
+      const all =
+        unique([
 
-      case "fandub":
-        return all.filter(function (a) {
-          const type = String(a.type || "").toLowerCase();
-          const languages = (a.languages || []).map(function (x) {
-            return String(x).toLowerCase();
-          });
-          return type === "fan dub" || languages.includes("fan dub");
-        });
+          ...(data.trending || []),
 
-      case "top-rated":
-        return all
-          .slice()
-          .sort(function (a, b) {
-            return Number(b.rating || 0) - Number(a.rating || 0);
-          })
-          .slice(0, 100);
+          ...(data.continueWatching || []),
 
-      case "completed":
-        return all.filter(function (a) {
-          return String(a.status || "").toLowerCase() === "completed";
-        });
+          ...(data.recentlyAdded || []),
 
-      default:
-        return all;
+          ...(data.movies || []),
+
+          ...(data.hindi || []),
+
+          ...(data.top || []),
+
+          ...(data.fandub || [])
+
+        ]);
+
+
+      switch(requested){
+
+        case "all":
+
+          return all;
+
+
+        case "trending":
+
+          return unique(
+            data.trending || []
+          ).slice(0,100);
+
+
+        case "ongoing":
+
+          return all.filter(
+            function(a){
+
+              return String(
+                a.status || ""
+              ).toLowerCase() ===
+                "ongoing";
+
+            }
+          );
+
+
+        case "latest":
+
+          return unique(
+            data.recentlyAdded || []
+          );
+
+
+        case "recent":
+
+          return unique(
+            data.recentlyAdded || []
+          );
+
+
+        case "upcoming":
+
+          return unique(
+            data.upcoming || []
+          );
+
+
+        case "tv":
+
+          return all.filter(
+            function(a){
+
+              const type =
+                String(
+                  a.type || ""
+                ).toLowerCase();
+
+              return(
+                type === "tv" ||
+                type === "webseries" ||
+                type === "web series"
+              );
+
+            }
+          );
+
+
+        case "movies":
+
+          return unique(
+            data.movies || []
+          );
+
+
+        case "hindi":
+
+          return unique(
+            data.hindi || []
+          );
+
+
+        case "fandub":
+
+          return unique(
+            data.fandub || []
+          );
+
+
+        case "top-rated":
+
+          return unique(
+            data.top || []
+          ).slice(0,100);
+
+
+        case "completed":
+
+          return all.filter(
+            function(a){
+
+              const status =
+                String(
+                  a.status || ""
+                ).toLowerCase();
+
+              return(
+                status === "completed" ||
+                status === "complete" ||
+                status === "finished"
+              );
+
+            }
+          );
+
+
+        default:
+
+          return all;
+
+      }
+
     }
-  }
 
-  function escapeHtml(value) {
-    return String(value == null ? "" : value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
 
-  function card(anime) {
-    const id = encodeURIComponent(anime.id || anime.title || "");
-    const title = escapeHtml(anime.title || "Unknown Anime");
-    const image = escapeHtml(anime.image || "");
-    const rating = escapeHtml(anime.rating || "N/A");
-    const quality = escapeHtml(anime.quality || "HD");
-    const year = escapeHtml(anime.year || "");
-    const type = escapeHtml(anime.type || "TV");
+    /* ==============================
+       IMAGE
+       ============================== */
 
-    return `
-      <article class="anime-card">
-        <a href="details.html?anime=${id}">
-          <div class="anime-poster">
-            <img
-              src="${image}"
-              alt="${title}"
-              loading="lazy"
-              decoding="async"
-              onerror="this.onerror=null;this.src='assets/logo-header-transparent.png';"
-            >
-            <span class="card-rating">⭐ ${rating}</span>
-            <span class="card-quality">${quality}</span>
-          </div>
+    function getImage(anime){
 
-          <div class="anime-info">
-            <h3 class="anime-title">${title}</h3>
-            <div class="anime-meta">
-              <span>${year}</span>
-              <span>•</span>
-              <span>${type}</span>
+      return(
+        anime.image ||
+        anime.poster ||
+        anime.thumbnail ||
+        anime.cover ||
+        "assets/placeholder.jpg"
+      );
+
+    }
+
+
+    /* ==============================
+       TITLE
+       ============================== */
+
+    function getTitle(anime){
+
+      return(
+        anime.title ||
+        anime.name ||
+        "Unknown Anime"
+      );
+
+    }
+
+
+    /* ==============================
+       TYPE
+       ============================== */
+
+    function getType(anime){
+
+      if(anime.type){
+
+        return anime.type;
+
+      }
+
+      if(anime.animeType){
+
+        return anime.animeType;
+
+      }
+
+      return "Anime";
+
+    }
+
+
+    /* ==============================
+       RATING
+       ============================== */
+
+    function getRating(anime){
+
+      return(
+        anime.rating ||
+        anime.score ||
+        ""
+      );
+
+    }
+
+
+    /* ==============================
+       QUALITY
+       ============================== */
+
+    function getQuality(anime){
+
+      return(
+        anime.quality ||
+        anime.resolution ||
+        "HD"
+      );
+
+    }
+
+
+    /* ==============================
+       CARD HTML
+       ============================== */
+
+    function createCard(anime){
+
+      const id =
+        anime.id || "";
+
+      const title =
+        getTitle(anime);
+
+      const image =
+        getImage(anime);
+
+      const type =
+        getType(anime);
+
+      const rating =
+        getRating(anime);
+
+      const quality =
+        getQuality(anime);
+
+
+      const href =
+        anime.url ||
+        (
+          "anime-detail.html?id=" +
+          encodeURIComponent(id)
+        );
+
+
+      const ratingHTML =
+        rating !== ""
+          ? `
+            <span class="card-rating">
+              ★ ${rating}
+            </span>
+          `
+          : "";
+
+
+      const qualityHTML =
+        quality
+          ? `
+            <span class="card-quality">
+              ${quality}
+            </span>
+          `
+          : "";
+
+
+      return `
+
+        <article class="anime-card">
+
+          <a href="${href}">
+
+            <div class="anime-poster">
+
+              <img
+                src="${image}"
+                alt="${title}"
+                loading="lazy"
+                onerror="
+                  this.onerror=null;
+                  this.src='assets/placeholder.jpg';
+                "
+              >
+
+              ${ratingHTML}
+
+              ${qualityHTML}
+
             </div>
+
+
+            <div class="anime-info">
+
+              <div class="anime-title">
+                ${title}
+              </div>
+
+
+              <div class="anime-meta">
+
+                <span>
+                  ${type}
+                </span>
+
+              </div>
+
+            </div>
+
+          </a>
+
+        </article>
+
+      `;
+
+    }
+
+
+    /* ==============================
+       RENDER
+       ============================== */
+
+    function render(){
+
+      let items =
+        getSource();
+
+
+      if(
+        active.countMax !== Infinity
+      ){
+
+        items =
+          items.slice(
+            0,
+            active.countMax
+          );
+
+      }
+
+
+      countEl.textContent =
+        items.length +
+        " Anime";
+
+
+      grid.innerHTML = "";
+
+
+      if(!items.length){
+
+        grid.innerHTML = `
+
+          <div class="browse-empty">
+
+            <div
+              style="
+                font-size:36px;
+                margin-bottom:12px;
+              "
+            >
+              🎬
+            </div>
+
+            <div
+              style="
+                color:#fff;
+                font-size:18px;
+                font-weight:800;
+                margin-bottom:6px;
+              "
+            >
+              No Anime Found
+            </div>
+
+            <div
+              style="
+                color:#7f8792;
+                font-size:13px;
+              "
+            >
+              No content is available
+              in this category yet.
+            </div>
+
           </div>
-        </a>
-      </article>
-    `;
-  }
 
-  const source = getSource().slice(0, active.countMax);
+        `;
 
-  countEl.textContent = source.length + (source.length === 1 ? " Anime" : " Anime");
+        if(noMore){
 
-  if (!source.length) {
-    grid.innerHTML = `
-      <div class="browse-empty">
-        <strong>No Anime Found</strong>
-        <div style="margin-top:6px">
-          Content will appear here when it is added.
-        </div>
-      </div>
-    `;
-  } else {
-    grid.innerHTML = source.map(card).join("");
-  }
+          noMore.style.display =
+            "none";
 
-  if (noMore) {
-    noMore.textContent = "— No More Content —";
-  }
-})();
-</script>
+        }
+
+        return;
+
+      }
+
+
+      grid.innerHTML =
+        items
+          .map(createCard)
+          .join("");
+
+
+      if(noMore){
+
+        noMore.style.display =
+          "block";
+
+      }
+
+    }
+
+
+    /* ==============================
+       START
+       ============================== */
+
+    render();
+
+
+  })();
+
+  </script>
+
 
 </body>
-  </html>
+</html>
