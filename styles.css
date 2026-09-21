@@ -3817,3 +3817,306 @@ body.light-theme .anime-card {
     border: 0 !important;
   }
 }
+
+/* =====================================================
+   VIEW ALL — FINAL MOBILE FIX
+===================================================== */
+
+@media (max-width: 768px) {
+
+  /* Main browse page */
+  .browse-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 90px !important;
+    overflow: hidden !important;
+  }
+
+  /* Top title section */
+  .browse-hero {
+    width: 100% !important;
+    min-height: 180px !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    padding: 28px 22px !important;
+
+    box-sizing: border-box !important;
+  }
+
+  .browse-hero > div {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .browse-hero h1 {
+    width: 100% !important;
+
+    margin: 0 !important;
+
+    font-size: 38px !important;
+    line-height: 1.05 !important;
+
+    white-space: normal !important;
+    word-break: normal !important;
+  }
+
+  .browse-hero p {
+    max-width: 280px !important;
+
+    margin: 10px 0 0 !important;
+
+    font-size: 14px !important;
+    line-height: 1.4 !important;
+  }
+
+
+  /* FILTERS */
+  .browse-filter-wrap {
+    width: 100% !important;
+
+    padding: 14px 14px 0 !important;
+
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+  }
+
+  .browse-filters {
+    width: 100% !important;
+
+    display: flex !important;
+
+    flex-wrap: nowrap !important;
+
+    gap: 8px !important;
+
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+
+    padding-bottom: 4px !important;
+
+    box-sizing: border-box !important;
+
+    scrollbar-width: none !important;
+  }
+
+  .browse-filters::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .browse-filters a {
+    flex: 0 0 auto !important;
+
+    width: auto !important;
+    min-width: max-content !important;
+
+    white-space: nowrap !important;
+
+    display: inline-flex !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    box-sizing: border-box !important;
+  }
+
+
+  /* CONTENT */
+  .browse-content {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    padding: 25px 14px 0 !important;
+
+    box-sizing: border-box !important;
+
+    overflow: visible !important;
+  }
+
+  .browse-heading {
+    width: 100% !important;
+
+    display: flex !important;
+
+    align-items: center !important;
+    justify-content: space-between !important;
+
+    margin-bottom: 15px !important;
+  }
+
+  .browse-heading > div {
+    min-width: 0 !important;
+  }
+
+  .browse-heading h2 {
+    margin: 0 !important;
+
+    font-size: 21px !important;
+    line-height: 1.2 !important;
+
+    white-space: normal !important;
+  }
+
+
+  /* =================================================
+     IMPORTANT — CARD GRID
+  ================================================= */
+
+  .browse-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+
+    gap: 12px !important;
+
+    align-items: start !important;
+
+    box-sizing: border-box !important;
+
+    overflow: visible !important;
+  }
+
+
+  /* CARD */
+  .browse-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    display: block !important;
+
+    position: relative !important;
+
+    box-sizing: border-box !important;
+
+    overflow: hidden !important;
+  }
+
+  .browse-card > a {
+    width: 100% !important;
+
+    display: block !important;
+
+    box-sizing: border-box !important;
+  }
+
+
+  /* POSTER */
+  .browse-poster {
+    width: 100% !important;
+
+    height: auto !important;
+
+    aspect-ratio: 2 / 3 !important;
+
+    min-height: 0 !important;
+
+    display: block !important;
+
+    position: relative !important;
+
+    overflow: hidden !important;
+
+    background: #090b0f !important;
+  }
+
+  .browse-poster img {
+    width: 100% !important;
+    height: 100% !important;
+
+    display: block !important;
+
+    object-fit: cover !important;
+
+    object-position: center !important;
+  }
+
+
+  /* INFO */
+  .browse-info {
+    width: 100% !important;
+
+    box-sizing: border-box !important;
+
+    padding: 8px !important;
+  }
+
+  .browse-title {
+    width: 100% !important;
+
+    font-size: 11px !important;
+
+    line-height: 1.35 !important;
+
+    margin: 0 !important;
+  }
+
+  .browse-meta {
+    width: 100% !important;
+
+    display: flex !important;
+
+    flex-wrap: wrap !important;
+
+    align-items: center !important;
+
+    gap: 4px !important;
+
+    margin-top: 6px !important;
+  }
+
+  .browse-watch {
+    width: 100% !important;
+
+    box-sizing: border-box !important;
+
+    margin-top: 8px !important;
+  }
+
+
+  /* NO MORE */
+  .no-more-content {
+    width: 100% !important;
+
+    clear: both !important;
+
+    padding: 35px 10px 25px !important;
+
+    box-sizing: border-box !important;
+
+    text-align: center !important;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL PHONES
+===================================================== */
+
+@media (max-width: 380px) {
+
+  .browse-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+
+    gap: 9px !important;
+  }
+
+  .browse-content {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .browse-hero h1 {
+    font-size: 34px !important;
+  }
+
+     }
