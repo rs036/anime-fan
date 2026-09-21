@@ -2093,3 +2093,569 @@ document.addEventListener(
 
   }
 );
+
+/* =========================================================
+   VIEW ALL / TOP RANKING PAGE
+========================================================= */
+
+function getBrowseAnime() {
+
+  const all = [];
+
+  Object.keys(animeData).forEach(key => {
+
+    const value = animeData[key];
+
+    if (!Array.isArray(value)) return;
+
+    value.forEach(anime => {
+
+      if (
+        anime &&
+        anime.id &&
+        !all.some(item => item.id === anime.id)
+      ) {
+        all.push(anime);
+      }
+
+    });
+
+  });
+
+  return all;
+}
+
+
+/* =========================================================
+   BROWSE CONFIG
+========================================================= */
+
+const browseConfig = {
+
+  all: {
+    title: "Top Ranking",
+    mobileTitle: "Top Ranking",
+    subtitle: "The Most Popular Anime Right Now",
+    ranked: true,
+    limit: null
+  },
+
+  trending: {
+    title: "Trending Now",
+    mobileTitle: "Trending",
+    subtitle: "Top Trending Anime Right Now",
+    ranked: false,
+    limit: 100
+  },
+
+  ongoing: {
+    title: "Ongoing Anime",
+    mobileTitle: "Ongoing",
+    subtitle: "Anime Currently Airing",
+    ranked: false,
+    limit: null
+  },
+
+  latest: {
+    title: "Latest Episode",
+    mobileTitle: "Latest",
+    subtitle: "Latest Episode Updates",
+    ranked: false,
+    limit: null
+  },
+
+  recent: {
+    title: "Recently Added",
+    mobileTitle: "Recent",
+    subtitle: "Recently Added Anime",
+    ranked: false,
+    limit: null
+  },
+
+  upcoming: {
+    title: "Upcoming Anime",
+    mobileTitle: "Upcoming",
+    subtitle: "Coming Soon",
+    ranked: false,
+    limit: null
+  },
+
+  tv: {
+    title: "TV Series",
+    mobileTitle: "TV Series",
+    subtitle: "Anime TV & Web Series",
+    ranked: false,
+    limit: null
+  },
+
+  movies: {
+    title: "Anime Movies",
+    mobileTitle: "Movies",
+    subtitle: "Anime Movies",
+    ranked: false,
+    limit: null
+  },
+
+  hindi: {
+    title: "Hindi Dub",
+    mobileTitle: "Hindi Dub",
+    subtitle: "Anime Available in Hindi Dub",
+    ranked: false,
+    limit: null
+  },
+
+  fandub: {
+    title: "Fan Dub",
+    mobileTitle: "Fan Dub",
+    subtitle: "Anime Available in Fan Dub",
+    ranked: false,
+    limit: null
+  },
+
+  "top-rated": {
+    title: "Top Rated Anime",
+    mobileTitle: "Top Rated",
+    subtitle: "100 Highest Rated Anime",
+    ranked: false,
+    limit: 100
+  },
+
+  completed: {
+    title: "Completed Anime",
+    mobileTitle: "Completed",
+    subtitle: "Completed Anime",
+    ranked: false,
+    limit: null
+  }
+
+};
+
+
+/* =========================================================
+   FILTER DATA
+========================================================= */
+
+function getBrowseList(category) {
+
+  const all = getBrowseAnime();
+
+  switch (category) {
+
+    case "all":
+
+      return all
+        .slice()
+        .sort(
+          (a, b) =>
+            Number(b.rating || 0) -
+            Number(a.rating || 0)
+        );
+
+
+    case "trending":
+
+      return [
+        ...(animeData.trending || [])
+      ].slice(0, 100);
+
+
+    case "ongoing":
+
+      return all.filter(anime =>
+        String(anime.status || "")
+          .toLowerCase()
+          .includes("ongoing")
+      );
+
+
+    case "latest": {
+
+      const latest = all.filter(anime =>
+        anime.latestEpisode === true ||
+        anime.isLatest === true
+      );
+
+      /*
+        Agar abhi kisi anime me latestEpisode
+        flag nahi hai to Recently Added ko
+        temporary fallback use karega.
+      */
+
+      return latest.length
+        ? latest
+        : [
+            ...(animeData.recentlyAdded || [])
+          ];
+
+    }
+
+
+    case "recent":
+
+      return [
+        ...(animeData.recentlyAdded || [])
+      ];
+
+
+    case "upcoming":
+
+      return [
+        ...(animeData.upcoming || [])
+      ];
+
+
+    case "tv":
+
+      return all.filter(anime => {
+
+        const type =
+          String(anime.type || "")
+            .toLowerCase();
+
+        return (
+          type.includes("tv") ||
+          type.includes("web") ||
+          type.includes("series")
+        );
+
+      });
+
+
+    case "movies":
+
+      return [
+        ...(animeData.movies || [])
+      ];
+
+
+    case "hindi":
+
+      return [
+        ...(animeData.hindi || [])
+      ];
+
+
+    case "fandub":
+
+      return [
+        ...(animeData.fanDub || [])
+      ];
+
+
+    case "top-rated":
+
+      return all
+        .slice()
+        .sort(
+          (a, b) =>
+            Number(b.rating || 0) -
+            Number(a.rating || 0)
+        )
+        .slice(0, 100);
+
+
+    case "completed":
+
+      return all.filter(anime =>
+        String(anime.status || "")
+          .toLowerCase()
+          .includes("completed")
+      );
+
+
+    default:
+
+      return all;
+
+  }
+
+}
+
+
+/* =========================================================
+   CREATE BROWSE CARD
+========================================================= */
+
+function createBrowseCard(anime, rank, showRank) {
+
+  const card =
+    document.createElement("article");
+
+  card.className =
+    "browse-card";
+
+  card.innerHTML = `
+
+    <a
+      href="details.html?anime=${encodeURIComponent(
+        anime.id
+      )}">
+
+      <div class="browse-poster">
+
+        <img
+          src="${anime.image || ""}"
+          alt="${anime.title}"
+          loading="lazy"
+          decoding="async"
+          onerror="imageFallback(this)">
+
+        ${
+          showRank
+            ? `
+              <span class="browse-rank">
+                ${String(rank).padStart(2, "0")}
+              </span>
+            `
+            : ""
+        }
+
+      </div>
+
+
+      <div class="browse-info">
+
+        <h3 class="browse-title">
+          ${anime.title}
+        </h3>
+
+
+        <div class="browse-meta">
+
+          <span class="browse-rating">
+            ⭐ ${anime.rating || "N/A"}
+          </span>
+
+          <span>•</span>
+
+          <span>
+            ${anime.year || ""}
+          </span>
+
+          <span>•</span>
+
+          <span>
+            ${anime.episodes
+              ? anime.episodes + " Ep"
+              : anime.type || "TV"}
+          </span>
+
+        </div>
+
+
+        <div class="browse-watch">
+          ▶ Watch Now
+        </div>
+
+      </div>
+
+    </a>
+
+  `;
+
+  return card;
+}
+
+
+/* =========================================================
+   LOAD BROWSE PAGE
+========================================================= */
+
+function loadBrowsePage() {
+
+  const grid =
+    document.getElementById("browseGrid");
+
+  if (!grid) return;
+
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  const category =
+    params.get("category") || "all";
+
+
+  const config =
+    browseConfig[category] ||
+    browseConfig.all;
+
+
+  let list =
+    getBrowseList(category);
+
+
+  if (config.limit) {
+
+    list =
+      list.slice(0, config.limit);
+
+  }
+
+
+  /* TITLES */
+
+  const title =
+    document.getElementById(
+      "browseTitle"
+    );
+
+  const mobileTitle =
+    document.getElementById(
+      "browseMobileTitle"
+    );
+
+  const listTitle =
+    document.getElementById(
+      "browseListTitle"
+    );
+
+  const subtitle =
+    document.getElementById(
+      "browseSubtitle"
+    );
+
+  const count =
+    document.getElementById(
+      "browseCount"
+    );
+
+
+  if (title)
+    title.textContent =
+      config.title;
+
+
+  if (mobileTitle)
+    mobileTitle.textContent =
+      config.mobileTitle;
+
+
+  if (listTitle)
+    listTitle.textContent =
+      config.title;
+
+
+  if (subtitle)
+    subtitle.textContent =
+      config.subtitle;
+
+
+  if (count)
+    count.textContent =
+      `${list.length} Anime`;
+
+
+  /* ACTIVE FILTER */
+
+  document
+    .querySelectorAll(
+      "#browseFilters a"
+    )
+    .forEach(link => {
+
+      link.classList.remove(
+        "active"
+      );
+
+      const href =
+        link.getAttribute("href") ||
+        "";
+
+      if (
+        href.includes(
+          `category=${category}`
+        )
+      ) {
+
+        link.classList.add(
+          "active"
+        );
+
+      }
+
+    });
+
+
+  /* EMPTY */
+
+  grid.innerHTML = "";
+
+
+  if (!list.length) {
+
+    grid.innerHTML = `
+
+      <div class="empty-message">
+
+        No anime found.
+
+      </div>
+
+    `;
+
+    const noMore =
+      document.getElementById(
+        "noMoreContent"
+      );
+
+    if (noMore)
+      noMore.classList.add(
+        "show"
+      );
+
+    return;
+  }
+
+
+  /* CARDS */
+
+  list.forEach(
+    (anime, index) => {
+
+      grid.appendChild(
+        createBrowseCard(
+          anime,
+          index + 1,
+          config.ranked
+        )
+      );
+
+    }
+  );
+
+
+  /* NO MORE */
+
+  const noMore =
+    document.getElementById(
+      "noMoreContent"
+    );
+
+  if (noMore) {
+
+    noMore.classList.add(
+      "show"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   START BROWSE PAGE
+========================================================= */
+
+if (
+  document.getElementById(
+    "browseGrid"
+  )
+) {
+
+  loadBrowsePage();
+
+}
