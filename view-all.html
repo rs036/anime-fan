@@ -1620,7 +1620,9 @@
   ======================================================= */
 
   const data =
-    window.animeData || {};
+  (typeof animeData !== "undefined")
+    ? animeData
+    : {};
 
 
   /* =======================================================
@@ -1860,99 +1862,9 @@
 
       case "hindi":
 
-        return allAnime.filter(
-          function(anime){
-
-            const type =
-              String(
-                anime.type ||
-                anime.animeType ||
-                ""
-              ).toLowerCase();
-
-
-            const languages =
-              Array.isArray(
-                anime.languages
-              )
-              ?
-              anime.languages.map(
-                function(language){
-
-                  return String(
-                    language
-                  ).toLowerCase();
-
-                }
-              )
-              :
-              [];
-
-
-            return(
-              type === "hindi" ||
-              type === "hindi dub" ||
-              languages.includes(
-                "hindi"
-              ) ||
-              languages.includes(
-                "hindi dub"
-              )
-            );
-
-          }
-        );
-
-
-      /* -----------------------------------------------
-         FAN DUB
-      ----------------------------------------------- */
-
-      case "fandub":
-
-        return allAnime.filter(
-          function(anime){
-
-            const type =
-              String(
-                anime.type ||
-                anime.animeType ||
-                ""
-              ).toLowerCase();
-
-
-            const languages =
-              Array.isArray(
-                anime.languages
-              )
-              ?
-              anime.languages.map(
-                function(language){
-
-                  return String(
-                    language
-                  ).toLowerCase();
-
-                }
-              )
-              :
-              [];
-
-
-            return(
-              type === "fan dub" ||
-              type === "fandub" ||
-              languages.includes(
-                "fan dub"
-              ) ||
-              languages.includes(
-                "fandub"
-              )
-            );
-
-          }
-        );
-
+  return unique(
+    data.hindi || []
+  );
 
       /* -----------------------------------------------
          TOP RATED
