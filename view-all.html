@@ -311,7 +311,7 @@
     rgba(255,18,57,.75);
 }
 
-.browse-grid .anime-card > a{
+.browse-grid .anime-card > .anime-card-main{
   display:block;
 
   width:100%;
@@ -319,6 +319,20 @@
   color:inherit;
 
   text-decoration:none;
+}
+
+.browse-grid .anime-card .browse-watch{
+  text-decoration:none;
+  cursor:pointer;
+  box-sizing:border-box;
+  position:relative;
+  z-index:7;
+}
+
+.browse-watch-icon{
+  display:inline-block;
+  margin-right:6px;
+  font-size:.9em;
 }
 
 
@@ -520,6 +534,22 @@
   font-size:11px;
 
   font-weight:900;
+
+  transition:
+    transform .18s ease,
+    background .18s ease,
+    box-shadow .18s ease;
+}
+
+.browse-watch:hover{
+  color:#fff;
+  background:#ff2448;
+  box-shadow:0 6px 18px rgba(255,18,57,.30);
+  transform:translateY(-1px);
+}
+
+.browse-watch:active{
+  transform:translateY(0);
 }
 
 
@@ -703,6 +733,8 @@
 
     display:block;
 
+    position:relative;
+
     width:100%;
 
     min-height:128px;
@@ -715,7 +747,7 @@
   }
 
 
-  .browse-grid .anime-card > a{
+  .browse-grid .anime-card > .anime-card-main{
 
     display:grid;
 
@@ -799,11 +831,17 @@
 
   .browse-watch{
 
+    position:absolute;
+
+    left:106px;
+
+    bottom:9px;
+
     width:120px;
 
     min-height:29px;
 
-    margin-top:7px;
+    margin-top:0;
 
     border-radius:6px;
 
@@ -891,6 +929,8 @@
   }
 
   .browse-watch{
+    left:97px;
+
     width:110px;
 
     min-height:27px;
@@ -2062,6 +2102,17 @@
       );
 
 
+    /* Dedicated Watch Now destination. */
+    const watchHref =
+      escapeHTML(
+        anime.watchUrl ||
+        anime.watchLink ||
+        anime.url ||
+        anime.link ||
+        ("anime-detail.html?id=" + id)
+      );
+
+
     const rank =
       String(
         index + 1
@@ -2078,9 +2129,10 @@
       >
 
         <a
+          class="anime-card-main"
           href="anime-detail.html?id=${id}"
+          aria-label="Open ${animeTitle}"
         >
-
 
           <div
             class="anime-poster"
@@ -2168,15 +2220,18 @@
             </div>
 
 
-            <div
-              class="browse-watch"
-            >
-              ▶ Watch Now
-            </div>
-
           </div>
 
+        </a>
 
+        <!-- Dedicated Watch Now button -->
+        <a
+          class="browse-watch"
+          href="${watchHref}"
+          aria-label="Watch ${animeTitle} now"
+        >
+          <span class="browse-watch-icon" aria-hidden="true">▶</span>
+          <span>Watch Now</span>
         </a>
 
       </article>
