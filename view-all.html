@@ -879,6 +879,153 @@
 
 </style>
 
+
+<style id="mobile-3-card-final-fix">
+/* FINAL MOBILE FIX FOR VIEW-ALL: 3 vertical cards, same desktop card style */
+@media (max-width: 768px) {
+  .browse-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    overflow: visible !important;
+  }
+
+  .browse-grid > .anime-card {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: auto !important;
+    min-height: 0 !important;
+    flex: none !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-grid > .anime-card > .anime-card-main,
+  .browse-grid > .anime-card > a {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-grid .anime-poster {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    aspect-ratio: 2 / 3 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-grid .anime-poster img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    transform: none !important;
+  }
+
+  .browse-grid .anime-info {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 7px !important;
+  }
+
+  .browse-grid .anime-title {
+    display: -webkit-box !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    min-height: 28px !important;
+    max-height: 30px !important;
+    margin: 0 !important;
+    font-size: 9px !important;
+    line-height: 1.35 !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    white-space: normal !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-grid .anime-meta {
+    display: flex !important;
+    align-items: center !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: 3px !important;
+    margin-top: 5px !important;
+    font-size: 7px !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-grid .browse-watch {
+    display: flex !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: calc(100% - 14px) !important;
+    min-width: 0 !important;
+    min-height: 28px !important;
+    height: 28px !important;
+    margin: 0 7px 7px !important;
+    padding: 0 3px !important;
+    box-sizing: border-box !important;
+    border-radius: 5px !important;
+    font-size: 7px !important;
+    line-height: 1 !important;
+    z-index: 10 !important;
+  }
+
+  /* No heart on the anime card; My List bottom-nav heart stays untouched. */
+  .browse-grid .card-heart,
+  .browse-grid .heart,
+  .browse-grid .favorite,
+  .browse-grid .favorite-btn {
+    display: none !important;
+  }
+
+  .browse-grid .rank-badge {
+    min-width: 30px !important;
+    width: auto !important;
+    height: 30px !important;
+    padding: 0 5px !important;
+    font-size: 10px !important;
+    z-index: 20 !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .browse-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+  .browse-grid .anime-info { padding: 6px !important; }
+  .browse-grid .anime-title { font-size: 8px !important; min-height: 25px !important; max-height: 26px !important; }
+  .browse-grid .anime-meta { font-size: 6px !important; gap: 2px !important; }
+  .browse-grid .browse-watch { width: calc(100% - 12px) !important; min-height: 25px !important; height: 25px !important; margin: 0 6px 6px !important; font-size: 6px !important; }
+}
+</style>
+
 </head>
 
 
