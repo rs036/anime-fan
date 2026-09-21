@@ -1,79 +1,127 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Anime Fan — Home</title>
-<link rel="stylesheet" href="styles.css">
+<title>Anime Fan — Watch Anime</title>
+<meta name="description" content="Anime Fan — discover trending anime, continue watching, browse genres and manage your list.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kalam:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="app-shell">
   <aside class="sidebar">
-    <a class="brand" href="index.html"><span class="brand-mark">✦</span><span>Anime <b>Fan</b></span></a>
-    <nav class="side-nav">
-      <a class="active" href="#home">⌂ <span>Home</span></a><a href="#anime">▣ <span>Anime</span></a>
-      <a href="#movies">▤ <span>Movies</span></a><a href="#genres">◇ <span>Genres</span></a>
-      <a href="#mylist">♡ <span>My List</span></a><a href="#continue">◉ <span>Continue Watching</span></a>
-      <a href="#request">♧ <span>Request</span></a><a href="#report">⚑ <span>Report</span></a>
+    <div class="brand">
+      <div class="brand-mark">✦</div>
+      <div><strong>ANIME FAN</strong><span>アニメファン</span></div>
+    </div>
+    <nav>
+      <button class="nav-item active" data-page="home">⌂ <span>Home</span></button>
+      <button class="nav-item" data-page="anime">♡ <span>Anime</span></button>
+      <button class="nav-item" data-page="movies">▣ <span>Movies</span></button>
+      <button class="nav-item" data-page="genres">▦ <span>Genres</span></button>
+      <button class="nav-item" data-page="trending">↗ <span>Trending</span></button>
+      <button class="nav-item" data-page="mylist">♥ <span>My List</span></button>
+      <button class="nav-item" data-page="request">◉ <span>Request</span></button>
     </nav>
-    <div class="side-title">QUICK GENRES</div>
-    <div class="quick-genres">
-      <span>★ Action</span><span>★ Adventure</span><span>● Comedy</span><span>◆ Drama</span>
-      <span>✦ Fantasy</span><span>● Horror</span><span>♥ Romance</span><span>◌ Sci-Fi</span>
-      <span>⚽ Sports</span><span>☁ Slice of Life</span><span>✧ Supernatural</span><span>◇ Mystery</span>
+    <div class="premium-card">
+      <button class="close">×</button>
+      <div class="crown">♛</div>
+      <h3>Go Premium</h3>
+      <p>Unlock HD quality, no ads, early access and more!</p>
+      <button class="gradient-btn">Upgrade Now →</button>
     </div>
-    <div class="side-promo">
-      <div class="promo-art">⚔</div><b>Watch Your Favorite Anime Anytime!</b><small>👑 AniFan India</small>
+    <div class="sidebar-art">
+      <div class="art-glow"></div>
+      <div class="art-character">影</div>
+      <div class="jp">夢を追え</div>
+      <small>CHASE YOUR DREAMS</small>
     </div>
+    <div class="socials">◉　▶　𝕏　◎</div>
+    <div class="footer-note">Anime Fan<br><span>More Than Just Anime</span></div>
   </aside>
 
   <main class="main">
     <header class="topbar">
-      <a class="mobile-brand" href="index.html"><span class="brand-mark">✦</span>Anime <b>Fan</b></a>
-      <nav class="top-nav"><a class="active" href="#home">⌂ Home</a><a href="#anime">▣ Anime</a><a href="#movies">▤ Movies</a><a href="#genres">◇ Genres</a><a href="#trending">✳ Trending</a><a href="#mylist">♡ My List</a><a href="#request">♧ Request</a></nav>
-      <div class="top-actions"><div class="search"><span>⌕</span><input id="search" placeholder="Search anime, movies, genres..."></div><button>◔</button><button>☾</button><button class="hamb">☰</button></div>
+      <div class="mobile-brand">ANIME FAN</div>
+      <div class="search-wrap"><span>⌕</span><input id="search" placeholder="Search anime, movies, genres..."><kbd>⌘ K</kbd></div>
+      <div class="top-actions"><button>☾</button><button class="bell">♧<i></i></button><button class="profile">◉ <span>Anime Lover<br><small>Premium Member</small></span>⌄</button></div>
     </header>
 
-    <section id="home" class="hero">
-      <div class="hero-copy">
-        <span class="pill red">FEATURED</span><h1>One Piece</h1>
-        <p>Follow Monkey D. Luffy and his crew, the Straw Hat Pirates, as they search for the legendary One Piece and the title of Pirate King.</p>
-        <div class="meta">⭐ 9.1/10 &nbsp; ◉ TV &nbsp; • Adventure &nbsp; • Action &nbsp; • 1120+ Episodes</div>
-        <div class="actions"><a class="btn primary" href="watch.html?anime=one-piece&episode=1">▶ Watch Now</a><button class="btn outline" data-list="one-piece">＋ Add to My List</button></div>
+    <section id="hero" class="hero">
+      <div class="hero-content">
+        <span class="pill">Featured</span>
+        <h1>SOLO <em>LEVELING</em></h1>
+        <div class="meta">◉ TV Series　◷ 2024　13+　▣ 24 Episodes　<span>JP & EN</span></div>
+        <p>After being the weakest hunter, Sung Jin-Woo gains a mysterious power and rises to become the strongest...</p>
+        <div class="hero-buttons"><button class="gradient-btn" onclick="openPlayer('Solo Leveling',12)">▶ Watch Now</button><button class="outline-btn" onclick="toggleList('Solo Leveling')">＋ My List</button><button class="circle-btn" onclick="openPlayer('Solo Leveling',12)">▶</button></div>
       </div>
-      <div class="hero-art one-piece"><div class="hero-character">ONE<br><em>PIECE</em></div></div>
-      <div class="hero-dots"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="hero-art"></div>
+      <div class="hero-slogan">Not just an<br>anime...<br><strong>It's a feeling</strong></div>
+      <div class="dots">●　○　○　○</div>
     </section>
 
-    <div class="content-grid">
-      <div class="left-content">
-        <section id="trending" class="section"><div class="section-head"><h2>🔥 Trending Now</h2><a>View All ›</a></div><div id="trendingCards" class="cards"></div></section>
-        <section id="continue" class="section"><div class="section-head"><h2>▶ Continue Watching</h2><a>View All ›</a></div><div id="continueCards" class="cards"></div></section>
-        <section class="section"><div class="section-head"><h2>🆕 Latest Updates</h2><a>View All ›</a></div><div id="latestCards" class="latest-list"></div></section>
-        <section id="anime" class="section"><div class="section-head"><h2>♛ Recently Added</h2><a>View All ›</a></div><div id="recentCards" class="cards"></div></section>
-        <section id="genres" class="section"><div class="section-head"><h2>◇ Browse by Genre</h2><a>View All ›</a></div><div class="genre-grid">
-          <span>⚔ Action</span><span>🌄 Adventure</span><span>😂 Comedy</span><span>🎭 Drama</span><span>🪄 Fantasy</span><span>👻 Horror</span><span>💗 Romance</span><span>🤖 Sci-Fi</span><span>⚽ Sports</span><span>☁ Slice of Life</span><span>☯ Supernatural</span><span>🕵 Mystery</span>
-        </div></section>
-        <section class="section"><div class="section-head"><h2>🇮🇳 Hindi Dub</h2><a>View All ›</a></div><div id="hindiCards" class="cards"></div></section>
-        <section id="movies" class="section"><div class="section-head"><h2>🎬 Movies</h2><a>View All ›</a></div><div id="movieCards" class="cards"></div></section>
-      </div>
-      <aside class="right-column">
-        <section class="panel"><div class="panel-head"><h3>👑 Top Anime</h3><a>View All</a></div><div id="topList"></div></section>
-        <section class="panel"><div class="panel-head"><h3>▣ Upcoming Schedule</h3><a>View All</a></div><div class="schedule">
-          <div><b>14<br><small>Sep</small></b><span>🏴 One Piece<br><small>Ep 1121 • 09:00 AM</small></span></div>
-          <div><b>15<br><small>Sep</small></b><span>🔥 Demon Slayer<br><small>Ep 56 • 08:30 AM</small></span></div>
-          <div><b>16<br><small>Sep</small></b><span>👁 Jujutsu Kaisen<br><small>Ep 48 • 09:30 AM</small></span></div>
-          <div><b>17<br><small>Sep</small></b><span>🍥 Naruto Shippuden<br><small>Ep 501 • 09:30 AM</small></span></div>
-        </div></section>
-        <section id="request" class="panel request-panel"><h3>♧ Anime Request</h3><p>Didn't find your favorite anime? Tell us and we'll add it!</p><a class="btn primary" href="#requestForm">➤ Request Now</a></section>
-        <section id="requestForm" class="panel form-panel"><h3>♧ Request Anime</h3><input placeholder="Anime name"><select><option>Select Season</option><option>Season 1</option><option>Season 2</option></select><select><option>Audio Language</option><option>Hindi Dub</option><option>English Dub</option><option>Original Audio</option></select><textarea placeholder="Tell us more about the anime..."></textarea><button class="btn primary">➤ Submit Request</button></section>
-      </aside>
-    </div>
+    <section class="content-section">
+      <div class="section-head"><h2>🔥 Trending Now</h2><button onclick="setPage('trending')">View All →</button></div>
+      <div class="anime-row" id="trendingRow"></div>
+    </section>
 
-    <footer><div class="footer-brand"><span class="brand-mark">✦</span><strong>Anime <b>Fan</b></strong><small>ANIME • MOVIES • SERIES • MORE</small></div><div>✈ 1200+ Anime &nbsp; ▣ 500+ Movies &nbsp; 👤 50K+ Members</div><div class="footer-links">About Us &nbsp;&nbsp; Contact &nbsp;&nbsp; Privacy Policy &nbsp;&nbsp; Terms & Conditions &nbsp;&nbsp; DMCA</div></footer>
+    <section class="content-section">
+      <div class="section-head"><h2>▶ Continue Watching</h2></div>
+      <div class="continue-row" id="continueRow"></div>
+    </section>
+
+    <section class="quick-row">
+      <button class="quick-card movie"><b>▣</b><span>Movies<small>Big Screen Anime</small></span></button>
+      <button class="quick-card dub"><b>◉</b><span>Dubbed<small>Hindi & More</small></span></button>
+      <button class="quick-card genre"><b>▦</b><span>Genres<small>Find Your Vibe</small></span></button>
+      <button class="quick-card upcoming"><b>▣</b><span>Upcoming<small>Next Season</small></span></button>
+      <button class="quick-card rated"><b>★</b><span>Top Rated<small>Best of All Time</small></span></button>
+    </section>
+
+    <section class="content-section">
+      <div class="section-head"><h2>▣ Popular Categories</h2><button onclick="setPage('genres')">View All →</button></div>
+      <div class="categories" id="categories"></div>
+    </section>
   </main>
+
+  <aside class="rightbar">
+    <div class="promo">
+      <div><h2>Your Next<br><i>Adventure Awaits</i></h2><p>1000+ Anime · Movies · Dubbed · Subbed</p><button class="gradient-btn">Explore Now →</button></div>
+    </div>
+    <div class="side-panel">
+      <div class="section-head"><h3>Currently Watching</h3><button>View All →</button></div>
+      <div class="watching"><img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=180&q=80"><div><b>One Piece</b><small>S1 · E1089</small><div class="progress"><i style="width:72%"></i></div></div><button>Ⅱ</button></div>
+    </div>
+    <div class="side-panel">
+      <div class="section-head"><h3>♛ Top 10 This Week</h3></div>
+      <div id="topList"></div>
+    </div>
+    <div class="side-panel">
+      <div class="section-head"><h3>Next Episodes</h3><button>View All →</button></div>
+      <div class="next-list">
+        <div>🍥 <span>Naruto Shippuden<small>S6 · E12</small></span><b>2h</b></div>
+        <div>🔵 <span>Blue Lock<small>S2 · E7</small></span><b>4h</b></div>
+        <div>🟣 <span>Jujutsu Kaisen<small>S2 · E16</small></span><b>6h</b></div>
+      </div>
+    </div>
+    <div class="side-panel calendar">
+      <div class="section-head"><h3>Anime Calendar</h3><button>Apr 26, 2026 →</button></div>
+      <div class="days"><b>Mon<br>24</b><b>Tue<br>25</b><b class="today">Wed<br>26</b><b>Thu<br>27</b><b>Fri<br>29</b><b>Sat<br>30</b></div>
+      <div class="calendar-event">🌊 <span>Wind Breaker S2<small>E6 · 10:00 AM</small></span> <b>›</b></div>
+    </div>
+  </aside>
 </div>
-<div class="mobile-nav"><a class="active" href="#home">⌂<small>Home</small></a><a href="#anime">▣<small>Anime</small></a><a href="#movies">▤<small>Movies</small></a><a href="#genres">◇<small>Genres</small></a><a href="#mylist">♥<small>My List</small></a></div>
+
+<div class="modal" id="playerModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closePlayer()">×</button>
+    <div class="video-placeholder"><div>▶</div><p id="playerTitle">Episode</p><small>Player demo — connect your licensed video source/API here.</small></div>
+    <div class="episode-bar"><button>‹ Previous</button><span id="episodeLabel">Episode 12</span><button>Next ›</button></div>
+  </div>
+</div>
 <script src="app.js"></script>
 </body>
 </html>

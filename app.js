@@ -1,31 +1,24 @@
-const animeData={
- "solo-leveling":{title:"Solo Leveling",ep:24,year:2024,rating:"9.2",genres:"Action • Adventure • Fantasy",c1:"#1b4bdb",c2:"#24105d",icon:"⚔",desc:"After being killed, Sung Jin-Woo becomes the weakest hunter, but through a mysterious system, he gains the power to level up and become the strongest."},
- "one-piece":{title:"One Piece",ep:1120,year:1999,rating:"9.1",genres:"Adventure • Action • Comedy",c1:"#e27b14",c2:"#68120f",icon:"☠",desc:"Follow Monkey D. Luffy and his crew, the Straw Hat Pirates, as they search for the legendary One Piece."},
- "jujutsu-kaisen":{title:"Jujutsu Kaisen",ep:47,year:2020,rating:"8.7",genres:"Action • Supernatural",c1:"#4d8cff",c2:"#37105f",icon:"呪",desc:"Yuji Itadori joins the world of jujutsu sorcery after becoming involved with a cursed object."},
- "demon-slayer":{title:"Demon Slayer",ep:63,year:2019,rating:"9.1",genres:"Action • Fantasy",c1:"#e44535",c2:"#4d1020",icon:"炎",desc:"Tanjiro begins a dangerous journey to save his sister and defeat the demons threatening humanity."},
- "attack-on-titan":{title:"Attack on Titan",ep:87,year:2013,rating:"9.7",genres:"Action • Drama",c1:"#ad5a24",c2:"#121722",icon:"巨",desc:"Humanity fights for survival behind enormous walls as terrifying Titans threaten the world."},
- "blue-lock":{title:"Blue Lock",ep:38,year:2022,rating:"8.6",genres:"Sports • Drama",c1:"#237bff",c2:"#071d4c",icon:"⚽",desc:"A ruthless football training project searches for the striker who can lead Japan to victory."},
- "naruto":{title:"Naruto Shippuden",ep:500,year:2007,rating:"8.8",genres:"Action • Adventure",c1:"#e47c23",c2:"#47200e",icon:"忍",desc:"Naruto returns stronger and faces a new generation of threats."},
- "black-clover":{title:"Black Clover",ep:170,year:2017,rating:"8.2",genres:"Action • Fantasy",c1:"#251b73",c2:"#071a2e",icon:"BC",desc:"Asta dreams of becoming the Wizard King despite having no magic."}
-};
-const order=["solo-leveling","one-piece","naruto","demon-slayer","jujutsu-kaisen","attack-on-titan","blue-lock","black-clover"];
-function card(id,continueMode=false){const a=animeData[id];return `<article class="card ${continueMode?'continue':''}" data-title="${a.title.toLowerCase()}" onclick="location.href='anime.html?anime=${id}'"><div class="poster" style="--c1:${a.c1};--c2:${a.c2}"><span class="poster-art">${a.icon}</span></div><div class="card-info"><b>${a.title}</b><small>TV • ${a.ep} Eps</small><small class="rating">★ ${a.rating}</small>${continueMode?`<div class="progress"><i style="width:${Math.floor(35+Math.random()*55)}%"></i></div>`:""}</div></article>`}
-function fill(id,arr,cont=false){const el=document.getElementById(id);if(el)el.innerHTML=arr.map(x=>card(x,cont)).join("")}
-function initHome(){
- fill("trendingCards",["solo-leveling","one-piece","naruto","demon-slayer","jujutsu-kaisen","attack-on-titan","blue-lock"]);
- fill("continueCards",["solo-leveling","one-piece","demon-slayer","jujutsu-kaisen","attack-on-titan"],true);
- fill("recentCards",["jujutsu-kaisen","demon-slayer","attack-on-titan","solo-leveling","black-clover","naruto","blue-lock"]);
- fill("hindiCards",["one-piece","solo-leveling","demon-slayer","naruto","black-clover","blue-lock"]);
- fill("movieCards",["one-piece","jujutsu-kaisen","demon-slayer","attack-on-titan","blue-lock","naruto"]);
- const top=document.getElementById("topList");
- if(top)top.innerHTML=["solo-leveling","one-piece","jujutsu-kaisen","demon-slayer","naruto"].map((id,i)=>{const a=animeData[id];return `<div class="rank"><strong>${i+1}</strong><div class="rank-poster" style="--c1:${a.c1};--c2:${a.c2}">${a.icon}</div><div><b>${a.title}</b><small>TV • ${a.ep} Eps</small></div><span class="${i===3?'down':'up'}">${i===3?'↓':i===1?'—':'↑'}</span></div>`}).join("");
- const latest=document.getElementById("latestCards");
- if(latest)latest.innerHTML=["attack-on-titan","blue-lock","naruto","jujutsu-kaisen"].map(id=>{const a=animeData[id];return `<div class="latest-item"><div class="mini-poster" style="--c1:${a.c1};--c2:${a.c2}"></div><div><b>${a.title}</b><small>Episode ${a.ep} Released<br>2 hours ago</small></div></div>`}).join("");
- const search=document.getElementById("search");
- if(search)search.addEventListener("input",e=>{const q=e.target.value.toLowerCase();document.querySelectorAll(".card").forEach(c=>c.style.display=c.dataset.title.includes(q)?"":"none")});
- document.querySelectorAll("[data-list]").forEach(btn=>btn.addEventListener("click",()=>{const id=btn.dataset.list;let list=JSON.parse(localStorage.getItem("animeFanList")||"[]");if(!list.includes(id))list.push(id);localStorage.setItem("animeFanList",JSON.stringify(list));btn.textContent="✓ Added to My List"}));
-}
-function qs(name){return new URLSearchParams(location.search).get(name)||"one-piece"}
-function initDetail(){const id=qs("anime"),a=animeData[id]||animeData["one-piece"],el=document.getElementById("detail");if(!el)return;el.innerHTML=`<div class="detail-hero"><div class="detail-poster" style="background:linear-gradient(145deg,${a.c1},${a.c2})">${a.icon}</div><div class="detail-copy"><span class="pill red">ANIME DETAILS</span><h1>${a.title}</h1><p>${a.desc}</p><div class="chips"><span>⭐ ${a.rating}</span><span>TV</span><span>${a.genres}</span><span>${a.ep} Episodes</span><span>2024</span></div><p><b>Available Languages:</b></p><div class="chips"><span>🇮🇳 Hindi Dub</span><span>🇬🇧 English Dub</span><span>🇯🇵 Original Audio</span><span>🎙 Fan Dub</span></div><div class="actions" style="margin-top:15px"><a class="btn primary" href="watch.html?anime=${id}&episode=1">▶ Watch Now</a><button class="btn outline" data-list="${id}">＋ Add to My List</button></div><hr style="border-color:#153246;margin:18px 0"><b>Episodes • Season 01</b><div class="episode-grid">${Array.from({length:Math.min(a.ep,24)},(_,i)=>`<a href="watch.html?anime=${id}&episode=${i+1}">${i+1}</a>`).join("")}</div></div></div>`}
-function initWatch(){const id=qs("anime"),ep=Number(new URLSearchParams(location.search).get("episode")||1),a=animeData[id]||animeData["one-piece"],el=document.getElementById("watch");if(!el)return;const last=Math.min(a.ep,24);el.innerHTML=`<div class="watch-player" style="background:radial-gradient(circle at 50% 45%,${a.c1},#02070d 62%)">▶</div><div class="watch-controls"><b>${a.title} • S1 • E${ep}</b><div class="actions" style="margin-top:10px"><a class="btn outline" href="watch.html?anime=${id}&episode=${Math.max(1,ep-1)}">◀ Previous</a>${ep<last?`<a class="btn primary" href="watch.html?anime=${id}&episode=${ep+1}">Next ▶</a>`:""}</div><p>🇮🇳 Hindi Dub　　Season 01　　Episode ${ep}</p><div class="episode-grid">${Array.from({length:last},(_,i)=>`<a class="${i+1===ep?'active':''}" href="watch.html?anime=${id}&episode=${i+1}">${i+1}</a>`).join("")}</div></div>`}
-initHome();initDetail();initWatch();
+const anime=[
+["Demon Slayer","S3 · 11 Episodes","9.3","https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=400&q=80"],
+["One Piece","S1 · 1120 Episodes","9.2","https://images.unsplash.com/photo-1541560052-5e137f229371?auto=format&fit=crop&w=400&q=80"],
+["Jujutsu Kaisen","S2 · 24 Episodes","9.1","https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&q=80"],
+["Attack on Titan","S4 · 94 Episodes","9.0","https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80"],
+["Solo Leveling","S1 · 24 Episodes","9.4","https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?auto=format&fit=crop&w=400&q=80"],
+["Blue Lock","S2 · 24 Episodes","8.7","https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=400&q=80"],
+["Naruto Shippuden","S6 · 500 Episodes","8.6","https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&w=400&q=80"],
+["My Hero Academia","S6 · 25 Episodes","8.5","https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&q=80"]
+];
+const cats=["Action","Adventure","Fantasy","Romance","Comedy","Mystery"];
+function card(a,i){return `<article class="anime-card" onclick="openPlayer('${a[0]}',${i+1})"><div class="poster" style="background-image:linear-gradient(0deg,#020711 0%,transparent 45%),url('${a[3]}')"><span class="rank">${i+1}</span><span class="hd">HD</span></div><div class="anime-info"><b>${a[0]}</b><small>${a[1]}</small><div class="rating">★ ${a[2]}</div></div></article>`}
+document.getElementById('trendingRow').innerHTML=anime.map(card).join('');
+document.getElementById('topList').innerHTML=anime.slice(0,5).map((a,i)=>`<div class="top-item"><span class="num">${i+1}</span><img src="${a[3]}"><span>${a[0]}<small>9.${4-i}</small></span><strong>↑</strong></div>`).join('');
+document.getElementById('categories').innerHTML=cats.map((c,i)=>`<button class="category" style="background-image:linear-gradient(0deg,#07101dcc,transparent),url('${anime[i][3]}')" onclick="setPage('genres')">${c}</button>`).join('');
+const cont=[["Solo Leveling","S1 · E12","50%",anime[4][3]],["One Piece","S1 · E1089","72%",anime[1][3]],["Demon Slayer","S3 · E8","43%",anime[0][3]],["Jujutsu Kaisen","S2 · E15","68%",anime[2][3]]];
+document.getElementById('continueRow').innerHTML=cont.map(x=>`<div class="continue-card" onclick="openPlayer('${x[0]}',12)"><img src="${x[3]}"><div><b>${x[0]}</b><small>${x[1]}　24m left</small><div class="progress"><i style="width:${x[2]}"></i></div></div><span>▶</span></div>`).join('');
+document.querySelectorAll('.nav-item').forEach(b=>b.onclick=()=>setPage(b.dataset.page));
+function setPage(page){document.querySelectorAll('.nav-item').forEach(b=>b.classList.toggle('active',b.dataset.page===page)); window.scrollTo({top:0,behavior:'smooth'}); if(page!=='home') alert(page[0].toUpperCase()+page.slice(1)+' page is ready for your next content/API connection.');}
+function openPlayer(title,ep){document.getElementById('playerTitle').textContent=title;document.getElementById('episodeLabel').textContent='Episode '+ep;document.getElementById('playerModal').classList.add('open')}
+function closePlayer(){document.getElementById('playerModal').classList.remove('open')}
+function toggleList(name){let key='anime-list';let list=JSON.parse(localStorage.getItem(key)||'[]');if(!list.includes(name))list.push(name);localStorage.setItem(key,JSON.stringify(list));alert(name+' added to My List');}
+document.getElementById('search').addEventListener('keydown',e=>{if(e.key==='Enter'){const q=e.target.value.trim().toLowerCase();if(!q)return;const found=anime.filter(a=>a[0].toLowerCase().includes(q));document.getElementById('trendingRow').innerHTML=found.length?found.map(card).join(''):'<p style="color:#8ba0ba">No demo result found. Connect your anime API for live search.</p>';document.getElementById('trendingRow').scrollIntoView({behavior:'smooth'});}});
+document.getElementById('playerModal').addEventListener('click',e=>{if(e.target.id==='playerModal')closePlayer()});
