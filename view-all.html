@@ -1026,6 +1026,159 @@
 }
 </style>
 
+
+<style id="mobile-target-exact-fix">
+@media (max-width: 768px) {
+  body { padding-bottom: 86px !important; }
+
+  .browse-page {
+    width: 100% !important;
+    padding: 0 18px 96px !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-hero {
+    margin: 0 !important;
+    min-height: 185px !important;
+    padding: 28px 28px !important;
+    border-radius: 0 0 18px 18px !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-hero h1 {
+    font-size: 50px !important;
+    line-height: 1.05 !important;
+    letter-spacing: -1.5px !important;
+  }
+  .browse-hero p {
+    font-size: 16px !important;
+    margin-top: 12px !important;
+  }
+  .browse-hero-icon { width: 42px !important; height: 42px !important; }
+  .browse-hero-icon::before { font-size: 34px !important; }
+
+  .browse-filter-wrap {
+    margin: 26px 0 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .browse-filters {
+    display: grid !important;
+    grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+    gap: 18px !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+  .browse-filters a {
+    min-height: 64px !important;
+    padding: 0 8px !important;
+    font-size: 17px !important;
+    border-radius: 32px !important;
+    white-space: nowrap !important;
+  }
+
+  .browse-content { margin-top: 32px !important; }
+  .browse-heading {
+    margin-bottom: 18px !important;
+    padding: 0 8px !important;
+  }
+  .browse-heading h2 {
+    font-size: 30px !important;
+    line-height: 1.1 !important;
+  }
+  .browse-count { font-size: 17px !important; }
+
+  .browse-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    gap: 18px !important;
+    width: 100% !important;
+    align-items: start !important;
+  }
+
+  .browse-grid > .anime-card {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    border: 2px solid rgba(0,210,255,.65) !important;
+    border-radius: 13px !important;
+    background: #080d13 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-grid .anime-poster {
+    width: 100% !important;
+    aspect-ratio: 1 / 0.98 !important;
+    height: auto !important;
+    border-radius: 9px 9px 0 0 !important;
+  }
+  .browse-grid .anime-poster img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  .browse-grid .anime-info {
+    padding: 10px 9px 8px !important;
+  }
+  .browse-grid .anime-title {
+    min-height: 22px !important;
+    max-height: 46px !important;
+    font-size: 17px !important;
+    line-height: 1.25 !important;
+    -webkit-line-clamp: 2 !important;
+  }
+  .browse-grid .anime-meta {
+    margin-top: 9px !important;
+    gap: 6px !important;
+    font-size: 13px !important;
+    line-height: 1.15 !important;
+  }
+
+  .browse-grid .browse-watch {
+    width: calc(100% - 18px) !important;
+    height: 46px !important;
+    min-height: 46px !important;
+    margin: 0 9px 9px !important;
+    border-radius: 9px !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    box-sizing: border-box !important;
+  }
+
+  .browse-grid .browse-watch-icon {
+    margin-right: 7px !important;
+    font-size: 12px !important;
+  }
+
+  .browse-grid .rank-badge {
+    min-width: 58px !important;
+    height: 58px !important;
+    padding: 0 9px !important;
+    border-radius: 0 0 14px 0 !important;
+    font-size: 18px !important;
+  }
+
+  .browse-grid .card-heart,
+  .browse-grid .heart,
+  .browse-grid .favorite,
+  .browse-grid .favorite-btn { display: none !important; }
+
+  .mobile-bottom-nav { height: 78px !important; }
+}
+
+@media (max-width: 600px) {
+  .browse-page { padding-left: 18px !important; padding-right: 18px !important; }
+}
+
+@media (max-width: 380px) {
+  .browse-grid { gap: 8px !important; }
+  .browse-grid .anime-title { font-size: 11px !important; }
+  .browse-grid .anime-meta { font-size: 8px !important; }
+  .browse-grid .browse-watch { font-size: 8px !important; height: 32px !important; min-height: 32px !important; }
+}
+</style>
 </head>
 
 
