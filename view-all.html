@@ -59,19 +59,28 @@
 
     <div class="header-actions">
 
-      <button
-        class="icon-btn"
-        id="searchBtn"
-        aria-label="Search">
-        🔍
-      </button>
+      <button class="icon-btn" id="searchBtn" aria-label="Search">
+        <svg class="header-icon search-svg"
+             viewBox="0 0 24 24"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7.5"/>
+            <path d="M16.5 16.5L22 22"/>
+        </svg>
+    </button>
 
-      <button
-        class="icon-btn"
-        id="notificationBtn"
-        aria-label="Notifications">
-        ♡
-      </button>
+    <!-- NOTIFICATION -->
+    <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+        <svg class="header-icon notification-svg"
+             viewBox="0 0 24 24"
+             fill="none"
+             xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 9C18 5.69 15.31 3 12 3C8.69 3 6 5.69 6 9V14L4 17H20L18 14V9Z"/>
+            <path d="M10 20C10.45 20.61 11.15 21 12 21C12.85 21 13.55 20.61 14 20"/>
+        </svg>
+
+        <span class="notification-dot"></span>
+    </button>
 
     </div>
 
