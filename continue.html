@@ -100,12 +100,7 @@
         }
     
         /* Mobile: 4 full cards per row */
-        @media(max-width:700px){
-            .grid {
-                grid-template-columns:repeat(4, 1fr) !important;
-                gap:0.5rem !important;
-                padding:0 0.6rem;
-            }
+        @media(max-width:700px){ .grid { grid-template-columns:1fr !important; gap:0.75rem !important; } } }
             .page-header, .navbar, .back, main, .container {
                 padding-left:0.6rem !important;
                 padding-right:0.6rem !important;
@@ -349,6 +344,6 @@
             </div>
         </div>
     </div>
-    <footer>© 2026 AnimeFan · Made with ❤️ for anime lovers</footer>
+    <footer><span style="display:block;font-size:0.72rem;margin-bottom:0.5rem;opacity:0.85;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</span>© 2026 AnimeFan · Made with ❤️ for anime lovers</footer>
 </body>
 </html>

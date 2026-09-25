@@ -42,7 +42,8 @@
         .menu-btn { display:none; background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; }
 
         /* HERO - full poster bg, NO badges */
-        .hero { position:relative; 
+        .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+        
             position:relative; 
             height: min(62vh, 580px);
             min-height: 420px;
@@ -88,11 +89,17 @@
         .btn-more:hover { background:rgba(255,255,255,0.18); }
 
         .hero-poster {
-            position:absolute; right:5%; bottom:5%; width:220px; height:310px;
-            border-radius:14px; overflow:hidden; box-shadow:0 20px 50px rgba(0,0,0,0.55);
-            border:2px solid rgba(255,255,255,0.1); z-index:2; display:none;
+            display:block; flex:0 0 200px; width:200px; height:300px;
+            border-radius:14px; overflow:hidden; z-index:3; position:relative;
+            box-shadow:0 12px 40px rgba(0,0,0,0.5); border:2px solid rgba(255,255,255,0.12);
+            background:linear-gradient(145deg,#1e1e2e,#2a1a3a); margin-bottom:1rem;
         }
-        @media(min-width:1100px){ .hero-poster{display:block;} }
+        .hero-poster img { width:100%; height:100%; object-fit:cover; }
+        @media(max-width:900px){
+            .hero { flex-direction:column; align-items:stretch; }
+            
+        }
+        .hero-poster{display:block;}
         .hero-poster img { width:100%; height:100%; object-fit:cover; }
 
         .spotlight-badge {
@@ -113,27 +120,22 @@
         .spotlight-badge span { color: #fff; }
         .hero-content { transition: opacity 0.4s ease; }
         .hero-content.fade { opacity: 0; }
-        .hero-arrow {
-            position:absolute; top:50%; transform:translateY(-50%); z-index:5;
-            width:44px; height:44px; border-radius:50%; border:none;
-            background:rgba(0,0,0,0.45); color:#fff; font-size:1.3rem;
-            cursor:pointer; display:flex; align-items:center; justify-content:center;
-            transition:0.2s; backdrop-filter:blur(6px);
-        }
-        .hero-arrow:hover { background:rgba(168,85,247,0.7); }
-        .hero-arrow.prev { left:1%; }
-        .hero-arrow.next { right:1%; }
+        
+        
+        
+        
         @media(max-width:700px){
-            .hero-arrow { width:36px; height:36px; font-size:1.1rem; }
+            
         }
         .hero-dots {
-            position: absolute;
-            bottom: 1.2rem;
-            left: 4%;
-            display: flex;
-            gap: 6px;
-            z-index: 3;
+            display:flex; gap:0.4rem; margin-top:1rem; position:relative; z-index:4;
+            padding:0; left:auto; bottom:auto;
         }
+        .hero-dot {
+            width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.35);
+            cursor:pointer; transition:0.2s; border:none; padding:0;
+        }
+        .hero-dot.active { background:#a855f7; width:22px; border-radius:6px; }
         .hero-dot {
             width: 8px;
             height: 8px;
@@ -186,21 +188,48 @@
         .card-meta { font-size:0.72rem; color:var(--muted); }
 
         /* Continue Watching */
+
+        /* Continue Watching - Aniflix landscape style */
         .cw-card {
-            flex: 0 0 220px;
-            scroll-snap-align: start;
-            background: var(--card);
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            border: 1px solid transparent;
-            transition: 0.25s;
+            flex:0 0 280px;
+            scroll-snap-align:start;
+            background:var(--card);
+            border-radius:14px;
+            overflow:hidden;
+            border:1px solid var(--border);
+            position:relative;
+            cursor:pointer;
+            transition:0.25s;
         }
-        .cw-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(168,85,247,0.4);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+        .cw-card:hover { transform:translateY(-3px); border-color:rgba(168,85,247,0.4); }
+        .cw-poster {
+            width:100%;
+            aspect-ratio:16/9;
+            background:linear-gradient(145deg,#1e1e2e,#2a1a3a);
+            position:relative;
+            display:flex; align-items:center; justify-content:center;
+            font-size:2.5rem;
         }
+        .cw-overlay {
+            position:absolute; inset:0;
+            background:linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 55%);
+            display:flex; flex-direction:column; justify-content:flex-end;
+            padding:0.75rem 0.85rem;
+        }
+        .cw-overlay h3 { font-size:0.88rem; font-weight:600; margin-bottom:0.2rem;
+            white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .cw-overlay .cw-meta { font-size:0.72rem; color:#c4b5fd; }
+        .cw-progress {
+            position:absolute; bottom:0; left:0; right:0; height:3px;
+            background:rgba(255,255,255,0.15);
+        }
+        .cw-progress span {
+            display:block; height:100%; background:linear-gradient(90deg,#a855f7,#ec4899);
+        }
+        @media(max-width:700px){
+            .cw-card { flex:0 0 78vw; max-width:300px; }
+        }
+
         .cw-img {
             height: 124px;
             background: linear-gradient(135deg, #1e1b4b, #0f172a);
@@ -244,7 +273,7 @@
 
 
         /* Latest + Top Ranked */
-        .episodes-grid { display:grid; grid-template-columns:1fr 290px; gap:1.3rem; }
+        .episodes-grid { display:grid; grid-template-columns:1fr; gap:1.3rem; }
         @media(max-width:900px){ .episodes-grid{grid-template-columns:1fr;} }
         .episode-list { display:flex; flex-direction:column; gap:0.6rem; }
         .episode-item { display:flex; gap:0.9rem; background:var(--card); border-radius:10px; padding:0.6rem; transition:0.2s; cursor:pointer; border:1px solid transparent; }
@@ -379,13 +408,15 @@
         @media(max-width:900px){
             .nav-links, .search-box { display:none; }
             .menu-btn { display:block; }
-            .hero { position:relative;  height:auto; min-height:52vh; max-height:480px; padding:4rem 5% 2rem; }
+            .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+         height:auto; min-height:52vh; max-height:480px; padding:4rem 5% 2rem; }
             .hero h1 { font-size:1.85rem; }
             .hero p { font-size:0.88rem; -webkit-line-clamp:2; }
-            .hero-poster { display:none !important; }
+            /* poster visible */
         }
         @media(max-width:480px){
-            .hero { position:relative;  min-height:48vh; }
+            .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+         min-height:48vh; }
             .hero h1 { font-size:1.65rem; }
         }
 
@@ -413,16 +444,67 @@
             .card-body { padding:0.5rem; }
             .card-body h3 { font-size:0.78rem; }
             .card-meta { font-size:0.65rem; }
-            .hero { position:relative;  min-height:auto; padding:1.2rem 0.75rem 1.5rem; }
+            .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+         min-height:auto; padding:1.2rem 0.75rem 1.5rem; }
             .hero-content h1 { font-size:1.45rem; }
             .hero-content p { font-size:0.85rem; }
             .section-title { font-size:1.05rem; }
             .navbar { padding:0.55rem 0.75rem; }
-            /* Continue watching same portrait ratio as anime cards */
-            .cw-card .cw-poster, .cw-poster { width:100%; aspect-ratio:2/3; background:linear-gradient(145deg,#1e1e2e,#2a1a3a); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:2.2rem; }
+
         }
 
-    </style>
+    
+        .sched-tabs {
+            display:flex; gap:0.3rem; overflow-x:auto; margin-bottom:1rem;
+            padding-bottom:0.3rem; scrollbar-width:none;
+        }
+        .sched-tabs::-webkit-scrollbar { display:none; }
+        .sched-tab {
+            flex:0 0 auto; background:transparent; border:none; color:var(--muted);
+            font-weight:700; font-size:0.85rem; padding:0.5rem 0.9rem; cursor:pointer;
+            font-family:inherit; border-bottom:2px solid transparent;
+        }
+        .sched-tab.active { color:#fff; border-bottom-color:#ec4899; }
+        .sched-list { display:flex; flex-direction:column; gap:0.55rem; }
+        .sched-item {
+            display:flex; align-items:center; gap:0.85rem;
+            background:var(--card); border-radius:12px; padding:0.65rem 0.85rem;
+            border:1px solid var(--border);
+        }
+        .sched-thumb {
+            flex:0 0 52px; width:52px; height:70px; border-radius:8px;
+            background:linear-gradient(145deg,#1e1e2e,#2a1a3a);
+            display:flex; align-items:center; justify-content:center; font-size:1.4rem;
+            overflow:hidden;
+        }
+        .sched-info { flex:1; min-width:0; }
+        .sched-info h4 {
+            font-size:0.88rem; font-weight:600; margin-bottom:0.35rem;
+            white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        }
+        .sched-ep {
+            display:inline-flex; align-items:center; gap:0.25rem;
+            font-size:0.72rem; background:rgba(255,255,255,0.08);
+            padding:0.2rem 0.5rem; border-radius:6px; color:var(--muted);
+        }
+        .sched-live {
+            display:inline-flex; align-items:center; gap:0.25rem;
+            font-size:0.68rem; font-weight:700; background:#ef4444;
+            color:#fff; padding:0.2rem 0.5rem; border-radius:6px; margin-left:0.35rem;
+        }
+        .sched-time {
+            flex:0 0 auto; font-size:0.82rem; font-weight:600; color:var(--muted);
+            white-space:nowrap;
+        }
+
+    
+/* hero-poster-force */
+.hero-poster { display:block !important; }
+@media(max-width:800px){
+  .hero-poster { display:none !important; }
+  .hero-dots { margin-top:0.85rem; }
+}
+</style>
 </head>
 <body>
     <nav class="navbar">
@@ -453,9 +535,8 @@
 
     <!-- HERO - No ON AIR / HD / SUB / DUB badges -->
     <section class="hero" id="home">
-        <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Previous">‹</button>
-        <button type="button" class="hero-arrow next" id="heroNext" aria-label="Next">›</button>
-        <div class="hero-bg" id="heroBg"></div>
+
+<div class="hero-bg" id="heroBg"></div>
         <div class="hero-content" id="heroContent">
             <div class="spotlight-badge" id="spotlightBadge">#1 <span>Spotlight</span></div>
             <h1 id="heroTitle">Shadow of the Eternal Blade</h1>
@@ -478,12 +559,12 @@
                 
                 <button class="btn-more">+ Watchlist</button>
             </div>
+            <div class="hero-dots" id="heroDots"></div>
         </div>
         <div class="hero-poster">
             <img id="heroPosterImg" src="https://cdn.myanimelist.net/images/anime/1015/138006.jpg" alt="Poster" onerror="this.style.display='none'">
         </div>
-        <div class="hero-dots" id="heroDots"></div>
-    </section>
+</section>
 
     <!-- TRENDING -->
     <section id="trending">
@@ -642,228 +723,46 @@
             <h2 class="section-title"><span class="bar"></span> ▶ Continue Watching</h2>
             <a href="continue.html" class="view-all">View All →</a>
         </div>
-        <div class="scroll-row">
-            <div class="cw-card">
-                <div class="cw-img">
-                    ⚔️
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:72%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Shadow of the Eternal Blade</h3>
-                    <div class="cw-meta">EP 1 · 72% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🌌
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:45%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Neon Horizon: Zero</h3>
-                    <div class="cw-meta">EP 2 · 45% watched</div>
+        
+        <div class="scroll-row" id="continueRow">
+            <div class="cw-card" onclick="location.href='watch.html'">
+                <div class="cw-poster">⚔️
+                    <div class="cw-overlay">
+                        <h3>Shadow of the Eternal Blade</h3>
+                        <div class="cw-meta">EP 1 · 72% watched</div>
+                    </div>
+                    <div class="cw-progress"><span style="width:72%"></span></div>
                 </div>
             </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    💖
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:88%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Cherry Blossom Letters</h3>
-                    <div class="cw-meta">EP 3 · 88% watched</div>
+            <div class="cw-card" onclick="location.href='watch.html'">
+                <div class="cw-poster">🌌
+                    <div class="cw-overlay">
+                        <h3>Neon Horizon: Zero</h3>
+                        <div class="cw-meta">EP 2 · 45% watched</div>
+                    </div>
+                    <div class="cw-progress"><span style="width:45%"></span></div>
                 </div>
             </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🗡️
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:30%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Crimson Guild Chronicles</h3>
-                    <div class="cw-meta">EP 4 · 30% watched</div>
+            <div class="cw-card" onclick="location.href='watch.html'">
+                <div class="cw-poster">💖
+                    <div class="cw-overlay">
+                        <h3>Cherry Blossom Letters</h3>
+                        <div class="cw-meta">EP 3 · 88% watched</div>
+                    </div>
+                    <div class="cw-progress"><span style="width:88%"></span></div>
                 </div>
             </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🔥
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:95%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Jujutsu Kaisen S3</h3>
-                    <div class="cw-meta">EP 5 · 95% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🌀
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:60%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Solo Leveling S2</h3>
-                    <div class="cw-meta">EP 6 · 60% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    ⚡
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:40%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>One Punch Man S3</h3>
-                    <div class="cw-meta">EP 7 · 40% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🕵️
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:55%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Spy x Family S3</h3>
-                    <div class="cw-meta">EP 8 · 55% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🏰
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:20%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Frieren</h3>
-                    <div class="cw-meta">EP 9 · 20% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🌟
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:78%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Demon Slayer S4</h3>
-                    <div class="cw-meta">EP 10 · 78% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    ⚔️
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:65%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Attack on Titan</h3>
-                    <div class="cw-meta">EP 11 · 65% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🍥
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:33%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Naruto Shippuden</h3>
-                    <div class="cw-meta">EP 12 · 33% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🏴‍☠️
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:90%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>One Piece</h3>
-                    <div class="cw-meta">EP 13 · 90% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🦸
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:15%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>My Hero Academia</h3>
-                    <div class="cw-meta">EP 14 · 15% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    ⚽
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:50%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Blue Lock</h3>
-                    <div class="cw-meta">EP 15 · 50% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    ⛓️
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:70%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Chainsaw Man</h3>
-                    <div class="cw-meta">EP 16 · 70% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🛡️
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:25%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Vinland Saga</h3>
-                    <div class="cw-meta">EP 17 · 25% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    👊
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:85%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Tokyo Revengers</h3>
-                    <div class="cw-meta">EP 18 · 85% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    💫
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:42%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Oshi no Ko</h3>
-                    <div class="cw-meta">EP 19 · 42% watched</div>
-                </div>
-            </div>
-            <div class="cw-card">
-                <div class="cw-img">
-                    🦖
-                    <div class="cw-progress-bg"></div>
-                    <div class="cw-progress" style="width:58%;"></div>
-                </div>
-                <div class="cw-body">
-                    <h3>Kaiju No. 8</h3>
-                    <div class="cw-meta">EP 20 · 58% watched</div>
+            <div class="cw-card" onclick="location.href='watch.html'">
+                <div class="cw-poster">🗡️
+                    <div class="cw-overlay">
+                        <h3>Crimson Guild Chronicles</h3>
+                        <div class="cw-meta">EP 4 · 30% watched</div>
+                    </div>
+                    <div class="cw-progress"><span style="width:30%"></span></div>
                 </div>
             </div>
         </div>
+
     </section>
 
 
@@ -1075,16 +974,158 @@
                     </div>
                 </div>
             </div>
-            <div class="top-ranked">
-                <h3>🏆 Top Ranked</h3>
-                <div class="rank-item"><div class="rank-num">1</div><div class="rank-poster">⚔️</div><div class="rank-info"><h4>Shadow of the Eternal Blade</h4><span>TV • ★ 9.4</span></div></div>
-                <div class="rank-item"><div class="rank-num">2</div><div class="rank-poster">🗡️</div><div class="rank-info"><h4>Crimson Guild Chronicles</h4><span>TV • ★ 9.2</span></div></div>
-                <div class="rank-item"><div class="rank-num">3</div><div class="rank-poster">🌌</div><div class="rank-info"><h4>Neon Horizon: Zero</h4><span>TV • ★ 9.1</span></div></div>
-                <div class="rank-item"><div class="rank-num">4</div><div class="rank-poster">🔥</div><div class="rank-info"><h4>Jujutsu Kaisen S3</h4><span>TV • ★ 9.0</span></div></div>
-                <div class="rank-item"><div class="rank-num">5</div><div class="rank-poster">💖</div><div class="rank-info"><h4>Cherry Blossom Letters</h4><span>TV • ★ 8.9</span></div></div>
+            </div>
+    </section>
+
+<section id="popular">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span> 🏆 Top Ranking</h2>
+            <a href="trending.html" class="view-all">View All →</a>
+        </div>
+        <div class="scroll-row">
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.4</span>
+                    ⚔️
+                </div>
+                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🌌
+                </div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    💖
+                </div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🗡️
+                </div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🔥
+                </div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    🌀
+                </div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⚡
+                </div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    🕵️
+                </div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🏰
+                </div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🌟
+                </div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.5</span>
+                    ⚔️
+                </div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🍥
+                </div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🏴‍☠️
+                </div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    🦸
+                </div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    ⚽
+                </div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⛓️
+                </div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🛡️
+                </div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.5</span>
+                    👊
+                </div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    💫
+                </div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.4</span>
+                    🦖
+                </div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
         </div>
     </section>
+
 
 
     <!-- LATEST EPISODES (already exists, keep) -->
@@ -1240,154 +1281,7 @@
     </section>
 
     <!-- ALL TIME POPULAR -->
-    <section id="popular">
-        <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> 🏆 Top Ranking</h2>
-            <a href="trending.html" class="view-all">View All →</a>
-        </div>
-        <div class="scroll-row">
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.4</span>
-                    ⚔️
-                </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.1</span>
-                    🌌
-                </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.9</span>
-                    💖
-                </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.2</span>
-                    🗡️
-                </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.0</span>
-                    🔥
-                </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.7</span>
-                    🌀
-                </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.8</span>
-                    ⚡
-                </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.6</span>
-                    🕵️
-                </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.3</span>
-                    🏰
-                </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.0</span>
-                    🌟
-                </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.5</span>
-                    ⚔️
-                </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.3</span>
-                    🍥
-                </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.2</span>
-                    🏴‍☠️
-                </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.9</span>
-                    🦸
-                </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.7</span>
-                    ⚽
-                </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.8</span>
-                    ⛓️
-                </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.1</span>
-                    🛡️
-                </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.5</span>
-                    👊
-                </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.6</span>
-                    💫
-                </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.4</span>
-                    🦖
-                </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- TOP RATED -->
     
@@ -1845,74 +1739,25 @@
     <!-- BROWSE BY GENRES -->
 
     <!-- ANIME RELEASE SCHEDULE TRACKER -->
+    
     <section id="schedule">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Anime Schedule</h2>
-            <a href="schedule.html" class="view-all">Full Calendar →</a>
+            <h2 class="section-title"><span class="bar"></span> 📅 Estimated Schedule</h2>
         </div>
-        <div class="tracker-wrap">
-            <div class="tracker-tabs" id="trackerTabs">
-                <div class="tracker-tab active" data-day="today">Today</div>
-                <div class="tracker-tab" data-day="tomorrow">Tomorrow</div>
-                <div class="tracker-tab" data-day="mon">Mon</div>
-                <div class="tracker-tab" data-day="tue">Tue</div>
-                <div class="tracker-tab" data-day="wed">Wed</div>
-                <div class="tracker-tab" data-day="thu">Thu</div>
-                <div class="tracker-tab" data-day="fri">Fri</div>
-                <div class="tracker-tab" data-day="sat">Sat</div>
-                <div class="tracker-tab" data-day="sun">Sun</div>
-            </div>
-            <div class="tracker-body">
-                <div class="tracker-list" id="trackerList">
-                    <div class="tracker-item">
-                        <div class="tracker-time">18:30</div>
-                        <div class="tracker-poster">⚔️</div>
-                        <div class="tracker-info">
-                            <h4>Shadow of the Eternal Blade</h4>
-                            <div class="sub">EP 19 · Hindi Sub · 24 min</div>
-                        </div>
-                        <div class="tracker-badge">LIVE</div>
-                    </div>
-                    <div class="tracker-item">
-                        <div class="tracker-time">19:00</div>
-                        <div class="tracker-poster">🌌</div>
-                        <div class="tracker-info">
-                            <h4>Neon Horizon: Zero</h4>
-                            <div class="sub">EP 10 · Hindi Dub · 23 min</div>
-                        </div>
-                        <div class="tracker-badge soon">1h left</div>
-                    </div>
-                    <div class="tracker-item">
-                        <div class="tracker-time">20:15</div>
-                        <div class="tracker-poster">🌀</div>
-                        <div class="tracker-info">
-                            <h4>Solo Leveling Season 2</h4>
-                            <div class="sub">EP 12 · Hindi Sub · 24 min</div>
-                        </div>
-                        <div class="tracker-badge soon">2h left</div>
-                    </div>
-                    <div class="tracker-item">
-                        <div class="tracker-time">21:00</div>
-                        <div class="tracker-poster">🕵️</div>
-                        <div class="tracker-info">
-                            <h4>Spy x Family Season 3</h4>
-                            <div class="sub">EP 6 · Hindi Dub · 24 min</div>
-                        </div>
-                        <div class="tracker-badge soon">3h left</div>
-                    </div>
-                    <div class="tracker-item">
-                        <div class="tracker-time">22:30</div>
-                        <div class="tracker-poster">⚡</div>
-                        <div class="tracker-info">
-                            <h4>One Punch Man Season 3</h4>
-                            <div class="sub">EP 7 · Hindi Sub · 24 min</div>
-                        </div>
-                        <div class="tracker-badge soon">4h left</div>
-                    </div>
-                </div>
-            </div>
+        <div class="sched-tabs" id="schedTabs">
+            <button class="sched-tab" data-day="mon">MON</button>
+            <button class="sched-tab" data-day="tue">TUE</button>
+            <button class="sched-tab" data-day="wed">WED</button>
+            <button class="sched-tab" data-day="thu">THU</button>
+            <button class="sched-tab active" data-day="fri">FRI</button>
+            <button class="sched-tab" data-day="sat">SAT</button>
+            <button class="sched-tab" data-day="sun">SUN</button>
+        </div>
+        <div class="sched-list" id="trackerList">
+            <!-- filled by JS -->
         </div>
     </section>
+
 
     <section id="genres">
         <div class="section-header">
@@ -1954,8 +1799,10 @@
             <div class="footer-col"><h4>Community</h4><a href="#">Forums</a><a href="#">Fan Art</a><a href="#">Watch Parties</a><a href="#">Discord</a></div>
             <div class="footer-col"><h4>Support</h4><a href="#">Help</a><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div>
         </div>
-        <div class="footer-bottom">© 2026 AnimeFan. Made with ❤️ for anime lovers.</div>
-    <p class="disclaimer" style="text-align:center;color:var(--muted);font-size:0.75rem;max-width:720px;margin:1rem auto 0;line-height:1.5;padding:0 1rem;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p>
+        <div class="footer-bottom">
+            <p style="color:var(--muted);font-size:0.75rem;max-width:700px;margin:0 auto 0.75rem;line-height:1.5;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p>
+            <p>© 2026 AnimeFan. Made with ❤️ for anime lovers.</p>
+        </div>
     </footer>
 
     <script>
@@ -2104,135 +1951,25 @@
         // Auto rotate every 5 seconds
         setInterval(next, 5000);
 
+        // Hero swipe left/right (no arrow buttons)
+        (function(){
+          const hero = document.querySelector('.hero');
+          if (!hero) return;
+          let x0 = null;
+          hero.addEventListener('touchstart', e => { x0 = e.changedTouches[0].clientX; }, {passive:true});
+          hero.addEventListener('touchend', e => {
+            if (x0 === null) return;
+            const dx = e.changedTouches[0].clientX - x0;
+            if (Math.abs(dx) > 40) {
+              if (dx < 0) next(); else prev();
+            }
+            x0 = null;
+          }, {passive:true});
+        })();
         function prev() {
             current = (current - 1 + animes.length) % animes.length;
             updateHero(current);
         }
-        const heroPrevBtn = document.getElementById('heroPrev');
-        const heroNextBtn = document.getElementById('heroNext');
-        if (heroPrevBtn) heroPrevBtn.addEventListener('click', prev);
-        if (heroNextBtn) heroNextBtn.addEventListener('click', next);
 
 
-
-        // Schedule tracker tabs
-        const scheduleData = {
-            today: [
-                {time:"18:30", emoji:"⚔️", title:"Shadow of the Eternal Blade", sub:"EP 19 · Hindi Sub · 24 min", badge:"LIVE", badgeClass:""},
-                {time:"19:00", emoji:"🌌", title:"Neon Horizon: Zero", sub:"EP 10 · Hindi Dub · 23 min", badge:"1h left", badgeClass:"soon"},
-                {time:"20:15", emoji:"🌀", title:"Solo Leveling Season 2", sub:"EP 12 · Hindi Sub · 24 min", badge:"2h left", badgeClass:"soon"},
-                {time:"21:00", emoji:"🕵️", title:"Spy x Family Season 3", sub:"EP 6 · Hindi Dub · 24 min", badge:"3h left", badgeClass:"soon"},
-                {time:"22:30", emoji:"⚡", title:"One Punch Man Season 3", sub:"EP 7 · Hindi Sub · 24 min", badge:"4h left", badgeClass:"soon"}
-            ],
-            tomorrow: [
-                {time:"17:00", emoji:"🗡️", title:"Crimson Guild Chronicles", sub:"EP 8 · Hindi Sub · 24 min", badge:"Tomorrow", badgeClass:"soon"},
-                {time:"19:30", emoji:"🔥", title:"Jujutsu Kaisen S3", sub:"EP 21 · Hindi Sub · 24 min", badge:"Tomorrow", badgeClass:"soon"},
-                {time:"21:00", emoji:"🌟", title:"Demon Slayer S4", sub:"EP 5 · Hindi Dub · 24 min", badge:"Tomorrow", badgeClass:"soon"}
-            ],
-            mon: [
-                {time:"18:30", emoji:"⚔️", title:"Shadow of the Eternal Blade", sub:"EP 20 · Hindi Sub", badge:"Mon", badgeClass:"soon"},
-                {time:"20:00", emoji:"🌌", title:"Neon Horizon: Zero", sub:"EP 11 · Hindi Dub", badge:"Mon", badgeClass:"soon"}
-            ],
-            tue: [
-                {time:"19:00", emoji:"🗡️", title:"Crimson Guild Chronicles", sub:"EP 9 · Hindi Sub", badge:"Tue", badgeClass:"soon"}
-            ],
-            wed: [
-                {time:"18:00", emoji:"🌀", title:"Solo Leveling S2", sub:"EP 13 · Hindi Sub", badge:"Wed", badgeClass:"soon"},
-                {time:"21:00", emoji:"🕵️", title:"Spy x Family S3", sub:"EP 7 · Hindi Dub", badge:"Wed", badgeClass:"soon"}
-            ],
-            thu: [
-                {time:"20:30", emoji:"⚡", title:"One Punch Man S3", sub:"EP 8 · Hindi Sub", badge:"Thu", badgeClass:"soon"}
-            ],
-            fri: [
-                {time:"19:00", emoji:"🔥", title:"Jujutsu Kaisen S3", sub:"EP 22 · Hindi Sub", badge:"Fri", badgeClass:"soon"}
-            ],
-            sat: [
-                {time:"18:00", emoji:"🏰", title:"Frieren Special", sub:"OVA · Hindi Sub", badge:"Sat", badgeClass:"soon"},
-                {time:"21:00", emoji:"💖", title:"Cherry Blossom Letters", sub:"EP 13 Finale · Hindi Dub", badge:"Sat", badgeClass:"soon"}
-            ],
-            sun: [
-                {time:"17:00", emoji:"🌟", title:"Demon Slayer S4", sub:"EP 6 · Hindi Dub", badge:"Sun", badgeClass:"soon"},
-                {time:"20:00", emoji:"⚽", title:"Blue Lock S2", sub:"EP 4 · Hindi Sub", badge:"Sun", badgeClass:"soon"}
-            ]
-        };
-
-        function renderTracker(day) {
-            const list = document.getElementById('trackerList');
-            if (!list) return;
-            const items = scheduleData[day] || scheduleData.today;
-            list.innerHTML = items.map(i => `
-                <div class="tracker-item">
-                    <div class="tracker-time">${i.time}</div>
-                    <div class="tracker-poster">${i.emoji}</div>
-                    <div class="tracker-info">
-                        <h4>${i.title}</h4>
-                        <div class="sub">${i.sub}</div>
-                    </div>
-                    <div class="tracker-badge ${i.badgeClass}">${i.badge}</div>
-                </div>
-            `).join('');
-        }
-
-        document.querySelectorAll('.tracker-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                document.querySelectorAll('.tracker-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                renderTracker(tab.dataset.day);
-            });
-        });
-
-        // Initial bg
-        bg.style.backgroundImage = `url('${animes[0].bg}')`;
-        bg.style.backgroundSize = 'cover';
-        bg.style.backgroundPosition = 'center top';
-    
-        // Card click → detail page
-        document.querySelectorAll('.anime-card, .cw-card').forEach(c => {
-          c.style.cursor = 'pointer';
-          c.addEventListener('click', () => { window.location.href = 'anime-detail.html'; });
-        });
-        document.querySelectorAll('.btn-watch').forEach(b => {
-          if (!b.getAttribute('href')) {
-            b.addEventListener('click', () => { window.location.href = 'watch.html'; });
-          }
-        });
-
-        // Browse by Language filter
-        const langAnimeData = [
-          {title:"Shadow of the Eternal Blade", rating:"9.4", emoji:"⚔️", lang:"HSub", meta:"TV · 24 Eps · HSub"},
-          {title:"Neon Horizon: Zero", rating:"9.1", emoji:"🌌", lang:"Hindi", meta:"TV · 24 Eps · Hindi"},
-          {title:"Cherry Blossom Letters", rating:"8.9", emoji:"💖", lang:"HSub", meta:"TV · 12 Eps · HSub"},
-          {title:"Crimson Guild Chronicles", rating:"9.2", emoji:"🗡️", lang:"FanDub", meta:"TV · 24 Eps · FanDub"},
-          {title:"Jujutsu Kaisen S3", rating:"9.0", emoji:"🔥", lang:"HSub", meta:"TV · 24 Eps · HSub"},
-          {title:"Solo Leveling S2", rating:"8.7", emoji:"🌀", lang:"Hindi", meta:"TV · 13 Eps · Hindi"},
-          {title:"One Punch Man S3", rating:"8.8", emoji:"⚡", lang:"HSub", meta:"TV · 12 Eps · HSub"},
-          {title:"Spy x Family S3", rating:"8.6", emoji:"🕵️", lang:"Hindi", meta:"TV · 12 Eps · Hindi"},
-          {title:"Frieren", rating:"9.3", emoji:"🏰", lang:"HSub", meta:"TV · 28 Eps · HSub"},
-          {title:"Demon Slayer S4", rating:"9.0", emoji:"🌟", lang:"FanDub", meta:"TV · 11 Eps · FanDub"},
-          {title:"Attack on Titan", rating:"9.5", emoji:"⚔️", lang:"HSub", meta:"TV · 87 Eps · HSub"},
-          {title:"Naruto Shippuden", rating:"9.3", emoji:"🍥", lang:"Hindi", meta:"TV · 500 Eps · Hindi"}
-        ];
-        function renderLangRow(lang) {
-          const row = document.getElementById('langAnimeRow');
-          if (!row) return;
-          const map = {Hindi:['Hindi','Hindi Dub'], HSub:['HSub','Hindi Sub'], FanDub:['FanDub','Fan Dub']};
-          const keys = map[lang] || [lang];
-          const filtered = langAnimeData.filter(a => keys.some(k => a.lang.includes(k) || a.meta.includes(k)));
-          row.innerHTML = filtered.map(a => `
-            <div class="anime-card" onclick="location.href='anime-detail.html'">
-              <div class="card-poster"><span class="rating-badge">★ ${a.rating}</span>${a.emoji}</div>
-              <div class="card-body"><h3>${a.title}</h3><div class="card-meta">${a.meta}</div></div>
-            </div>`).join('');
-        }
-        document.querySelectorAll('#langChips .chip').forEach(chip => {
-          chip.addEventListener('click', () => {
-            document.querySelectorAll('#langChips .chip').forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            renderLangRow(chip.dataset.lang);
-          });
-        });
-        renderLangRow('Hindi');
-
-</script>
-</body>
-</html>
+        
