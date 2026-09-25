@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Continue Watching — AnimeFan</title>
+<title>Genre — AnimeFan</title>
 <style>
 
 :root{--bg:#0a0a0f;--card:#14141c;--elevated:#1a1a24;--border:rgba(255,255,255,0.08);--accent:#a855f7;--accent2:#ec4899;--muted:#a1a1aa;--grad:linear-gradient(135deg,#a855f7,#ec4899);}
@@ -34,50 +34,80 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#
 .card-meta{font-size:0.7rem;color:var(--muted);}
 footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);margin-top:2rem;}
 
-.cw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:0.85rem;}
-@media(max-width:700px){.cw-grid{grid-template-columns:repeat(2,1fr);gap:0.55rem;}}
-.cw-card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--border);cursor:pointer;text-decoration:none;color:inherit;display:block;}
-.cw-poster{aspect-ratio:2/3;background:linear-gradient(145deg,#1e1e2e,#2a1a3a);display:flex;align-items:center;justify-content:center;font-size:2.4rem;position:relative;}
-.cw-progress{position:absolute;bottom:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.12);}
-.cw-progress span{display:block;height:100%;background:linear-gradient(90deg,#a855f7,#ec4899);}
-.cw-body{padding:0.55rem;}
-.cw-body h3{font-size:0.82rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.cw-body p{font-size:0.7rem;color:var(--muted);margin-top:0.15rem;}
+.genre-head{display:flex;align-items:center;gap:0.85rem;margin-bottom:0.35rem;}
+.genre-icon{width:52px;height:52px;border-radius:14px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.5rem;}
 </style>
 </head>
 <body>
 <nav class="navbar">
   <a href="index.html" class="logo">AnimeFan</a>
-  <ul class="nav-links"><li><a href="index.html">Home</a></li></ul>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="trending.html">Trending</a></li>
+    <li><a href="schedule.html">Schedule</a></li>
+    <li><a href="genres.html">Genres</a></li>
+  </ul>
 </nav>
 <div class="page">
   <a href="index.html" class="back-btn">← Back to Home</a>
-  <div class="page-header"><h1>▶ Continue Watching</h1><p>Wahan se continue karo jahan chhoda tha</p></div>
-  <div class="cw-grid" id="grid"></div>
+  <div class="page-header">
+    <div class="genre-head">
+      <div class="genre-icon" id="gIcon">⚔️</div>
+      <div>
+        <h1 id="gTitle">Action anime</h1>
+        <p id="gSub">0 titles available</p>
+      </div>
+    </div>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-sort="popular">Popular</button>
+    <button class="tab" data-sort="newest">Newest</button>
+    <button class="tab" data-sort="rated">Top Rated</button>
+  </div>
+  <div class="grid" id="grid"></div>
 </div>
 <footer>
   <p style="font-size:0.72rem;margin-bottom:0.5rem;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p>
   <p>© 2026 AnimeFan. Made with ❤️ for anime lovers.</p>
 </footer>
 <script>
-const items = [
-  {t:"Shadow of the Eternal Blade",e:"⚔️",ep:"EP 1",p:72},
-  {t:"Neon Horizon: Zero",e:"🌌",ep:"EP 2",p:45},
-  {t:"Cherry Blossom Letters",e:"💖",ep:"EP 3",p:88},
-  {t:"Crimson Guild Chronicles",e:"🗡️",ep:"EP 4",p:30},
-  {t:"Jujutsu Kaisen S3",e:"🔥",ep:"EP 12",p:60},
-  {t:"Solo Leveling S2",e:"🌀",ep:"EP 5",p:15}
+const icons = {"Action":"⚔️","Romance":"💖","Comedy":"😂","Horror":"👻","Fantasy":"🔮","Sci-Fi":"🚀","Mystery":"🕵️","Drama":"🎭","Sports":"⚽","Mecha":"🤖","Adventure":"🗡️","Slice of Life":"☀️"};
+const pool = [
+  {t:"Shadow of the Eternal Blade",r:"9.4",e:"⚔️",m:"TV · 24 Eps"},
+  {t:"Jujutsu Kaisen S3",r:"9.0",e:"🔥",m:"TV · 24 Eps"},
+  {t:"Neon Horizon: Zero",r:"9.1",e:"🌌",m:"TV · 12 Eps"},
+  {t:"Crimson Guild Chronicles",r:"9.2",e:"🗡️",m:"TV · 24 Eps"},
+  {t:"Solo Leveling S2",r:"8.7",e:"🌀",m:"TV · 13 Eps"},
+  {t:"One Punch Man S3",r:"8.8",e:"⚡",m:"TV · 12 Eps"},
+  {t:"Demon Slayer S4",r:"9.0",e:"🌟",m:"TV · 11 Eps"},
+  {t:"Attack on Titan",r:"9.5",e:"⚔️",m:"TV · 87 Eps"},
+  {t:"Cherry Blossom Letters",r:"8.9",e:"💖",m:"TV · 12 Eps"},
+  {t:"Spy x Family S3",r:"8.6",e:"🕵️",m:"TV · 12 Eps"}
 ];
-document.getElementById("grid").innerHTML = items.map(a => `
-  <a class="cw-card" href="watch.html">
-    <div class="cw-poster">${a.e}
-      <div class="cw-progress"><span style="width:${a.p}%"></span></div>
-    </div>
-    <div class="cw-body">
-      <h3>${a.t}</h3>
-      <p>${a.ep} · ${a.p}% watched</p>
-    </div>
-  </a>`).join("");
+const params = new URLSearchParams(location.search);
+const g = params.get("g") || "Action";
+document.getElementById("gTitle").textContent = g + " anime";
+document.getElementById("gIcon").textContent = icons[g] || "🎬";
+document.title = g + " anime — AnimeFan";
+// mock count by genre name length for variety
+const list = pool.map((a,i)=>({...a, r: (parseFloat(a.r)-i*0.05).toFixed(1)}));
+document.getElementById("gSub").textContent = list.length + " titles available";
+function render(sort) {
+  let arr = [...list];
+  if (sort === "rated") arr.sort((a,b)=>parseFloat(b.r)-parseFloat(a.r));
+  if (sort === "newest") arr = arr.slice().reverse();
+  document.getElementById("grid").innerHTML = arr.map(a => `
+    <a class="anime-card" href="anime-detail.html">
+      <div class="card-poster"><span class="rating-badge">★ ${a.r}</span>${a.e}</div>
+      <div class="card-body"><h3>${a.t}</h3><div class="card-meta">${a.m}</div></div>
+    </a>`).join("");
+}
+render("popular");
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+  t.classList.add("active");
+  render(t.dataset.sort);
+}));
 </script>
 </body>
 </html>

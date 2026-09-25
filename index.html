@@ -187,48 +187,49 @@
         .card-body h3 { font-size:0.88rem; font-weight:600; margin-bottom:0.25rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
         .card-meta { font-size:0.72rem; color:var(--muted); }
 
-        /* Continue Watching */
-
-        /* Continue Watching - Aniflix landscape style */
+        
+        /* Continue Watching - portrait + progress (user style) */
         .cw-card {
-            flex:0 0 280px;
+            flex:0 0 160px;
             scroll-snap-align:start;
             background:var(--card);
-            border-radius:14px;
+            border-radius:12px;
             overflow:hidden;
             border:1px solid var(--border);
             position:relative;
             cursor:pointer;
             transition:0.25s;
+            text-decoration:none;
+            color:inherit;
         }
         .cw-card:hover { transform:translateY(-3px); border-color:rgba(168,85,247,0.4); }
         .cw-poster {
             width:100%;
-            aspect-ratio:16/9;
+            aspect-ratio:2/3;
             background:linear-gradient(145deg,#1e1e2e,#2a1a3a);
             position:relative;
             display:flex; align-items:center; justify-content:center;
-            font-size:2.5rem;
+            font-size:2.2rem;
         }
         .cw-overlay {
-            position:absolute; inset:0;
-            background:linear-gradient(to top, rgba(0,0,0,0.92) 0%, transparent 55%);
-            display:flex; flex-direction:column; justify-content:flex-end;
-            padding:0.75rem 0.85rem;
+            position:absolute; left:0; right:0; bottom:0;
+            padding:0.55rem 0.6rem 0.7rem;
+            background:linear-gradient(to top, rgba(0,0,0,0.92), transparent);
         }
-        .cw-overlay h3 { font-size:0.88rem; font-weight:600; margin-bottom:0.2rem;
+        .cw-overlay h3 { font-size:0.78rem; font-weight:600; margin-bottom:0.15rem;
             white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-        .cw-overlay .cw-meta { font-size:0.72rem; color:#c4b5fd; }
+        .cw-overlay .cw-meta { font-size:0.65rem; color:#c4b5fd; }
         .cw-progress {
             position:absolute; bottom:0; left:0; right:0; height:3px;
-            background:rgba(255,255,255,0.15);
+            background:rgba(255,255,255,0.12);
         }
         .cw-progress span {
             display:block; height:100%; background:linear-gradient(90deg,#a855f7,#ec4899);
         }
         @media(max-width:700px){
-            .cw-card { flex:0 0 78vw; max-width:300px; }
+            .cw-card { flex:0 0 calc((100vw - 1.5rem - 0.55rem) / 2.05); }
         }
+
 
         .cw-img {
             height: 124px;
@@ -423,7 +424,11 @@
         .mobile-menu { position:fixed; top:0; right:-100%; width:270px; height:100vh; background:var(--elevated); z-index:110; padding:4rem 1.3rem 2rem; transition:0.3s; border-left:1px solid var(--border); }
         .mobile-menu.open { right:0; }
         .mobile-menu a { display:block; color:#fff; text-decoration:none; padding:0.85rem 0; border-bottom:1px solid var(--border); font-size:1rem; }
-        .overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:105; opacity:0; visibility:hidden; transition:0.3s; }
+        .overlay {
+            position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:105;
+            opacity:0; visibility:hidden; transition:0.25s;
+        }
+        .overlay.open { opacity:1; visibility:visible; }
         .overlay.open { opacity:1; visibility:visible; }
     
         /* ===== MOBILE: 2 full cards ===== */
@@ -504,6 +509,10 @@
   .hero-poster { display:none !important; }
   .hero-dots { margin-top:0.85rem; }
 }
+
+a.chip { text-decoration:none; color:inherit; display:inline-flex; align-items:center; }
+
+a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.35rem; }
 </style>
 </head>
 <body>
@@ -775,13 +784,11 @@
             <h2 class="section-title"><span class="bar"></span> Browse by Language</h2>
         </div>
         <div class="chip-row" id="langChips">
-            <div class="chip active" data-lang="Hindi">Hindi</div>
-            <div class="chip" data-lang="HSub">Hindi Sub</div>
-            <div class="chip" data-lang="FanDub">FanDub</div>
+            <a class="chip active" href="language.html?lang=Hindi">Hindi</a>
+            <a class="chip" href="language.html?lang=HSub">Hindi Sub</a>
+            <a class="chip" href="language.html?lang=FanDub">FanDub</a>
         </div>
-        <div class="scroll-row" id="langAnimeRow">
-            <!-- filled by JS -->
-        </div>
+        <div class="scroll-row" id="langAnimeRow"></div>
     </section>
 
     <!-- AIRING -->
@@ -941,7 +948,7 @@
         </div>
         <div class="episodes-grid">
             <div class="episode-list">
-                <div class="episode-item">
+                <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
                     <div class="ep-thumb">⚔️<span class="ep-num">EP 24</span></div>
                     <div class="ep-info">
                         <h4>Shadow of the Eternal Blade</h4>
@@ -949,7 +956,7 @@
                         <div class="ep-meta"><span>24min</span><span>Sep 21, 2026</span></div>
                     </div>
                 </div>
-                <div class="episode-item">
+                <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
                     <div class="ep-thumb">🌌<span class="ep-num">EP 11</span></div>
                     <div class="ep-info">
                         <h4>Neon Horizon: Zero</h4>
@@ -957,7 +964,7 @@
                         <div class="ep-meta"><span>23min</span><span>Sep 20, 2026</span></div>
                     </div>
                 </div>
-                <div class="episode-item">
+                <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
                     <div class="ep-thumb">🗡️<span class="ep-num">EP 08</span></div>
                     <div class="ep-info">
                         <h4>Crimson Guild Chronicles</h4>
@@ -965,7 +972,7 @@
                         <div class="ep-meta"><span>24min</span><span>Sep 19, 2026</span></div>
                     </div>
                 </div>
-                <div class="episode-item">
+                <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
                     <div class="ep-thumb">🌀<span class="ep-num">EP 13</span></div>
                     <div class="ep-info">
                         <h4>Solo Leveling S2</h4>
@@ -985,6 +992,7 @@
         <div class="scroll-row">
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num rank-1">#1</span>
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
@@ -992,6 +1000,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num rank-2">#2</span>
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
@@ -999,6 +1008,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num rank-3">#3</span>
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
@@ -1006,6 +1016,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#4</span>
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
@@ -1013,6 +1024,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#5</span>
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
@@ -1020,6 +1032,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#6</span>
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
@@ -1027,6 +1040,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#7</span>
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
@@ -1034,6 +1048,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#8</span>
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
@@ -1041,6 +1056,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#9</span>
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
@@ -1048,6 +1064,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#10</span>
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
@@ -1055,6 +1072,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#11</span>
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
@@ -1062,6 +1080,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#12</span>
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
@@ -1069,6 +1088,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#13</span>
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
@@ -1076,6 +1096,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#14</span>
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
@@ -1083,6 +1104,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#15</span>
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
@@ -1090,6 +1112,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#16</span>
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
@@ -1097,6 +1120,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#17</span>
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
@@ -1104,6 +1128,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#18</span>
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
@@ -1111,6 +1136,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#19</span>
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
@@ -1118,6 +1144,7 @@
             </div>
             <div class="anime-card">
                 <div class="card-poster">
+<span class="rank-num ">#20</span>
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
@@ -1763,20 +1790,22 @@
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🏷️ Browse by Genres</h2>
         </div>
+        
         <div class="genre-grid">
-            <div class="genre-item"><span>⚔️</span>Action</div>
-            <div class="genre-item"><span>💖</span>Romance</div>
-            <div class="genre-item"><span>😂</span>Comedy</div>
-            <div class="genre-item"><span>👻</span>Horror</div>
-            <div class="genre-item"><span>🔮</span>Fantasy</div>
-            <div class="genre-item"><span>🚀</span>Sci-Fi</div>
-            <div class="genre-item"><span>🕵️</span>Mystery</div>
-            <div class="genre-item"><span>🎭</span>Drama</div>
-            <div class="genre-item"><span>⚽</span>Sports</div>
-            <div class="genre-item"><span>🤖</span>Mecha</div>
-            <div class="genre-item"><span>🗡️</span>Adventure</div>
-            <div class="genre-item"><span>🌟</span>Slice of Life</div>
+            <a class="genre-item" href="genre.html?g=Action">⚔️<span>Action</span></a>
+            <a class="genre-item" href="genre.html?g=Romance">💖<span>Romance</span></a>
+            <a class="genre-item" href="genre.html?g=Comedy">😂<span>Comedy</span></a>
+            <a class="genre-item" href="genre.html?g=Horror">👻<span>Horror</span></a>
+            <a class="genre-item" href="genre.html?g=Fantasy">🔮<span>Fantasy</span></a>
+            <a class="genre-item" href="genre.html?g=Sci-Fi">🚀<span>Sci-Fi</span></a>
+            <a class="genre-item" href="genre.html?g=Mystery">🕵️<span>Mystery</span></a>
+            <a class="genre-item" href="genre.html?g=Drama">🎭<span>Drama</span></a>
+            <a class="genre-item" href="genre.html?g=Sports">⚽<span>Sports</span></a>
+            <a class="genre-item" href="genre.html?g=Mecha">🤖<span>Mecha</span></a>
+            <a class="genre-item" href="genre.html?g=Adventure">🗡️<span>Adventure</span></a>
+            <a class="genre-item" href="genre.html?g=Slice%20of%20Life">☀️<span>Slice of Life</span></a>
         </div>
+
     </section>
 
     
@@ -1807,12 +1836,17 @@
 
     <script>
         // Mobile menu
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('overlay');
-        menuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('open'); overlay.classList.toggle('open'); });
-        overlay.addEventListener('click', () => { mobileMenu.classList.remove('open'); overlay.classList.remove('open'); });
-        document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => { mobileMenu.classList.remove('open'); overlay.classList.remove('open'); }));
+        (function initMenu(){
+          const menuBtn = document.getElementById('menuBtn');
+          const mobileMenu = document.getElementById('mobileMenu');
+          const overlay = document.getElementById('overlay');
+          if (!menuBtn || !mobileMenu) return;
+          function closeMenu(){ mobileMenu.classList.remove('open'); if(overlay) overlay.classList.remove('open'); }
+          function toggleMenu(){ mobileMenu.classList.toggle('open'); if(overlay) overlay.classList.toggle('open'); }
+          menuBtn.addEventListener('click', toggleMenu);
+          if (overlay) overlay.addEventListener('click', closeMenu);
+          document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', closeMenu));
+        })();
 
         // Hero Auto Carousel - 10 Animes
         const animes = [
@@ -2079,7 +2113,16 @@
         }
 
         // Card clicks
-        document.querySelectorAll('.anime-card, .cw-card').forEach(c => {
+        document.querySelectorAll('.cw-card').forEach(c => {
+          c.style.cursor = 'pointer';
+          c.onclick = () => { window.location.href = 'watch.html'; };
+        });
+        document.querySelectorAll('#latest .anime-card, #latest .episode-item').forEach(c => {
+          c.style.cursor = 'pointer';
+          c.addEventListener('click', () => { window.location.href = 'watch.html'; });
+        });
+        document.querySelectorAll('.anime-card').forEach(c => {
+          if (c.closest('#latest') || c.closest('#continue') || c.closest('#langAnimeRow')) return;
           c.style.cursor = 'pointer';
           c.addEventListener('click', () => { window.location.href = 'anime-detail.html'; });
         });
@@ -2089,22 +2132,6 @@
           }
         });
 
-        // Mobile menu (safe)
-        (function(){
-          const mb = document.getElementById('menuBtn');
-          const mm = document.getElementById('mobileMenu');
-          const ov = document.getElementById('overlay');
-          if (mb && mm) {
-            mb.addEventListener('click', () => {
-              mm.classList.toggle('open');
-              if (ov) ov.classList.toggle('show');
-            });
-            if (ov) ov.addEventListener('click', () => {
-              mm.classList.remove('open');
-              ov.classList.remove('show');
-            });
-          }
-        })();
-</script>
+        </script>
 </body>
 </html>
