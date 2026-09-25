@@ -150,7 +150,10 @@ body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var
 
 .ep-list { overflow-y:auto; flex:1; padding:0.5rem; }
 .ep-list.grid-view {
-  display:grid; grid-template-columns:repeat(4, 1fr); gap:0.45rem; padding:0.65rem;
+  display:grid; grid-template-columns:repeat(6, 1fr); gap:0.4rem; padding:0.55rem;
+}
+@media(max-width:700px){
+  .ep-list.grid-view { grid-template-columns:repeat(6, 1fr); gap:0.35rem; }
 }
 
 /* List view: EP + title */
@@ -171,8 +174,9 @@ body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var
 /* Grid/box view */
 .ep-box {
   aspect-ratio:1; border-radius:10px; background:var(--elevated); border:1px solid var(--border);
-  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem;
-  cursor:pointer; text-decoration:none; color:#fff; transition:0.15s;
+  display:flex; align-items:center; justify-content:center; font-weight:600; font-size:0.85rem;
+  cursor:pointer; text-decoration:none; color:#a1a1aa; transition:0.15s; min-height:0;
+  padding:0.35rem;
 }
 .ep-box:hover { border-color:var(--accent); background:rgba(168,85,247,0.12); }
 .ep-box.active { background:var(--grad); border-color:transparent; }
@@ -267,9 +271,12 @@ footer { text-align:center; padding:1.5rem; color:var(--muted); font-size:0.8rem
 
 <div class="watch-layout">
   <div>
-    <div class="player-wrap">
-      <div class="player-placeholder">
-        <div class="play-icon">▶</div>
+    <div class="player-wrap" id="playerWrap">
+      <video id="mainVideo" playsinline controls poster="" style="width:100%;height:100%;object-fit:contain;background:#000;display:none;">
+        <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+      </video>
+      <div class="player-placeholder" id="playerPlaceholder">
+        <div class="play-icon" id="playBtn">▶</div>
         <h3>Shadow of the Eternal Blade</h3>
         <p>Episode 1 · Click to play</p>
       </div>
@@ -558,6 +565,17 @@ document.querySelectorAll('.media-group').forEach(group => {
 
 updateNav();
 renderEpisodes();
+
+document.getElementById('playBtn')?.addEventListener('click', () => {
+  const v = document.getElementById('mainVideo');
+  const ph = document.getElementById('playerPlaceholder');
+  if (v) {
+    ph.style.display = 'none';
+    v.style.display = 'block';
+    v.play().catch(()=>{});
+  }
+});
+
 </script>
 </body>
 </html>

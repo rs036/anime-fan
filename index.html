@@ -42,7 +42,7 @@
         .menu-btn { display:none; background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; }
 
         /* HERO - full poster bg, NO badges */
-        .hero {
+        .hero { position:relative; 
             position:relative; 
             height: min(62vh, 580px);
             min-height: 420px;
@@ -113,6 +113,19 @@
         .spotlight-badge span { color: #fff; }
         .hero-content { transition: opacity 0.4s ease; }
         .hero-content.fade { opacity: 0; }
+        .hero-arrow {
+            position:absolute; top:50%; transform:translateY(-50%); z-index:5;
+            width:44px; height:44px; border-radius:50%; border:none;
+            background:rgba(0,0,0,0.45); color:#fff; font-size:1.3rem;
+            cursor:pointer; display:flex; align-items:center; justify-content:center;
+            transition:0.2s; backdrop-filter:blur(6px);
+        }
+        .hero-arrow:hover { background:rgba(168,85,247,0.7); }
+        .hero-arrow.prev { left:1%; }
+        .hero-arrow.next { right:1%; }
+        @media(max-width:700px){
+            .hero-arrow { width:36px; height:36px; font-size:1.1rem; }
+        }
         .hero-dots {
             position: absolute;
             bottom: 1.2rem;
@@ -146,11 +159,11 @@
         .section-title .bar { width:4px; height:1.2rem; background:var(--grad); border-radius:4px; }
         .view-all { color:var(--accent); text-decoration:none; font-size:0.88rem; font-weight:500; }
 
-        .scroll-row { display:flex; gap:0.9rem; overflow-x:auto; padding-bottom:0.8rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+        .scroll-row { display:flex; gap:0.9rem; overflow-x:auto; padding-bottom:0.8rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
         /* Extra right padding so last card can sit partially off-screen */
         .scroll-row::after { content:''; flex:0 0 40px; }
-        .scroll-row::-webkit-scrollbar { height:5px; }
-        .scroll-row::-webkit-scrollbar-thumb { background:rgba(255,255,255,0.15); border-radius:10px; }
+        .scroll-row::-webkit-scrollbar { display:none; height:0; }
+        .scroll-row { scrollbar-width:none; -ms-overflow-style:none; }
 
         .anime-card { flex:0 0 178px; scroll-snap-align:start; background:var(--card); border-radius:12px; overflow:hidden; transition:0.25s; cursor:pointer; border:1px solid transparent; }
         @media(min-width:1400px){
@@ -303,7 +316,7 @@
         .day-card .ep { font-size:0.75rem; color:var(--muted); margin-bottom:0.35rem; line-height:1.3; }
         .day-card .ep strong { color:#e4e4e7; display:block; font-size:0.8rem; }
 
-        /* Anime Release Schedule Tracker */
+        /* Anime Schedule */
         .tracker-wrap { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
         .tracker-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); overflow-x:auto; }
         .tracker-tab {
@@ -366,13 +379,13 @@
         @media(max-width:900px){
             .nav-links, .search-box { display:none; }
             .menu-btn { display:block; }
-            .hero { height:auto; min-height:52vh; max-height:480px; padding:4rem 5% 2rem; }
+            .hero { position:relative;  height:auto; min-height:52vh; max-height:480px; padding:4rem 5% 2rem; }
             .hero h1 { font-size:1.85rem; }
             .hero p { font-size:0.88rem; -webkit-line-clamp:2; }
             .hero-poster { display:none !important; }
         }
         @media(max-width:480px){
-            .hero { min-height:48vh; }
+            .hero { position:relative;  min-height:48vh; }
             .hero h1 { font-size:1.65rem; }
         }
 
@@ -382,41 +395,31 @@
         .overlay { position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:105; opacity:0; visibility:hidden; transition:0.3s; }
         .overlay.open { opacity:1; visibility:visible; }
     
-        /* ===== MOBILE: 3 full cards + partial 4th in horizontal rows ===== */
+        /* ===== MOBILE: 2 full cards ===== */
         @media(max-width:700px){
             .nav-links { display:none; }
             section, .section { padding-left:0.75rem; padding-right:0.75rem; }
             .scroll-row {
-                gap:0.55rem;
-                padding-bottom:0.6rem;
-                padding-right:0;
+                gap:0.65rem;
+                padding-bottom:0.5rem;
                 scroll-padding-left:0.75rem;
             }
-            .scroll-row::after { flex:0 0 12px; }
-            /* ~3.25 cards visible → 3 full + 4th peek */
-            .anime-card {
-                flex:0 0 calc((100vw - 1.5rem - 1.65rem) / 3.55);
-                max-width:115px;
+            .scroll-row::after { flex:0 0 8px; }
+            .anime-card, .cw-card {
+                flex:0 0 calc((100vw - 1.5rem - 0.65rem) / 2.08);
+                max-width:none;
             }
-            .card-poster { height:auto; aspect-ratio:2/3; font-size:1.8rem; }
-            .card-body { padding:0.45rem; }
-            .card-body h3 { font-size:0.72rem; }
-            .card-meta { font-size:0.62rem; }
-            .cw-card {
-                flex:0 0 calc((100vw - 1.5rem - 1.65rem) / 3.55);
-                max-width:115px;
-            }
-            .hero { min-height:auto; padding:1.2rem 0.75rem 1.5rem; }
+            .card-poster { height:auto; aspect-ratio:2/3; font-size:2rem; }
+            .card-body { padding:0.5rem; }
+            .card-body h3 { font-size:0.78rem; }
+            .card-meta { font-size:0.65rem; }
+            .hero { position:relative;  min-height:auto; padding:1.2rem 0.75rem 1.5rem; }
             .hero-content h1 { font-size:1.45rem; }
             .hero-content p { font-size:0.85rem; }
             .section-title { font-size:1.05rem; }
             .navbar { padding:0.55rem 0.75rem; }
-        }
-        @media(max-width:400px){
-            .anime-card, .cw-card {
-                flex:0 0 calc((100vw - 1.2rem - 1.4rem) / 3.5);
-                max-width:108px;
-            }
+            /* Continue watching same portrait ratio as anime cards */
+            .cw-card .cw-poster, .cw-poster { width:100%; aspect-ratio:2/3; background:linear-gradient(145deg,#1e1e2e,#2a1a3a); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:2.2rem; }
         }
 
     </style>
@@ -428,7 +431,6 @@
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#trending">Anime</a></li>
             <li><a href="#latest">Schedule</a></li>
-            <li><a href="#community">Community</a></li>
             <li><a href="#">Genres</a></li>
         </ul>
         <div class="nav-right">
@@ -444,7 +446,6 @@
         <a href="#home">Home</a>
         <a href="#trending">Anime</a>
         <a href="#latest">Schedule</a>
-        <a href="#community">Community</a>
         <a href="#">Genres</a>
         <a href="#" style="color:var(--accent);margin-top:1rem;">Login</a>
         <a href="#" style="color:var(--accent2);">Register</a>
@@ -452,6 +453,8 @@
 
     <!-- HERO - No ON AIR / HD / SUB / DUB badges -->
     <section class="hero" id="home">
+        <button type="button" class="hero-arrow prev" id="heroPrev" aria-label="Previous">‹</button>
+        <button type="button" class="hero-arrow next" id="heroNext" aria-label="Next">›</button>
         <div class="hero-bg" id="heroBg"></div>
         <div class="hero-content" id="heroContent">
             <div class="spotlight-badge" id="spotlightBadge">#1 <span>Spotlight</span></div>
@@ -472,7 +475,7 @@
             </div>
             <div class="hero-actions">
                 <a href="watch.html" class="btn-watch" style="text-decoration:none;">▶ Watch Now</a>
-                <a href="anime-detail.html" class="btn-more" style="text-decoration:none;">ℹ More Info</a>
+                
                 <button class="btn-more">+ Watchlist</button>
             </div>
         </div>
@@ -494,140 +497,140 @@
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
         </div>
     </section>
@@ -872,12 +875,13 @@
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> Browse by Language</h2>
         </div>
-        <div class="chip-row">
-            <div class="chip active"><span class="dot dot-hindi-dub"></span> Hindi Dub</div>
-            <div class="chip"><span class="dot dot-hindi-sub"></span> Hindi Sub</div>
-            <div class="chip"><span class="dot dot-fan-dub"></span> Fan Dub</div>
-            <div class="chip">English Dub</div>
-            <div class="chip">Japanese Sub</div>
+        <div class="chip-row" id="langChips">
+            <div class="chip active" data-lang="Hindi">Hindi</div>
+            <div class="chip" data-lang="HSub">Hindi Sub</div>
+            <div class="chip" data-lang="FanDub">FanDub</div>
+        </div>
+        <div class="scroll-row" id="langAnimeRow">
+            <!-- filled by JS -->
         </div>
     </section>
 
@@ -893,140 +897,140 @@
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
         </div>
     </section>
@@ -1097,140 +1101,140 @@
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
         </div>
     </section>
@@ -1238,8 +1242,8 @@
     <!-- ALL TIME POPULAR -->
     <section id="popular">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> 🔥 All Time Popular</h2>
-            <a href="popular.html" class="view-all">View All →</a>
+            <h2 class="section-title"><span class="bar"></span> 🏆 Top Ranking</h2>
+            <a href="trending.html" class="view-all">View All →</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1247,293 +1251,146 @@
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
         </div>
     </section>
 
     <!-- TOP RATED -->
-    <section id="toprated">
-        <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> ⭐ Top Rated Anime</h2>
-            <a href="toprated.html" class="view-all">View All →</a>
-        </div>
-        <div class="scroll-row">
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.4</span>
-                    ⚔️
-                </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.1</span>
-                    🌌
-                </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.9</span>
-                    💖
-                </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.2</span>
-                    🗡️
-                </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">HSub · FanDub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.0</span>
-                    🔥
-                </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.7</span>
-                    🌀
-                </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.8</span>
-                    ⚡
-                </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.6</span>
-                    🕵️
-                </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.3</span>
-                    🏰
-                </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.0</span>
-                    🌟
-                </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">HSub · FanDub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.5</span>
-                    ⚔️
-                </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">HSub · FanDub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.3</span>
-                    🍥
-                </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Hindi</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.2</span>
-                    🏴‍☠️
-                </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Hindi</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.9</span>
-                    🦸
-                </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.7</span>
-                    ⚽
-                </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.8</span>
-                    ⛓️
-                </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Hindi Dub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 9.1</span>
-                    🛡️
-                </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.5</span>
-                    👊
-                </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.6</span>
-                    💫
-                </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">HSub</div></div>
-            </div>
-            <div class="anime-card">
-                <div class="card-poster">
-<span class="rating-badge">★ 8.4</span>
-                    🦖
-                </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Hindi Dub</div></div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- UPCOMING -->
     <section id="upcoming">
@@ -1547,140 +1404,140 @@
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
         </div>
     </section>
@@ -1697,140 +1554,140 @@
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
         </div>
     </section>
@@ -1847,140 +1704,140 @@
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
-                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
-                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
-                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
-                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
-                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
-                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
-                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
-                <div class="card-body"><h3>Frieren</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
-                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">HSub · FanDub</div></div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
-                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
-                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Hindi</div></div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
-                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
-                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
-                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
-                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
-                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
-                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">HSub</div></div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
-                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Hindi Dub</div></div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
         </div>
     </section>
@@ -1990,7 +1847,7 @@
     <!-- ANIME RELEASE SCHEDULE TRACKER -->
     <section id="schedule">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> 📅 Anime Release Schedule Tracker</h2>
+            <h2 class="section-title"><span class="bar"></span> Anime Schedule</h2>
             <a href="schedule.html" class="view-all">Full Calendar →</a>
         </div>
         <div class="tracker-wrap">
@@ -2077,17 +1934,7 @@
         </div>
     </section>
 
-    <section id="community">
-        <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> AnimeFan Community</h2>
-        </div>
-        <div class="features">
-            <div class="feature-card"><div class="feature-icon">💬</div><h3>Discussion Forums</h3><p>Episode discussions, theories & recommendations.</p></div>
-            <div class="feature-card"><div class="feature-icon">🎨</div><h3>Fan Art Gallery</h3><p>Upload art, get feedback, win weekly contests.</p></div>
-            <div class="feature-card"><div class="feature-icon">📺</div><h3>Watch Parties</h3><p>Live group watching with real-time chat.</p></div>
-            <div class="feature-card"><div class="feature-icon">📅</div><h3>Airing Schedule</h3><p>Daily & weekly schedule with reminders.</p></div>
-        </div>
-    </section>
+    
 
     <section class="cta-section">
         <div class="cta-box">
@@ -2108,6 +1955,7 @@
             <div class="footer-col"><h4>Support</h4><a href="#">Help</a><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div>
         </div>
         <div class="footer-bottom">© 2026 AnimeFan. Made with ❤️ for anime lovers.</div>
+    <p class="disclaimer" style="text-align:center;color:var(--muted);font-size:0.75rem;max-width:720px;margin:1rem auto 0;line-height:1.5;padding:0 1rem;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p>
     </footer>
 
     <script>
@@ -2256,6 +2104,16 @@
         // Auto rotate every 5 seconds
         setInterval(next, 5000);
 
+        function prev() {
+            current = (current - 1 + animes.length) % animes.length;
+            updateHero(current);
+        }
+        const heroPrevBtn = document.getElementById('heroPrev');
+        const heroNextBtn = document.getElementById('heroNext');
+        if (heroPrevBtn) heroPrevBtn.addEventListener('click', prev);
+        if (heroNextBtn) heroNextBtn.addEventListener('click', next);
+
+
 
         // Schedule tracker tabs
         const scheduleData = {
@@ -2338,6 +2196,43 @@
             b.addEventListener('click', () => { window.location.href = 'watch.html'; });
           }
         });
+
+        // Browse by Language filter
+        const langAnimeData = [
+          {title:"Shadow of the Eternal Blade", rating:"9.4", emoji:"⚔️", lang:"HSub", meta:"TV · 24 Eps · HSub"},
+          {title:"Neon Horizon: Zero", rating:"9.1", emoji:"🌌", lang:"Hindi", meta:"TV · 24 Eps · Hindi"},
+          {title:"Cherry Blossom Letters", rating:"8.9", emoji:"💖", lang:"HSub", meta:"TV · 12 Eps · HSub"},
+          {title:"Crimson Guild Chronicles", rating:"9.2", emoji:"🗡️", lang:"FanDub", meta:"TV · 24 Eps · FanDub"},
+          {title:"Jujutsu Kaisen S3", rating:"9.0", emoji:"🔥", lang:"HSub", meta:"TV · 24 Eps · HSub"},
+          {title:"Solo Leveling S2", rating:"8.7", emoji:"🌀", lang:"Hindi", meta:"TV · 13 Eps · Hindi"},
+          {title:"One Punch Man S3", rating:"8.8", emoji:"⚡", lang:"HSub", meta:"TV · 12 Eps · HSub"},
+          {title:"Spy x Family S3", rating:"8.6", emoji:"🕵️", lang:"Hindi", meta:"TV · 12 Eps · Hindi"},
+          {title:"Frieren", rating:"9.3", emoji:"🏰", lang:"HSub", meta:"TV · 28 Eps · HSub"},
+          {title:"Demon Slayer S4", rating:"9.0", emoji:"🌟", lang:"FanDub", meta:"TV · 11 Eps · FanDub"},
+          {title:"Attack on Titan", rating:"9.5", emoji:"⚔️", lang:"HSub", meta:"TV · 87 Eps · HSub"},
+          {title:"Naruto Shippuden", rating:"9.3", emoji:"🍥", lang:"Hindi", meta:"TV · 500 Eps · Hindi"}
+        ];
+        function renderLangRow(lang) {
+          const row = document.getElementById('langAnimeRow');
+          if (!row) return;
+          const map = {Hindi:['Hindi','Hindi Dub'], HSub:['HSub','Hindi Sub'], FanDub:['FanDub','Fan Dub']};
+          const keys = map[lang] || [lang];
+          const filtered = langAnimeData.filter(a => keys.some(k => a.lang.includes(k) || a.meta.includes(k)));
+          row.innerHTML = filtered.map(a => `
+            <div class="anime-card" onclick="location.href='anime-detail.html'">
+              <div class="card-poster"><span class="rating-badge">★ ${a.rating}</span>${a.emoji}</div>
+              <div class="card-body"><h3>${a.title}</h3><div class="card-meta">${a.meta}</div></div>
+            </div>`).join('');
+        }
+        document.querySelectorAll('#langChips .chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            document.querySelectorAll('#langChips .chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            renderLangRow(chip.dataset.lang);
+          });
+        });
+        renderLangRow('Hindi');
+
 </script>
 </body>
 </html>

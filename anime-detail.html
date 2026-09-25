@@ -173,6 +173,27 @@ footer { text-align:center; padding:1.5rem; color:var(--muted); font-size:0.8rem
   .info-grid { grid-template-columns:repeat(2, 1fr) !important; }
 }
 
+
+/* detail-poster-mobile-fix */
+@media(max-width:700px){
+  .detail-hero { min-height:auto !important; padding:1.5rem 0.85rem 2rem !important; align-items:center; }
+  .detail-content {
+    flex-direction:column !important;
+    align-items:center !important;
+    text-align:center !important;
+    gap:1.1rem !important;
+  }
+  .detail-poster {
+    width:150px !important;
+    height:225px !important;
+    flex:none !important;
+    margin:0 auto 0.5rem !important;
+  }
+  .detail-info { max-width:100% !important; }
+  .detail-info h1 { font-size:1.5rem !important; }
+  .detail-actions { justify-content:center !important; }
+  .detail-tags, .detail-meta { justify-content:center !important; }
+}
 </style>
 </head>
 <body>
