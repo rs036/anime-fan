@@ -291,7 +291,12 @@
         .top-ranked h3 { font-size:1rem; margin-bottom:0.9rem; }
         .rank-item { display:flex; align-items:center; gap:0.7rem; padding:0.5rem 0; border-bottom:1px solid var(--border); cursor:pointer; }
         .rank-item:last-child { border-bottom:none; }
-        .rank-num { font-size:1.05rem; font-weight:800; color:var(--accent); width:22px; text-align:center; }
+        .rank-num {
+  position:absolute; top:8px; left:8px; z-index:5;
+  font-size:0.78rem; font-weight:800; padding:0.25rem 0.55rem;
+  border-radius:7px; background:linear-gradient(135deg,#7c3aed,#a855f7); color:#fff;
+  box-shadow:0 3px 12px rgba(168,85,247,0.55); line-height:1.2;
+}
         .rank-poster { width:40px; height:54px; border-radius:5px; background:linear-gradient(135deg,#2a1a3a,#1a1a2a); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
         .rank-info h4 { font-size:0.82rem; font-weight:600; margin-bottom:0.12rem; }
         .rank-info span { font-size:0.72rem; color:var(--muted); }
@@ -320,11 +325,7 @@
         .dot-hindi-sub { background:#a855f7; }
         .dot-fan-dub { background:#22d3ee; }
 
-        .genre-grid {
-            display:grid;
-            grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
-            gap:0.7rem;
-        }
+        
         .genre-item {
             background:var(--card); border:1px solid var(--border);
             border-radius:12px; padding:1rem 0.8rem; text-align:center;
@@ -560,22 +561,11 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 .rank-num.rank-3 { background:linear-gradient(135deg,#b45309,#d97706); color:#fff; }
 .card-poster { position:relative; }
 
-        .genre-grid {
-            display:grid;
-            grid-template-columns:repeat(2, 1fr);
-            gap:0.75rem;
-        }
-        @media(min-width:700px){ .genre-grid { grid-template-columns:repeat(3, 1fr); } }
-        @media(min-width:1100px){ .genre-grid { grid-template-columns:repeat(4, 1fr); } }
-        a.genre-tile {
-            display:flex; flex-direction:column; justify-content:center;
-            min-height:100px; padding:1.1rem 1.2rem;
-            border-radius:16px; text-decoration:none; color:#fff;
-            font-weight:700; font-size:1.05rem;
-            transition:0.2s; border:1px solid rgba(255,255,255,0.06);
-        }
-        a.genre-tile:hover { transform:translateY(-3px); filter:brightness(1.12); }
-        a.genre-tile span { font-size:0.78rem; font-weight:500; opacity:0.75; margin-top:0.35rem; }
+         }
+        @media(min-width:1100px){  }
+        
+        
+        
 
     
         .mobile-menu {
@@ -616,6 +606,28 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             background:linear-gradient(135deg,#a855f7,#ec4899); color:#fff;
         }
 
+    
+        .genre-grid {
+            display:grid;
+            grid-template-columns:repeat(2, 1fr);
+            gap:0.65rem;
+        }
+        @media(min-width:500px){ .genre-grid { grid-template-columns:repeat(3, 1fr); } }
+        @media(min-width:900px){ .genre-grid { grid-template-columns:repeat(4, 1fr); gap:0.75rem; } }
+        @media(min-width:1200px){ .genre-grid { grid-template-columns:repeat(6, 1fr); } }
+        a.genre-tile {
+            display:flex; flex-direction:column; justify-content:center;
+            min-height:72px; padding:0.85rem 1rem;
+            border-radius:14px; text-decoration:none; color:#fff;
+            font-weight:700; font-size:0.95rem;
+            transition:0.2s; border:1px solid rgba(255,255,255,0.06);
+        }
+        @media(min-width:900px){
+            a.genre-tile { min-height:78px; font-size:0.92rem; padding:0.75rem 0.9rem; }
+        }
+        a.genre-tile:hover { transform:translateY(-3px); filter:brightness(1.12); }
+        a.genre-tile span { font-size:0.72rem; font-weight:500; opacity:0.75; margin-top:0.25rem; }
+
     </style>
 </head>
 <body>
@@ -624,8 +636,9 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         <ul class="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#trending">Anime</a></li>
-            <li><a href="#latest">Schedule</a></li>
-            <li><a href="#">Genres</a></li>
+            <li><a href="#schedule">Schedule</a></li>
+            <li><a href="#genres">Genres</a></li>
+            <li><a href="#request">Request</a></li>
         </ul>
         <div class="nav-right">
             <div class="search-box">🔍 <input type="text" placeholder="Search anime..."></div>
@@ -643,15 +656,11 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             <button type="button" class="mm-close" id="mmClose" aria-label="Close">✕</button>
         </div>
         <div class="mm-links">
-            <a href="index.html">🏠 Home</a>
-            <a href="trending.html">🔥 Trending</a>
-            <a href="airing.html">📺 Currently Airing</a>
-            <a href="movies.html">🎬 Movies</a>
+            <a href="#home">🏠 Home</a>
+            <a href="#trending">📺 Anime</a>
             <a href="#schedule">📅 Schedule</a>
-            <a href="language.html?lang=Hindi">🇮🇳 Hindi Dub</a>
-            <a href="language.html?lang=HSub">CC Hindi Sub</a>
-            <a href="trending.html">🏆 Top Ranking</a>
             <a href="#genres">🏷️ Genres</a>
+            <a href="#request">✉️ Request</a>
         </div>
         <div class="mm-footer">
             <a href="#" class="mm-btn mm-btn-login">Login</a>
@@ -1109,160 +1118,140 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         </div>
         <div class="scroll-row">
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num rank-1">#1</span>
+                <div class="card-poster"><span class="rank-num rank-1">#1</span>
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
                 <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num rank-2">#2</span>
+                <div class="card-poster"><span class="rank-num rank-2">#2</span>
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
                 <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num rank-3">#3</span>
+                <div class="card-poster"><span class="rank-num rank-3">#3</span>
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
                 <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#4</span>
+                <div class="card-poster"><span class="rank-num">#4</span>
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
                 <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#5</span>
+                <div class="card-poster"><span class="rank-num">#5</span>
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
                 <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#6</span>
+                <div class="card-poster"><span class="rank-num">#6</span>
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
                 <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#7</span>
+                <div class="card-poster"><span class="rank-num">#7</span>
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
                 <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#8</span>
+                <div class="card-poster"><span class="rank-num">#8</span>
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
                 <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#9</span>
+                <div class="card-poster"><span class="rank-num">#9</span>
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
                 <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#10</span>
+                <div class="card-poster"><span class="rank-num">#10</span>
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
                 <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#11</span>
+                <div class="card-poster"><span class="rank-num">#11</span>
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
                 <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#12</span>
+                <div class="card-poster"><span class="rank-num">#12</span>
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
                 <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#13</span>
+                <div class="card-poster"><span class="rank-num">#13</span>
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
                 <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#14</span>
+                <div class="card-poster"><span class="rank-num">#14</span>
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
                 <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#15</span>
+                <div class="card-poster"><span class="rank-num">#15</span>
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
                 <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#16</span>
+                <div class="card-poster"><span class="rank-num">#16</span>
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
                 <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#17</span>
+                <div class="card-poster"><span class="rank-num">#17</span>
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
                 <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#18</span>
+                <div class="card-poster"><span class="rank-num">#18</span>
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
                 <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#19</span>
+                <div class="card-poster"><span class="rank-num">#19</span>
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
                 <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
-<span class="rank-num ">#20</span>
+                <div class="card-poster"><span class="rank-num">#20</span>
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
@@ -1936,6 +1925,18 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         </div>
     </section>
 
+    
+    <section id="request" style="padding:2.5rem 3%;">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span> ✉️ Request Anime</h2>
+        </div>
+        <div style="max-width:520px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;">
+            <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem;">Jo anime chahiye uska naam likho — hum try karenge add karne ka.</p>
+            <input id="reqInput" type="text" placeholder="Anime name..." style="width:100%;padding:0.75rem 1rem;border-radius:10px;border:1px solid var(--border);background:var(--elevated);color:#fff;font-family:inherit;margin-bottom:0.75rem;">
+            <button class="btn-watch" type="button" onclick="alert('Request received! Thanks 💜')">Submit Request</button>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
@@ -1954,6 +1955,15 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
     <script>
         // Mobile menu
+        // Hero click → detail (except buttons/links)
+        document.querySelector('.hero')?.addEventListener('click', function(e) {
+          if (e.target.closest('a, button, .hero-dot, .hero-dots')) return;
+          window.location.href = 'anime-detail.html';
+        });
+        document.querySelectorAll('.btn-watch').forEach(b => {
+          b.addEventListener('click', function(e){ e.stopPropagation(); });
+        });
+
         (function initMenu(){
           const menuBtn = document.getElementById('menuBtn');
           const mobileMenu = document.getElementById('mobileMenu');
