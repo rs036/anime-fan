@@ -1971,5 +1971,140 @@
             updateHero(current);
         }
 
+        // Schedule data + Aniflix-style renderer
+        const scheduleData = {
+            mon: [
+                {time:"06:30 PM", emoji:"⚔️", title:"Shadow of the Eternal Blade", sub:"EP 20 · Hindi Sub", badge:"Mon", badgeClass:"soon"},
+                {time:"08:00 PM", emoji:"🌌", title:"Neon Horizon: Zero", sub:"EP 11 · Hindi Dub", badge:"Mon", badgeClass:"soon"}
+            ],
+            tue: [
+                {time:"07:00 PM", emoji:"🗡️", title:"Crimson Guild Chronicles", sub:"EP 9 · Hindi Sub", badge:"Tue", badgeClass:"soon"}
+            ],
+            wed: [
+                {time:"06:00 PM", emoji:"🌀", title:"Solo Leveling S2", sub:"EP 13 · Hindi Sub", badge:"Wed", badgeClass:"soon"},
+                {time:"09:00 PM", emoji:"🕵️", title:"Spy x Family S3", sub:"EP 7 · Hindi Dub", badge:"Wed", badgeClass:"soon"}
+            ],
+            thu: [
+                {time:"08:30 PM", emoji:"⚡", title:"One Punch Man S3", sub:"EP 8 · Hindi Sub", badge:"Thu", badgeClass:"soon"}
+            ],
+            fri: [
+                {time:"12:30 PM", emoji:"🥊", title:"STEEL BALL RUN JoJo's Bizarre Adventure", sub:"EP 1", badge:"LIVE", badgeClass:""},
+                {time:"03:25 PM", emoji:"⚡", title:"Pokémon Horizons: The Series", sub:"EP 151", badge:"", badgeClass:"soon"},
+                {time:"05:30 PM", emoji:"🔍", title:"Meitantei Conan", sub:"EP 1", badge:"", badgeClass:"soon"},
+                {time:"07:30 PM", emoji:"🟢", title:"That Time I Got Reincarnated as a Slime Season 4", sub:"EP 24", badge:"", badgeClass:"soon"},
+                {time:"08:00 PM", emoji:"⚔️", title:"The Elusive Samurai Season 2", sub:"EP 11", badge:"", badgeClass:"soon"},
+                {time:"08:00 PM", emoji:"✏️", title:"Draw This, Then Die!", sub:"EP 12", badge:"", badgeClass:"soon"}
+            ],
+            sat: [
+                {time:"06:00 PM", emoji:"🏰", title:"Frieren Special", sub:"OVA · Hindi Sub", badge:"Sat", badgeClass:"soon"},
+                {time:"09:00 PM", emoji:"💖", title:"Cherry Blossom Letters", sub:"EP 13 Finale · Hindi Dub", badge:"Sat", badgeClass:"soon"}
+            ],
+            sun: [
+                {time:"05:00 PM", emoji:"🌟", title:"Demon Slayer S4", sub:"EP 6 · Hindi Dub", badge:"Sun", badgeClass:"soon"},
+                {time:"08:00 PM", emoji:"⚽", title:"Blue Lock S2", sub:"EP 4 · Hindi Sub", badge:"Sun", badgeClass:"soon"}
+            ],
+            today: []
+        };
+        scheduleData.today = scheduleData.fri;
 
-        
+        function renderTracker(day) {
+            const list = document.getElementById('trackerList');
+            if (!list) return;
+            const items = scheduleData[day] || scheduleData.fri;
+            list.innerHTML = items.map(i => {
+                const epMatch = (i.sub || '').match(/EP\s*\d+/i);
+                const ep = epMatch ? epMatch[0] : 'EP 1';
+                const live = (i.badge === 'LIVE') ? '<span class="sched-live">● LIVE</span>' : '';
+                return `<div class="sched-item">
+                    <div class="sched-thumb">${i.emoji}</div>
+                    <div class="sched-info">
+                        <h4>${i.title}</h4>
+                        <span class="sched-ep">▶ ${ep}</span>${live}
+                    </div>
+                    <div class="sched-time">${i.time}</div>
+                </div>`;
+            }).join('');
+        }
+
+        document.querySelectorAll('.sched-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.sched-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderTracker(tab.dataset.day);
+            });
+        });
+        renderTracker('fri');
+
+        // Browse by Language filter
+        const langAnimeData = [
+          {title:"Shadow of the Eternal Blade", rating:"9.4", emoji:"⚔️", lang:"HSub", meta:"TV · 24 Eps · HSub"},
+          {title:"Neon Horizon: Zero", rating:"9.1", emoji:"🌌", lang:"Hindi", meta:"TV · 24 Eps · Hindi"},
+          {title:"Cherry Blossom Letters", rating:"8.9", emoji:"💖", lang:"HSub", meta:"TV · 12 Eps · HSub"},
+          {title:"Crimson Guild Chronicles", rating:"9.2", emoji:"🗡️", lang:"FanDub", meta:"TV · 24 Eps · FanDub"},
+          {title:"Jujutsu Kaisen S3", rating:"9.0", emoji:"🔥", lang:"HSub", meta:"TV · 24 Eps · HSub"},
+          {title:"Solo Leveling S2", rating:"8.7", emoji:"🌀", lang:"Hindi", meta:"TV · 13 Eps · Hindi"},
+          {title:"One Punch Man S3", rating:"8.8", emoji:"⚡", lang:"HSub", meta:"TV · 12 Eps · HSub"},
+          {title:"Spy x Family S3", rating:"8.6", emoji:"🕵️", lang:"Hindi", meta:"TV · 12 Eps · Hindi"},
+          {title:"Frieren", rating:"9.3", emoji:"🏰", lang:"HSub", meta:"TV · 28 Eps · HSub"},
+          {title:"Demon Slayer S4", rating:"9.0", emoji:"🌟", lang:"FanDub", meta:"TV · 11 Eps · FanDub"},
+          {title:"Attack on Titan", rating:"9.5", emoji:"⚔️", lang:"HSub", meta:"TV · 87 Eps · HSub"},
+          {title:"Naruto Shippuden", rating:"9.3", emoji:"🍥", lang:"Hindi", meta:"TV · 500 Eps · Hindi"}
+        ];
+        function renderLangRow(lang) {
+          const row = document.getElementById('langAnimeRow');
+          if (!row) return;
+          const map = {Hindi:['Hindi','Hindi Dub'], HSub:['HSub','Hindi Sub'], FanDub:['FanDub','Fan Dub']};
+          const keys = map[lang] || [lang];
+          const filtered = langAnimeData.filter(a => keys.some(k => a.lang.includes(k) || a.meta.includes(k)));
+          row.innerHTML = filtered.map(a => `
+            <div class="anime-card" onclick="location.href='anime-detail.html'">
+              <div class="card-poster"><span class="rating-badge">★ ${a.rating}</span>${a.emoji}</div>
+              <div class="card-body"><h3>${a.title}</h3><div class="card-meta">${a.meta}</div></div>
+            </div>`).join('');
+        }
+        document.querySelectorAll('#langChips .chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            document.querySelectorAll('#langChips .chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            renderLangRow(chip.dataset.lang);
+          });
+        });
+        renderLangRow('Hindi');
+
+        // Initial hero bg
+        if (typeof bg !== 'undefined' && animes[0]) {
+          bg.style.backgroundImage = `url('${animes[0].bg}')`;
+          bg.style.backgroundSize = 'cover';
+          bg.style.backgroundPosition = 'center top';
+        }
+
+        // Card clicks
+        document.querySelectorAll('.anime-card, .cw-card').forEach(c => {
+          c.style.cursor = 'pointer';
+          c.addEventListener('click', () => { window.location.href = 'anime-detail.html'; });
+        });
+        document.querySelectorAll('.btn-watch').forEach(b => {
+          if (!b.getAttribute('href')) {
+            b.addEventListener('click', e => { e.preventDefault(); window.location.href = 'watch.html'; });
+          }
+        });
+
+        // Mobile menu (safe)
+        (function(){
+          const mb = document.getElementById('menuBtn');
+          const mm = document.getElementById('mobileMenu');
+          const ov = document.getElementById('overlay');
+          if (mb && mm) {
+            mb.addEventListener('click', () => {
+              mm.classList.toggle('open');
+              if (ov) ov.classList.toggle('show');
+            });
+            if (ov) ov.addEventListener('click', () => {
+              mm.classList.remove('open');
+              ov.classList.remove('show');
+            });
+          }
+        })();
+</script>
+</body>
+</html>
