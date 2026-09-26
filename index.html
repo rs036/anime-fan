@@ -643,6 +643,89 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         .genre-chip .g-count { font-size:0.72rem; color:var(--muted); font-weight:500; }
 
 
+    
+        .profile-wrap { position:relative; z-index:250; }
+        .profile-btn {
+            width:38px; height:38px; border-radius:50%; border:2px solid rgba(168,85,247,0.55);
+            background:linear-gradient(135deg,#1e1e2e,#2a1a3a); color:#fff;
+            cursor:pointer; display:flex; align-items:center; justify-content:center;
+            padding:0; flex-shrink:0;
+        }
+        .profile-btn svg { width:20px; height:20px; fill:#c4b5fd; pointer-events:none; }
+        .profile-dd {
+            display:none !important;
+            position:absolute; right:0; top:calc(100% + 10px);
+            width:240px;
+            background:#12121a !important;
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:16px;
+            padding:0.4rem;
+            z-index:300;
+            box-shadow:0 16px 48px rgba(0,0,0,0.65);
+            flex-direction:column;
+        }
+        .profile-dd.open {
+            display:flex !important;
+        }
+        .pd-head {
+            padding:0.85rem 0.95rem 0.7rem;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+            margin-bottom:0.3rem;
+        }
+        .pd-label { font-size:0.68rem; font-weight:800; letter-spacing:0.08em; color:#a855f7; text-transform:uppercase; }
+        .pd-sub { font-size:0.82rem; color:#a1a1aa; margin-top:0.2rem; }
+        a.pd-item, button.pd-item {
+            display:flex !important;
+            align-items:center;
+            gap:0.75rem;
+            width:100%;
+            padding:0.75rem 0.9rem !important;
+            border-radius:10px;
+            color:#e4e4e7 !important;
+            text-decoration:none !important;
+            font-size:0.92rem;
+            font-weight:500;
+            border:none;
+            background:transparent;
+            cursor:pointer;
+            font-family:inherit;
+            text-align:left;
+            box-sizing:border-box;
+        }
+        a.pd-item:hover, button.pd-item:hover {
+            background:rgba(168,85,247,0.14) !important;
+            color:#fff !important;
+            text-decoration:none !important;
+        }
+        a.pd-item svg, button.pd-item svg {
+            width:20px; height:20px; flex-shrink:0; fill:currentColor; opacity:0.95;
+        }
+        button.pd-item.danger { color:#f87171 !important; }
+
+    
+        .genre-pills {
+            display:flex; flex-wrap:wrap; gap:0.55rem;
+        }
+        a.genre-pill {
+            display:inline-flex; align-items:center; gap:0.4rem;
+            padding:0.55rem 1rem;
+            border-radius:999px;
+            text-decoration:none; color:#fff;
+            background:rgba(168,85,247,0.14);
+            border:1px solid rgba(168,85,247,0.35);
+            font-weight:600; font-size:0.88rem;
+            transition:0.2s;
+        }
+        a.genre-pill:hover {
+            background:rgba(168,85,247,0.28);
+            border-color:#a855f7;
+            transform:translateY(-2px);
+        }
+        a.genre-pill .gp-count {
+            font-size:0.72rem; font-weight:500; color:#c4b5fd;
+            opacity:0.9;
+        }
+
     </style>
 </head>
 <body>
@@ -1189,7 +1272,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <section id="popular">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🏆 Top Ranking</h2>
-            <a href="trending.html" class="view-all">View All ›</a>
+            <a href="toprated.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1971,62 +2054,32 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     
     
+    
     <section id="genres">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> Browse by Genres</h2>
-            <a href="genres.html" class="view-all">View All ›</a>
+            <a href="genres.html" class="view-all">All Genres ›</a>
         </div>
-        <div class="genre-grid">
-            <a class="genre-chip" href="genre.html?g=Action">
-                <span class="g-icon" style="background:linear-gradient(135deg,#b91c1c,#ef4444);">AC</span>
-                <span class="g-text"><span class="g-name">Action</span><span class="g-count">12 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Comedy">
-                <span class="g-icon" style="background:linear-gradient(135deg,#b45309,#f59e0b);">CO</span>
-                <span class="g-text"><span class="g-name">Comedy</span><span class="g-count">8 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Drama">
-                <span class="g-icon" style="background:linear-gradient(135deg,#047857,#10b981);">DR</span>
-                <span class="g-text"><span class="g-name">Drama</span><span class="g-count">9 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Fantasy">
-                <span class="g-icon" style="background:linear-gradient(135deg,#6d28d9,#a855f7);">FA</span>
-                <span class="g-text"><span class="g-name">Fantasy</span><span class="g-count">14 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Horror">
-                <span class="g-icon" style="background:linear-gradient(135deg,#9d174d,#ec4899);">HO</span>
-                <span class="g-text"><span class="g-name">Horror</span><span class="g-count">4 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Romance">
-                <span class="g-icon" style="background:linear-gradient(135deg,#0e7490,#06b6d4);">RO</span>
-                <span class="g-text"><span class="g-name">Romance</span><span class="g-count">10 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Sci-Fi">
-                <span class="g-icon" style="background:linear-gradient(135deg,#4d7c0f,#84cc16);">SF</span>
-                <span class="g-text"><span class="g-name">Sci-Fi</span><span class="g-count">6 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Mecha">
-                <span class="g-icon" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">ME</span>
-                <span class="g-text"><span class="g-name">Mecha</span><span class="g-count">0 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Mystery">
-                <span class="g-icon" style="background:linear-gradient(135deg,#86198f,#c026d3);">MY</span>
-                <span class="g-text"><span class="g-name">Mystery</span><span class="g-count">7 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Sports">
-                <span class="g-icon" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6);">SP</span>
-                <span class="g-text"><span class="g-name">Sports</span><span class="g-count">3 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Adventure">
-                <span class="g-icon" style="background:linear-gradient(135deg,#c2410c,#f97316);">AD</span>
-                <span class="g-text"><span class="g-name">Adventure</span><span class="g-count">11 anime</span></span>
-            </a>
-            <a class="genre-chip" href="genre.html?g=Slice%20of%20Life">
-                <span class="g-icon" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">SL</span>
-                <span class="g-text"><span class="g-name">Slice of Life</span><span class="g-count">6 anime</span></span>
-            </a>
+        <div class="genre-pills">
+            <a class="genre-pill" href="genre.html?g=Action">Action <span class="gp-count">(12)</span></a>
+            <a class="genre-pill" href="genre.html?g=Comedy">Comedy <span class="gp-count">(8)</span></a>
+            <a class="genre-pill" href="genre.html?g=Drama">Drama <span class="gp-count">(9)</span></a>
+            <a class="genre-pill" href="genre.html?g=Fantasy">Fantasy <span class="gp-count">(14)</span></a>
+            <a class="genre-pill" href="genre.html?g=Horror">Horror <span class="gp-count">(4)</span></a>
+            <a class="genre-pill" href="genre.html?g=Romance">Romance <span class="gp-count">(10)</span></a>
+            <a class="genre-pill" href="genre.html?g=Sci-Fi">Sci-Fi <span class="gp-count">(6)</span></a>
+            <a class="genre-pill" href="genre.html?g=Mecha">Mecha <span class="gp-count">(0)</span></a>
+            <a class="genre-pill" href="genre.html?g=Mystery">Mystery <span class="gp-count">(7)</span></a>
+            <a class="genre-pill" href="genre.html?g=Sports">Sports <span class="gp-count">(3)</span></a>
+            <a class="genre-pill" href="genre.html?g=Adventure">Adventure <span class="gp-count">(11)</span></a>
+            <a class="genre-pill" href="genre.html?g=Slice%20of%20Life">Slice of Life <span class="gp-count">(6)</span></a>
+            <a class="genre-pill" href="genre.html?g=Isekai">Isekai <span class="gp-count">(5)</span></a>
+            <a class="genre-pill" href="genre.html?g=Shonen">Shonen <span class="gp-count">(15)</span></a>
+            <a class="genre-pill" href="genre.html?g=Seinen">Seinen <span class="gp-count">(4)</span></a>
+            <a class="genre-pill" href="genre.html?g=Thriller">Thriller <span class="gp-count">(6)</span></a>
         </div>
     </section>
+
 
 
 
