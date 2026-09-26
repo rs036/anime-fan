@@ -48,6 +48,25 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
 @media(min-width:1000px){.genre-grid{grid-template-columns:repeat(6,1fr);}}
 .genre-tile{display:flex;flex-direction:column;justify-content:center;min-height:64px;padding:0.7rem 0.85rem;border-radius:12px;text-decoration:none;color:#fff;font-weight:700;font-size:0.88rem;border:1px solid rgba(255,255,255,0.06);}
 .genre-tile span{font-size:0.68rem;font-weight:500;opacity:0.75;margin-top:0.2rem;}
+
+.pagination{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;align-items:center;margin:1.5rem 0 0.5rem;padding:0.5rem 0;}
+.page-btn{
+  min-width:36px;height:36px;padding:0 0.55rem;border-radius:10px;
+  border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);
+  color:#e4e4e7;font-weight:600;font-size:0.85rem;cursor:pointer;font-family:inherit;
+}
+.page-btn:hover{border-color:rgba(168,85,247,0.5);color:#fff;}
+.page-btn.active{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:#fff;}
+.page-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.empty-state{
+  text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;
+  background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);
+  border-radius:16px;margin:1rem 0;
+}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.7;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+.empty-state p{font-size:0.9rem;}
+
 </style></head><body>
 
 <nav class="navbar">
@@ -96,4 +115,31 @@ document.getElementById("grid").innerHTML=filtered.map(a=>`
     <div class="card-poster"><span class="rating-badge">★ ${a.r}</span>${a.e}</div>
     <div class="card-body"><h3>${a.t}</h3><div class="card-meta">${a.m}</div></div>
   </a>`).join("");
-</script></body></html>
+</script>
+<script>
+(function(){
+  const grid=document.getElementById('grid')||document.querySelector('.grid');
+  const pager=document.getElementById('pager');
+  if(!grid) return;
+  const cards=[...grid.querySelectorAll('.anime-card, a.anime-card')];
+  if(!cards.length){
+    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">🎬</div><h3>No Anime Available</h3><p>Abhi is section mein anime nahi hai.</p></div>';
+    return;
+  }
+  const PER=12;
+  if(cards.length<=PER) return;
+  if(!pager) return;
+  let page=1;
+  function show(){
+    const pages=Math.ceil(cards.length/PER);
+    cards.forEach((c,i)=>{c.style.display=(i>=(page-1)*PER && i<page*PER)?'':'none';});
+    let h=`<button class="page-btn" ${page===1?'disabled':''} data-p="${page-1}">‹</button>`;
+    for(let i=1;i<=pages;i++) h+=`<button class="page-btn ${i===page?'active':''}" data-p="${i}">${i}</button>`;
+    h+=`<button class="page-btn" ${page===pages?'disabled':''} data-p="${page+1}">›</button>`;
+    pager.innerHTML=h;
+    pager.querySelectorAll('.page-btn').forEach(b=>b.onclick=()=>{const p=+b.dataset.p;if(p>=1&&p<=pages){page=p;show();window.scrollTo({top:0,behavior:'smooth'});}});
+  }
+  show();
+})();
+</script>
+</body></html>

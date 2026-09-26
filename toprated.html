@@ -162,7 +162,17 @@
             .grid { grid-template-columns:repeat(3, 1fr) !important; }
         }
 
-    </style>
+    
+.pagination{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;align-items:center;margin:1.5rem 0 0.5rem;}
+.page-btn{min-width:36px;height:36px;padding:0 0.55rem;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:#e4e4e7;font-weight:600;font-size:0.85rem;cursor:pointer;font-family:inherit;}
+.page-btn:hover{border-color:rgba(168,85,247,0.5);}
+.page-btn.active{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:#fff;}
+.page-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.empty-state{text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);border-radius:16px;margin:1rem 0;grid-column:1/-1;}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.7;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+
+</style>
 </head>
 <body>
     <nav class="navbar">
@@ -991,5 +1001,36 @@ document.querySelectorAll('.anime-card').forEach(c => {
   c.addEventListener('click', () => location.href='anime-detail.html');
 });
 </script>
+
+<script>
+(function(){
+  const grid=document.querySelector('.grid')||document.getElementById('grid');
+  if(!grid) return;
+  let pager=document.getElementById('pager');
+  if(!pager){pager=document.createElement('div');pager.className='pagination';pager.id='pager';grid.after(pager);}
+  const cards=[...grid.querySelectorAll('.anime-card')];
+  if(!cards.length){
+    grid.innerHTML='<div class="empty-state"><div class="es-icon">🎬</div><h3>No Anime Available</h3><p>Abhi is section mein anime nahi hai.</p></div>';
+    return;
+  }
+  const PER=20;
+  if(cards.length<=PER) return;
+  let page=1;
+  function show(){
+    const pages=Math.ceil(cards.length/PER);
+    cards.forEach((c,i)=>{c.style.display=(i>=(page-1)*PER&&i<page*PER)?'':'none';});
+    let h=`<button type="button" class="page-btn" ${page===1?'disabled':''} data-p="${page-1}">‹</button>`;
+    for(let i=1;i<=pages;i++){
+      if(pages>9 && Math.abs(i-page)>2 && i>1 && i<pages){ if(i===2||i===pages-1) h+='<span style="color:#a1a1aa;padding:0 2px">…</span>'; continue; }
+      h+=`<button type="button" class="page-btn ${i===page?'active':''}" data-p="${i}">${i}</button>`;
+    }
+    h+=`<button type="button" class="page-btn" ${page===pages?'disabled':''} data-p="${page+1}">›</button>`;
+    pager.innerHTML=h;
+    pager.querySelectorAll('.page-btn').forEach(b=>b.onclick=()=>{const p=+b.dataset.p;if(p>=1&&p<=pages){page=p;show();window.scrollTo({top:0,behavior:'smooth'});}});
+  }
+  show();
+})();
+</script>
+
 </body>
 </html>

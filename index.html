@@ -724,6 +724,45 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         .pd-item.danger { color:#f87171; }
         .hide-inline-search .search-box { display:none !important; }
 
+    
+        .genre-grid {
+            display:grid;
+            grid-template-columns:repeat(2, 1fr);
+            gap:0.7rem;
+        }
+        @media(min-width:600px){ .genre-grid { grid-template-columns:repeat(3, 1fr); } }
+        @media(min-width:900px){ .genre-grid { grid-template-columns:repeat(4, 1fr); gap:0.85rem; } }
+        @media(min-width:1200px){ .genre-grid { grid-template-columns:repeat(4, 1fr); } }
+        a.genre-chip {
+            display:flex; align-items:center; gap:0.85rem;
+            padding:0.95rem 1.05rem;
+            border-radius:14px;
+            text-decoration:none; color:#fff;
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.08);
+            position:relative; overflow:hidden;
+            transition:0.25s;
+        }
+        a.genre-chip::before {
+            content:''; position:absolute; left:0; top:0; bottom:0; width:4px;
+            background:var(--g-accent, #a855f7);
+        }
+        a.genre-chip:hover {
+            background:rgba(168,85,247,0.1);
+            border-color:rgba(168,85,247,0.35);
+            transform:translateY(-3px);
+            box-shadow:0 8px 24px rgba(0,0,0,0.25);
+        }
+        .genre-chip .g-icon {
+            width:42px; height:42px; border-radius:12px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.15rem; flex-shrink:0;
+            background:var(--g-bg, rgba(168,85,247,0.2));
+        }
+        .genre-chip .g-text { display:flex; flex-direction:column; gap:0.15rem; min-width:0; }
+        .genre-chip .g-name { font-weight:700; font-size:0.95rem; }
+        .genre-chip .g-count { font-size:0.72rem; color:var(--muted); font-weight:500; }
+
     </style>
 </head>
 <body>
@@ -745,21 +784,22 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
                 <button type="button" class="profile-btn" id="profileBtn" aria-label="Profile">
                     <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v1.2h19.2v-1.2c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
                 </button>
+                
                 <div class="profile-dd" id="profileDd">
                     <div class="pd-head">
                         <div class="pd-label" id="pdLabel">GUEST</div>
                         <div class="pd-sub" id="pdSub">Not signed in</div>
                     </div>
                     <a class="pd-item" id="pdSignIn" href="login.html">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 7L9.6 8.4l2.6 2.6H2v2h10.2l-2.6 2.6L11 17l5-5-5-5zm9 12h-8v2h8c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-8v2h8v14z"/></svg>
                         Sign in
                     </a>
                     <a class="pd-item" id="pdHistory" href="continue.html">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
                         History
                     </a>
                     <a class="pd-item" id="pdList" href="mylist.html">
-                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3 7 3V5c0-1.1-.9-2-2-2z"/></svg>
                         My List
                     </a>
                     <a class="pd-item" href="help.html">
@@ -771,6 +811,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
                         Sign out
                     </button>
                 </div>
+
             </div>
             <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
         </div>
@@ -2047,25 +2088,64 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 
     
+    
     <section id="genres">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🏷️ Browse by Genres</h2>
+            <a href="genres.html" class="view-all">View All ›</a>
         </div>
         <div class="genre-grid">
-            <a class="genre-tile" href="genre.html?g=Action" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c);">Action<span>12 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Comedy" style="background:linear-gradient(135deg,#92400e,#d97706);">Comedy<span>8 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Drama" style="background:linear-gradient(135deg,#065f46,#059669);">Drama<span>9 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Fantasy" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);">Fantasy<span>14 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Horror" style="background:linear-gradient(135deg,#831843,#be185d);">Horror<span>4 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Romance" style="background:linear-gradient(135deg,#0e7490,#0891b2);">Romance<span>10 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Sci-Fi" style="background:linear-gradient(135deg,#3f6212,#65a30d);">Sci-Fi<span>6 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Mecha" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">Mecha<span>5 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Mystery" style="background:linear-gradient(135deg,#701a75,#a21caf);">Mystery<span>7 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Sports" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6);">Sports<span>3 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Adventure" style="background:linear-gradient(135deg,#9a3412,#ea580c);">Adventure<span>11 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Slice%20of%20Life" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">Slice of Life<span>6 anime</span></a>
+            <a class="genre-chip" href="genre.html?g=Action" style="--g-accent:#ef4444;--g-bg:rgba(239,68,68,0.18);">
+                <span class="g-icon">⚔️</span>
+                <span class="g-text"><span class="g-name">Action</span><span class="g-count">12 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Comedy" style="--g-accent:#f59e0b;--g-bg:rgba(245,158,11,0.18);">
+                <span class="g-icon">😂</span>
+                <span class="g-text"><span class="g-name">Comedy</span><span class="g-count">8 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Drama" style="--g-accent:#10b981;--g-bg:rgba(16,185,129,0.18);">
+                <span class="g-icon">🎭</span>
+                <span class="g-text"><span class="g-name">Drama</span><span class="g-count">9 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Fantasy" style="--g-accent:#a855f7;--g-bg:rgba(168,85,247,0.2);">
+                <span class="g-icon">✨</span>
+                <span class="g-text"><span class="g-name">Fantasy</span><span class="g-count">14 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Horror" style="--g-accent:#ec4899;--g-bg:rgba(236,72,153,0.18);">
+                <span class="g-icon">👻</span>
+                <span class="g-text"><span class="g-name">Horror</span><span class="g-count">4 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Romance" style="--g-accent:#06b6d4;--g-bg:rgba(6,182,212,0.18);">
+                <span class="g-icon">💕</span>
+                <span class="g-text"><span class="g-name">Romance</span><span class="g-count">10 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Sci-Fi" style="--g-accent:#84cc16;--g-bg:rgba(132,204,22,0.18);">
+                <span class="g-icon">🚀</span>
+                <span class="g-text"><span class="g-name">Sci-Fi</span><span class="g-count">6 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Mecha" style="--g-accent:#3b82f6;--g-bg:rgba(59,130,246,0.18);">
+                <span class="g-icon">🤖</span>
+                <span class="g-text"><span class="g-name">Mecha</span><span class="g-count">5 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Mystery" style="--g-accent:#c026d3;--g-bg:rgba(192,38,211,0.18);">
+                <span class="g-icon">🔍</span>
+                <span class="g-text"><span class="g-name">Mystery</span><span class="g-count">7 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Sports" style="--g-accent:#8b5cf6;--g-bg:rgba(139,92,246,0.18);">
+                <span class="g-icon">⚽</span>
+                <span class="g-text"><span class="g-name">Sports</span><span class="g-count">3 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Adventure" style="--g-accent:#f97316;--g-bg:rgba(249,115,22,0.18);">
+                <span class="g-icon">🗡️</span>
+                <span class="g-text"><span class="g-name">Adventure</span><span class="g-count">11 anime</span></span>
+            </a>
+            <a class="genre-chip" href="genre.html?g=Slice%20of%20Life" style="--g-accent:#14b8a6;--g-bg:rgba(20,184,166,0.18);">
+                <span class="g-icon">🌿</span>
+                <span class="g-text"><span class="g-name">Slice of Life</span><span class="g-count">6 anime</span></span>
+            </a>
         </div>
     </section>
+
 
 
     
