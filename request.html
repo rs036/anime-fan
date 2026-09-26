@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Genres — AnimeFan</title><style>
+<title>Request Anime — AnimeFan</title><style>
 :root{--bg:#0a0a0f;--card:#14141c;--elevated:#1a1a24;--border:rgba(255,255,255,0.08);--accent:#a855f7;--accent2:#ec4899;--muted:#a1a1aa;--grad:linear-gradient(135deg,#a855f7,#ec4899);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#fff;min-height:100vh;}
@@ -56,27 +56,53 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
     <li><a href="index.html">Home</a></li>
     <li><a href="anime.html">Anime</a></li>
     <li><a href="schedule.html">Schedule</a></li>
-    <li><a href="genres.html" class="active">Genres</a></li>
-    <li><a href="request.html">Request</a></li>
+    <li><a href="genres.html">Genres</a></li>
+    <li><a href="request.html" class="active">Request</a></li>
   </ul>
 </nav>
 
 <div class="page">
   <a href="index.html" class="back-btn">← Back to Home</a>
-  <div class="page-header"><h1>Browse by Genres</h1><p>Pick a genre to explore</p></div>
-  <div class="genre-grid">
-    <a class="genre-tile" href="genre.html?g=Action" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c);">Action<span>12 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Comedy" style="background:linear-gradient(135deg,#92400e,#d97706);">Comedy<span>8 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Drama" style="background:linear-gradient(135deg,#065f46,#059669);">Drama<span>9 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Fantasy" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);">Fantasy<span>14 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Horror" style="background:linear-gradient(135deg,#831843,#be185d);">Horror<span>4 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Romance" style="background:linear-gradient(135deg,#0e7490,#0891b2);">Romance<span>10 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Sci-Fi" style="background:linear-gradient(135deg,#3f6212,#65a30d);">Sci-Fi<span>6 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Mecha" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">Mecha<span>5 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Mystery" style="background:linear-gradient(135deg,#701a75,#a21caf);">Mystery<span>7 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Sports" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6);">Sports<span>3 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Adventure" style="background:linear-gradient(135deg,#9a3412,#ea580c);">Adventure<span>11 anime</span></a>
-    <a class="genre-tile" href="genre.html?g=Slice%20of%20Life" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">Slice of Life<span>6 anime</span></a>
+  <div class="page-header">
+    <h1>Request Anime</h1>
+    <p>Anime name enough hai — baaki optional. Status yahin track karo.</p>
+  </div>
+  <div class="form-card">
+    <form id="reqForm">
+      <div class="form-group">
+        <label>Anime Name *</label>
+        <input type="text" id="reqName" placeholder="e.g. One Piece" required>
+      </div>
+      <div class="form-group">
+        <label>Type (optional)</label>
+        <select id="reqType">
+          <option value="">Select type</option>
+          <option>TV</option>
+          <option>Movie</option>
+          <option>OVA</option>
+          <option>Special</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Language preference (optional)</label>
+        <select id="reqLang">
+          <option value="">Any</option>
+          <option>Hindi Dub</option>
+          <option>Hindi Sub</option>
+          <option>FanDub</option>
+          <option>English Sub</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Details (optional)</label>
+        <textarea id="reqDetails" placeholder="Season, year, notes..."></textarea>
+      </div>
+      <button type="submit" class="btn-primary">Submit Request</button>
+    </form>
+  </div>
+  <div class="req-list">
+    <h2 style="font-size:1.1rem;margin-bottom:0.85rem;">Your Requests</h2>
+    <div id="reqList"><p style="color:var(--muted);font-size:0.9rem;">Abhi koi request nahi.</p></div>
   </div>
 </div>
 
@@ -85,4 +111,46 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
   <p>© 2026 AnimeFan. Made with ❤️ for anime lovers.</p>
 </footer>
 
-</body></html>
+<script>
+const KEY='animefan_requests';
+function load(){ try{return JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){return[];} }
+function save(arr){ localStorage.setItem(KEY, JSON.stringify(arr)); }
+function statusBadge(s){
+  const map={pending:'badge-pending',approved:'badge-approved',rejected:'badge-rejected'};
+  const label={pending:'Pending',approved:'Approved',rejected:'Rejected'};
+  return `<span class="badge ${map[s]||'badge-pending'}">${label[s]||s}</span>`;
+}
+function render(){
+  const list=load();
+  const el=document.getElementById('reqList');
+  if(!list.length){ el.innerHTML='<p style="color:var(--muted);font-size:0.9rem;">Abhi koi request nahi.</p>'; return; }
+  el.innerHTML=list.slice().reverse().map(r=>`
+    <div class="req-item">
+      <div>
+        <h4>${r.name}</h4>
+        <div class="meta">${[r.type,r.lang,r.details].filter(Boolean).join(' · ')||'—'} · ${r.date}</div>
+      </div>
+      ${statusBadge(r.status)}
+    </div>`).join('');
+}
+document.getElementById('reqForm').addEventListener('submit', e=>{
+  e.preventDefault();
+  const name=document.getElementById('reqName').value.trim();
+  if(!name) return;
+  const list=load();
+  list.push({
+    id:Date.now(),
+    name,
+    type:document.getElementById('reqType').value,
+    lang:document.getElementById('reqLang').value,
+    details:document.getElementById('reqDetails').value.trim(),
+    status:'pending',
+    date:new Date().toLocaleDateString()
+  });
+  save(list);
+  document.getElementById('reqForm').reset();
+  render();
+});
+// demo: if empty, seed one approved sample later optional
+render();
+</script></body></html>
