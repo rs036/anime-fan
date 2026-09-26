@@ -410,7 +410,7 @@
 
         /* MOBILE */
         @media(max-width:900px){
-            .nav-links, .search-box { display:none; }
+            .nav-links { display:none; } .search-box { display:flex; max-width:120px; } .search-box input { width:70px; }
             .menu-btn { display:block; }
             .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
          height:auto; min-height:52vh; max-height:480px; padding:4rem 5% 2rem; }
@@ -517,37 +517,37 @@ a.chip { text-decoration:none; color:inherit; display:inline-flex; align-items:c
 
 a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.35rem; }
 
+        
         .lang-grid {
             display:grid;
             grid-template-columns:repeat(2, 1fr);
             gap:0.75rem;
         }
-        @media(min-width:700px){
-            .lang-grid { grid-template-columns:repeat(3, 1fr); }
-        }
-        @media(min-width:1100px){
-            .lang-grid { grid-template-columns:repeat(4, 1fr); }
+        @media(min-width:800px){
+            .lang-grid { grid-template-columns:repeat(3, 1fr); max-width:720px; }
         }
         a.lang-btn {
-            display:flex; align-items:center; gap:0.75rem;
-            padding:0.95rem 1.1rem;
-            background:var(--card);
-            border:1px solid var(--border);
-            border-radius:50px;
+            display:flex; align-items:center; gap:0.85rem;
+            padding:1rem 1.15rem;
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:999px;
             text-decoration:none; color:#fff;
             font-weight:600; font-size:0.95rem;
             transition:0.2s;
         }
         a.lang-btn:hover {
-            border-color:rgba(168,85,247,0.5);
-            background:rgba(168,85,247,0.12);
+            border-color:rgba(168,85,247,0.55);
+            background:rgba(168,85,247,0.1);
             transform:translateY(-2px);
         }
         .lang-icon {
-            width:36px; height:36px; border-radius:50%;
+            width:40px; height:40px; border-radius:50%;
             display:flex; align-items:center; justify-content:center;
-            font-size:1rem; flex-shrink:0;
+            font-size:1.05rem; flex-shrink:0; font-weight:700;
+            box-shadow:0 4px 12px rgba(0,0,0,0.25);
         }
+
 
     
 .rank-num {
@@ -642,7 +642,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         .profile-dd {
             display:none; position:absolute; right:0; top:calc(100% + 8px);
             min-width:180px; background:#14141c; border:1px solid var(--border);
-            border-radius:12px; padding:0.45rem; z-index:80;
+            border-radius:12px; padding:0.45rem; z-index:200;
             box-shadow:0 12px 40px rgba(0,0,0,0.5);
         }
         .profile-dd.open { display:block; }
@@ -738,7 +738,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- TRENDING -->
     <section id="trending">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Trending Now</h2>
+            <h2 class="section-title"><span class="bar"></span> 🔥 Trending Now</h2>
             <a href="trending.html" class="view-all">View All →</a>
         </div>
         <div class="scroll-row">
@@ -889,7 +889,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- CONTINUE WATCHING -->
     <section id="continue">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Continue Watching</h2>
+            <h2 class="section-title"><span class="bar"></span> ▶ Continue Watching</h2>
             <a href="continue.html" class="view-all">View All →</a>
         </div>
         
@@ -936,22 +936,33 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 
 
+    
     <section id="language">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Browse by Language</h2>
+            <h2 class="section-title"><span class="bar"></span> 🌐 Browse by Language</h2>
         </div>
         <div class="lang-grid">
-            <a class="lang-btn" href="language.html?lang=Hindi"><span class="lang-icon" style="background:#7f1d1d;">🎤</span> Hindi Dub</a>
-            <a class="lang-btn" href="language.html?lang=HSub"><span class="lang-icon" style="background:#9a3412;">CC</span> Hindi Sub</a>
-            <a class="lang-btn" href="language.html?lang=FanDub"><span class="lang-icon" style="background:#5b21b6;">🎧</span> FanDub</a>
+            <a class="lang-btn" href="language.html?lang=Hindi">
+                <span class="lang-icon" style="background:linear-gradient(135deg,#9f1239,#e11d48);">🎤</span>
+                Hindi Dub
+            </a>
+            <a class="lang-btn" href="language.html?lang=HSub">
+                <span class="lang-icon" style="background:linear-gradient(135deg,#c2410c,#f59e0b);color:#111;font-size:0.75rem;">CC</span>
+                Hindi Sub
+            </a>
+            <a class="lang-btn" href="language.html?lang=FanDub">
+                <span class="lang-icon" style="background:linear-gradient(135deg,#5b21b6,#a855f7);">🎧</span>
+                FanDub
+            </a>
         </div>
     </section>
+
 
 
     <!-- AIRING -->
     <section id="airing">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Currently Airing</h2>
+            <h2 class="section-title"><span class="bar"></span> 🔴 Currently Airing</h2>
             <a href="airing.html" class="view-all">View All →</a>
         </div>
         <div class="scroll-row">
@@ -1100,7 +1111,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- LATEST + TOP RANKED -->
     <section id="latest">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Latest Episodes</h2>
+            <h2 class="section-title"><span class="bar"></span> 📺 Latest Episodes</h2>
             <a href="latest.html" class="view-all">View All →</a>
         </div>
         <div class="episodes-grid">
@@ -1143,7 +1154,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 <section id="popular">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Top Ranking</h2>
+            <h2 class="section-title"><span class="bar"></span> 🏆 Top Ranking</h2>
             <a href="trending.html" class="view-all">View All →</a>
         </div>
         <div class="scroll-row">
@@ -1297,7 +1308,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- NEW ON ANIMEFAN -->
     <section id="new">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> New On AnimeFan</h2>
+            <h2 class="section-title"><span class="bar"></span> ✨ New On AnimeFan</h2>
             <a href="new.html" class="view-all">View All →</a>
         </div>
         <div class="scroll-row">
@@ -1453,7 +1464,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- UPCOMING -->
     <section id="upcoming">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Upcoming</h2>
+            <h2 class="section-title"><span class="bar"></span> 📅 Upcoming</h2>
             <a href="upcoming.html" class="view-all">View All →</a>
         </div>
         <div class="scroll-row">
@@ -1603,7 +1614,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- MOVIES -->
     <section id="movies">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Movies</h2>
+            <h2 class="section-title"><span class="bar"></span> 🎬 Movies</h2>
             <a href="movies.html" class="view-all">View All →</a>
         </div>
         <div class="scroll-row">
@@ -1753,7 +1764,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- COMPLETED -->
     <section id="completed">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Completed</h2>
+            <h2 class="section-title"><span class="bar"></span> ✅ Completed</h2>
             <a href="completed.html" class="view-all">View All →</a>
         </div>
         <div class="scroll-row">
@@ -1906,7 +1917,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="schedule">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Estimated Schedule</h2>
+            <h2 class="section-title"><span class="bar"></span> 📅 Estimated Schedule</h2>
         </div>
         <div class="sched-tabs" id="schedTabs">
             <button class="sched-tab" data-day="mon">MON</button>
@@ -1926,7 +1937,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="genres">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Browse by Genres</h2>
+            <h2 class="section-title"><span class="bar"></span> 🏷️ Browse by Genres</h2>
         </div>
         <div class="genre-grid">
             <a class="genre-tile" href="genre.html?g=Action" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c);">Action<span>12 anime</span></a>
@@ -1946,6 +1957,17 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 
     
+
+    
+    <section id="requestCta" style="padding:2rem 3%;">
+        <div style="max-width:900px;margin:0 auto;background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(236,72,153,0.1));border:1px solid rgba(168,85,247,0.25);border-radius:18px;padding:1.5rem 1.4rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+            <div>
+                <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:0.35rem;">✉️ Request Anime</h2>
+                <p style="color:var(--muted);font-size:0.9rem;">Jo anime nahi mila — request bhejo. Status track bhi kar sakte ho.</p>
+            </div>
+            <a href="request.html" class="btn-watch" style="text-decoration:none;">Go to Request →</a>
+        </div>
+    </section>
 
     <footer>
         <div class="footer-grid">
@@ -1973,6 +1995,56 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         document.querySelectorAll('.btn-watch').forEach(b => {
           b.addEventListener('click', function(e){ e.stopPropagation(); });
         });
+
+        
+        // Profile dropdown
+        (function(){
+          const btn = document.getElementById('profileBtn');
+          const dd = document.getElementById('profileDd');
+          if (!btn || !dd) return;
+          btn.addEventListener('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            dd.classList.toggle('open');
+          });
+          document.addEventListener('click', function(e){
+            if (!dd.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
+              dd.classList.remove('open');
+            }
+          });
+        })();
+
+        // Search — filter cards on home / go to anime page
+        (function(){
+          const input = document.querySelector('.search-box input');
+          if (!input) return;
+          function runSearch(){
+            const q = input.value.trim().toLowerCase();
+            if (!q) {
+              document.querySelectorAll('.anime-card, .cw-card').forEach(c => c.style.display = '');
+              return;
+            }
+            let found = 0;
+            document.querySelectorAll('.anime-card, .cw-card').forEach(c => {
+              const t = (c.innerText || '').toLowerCase();
+              const show = t.includes(q);
+              c.style.display = show ? '' : 'none';
+              if (show) found++;
+            });
+            if (found === 0 && q.length > 1) {
+              // optional: navigate to anime page with query
+              // location.href = 'anime.html?q=' + encodeURIComponent(q);
+            }
+          }
+          input.addEventListener('input', runSearch);
+          input.addEventListener('keydown', function(e){
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              const q = input.value.trim();
+              if (q) location.href = 'anime.html?q=' + encodeURIComponent(q);
+            }
+          });
+        })();
 
         (function initMenu(){
           const menuBtn = document.getElementById('menuBtn');

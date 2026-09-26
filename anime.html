@@ -87,7 +87,11 @@ const list=[
   {t:"Attack on Titan",r:"9.5",e:"⚔️",m:"TV · 87 Eps · HSub"},
   {t:"Naruto Shippuden",r:"9.3",e:"🍥",m:"TV · 500 Eps · Hindi"}
 ];
-document.getElementById("grid").innerHTML=list.map(a=>`
+const params=new URLSearchParams(location.search);
+const q=(params.get('q')||'').toLowerCase();
+const filtered=q?list.filter(x=>x.t.toLowerCase().includes(q)):list;
+if(q){const h=document.querySelector('.page-header p');if(h)h.textContent='Results for: '+params.get('q');}
+document.getElementById("grid").innerHTML=filtered.map(a=>`
   <a class="anime-card" href="anime-detail.html">
     <div class="card-poster"><span class="rating-badge">★ ${a.r}</span>${a.e}</div>
     <div class="card-body"><h3>${a.t}</h3><div class="card-meta">${a.m}</div></div>
