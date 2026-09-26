@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Sign in — AnimeFan</title><style>
+<title>My List — AnimeFan</title><style>
 :root{--bg:#0a0a0f;--card:#14141c;--elevated:#1a1a24;--border:rgba(255,255,255,0.08);--accent:#a855f7;--accent2:#ec4899;--muted:#a1a1aa;--grad:linear-gradient(135deg,#a855f7,#ec4899);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#fff;min-height:100vh;}
@@ -49,28 +49,25 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
 .help-card p{font-size:0.85rem;color:var(--muted);line-height:1.45;}
 </style></head><body>
 <nav class="navbar"><a href="index.html" class="logo">AnimeFan</a></nav>
-<div class="page">
+<div class="page page-wide">
   <a href="index.html" class="back-btn">← Back</a>
-  <div class="auth-card">
-    <h1>Welcome back</h1>
-    <p class="sub">Sign in to sync History &amp; My List</p>
-    <form id="loginForm">
-      <div class="form-group"><label>Email</label><input type="email" id="email" placeholder="you@email.com" required></div>
-      <div class="form-group"><label>Password</label><input type="password" id="pass" placeholder="••••••••" required></div>
-      <button class="btn-primary" type="submit">Sign in</button>
-    </form>
-    <p class="auth-foot">New to AnimeFan? <a href="register.html">Create account</a></p>
-  </div>
+  <h1 style="font-size:1.4rem;margin-bottom:0.35rem;">♥ My List</h1>
+  <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.2rem;" id="sub">Your saved anime</p>
+  <div class="grid" id="grid"></div>
 </div>
 <footer><p style="font-size:0.72rem;margin-bottom:0.5rem;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p><p>© 2026 AnimeFan. Made with ❤️ for anime lovers.</p></footer>
 <script>
-const params=new URLSearchParams(location.search);
-const next=params.get('next')||'index.html';
-document.getElementById('loginForm').onsubmit=e=>{
-  e.preventDefault();
-  const email=document.getElementById('email').value.trim();
-  const name=email.split('@')[0]||'Fan';
-  localStorage.setItem('animefan_user', JSON.stringify({email,name}));
-  location.href=next;
-};
+const u=JSON.parse(localStorage.getItem('animefan_user')||'null');
+if(!u) location.href='login.html?next=mylist.html';
+else document.getElementById('sub').textContent=(u.name||'You')+' · saved anime';
+const list=[
+  {t:'Shadow of the Eternal Blade',e:'⚔️',m:'TV · HSub'},
+  {t:'Frieren',e:'🏰',m:'TV · HSub'},
+  {t:'Jujutsu Kaisen S3',e:'🔥',m:'TV · HSub'}
+];
+document.getElementById('grid').innerHTML=list.map(a=>`
+  <a class="anime-card" href="anime-detail.html">
+    <div class="card-poster">${a.e}</div>
+    <div class="card-body"><h3>${a.t}</h3><div class="card-meta">${a.m}</div></div>
+  </a>`).join('');
 </script></body></html>

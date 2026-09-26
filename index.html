@@ -655,10 +655,79 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         .icon-svg { display:inline-flex; width:1.1em; height:1.1em; vertical-align:-0.15em; margin-right:0.35rem; }
         .section-title .icon-svg { margin-right:0.4rem; }
 
+    
+        /* Aniflix-style search */
+        .search-toggle {
+            width:38px; height:38px; border-radius:50%; border:1px solid var(--border);
+            background:var(--elevated); color:#fff; cursor:pointer;
+            display:flex; align-items:center; justify-content:center; padding:0;
+        }
+        .search-toggle svg { width:18px; height:18px; stroke:#c4b5fd; fill:none; stroke-width:2; }
+        .search-toggle:hover { border-color:#a855f7; }
+        .search-overlay {
+            display:none; position:fixed; inset:0; z-index:300;
+            background:rgba(5,5,10,0.92); backdrop-filter:blur(10px);
+            padding:1rem; flex-direction:column;
+        }
+        .search-overlay.open { display:flex; }
+        .search-overlay-bar {
+            display:flex; align-items:center; gap:0.75rem;
+            background:var(--card); border:1px solid var(--border);
+            border-radius:14px; padding:0.65rem 1rem; max-width:640px; width:100%; margin:0.5rem auto 1rem;
+        }
+        .search-overlay-bar input {
+            flex:1; background:transparent; border:none; color:#fff; outline:none;
+            font-size:1.05rem; font-family:inherit;
+        }
+        .search-close {
+            background:none; border:none; color:var(--muted); font-size:1.4rem; cursor:pointer;
+        }
+        .search-results {
+            max-width:640px; width:100%; margin:0 auto; overflow-y:auto; flex:1;
+        }
+        .search-hit {
+            display:flex; align-items:center; gap:0.85rem;
+            padding:0.75rem; border-radius:12px; text-decoration:none; color:#fff;
+            border:1px solid transparent;
+        }
+        .search-hit:hover { background:var(--card); border-color:var(--border); }
+        .search-hit-thumb {
+            width:48px; height:68px; border-radius:8px; flex-shrink:0;
+            background:linear-gradient(145deg,#1e1e2e,#2a1a3a);
+            display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+        }
+        .search-hit h4 { font-size:0.95rem; margin-bottom:0.2rem; }
+        .search-hit p { font-size:0.75rem; color:var(--muted); }
+
+        /* Aniflix profile dropdown */
+        .profile-dd {
+            display:none; position:absolute; right:0; top:calc(100% + 10px);
+            width:260px; background:#12121a; border:1px solid var(--border);
+            border-radius:16px; padding:0.5rem; z-index:250;
+            box-shadow:0 16px 50px rgba(0,0,0,0.55);
+        }
+        .profile-dd.open { display:block; }
+        .pd-head {
+            padding:0.85rem 0.9rem 0.75rem; border-bottom:1px solid var(--border);
+            margin-bottom:0.35rem;
+        }
+        .pd-head .pd-label { font-size:0.7rem; font-weight:700; letter-spacing:0.06em; color:var(--accent); text-transform:uppercase; }
+        .pd-head .pd-sub { font-size:0.82rem; color:var(--muted); margin-top:0.2rem; }
+        .pd-item {
+            display:flex; align-items:center; gap:0.75rem;
+            padding:0.8rem 0.9rem; border-radius:10px;
+            color:#e4e4e7; text-decoration:none; font-size:0.92rem; font-weight:500;
+            border:none; background:none; width:100%; cursor:pointer; font-family:inherit; text-align:left;
+        }
+        .pd-item:hover { background:rgba(168,85,247,0.12); color:#fff; }
+        .pd-item svg { width:20px; height:20px; flex-shrink:0; opacity:0.9; }
+        .pd-item.danger { color:#f87171; }
+        .hide-inline-search .search-box { display:none !important; }
+
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="navbar hide-inline-search">
         <a href="index.html" class="logo">AnimeFan</a>
         <ul class="nav-links">
             <li><a href="index.html" class="active">Home</a></li>
@@ -667,20 +736,56 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             <li><a href="genres.html">Genres</a></li>
             <li><a href="request.html">Request</a></li>
         </ul>
+        
         <div class="nav-right">
-            <div class="search-box"><svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input type="text" placeholder="Search anime..."></div>
+            <button type="button" class="search-toggle" id="searchToggle" aria-label="Search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </button>
             <div class="profile-wrap">
                 <button type="button" class="profile-btn" id="profileBtn" aria-label="Profile">
                     <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v1.2h19.2v-1.2c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
                 </button>
                 <div class="profile-dd" id="profileDd">
-                    <a href="login.html">Login</a>
-                    <a href="register.html">Register</a>
+                    <div class="pd-head">
+                        <div class="pd-label" id="pdLabel">GUEST</div>
+                        <div class="pd-sub" id="pdSub">Not signed in</div>
+                    </div>
+                    <a class="pd-item" id="pdSignIn" href="login.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        Sign in
+                    </a>
+                    <a class="pd-item" id="pdHistory" href="continue.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+                        History
+                    </a>
+                    <a class="pd-item" id="pdList" href="mylist.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        My List
+                    </a>
+                    <a class="pd-item" href="help.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+                        Help &amp; Feedback
+                    </a>
+                    <button type="button" class="pd-item danger" id="pdLogout" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+                        Sign out
+                    </button>
                 </div>
             </div>
             <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
         </div>
+
     </nav>
+
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-overlay-bar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="searchInput" placeholder="Search anime..." autocomplete="off">
+            <button type="button" class="search-close" id="searchClose">✕</button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+
 
     
     <div class="overlay" id="overlay"></div>
@@ -739,7 +844,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="trending">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🔥 Trending Now</h2>
-            <a href="trending.html" class="view-all">View All →</a>
+            <a href="trending.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -890,7 +995,6 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="continue">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> ▶ Continue Watching</h2>
-            <a href="continue.html" class="view-all">View All →</a>
         </div>
         
         <div class="scroll-row" id="continueRow">
@@ -937,21 +1041,28 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 
     
+    
     <section id="language">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🌐 Browse by Language</h2>
         </div>
         <div class="lang-grid">
             <a class="lang-btn" href="language.html?lang=Hindi">
-                <span class="lang-icon" style="background:linear-gradient(135deg,#9f1239,#e11d48);">🎤</span>
+                <span class="lang-icon" style="background:linear-gradient(145deg,#be123c,#fb7185);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                </span>
                 Hindi Dub
             </a>
             <a class="lang-btn" href="language.html?lang=HSub">
-                <span class="lang-icon" style="background:linear-gradient(135deg,#c2410c,#f59e0b);color:#111;font-size:0.75rem;">CC</span>
+                <span class="lang-icon" style="background:linear-gradient(145deg,#c2410c,#fbbf24);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 12h4v2H4v-2zm10 6H4v-2h10v2zm6 0h-4v-2h4v2zm0-4H10v-2h10v2z"/></svg>
+                </span>
                 Hindi Sub
             </a>
             <a class="lang-btn" href="language.html?lang=FanDub">
-                <span class="lang-icon" style="background:linear-gradient(135deg,#5b21b6,#a855f7);">🎧</span>
+                <span class="lang-icon" style="background:linear-gradient(145deg,#6d28d9,#c084fc);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                </span>
                 FanDub
             </a>
         </div>
@@ -959,11 +1070,12 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 
 
+
     <!-- AIRING -->
     <section id="airing">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🔴 Currently Airing</h2>
-            <a href="airing.html" class="view-all">View All →</a>
+            <a href="airing.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1112,7 +1224,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="latest">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 📺 Latest Episodes</h2>
-            <a href="latest.html" class="view-all">View All →</a>
+            <a href="latest.html" class="view-all">View All ›</a>
         </div>
         <div class="episodes-grid">
             <div class="episode-list">
@@ -1155,7 +1267,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <section id="popular">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🏆 Top Ranking</h2>
-            <a href="trending.html" class="view-all">View All →</a>
+            <a href="trending.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1309,7 +1421,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="new">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> ✨ New On AnimeFan</h2>
-            <a href="new.html" class="view-all">View All →</a>
+            <a href="new.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1465,7 +1577,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="upcoming">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 📅 Upcoming</h2>
-            <a href="upcoming.html" class="view-all">View All →</a>
+            <a href="upcoming.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1615,7 +1727,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="movies">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🎬 Movies</h2>
-            <a href="movies.html" class="view-all">View All →</a>
+            <a href="movies.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1765,7 +1877,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="completed">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> ✅ Completed</h2>
-            <a href="completed.html" class="view-all">View All →</a>
+            <a href="completed.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1959,15 +2071,20 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
 
     
-    <section id="requestCta" style="padding:2rem 3%;">
-        <div style="max-width:900px;margin:0 auto;background:linear-gradient(135deg,rgba(168,85,247,0.15),rgba(236,72,153,0.1));border:1px solid rgba(168,85,247,0.25);border-radius:18px;padding:1.5rem 1.4rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
-            <div>
-                <h2 style="font-size:1.15rem;font-weight:700;margin-bottom:0.35rem;">✉️ Request Anime</h2>
-                <p style="color:var(--muted);font-size:0.9rem;">Jo anime nahi mila — request bhejo. Status track bhi kar sakte ho.</p>
+    
+    <section id="requestCta" style="padding:2.2rem 3%;">
+        <div style="max-width:960px;margin:0 auto;position:relative;overflow:hidden;border-radius:20px;border:1px solid rgba(168,85,247,0.3);background:radial-gradient(ellipse at top left,rgba(168,85,247,0.25),transparent 55%),radial-gradient(ellipse at bottom right,rgba(236,72,153,0.18),transparent 50%),#12121a;padding:1.75rem 1.5rem;">
+            <div style="position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.2rem;">
+                <div style="max-width:560px;">
+                    <div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#c4b5fd;margin-bottom:0.5rem;">Premium request</div>
+                    <h2 style="font-size:1.35rem;font-weight:800;margin-bottom:0.4rem;">Missing an anime?</h2>
+                    <p style="color:var(--muted);font-size:0.92rem;line-height:1.5;">Sirf naam likho — request bhejo. Pending / Approved status yahin track karo.</p>
+                </div>
+                <a href="request.html" class="btn-watch" style="text-decoration:none;white-space:nowrap;">Request Anime →</a>
             </div>
-            <a href="request.html" class="btn-watch" style="text-decoration:none;">Go to Request →</a>
         </div>
     </section>
+
 
     <footer>
         <div class="footer-grid">
@@ -1997,54 +2114,111 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         });
 
         
-        // Profile dropdown
+        
+        // Auth helpers
+        function getUser() {
+          try { return JSON.parse(localStorage.getItem('animefan_user') || 'null'); } catch(e) { return null; }
+        }
+        function setUser(u) {
+          if (u) localStorage.setItem('animefan_user', JSON.stringify(u));
+          else localStorage.removeItem('animefan_user');
+        }
+
+        // Profile menu (Aniflix style)
         (function(){
           const btn = document.getElementById('profileBtn');
           const dd = document.getElementById('profileDd');
           if (!btn || !dd) return;
+          function refreshProfile() {
+            const u = getUser();
+            const label = document.getElementById('pdLabel');
+            const sub = document.getElementById('pdSub');
+            const signIn = document.getElementById('pdSignIn');
+            const logout = document.getElementById('pdLogout');
+            const hist = document.getElementById('pdHistory');
+            const list = document.getElementById('pdList');
+            if (u) {
+              label.textContent = 'MEMBER';
+              sub.textContent = u.name || u.email || 'Signed in';
+              signIn.style.display = 'none';
+              logout.style.display = 'flex';
+              hist.href = 'continue.html';
+              list.href = 'mylist.html';
+            } else {
+              label.textContent = 'GUEST';
+              sub.textContent = 'Not signed in';
+              signIn.style.display = 'flex';
+              logout.style.display = 'none';
+              hist.href = 'login.html?next=continue.html';
+              list.href = 'login.html?next=mylist.html';
+            }
+          }
+          refreshProfile();
           btn.addEventListener('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
+            e.preventDefault(); e.stopPropagation();
             dd.classList.toggle('open');
           });
           document.addEventListener('click', function(e){
-            if (!dd.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-              dd.classList.remove('open');
-            }
+            if (!dd.contains(e.target) && !btn.contains(e.target)) dd.classList.remove('open');
+          });
+          document.getElementById('pdLogout')?.addEventListener('click', function(){
+            setUser(null); refreshProfile(); dd.classList.remove('open');
           });
         })();
 
-        // Search — filter cards on home / go to anime page
+        // Aniflix-style search overlay
         (function(){
-          const input = document.querySelector('.search-box input');
-          if (!input) return;
-          function runSearch(){
-            const q = input.value.trim().toLowerCase();
-            if (!q) {
-              document.querySelectorAll('.anime-card, .cw-card').forEach(c => c.style.display = '');
+          const toggle = document.getElementById('searchToggle');
+          const overlay = document.getElementById('searchOverlay');
+          const input = document.getElementById('searchInput');
+          const results = document.getElementById('searchResults');
+          const closeBtn = document.getElementById('searchClose');
+          if (!toggle || !overlay || !input) return;
+          const catalog = [
+            {t:'Shadow of the Eternal Blade',e:'⚔️',m:'TV · HSub · ★ 9.4'},
+            {t:'Neon Horizon: Zero',e:'🌌',m:'TV · Hindi · ★ 9.1'},
+            {t:'Cherry Blossom Letters',e:'💖',m:'TV · HSub · ★ 8.9'},
+            {t:'Crimson Guild Chronicles',e:'🗡️',m:'TV · FanDub · ★ 9.2'},
+            {t:'Jujutsu Kaisen S3',e:'🔥',m:'TV · HSub · ★ 9.0'},
+            {t:'Solo Leveling S2',e:'🌀',m:'TV · Hindi · ★ 8.7'},
+            {t:'One Punch Man S3',e:'⚡',m:'TV · HSub · ★ 8.8'},
+            {t:'Spy x Family S3',e:'🕵️',m:'TV · Hindi · ★ 8.6'},
+            {t:'Frieren',e:'🏰',m:'TV · HSub · ★ 9.3'},
+            {t:'Demon Slayer S4',e:'🌟',m:'TV · FanDub · ★ 9.0'},
+            {t:'Attack on Titan',e:'⚔️',m:'TV · HSub · ★ 9.5'},
+            {t:'Naruto Shippuden',e:'🍥',m:'TV · Hindi · ★ 9.3'}
+          ];
+          function openSearch(){
+            overlay.classList.add('open');
+            document.body.style.overflow='hidden';
+            setTimeout(()=>input.focus(),50);
+            render('');
+          }
+          function closeSearch(){
+            overlay.classList.remove('open');
+            document.body.style.overflow='';
+            input.value='';
+          }
+          function render(q){
+            q = (q||'').toLowerCase().trim();
+            const hits = q ? catalog.filter(x => x.t.toLowerCase().includes(q)) : catalog.slice(0,6);
+            if (!hits.length) {
+              results.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">No results found</p>';
               return;
             }
-            let found = 0;
-            document.querySelectorAll('.anime-card, .cw-card').forEach(c => {
-              const t = (c.innerText || '').toLowerCase();
-              const show = t.includes(q);
-              c.style.display = show ? '' : 'none';
-              if (show) found++;
-            });
-            if (found === 0 && q.length > 1) {
-              // optional: navigate to anime page with query
-              // location.href = 'anime.html?q=' + encodeURIComponent(q);
-            }
+            results.innerHTML = hits.map(h => `
+              <a class="search-hit" href="anime-detail.html">
+                <div class="search-hit-thumb">${h.e}</div>
+                <div><h4>${h.t}</h4><p>${h.m}</p></div>
+              </a>`).join('');
           }
-          input.addEventListener('input', runSearch);
-          input.addEventListener('keydown', function(e){
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              const q = input.value.trim();
-              if (q) location.href = 'anime.html?q=' + encodeURIComponent(q);
-            }
-          });
+          toggle.addEventListener('click', openSearch);
+          closeBtn?.addEventListener('click', closeSearch);
+          overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
+          input.addEventListener('input', () => render(input.value));
+          document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
         })();
+
 
         (function initMenu(){
           const menuBtn = document.getElementById('menuBtn');
