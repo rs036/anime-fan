@@ -2,78 +2,75 @@
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Genres — AnimeFan</title>
 <style>
-:root{--bg:#0a0a0f;--card:#14141c;--border:rgba(255,255,255,0.08);--muted:#a1a1aa;--grad:linear-gradient(135deg,#a855f7,#ec4899);}
+:root{--bg:#0a0a0f;--muted:#a1a1aa;--grad:linear-gradient(135deg,#a855f7,#ec4899);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,sans-serif;background:var(--bg);color:#fff;min-height:100vh;}
-.navbar{display:flex;padding:0.85rem 1.2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px);}
+.navbar{display:flex;padding:0.85rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.08);position:sticky;top:0;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px);}
 .logo{font-weight:800;font-size:1.25rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
 .page{padding:1.2rem 1.2%;max-width:1000px;margin:0 auto;}
-.back-btn{color:var(--muted);text-decoration:none;font-size:0.9rem;}
-h1{font-size:1.5rem;font-weight:800;margin:1rem 0 0.35rem;}
+h1{font-size:1.5rem;font-weight:800;margin:0.5rem 0 0.35rem;}
 .sub{color:var(--muted);margin-bottom:1.3rem;font-size:0.9rem;}
 .genre-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.7rem;}
 @media(min-width:600px){.genre-grid{grid-template-columns:repeat(3,1fr);}}
 @media(min-width:900px){.genre-grid{grid-template-columns:repeat(4,1fr);gap:0.85rem;}}
-a.genre-chip{display:flex;align-items:center;gap:0.85rem;padding:0.95rem 1.05rem;border-radius:14px;text-decoration:none;color:#fff;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);position:relative;overflow:hidden;transition:0.25s;}
-a.genre-chip::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--g-accent,#a855f7);}
-a.genre-chip:hover{background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.35);transform:translateY(-3px);}
-.g-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.15rem;background:var(--g-bg);}
+a.genre-chip{display:flex;align-items:center;gap:0.9rem;padding:1rem 1.1rem;border-radius:16px;text-decoration:none;color:#fff;background:linear-gradient(145deg,rgba(255,255,255,0.04),rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.09);transition:0.25s;}
+a.genre-chip:hover{border-color:rgba(168,85,247,0.45);background:rgba(168,85,247,0.12);transform:translateY(-3px);}
+.g-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;font-weight:800;flex-shrink:0;color:#fff;}
 .g-name{font-weight:700;font-size:0.95rem;}
 .g-count{font-size:0.72rem;color:var(--muted);}
-footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);margin-top:2rem;}
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;border-top:1px solid rgba(255,255,255,0.08);margin-top:2rem;}
 </style></head><body>
 <nav class="navbar"><a href="index.html" class="logo">AnimeFan</a></nav>
 <div class="page">
-  <a href="index.html" class="back-btn">← Back to Home</a>
   <h1>Browse by Genres</h1>
   <p class="sub">Pick a genre to explore</p>
   <div class="genre-grid">
-    <a class="genre-chip" href="genre.html?g=Action" style="--g-accent:#ef4444;--g-bg:rgba(239,68,68,0.18);">
-      <span class="g-icon">⚔️</span>
+    <a class="genre-chip" href="genre.html?g=Action">
+      <span class="g-icon" style="background:linear-gradient(135deg,#b91c1c,#ef4444);">AC</span>
       <span><div class="g-name">Action</div><div class="g-count">12 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Comedy" style="--g-accent:#f59e0b;--g-bg:rgba(245,158,11,0.18);">
-      <span class="g-icon">😂</span>
+    <a class="genre-chip" href="genre.html?g=Comedy">
+      <span class="g-icon" style="background:linear-gradient(135deg,#b45309,#f59e0b);">CO</span>
       <span><div class="g-name">Comedy</div><div class="g-count">8 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Drama" style="--g-accent:#10b981;--g-bg:rgba(16,185,129,0.18);">
-      <span class="g-icon">🎭</span>
+    <a class="genre-chip" href="genre.html?g=Drama">
+      <span class="g-icon" style="background:linear-gradient(135deg,#047857,#10b981);">DR</span>
       <span><div class="g-name">Drama</div><div class="g-count">9 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Fantasy" style="--g-accent:#a855f7;--g-bg:rgba(168,85,247,0.2);">
-      <span class="g-icon">✨</span>
+    <a class="genre-chip" href="genre.html?g=Fantasy">
+      <span class="g-icon" style="background:linear-gradient(135deg,#6d28d9,#a855f7);">FA</span>
       <span><div class="g-name">Fantasy</div><div class="g-count">14 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Horror" style="--g-accent:#ec4899;--g-bg:rgba(236,72,153,0.18);">
-      <span class="g-icon">👻</span>
+    <a class="genre-chip" href="genre.html?g=Horror">
+      <span class="g-icon" style="background:linear-gradient(135deg,#9d174d,#ec4899);">HO</span>
       <span><div class="g-name">Horror</div><div class="g-count">4 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Romance" style="--g-accent:#06b6d4;--g-bg:rgba(6,182,212,0.18);">
-      <span class="g-icon">💕</span>
+    <a class="genre-chip" href="genre.html?g=Romance">
+      <span class="g-icon" style="background:linear-gradient(135deg,#0e7490,#06b6d4);">RO</span>
       <span><div class="g-name">Romance</div><div class="g-count">10 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Sci-Fi" style="--g-accent:#84cc16;--g-bg:rgba(132,204,22,0.18);">
-      <span class="g-icon">🚀</span>
+    <a class="genre-chip" href="genre.html?g=Sci-Fi">
+      <span class="g-icon" style="background:linear-gradient(135deg,#4d7c0f,#84cc16);">SF</span>
       <span><div class="g-name">Sci-Fi</div><div class="g-count">6 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Mecha" style="--g-accent:#3b82f6;--g-bg:rgba(59,130,246,0.18);">
-      <span class="g-icon">🤖</span>
+    <a class="genre-chip" href="genre.html?g=Mecha">
+      <span class="g-icon" style="background:linear-gradient(135deg,#1d4ed8,#3b82f6);">ME</span>
       <span><div class="g-name">Mecha</div><div class="g-count">0 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Mystery" style="--g-accent:#c026d3;--g-bg:rgba(192,38,211,0.18);">
-      <span class="g-icon">🔍</span>
+    <a class="genre-chip" href="genre.html?g=Mystery">
+      <span class="g-icon" style="background:linear-gradient(135deg,#86198f,#c026d3);">MY</span>
       <span><div class="g-name">Mystery</div><div class="g-count">7 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Sports" style="--g-accent:#8b5cf6;--g-bg:rgba(139,92,246,0.18);">
-      <span class="g-icon">⚽</span>
+    <a class="genre-chip" href="genre.html?g=Sports">
+      <span class="g-icon" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6);">SP</span>
       <span><div class="g-name">Sports</div><div class="g-count">3 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Adventure" style="--g-accent:#f97316;--g-bg:rgba(249,115,22,0.18);">
-      <span class="g-icon">🗡️</span>
+    <a class="genre-chip" href="genre.html?g=Adventure">
+      <span class="g-icon" style="background:linear-gradient(135deg,#c2410c,#f97316);">AD</span>
       <span><div class="g-name">Adventure</div><div class="g-count">11 anime</div></span>
     </a>
-    <a class="genre-chip" href="genre.html?g=Slice%20of%20Life" style="--g-accent:#14b8a6;--g-bg:rgba(20,184,166,0.18);">
-      <span class="g-icon">🌿</span>
+    <a class="genre-chip" href="genre.html?g=Slice%20of%20Life">
+      <span class="g-icon" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">SL</span>
       <span><div class="g-name">Slice of Life</div><div class="g-count">6 anime</div></span>
     </a>
   </div>

@@ -29,15 +29,11 @@ body{font-family:system-ui,sans-serif;background:var(--bg);color:#fff;min-height
 .card-meta{font-size:0.7rem;color:var(--muted);}
 footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);margin-top:2rem;}
 
-.pagination{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;align-items:center;margin:1.5rem 0 0.5rem;padding:0.5rem 0;}
-.page-btn{
-  min-width:36px;height:36px;padding:0 0.55rem;border-radius:10px;
-  border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);
-  color:#e4e4e7;font-weight:600;font-size:0.85rem;cursor:pointer;font-family:inherit;
-}
-.page-btn:hover{border-color:rgba(168,85,247,0.5);color:#fff;}
-.page-btn.active{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:#fff;}
-.page-btn:disabled{opacity:0.35;cursor:not-allowed;}
+
+
+
+
+
 .empty-state{
   text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;
   background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);
@@ -47,10 +43,29 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
 .empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
 .empty-state p{font-size:0.9rem;}
 
+
+.pagination{
+  display:flex;flex-wrap:wrap;gap:0.45rem;
+  justify-content:center;align-items:center;
+  width:100%;margin:1.75rem auto 1rem;padding:0.5rem 0;
+  text-align:center;
+}
+.page-btn{
+  min-width:40px;height:40px;padding:0 0.6rem;border-radius:10px;
+  border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);
+  color:#e4e4e7;font-weight:600;font-size:0.9rem;cursor:pointer;font-family:inherit;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.page-btn:hover{border-color:rgba(168,85,247,0.55);color:#fff;}
+.page-btn.active{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:#fff;}
+.page-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.empty-state{text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);border-radius:16px;margin:1rem auto;grid-column:1/-1;max-width:520px;}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.5;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+
 </style></head><body>
 <nav class="navbar"><a href="index.html" class="logo">AnimeFan</a></nav>
 <div class="page">
-  <a href="genres.html" class="back-btn">← All Genres</a>
   <div class="page-header">
     <div class="genre-head">
       <div class="genre-icon" id="gIcon">⚔️</div>
@@ -70,7 +85,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
   <p>© 2026 AnimeFan. Made with ❤️ for anime lovers.</p>
 </footer>
 <script>
-const icons={"Action":"⚔️","Romance":"💕","Comedy":"😂","Horror":"👻","Fantasy":"✨","Sci-Fi":"🚀","Mystery":"🔍","Drama":"🎭","Sports":"⚽","Mecha":"🤖","Adventure":"🗡️","Slice of Life":"🌿"};
+const icons={};
 const fullPool=[
   {t:"Shadow of the Eternal Blade",r:"9.4",e:"⚔️",m:"TV · 24 Eps"},
   {t:"Jujutsu Kaisen S3",r:"9.0",e:"🔥",m:"TV · 24 Eps"},
@@ -102,7 +117,7 @@ const emptyGenres=new Set(["Mecha"]);
 const params=new URLSearchParams(location.search);
 const g=params.get("g")||"Action";
 document.getElementById("gTitle").textContent=g+" anime";
-document.getElementById("gIcon").textContent=icons[g]||"🎬";
+document.getElementById("gIcon").textContent=(g||"AN").slice(0,2).toUpperCase();
 document.title=g+" — AnimeFan";
 
 let list=[];
@@ -129,7 +144,7 @@ function render(){
   const pager=document.getElementById("pager");
   const arr=sorted();
   if(!arr.length){
-    grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">🎬</div><h3>No Anime Available</h3><p>Is genre mein abhi koi anime nahi hai. Baad mein check karo.</p></div>`;
+    grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="es-icon" style="font-weight:800;opacity:0.4;">N/A</div><h3>No Anime Available</h3><p>Is genre mein abhi koi anime nahi hai. Baad mein check karo.</p></div>`;
     pager.innerHTML="";
     return;
   }
