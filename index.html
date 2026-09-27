@@ -301,7 +301,7 @@
         .rank-info h4 { font-size:0.82rem; font-weight:600; margin-bottom:0.12rem; }
         .rank-info span { font-size:0.72rem; color:var(--muted); }
 
-        /* Community */
+        /* More */
         .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
         .feature-card { background:var(--card); border-radius:14px; padding:1.3rem; text-align:center; border:1px solid var(--border); transition:0.25s; }
         .feature-card:hover { border-color:rgba(168,85,247,0.4); transform:translateY(-4px); }
@@ -410,7 +410,7 @@
 
         /* MOBILE */
         @media(max-width:900px){
-            .nav-links, .search-box { display:none; }
+            .nav-links { display:none; } .search-box { display:flex; max-width:120px; } .search-box input { width:70px; }
             .menu-btn { display:block; }
             .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
          height:auto; min-height:52vh; max-height:480px; padding:4rem 5% 2rem; }
@@ -517,37 +517,37 @@ a.chip { text-decoration:none; color:inherit; display:inline-flex; align-items:c
 
 a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.35rem; }
 
+        
         .lang-grid {
             display:grid;
             grid-template-columns:repeat(2, 1fr);
             gap:0.75rem;
         }
-        @media(min-width:700px){
-            .lang-grid { grid-template-columns:repeat(3, 1fr); }
-        }
-        @media(min-width:1100px){
-            .lang-grid { grid-template-columns:repeat(4, 1fr); }
+        @media(min-width:800px){
+            .lang-grid { grid-template-columns:repeat(3, 1fr); max-width:720px; }
         }
         a.lang-btn {
-            display:flex; align-items:center; gap:0.75rem;
-            padding:0.95rem 1.1rem;
-            background:var(--card);
-            border:1px solid var(--border);
-            border-radius:50px;
+            display:flex; align-items:center; gap:0.85rem;
+            padding:1rem 1.15rem;
+            background:rgba(255,255,255,0.03);
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:999px;
             text-decoration:none; color:#fff;
             font-weight:600; font-size:0.95rem;
             transition:0.2s;
         }
         a.lang-btn:hover {
-            border-color:rgba(168,85,247,0.5);
-            background:rgba(168,85,247,0.12);
+            border-color:rgba(168,85,247,0.55);
+            background:rgba(168,85,247,0.1);
             transform:translateY(-2px);
         }
         .lang-icon {
-            width:36px; height:36px; border-radius:50%;
+            width:40px; height:40px; border-radius:50%;
             display:flex; align-items:center; justify-content:center;
-            font-size:1rem; flex-shrink:0;
+            font-size:1.05rem; flex-shrink:0; font-weight:700;
+            box-shadow:0 4px 12px rgba(0,0,0,0.25);
         }
+
 
     
 .rank-num {
@@ -607,46 +607,211 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         }
 
     
+        
+        
         .genre-grid {
             display:grid;
             grid-template-columns:repeat(2, 1fr);
-            gap:0.65rem;
+            gap:0.7rem;
         }
-        @media(min-width:500px){ .genre-grid { grid-template-columns:repeat(3, 1fr); } }
-        @media(min-width:900px){ .genre-grid { grid-template-columns:repeat(4, 1fr); gap:0.75rem; } }
-        @media(min-width:1200px){ .genre-grid { grid-template-columns:repeat(6, 1fr); } }
-        a.genre-tile {
-            display:flex; flex-direction:column; justify-content:center;
-            min-height:72px; padding:0.85rem 1rem;
-            border-radius:14px; text-decoration:none; color:#fff;
-            font-weight:700; font-size:0.95rem;
-            transition:0.2s; border:1px solid rgba(255,255,255,0.06);
+        @media(min-width:600px){ .genre-grid { grid-template-columns:repeat(3, 1fr); } }
+        @media(min-width:900px){ .genre-grid { grid-template-columns:repeat(4, 1fr); gap:0.85rem; } }
+        a.genre-chip {
+            display:flex; align-items:center; gap:0.9rem;
+            padding:1rem 1.1rem;
+            border-radius:16px;
+            text-decoration:none; color:#fff;
+            background:linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            border:1px solid rgba(255,255,255,0.09);
+            transition:0.25s;
         }
-        @media(min-width:900px){
-            a.genre-tile { min-height:78px; font-size:0.92rem; padding:0.75rem 0.9rem; }
+        a.genre-chip:hover {
+            border-color:rgba(168,85,247,0.45);
+            background:rgba(168,85,247,0.12);
+            transform:translateY(-3px);
+            box-shadow:0 10px 28px rgba(0,0,0,0.28);
         }
-        a.genre-tile:hover { transform:translateY(-3px); filter:brightness(1.12); }
-        a.genre-tile span { font-size:0.72rem; font-weight:500; opacity:0.75; margin-top:0.25rem; }
+        .genre-chip .g-icon {
+            width:44px; height:44px; border-radius:12px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:0.95rem; font-weight:800; letter-spacing:0.02em;
+            flex-shrink:0; color:#fff;
+            background:var(--g-bg, linear-gradient(135deg,#a855f7,#ec4899));
+        }
+        .genre-chip .g-text { display:flex; flex-direction:column; gap:0.2rem; min-width:0; }
+        .genre-chip .g-name { font-weight:700; font-size:0.95rem; }
+        .genre-chip .g-count { font-size:0.72rem; color:var(--muted); font-weight:500; }
+
+
+    
+        .profile-wrap { position:relative; z-index:250; }
+        .profile-btn {
+            width:38px; height:38px; border-radius:50%; border:2px solid rgba(168,85,247,0.55);
+            background:linear-gradient(135deg,#1e1e2e,#2a1a3a); color:#fff;
+            cursor:pointer; display:flex; align-items:center; justify-content:center;
+            padding:0; flex-shrink:0;
+        }
+        .profile-btn svg { width:20px; height:20px; fill:#c4b5fd; pointer-events:none; }
+        .profile-dd {
+            display:none !important;
+            position:absolute; right:0; top:calc(100% + 10px);
+            width:240px;
+            background:#12121a !important;
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:16px;
+            padding:0.4rem;
+            z-index:300;
+            box-shadow:0 16px 48px rgba(0,0,0,0.65);
+            flex-direction:column;
+        }
+        .profile-dd.open {
+            display:flex !important;
+        }
+        .pd-head {
+            padding:0.85rem 0.95rem 0.7rem;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+            margin-bottom:0.3rem;
+        }
+        .pd-label { font-size:0.68rem; font-weight:800; letter-spacing:0.08em; color:#a855f7; text-transform:uppercase; }
+        .pd-sub { font-size:0.82rem; color:#a1a1aa; margin-top:0.2rem; }
+        a.pd-item, button.pd-item {
+            display:flex !important;
+            align-items:center;
+            gap:0.75rem;
+            width:100%;
+            padding:0.75rem 0.9rem !important;
+            border-radius:10px;
+            color:#e4e4e7 !important;
+            text-decoration:none !important;
+            font-size:0.92rem;
+            font-weight:500;
+            border:none;
+            background:transparent;
+            cursor:pointer;
+            font-family:inherit;
+            text-align:left;
+            box-sizing:border-box;
+        }
+        a.pd-item:hover, button.pd-item:hover {
+            background:rgba(168,85,247,0.14) !important;
+            color:#fff !important;
+            text-decoration:none !important;
+        }
+        a.pd-item svg, button.pd-item svg {
+            width:20px; height:20px; flex-shrink:0; fill:currentColor; opacity:0.95;
+        }
+        button.pd-item.danger { color:#f87171 !important; }
+
+    
+        .genre-pills {
+            display:flex; flex-wrap:wrap; gap:0.55rem;
+        }
+        a.genre-pill {
+            display:inline-flex; align-items:center; gap:0.4rem;
+            padding:0.55rem 1rem;
+            border-radius:999px;
+            text-decoration:none; color:#fff;
+            background:rgba(168,85,247,0.14);
+            border:1px solid rgba(168,85,247,0.35);
+            font-weight:600; font-size:0.88rem;
+            transition:0.2s;
+        }
+        a.genre-pill:hover {
+            background:rgba(168,85,247,0.28);
+            border-color:#a855f7;
+            transform:translateY(-2px);
+        }
+        a.genre-pill .gp-count {
+            font-size:0.72rem; font-weight:500; color:#c4b5fd;
+            opacity:0.9;
+        }
+
+    
+        /* MOBILE MENU ICON FIX — force small icons */
+        #mobileMenu .mm-links a {
+            display:flex !important;
+            flex-direction:row !important;
+            align-items:center !important;
+            gap:0.85rem !important;
+            padding:0.9rem 0.85rem !important;
+            font-size:1rem !important;
+            border-bottom:1px solid rgba(255,255,255,0.06) !important;
+        }
+        #mobileMenu .mm-links a svg,
+        #mobileMenu .mm-links .icon-svg {
+            width:22px !important;
+            height:22px !important;
+            min-width:22px !important;
+            max-width:22px !important;
+            flex:0 0 22px !important;
+            display:inline-block !important;
+        }
 
     </style>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="#" class="logo">AnimeFan</a>
+    <nav class="navbar hide-inline-search">
+        <a href="index.html" class="logo">AnimeFan</a>
         <ul class="nav-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#trending">Anime</a></li>
-            <li><a href="#schedule">Schedule</a></li>
-            <li><a href="#genres">Genres</a></li>
-            <li><a href="#request">Request</a></li>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="anime.html">Anime</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="genres.html">Genres</a></li>
+            <li><a href="request.html">Request</a></li>
         </ul>
+        
         <div class="nav-right">
-            <div class="search-box">🔍 <input type="text" placeholder="Search anime..."></div>
-            <button class="btn-sm btn-outline">Login</button>
-            <button class="btn-sm btn-primary">Register</button>
-            <button class="menu-btn" id="menuBtn">☰</button>
+            <button type="button" class="search-toggle" id="searchToggle" aria-label="Search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </button>
+            <div class="profile-wrap">
+                <button type="button" class="profile-btn" id="profileBtn" aria-label="Profile">
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v1.2h19.2v-1.2c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                </button>
+                
+                
+                <div class="profile-dd" id="profileDd">
+                    <div class="pd-head">
+                        <div class="pd-label" id="pdLabel">GUEST</div>
+                        <div class="pd-sub" id="pdSub">Not signed in</div>
+                    </div>
+                    <a class="pd-item" id="pdSignIn" href="login.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        Sign in
+                    </a>
+                    <a class="pd-item" id="pdHistory" href="continue.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.25 2.52.77-1.28-3.52-2.09V8H12z"/></svg>
+                        History
+                    </a>
+                    <a class="pd-item" id="pdList" href="mylist.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        My List
+                    </a>
+                    <a class="pd-item" href="help.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+                        Help &amp; Feedback
+                    </a>
+                    <button type="button" class="pd-item danger" id="pdLogout" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+                        Sign out
+                    </button>
+                </div>
+
+            </div>
+            <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
         </div>
+
     </nav>
+
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-overlay-bar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="searchInput" placeholder="Search anime..." autocomplete="off">
+            <button type="button" class="search-close" id="searchClose">✕</button>
+        </div>
+        <div class="search-results" id="searchResults"></div>
+    </div>
+
 
     
     <div class="overlay" id="overlay"></div>
@@ -656,15 +821,15 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             <button type="button" class="mm-close" id="mmClose" aria-label="Close">✕</button>
         </div>
         <div class="mm-links">
-            <a href="#home">🏠 Home</a>
-            <a href="#trending">📺 Anime</a>
-            <a href="#schedule">📅 Schedule</a>
-            <a href="#genres">🏷️ Genres</a>
-            <a href="#request">✉️ Request</a>
+            <a href="index.html"><svg class="icon-svg" viewBox="0 0 24 24" width="22" height="22" style="width:22px;height:22px;min-width:22px;flex-shrink:0" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg> Home</a>
+            <a href="anime.html"><svg class="icon-svg" viewBox="0 0 24 24" width="22" height="22" style="width:22px;height:22px;min-width:22px;flex-shrink:0" fill="currentColor"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg> Anime</a>
+            <a href="schedule.html"><svg class="icon-svg" viewBox="0 0 24 24" width="22" height="22" style="width:22px;height:22px;min-width:22px;flex-shrink:0" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10z"/></svg> Schedule</a>
+            <a href="genres.html"><svg class="icon-svg" viewBox="0 0 24 24" width="22" height="22" style="width:22px;height:22px;min-width:22px;flex-shrink:0" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg> Genres</a>
+            <a href="request.html"><svg class="icon-svg" viewBox="0 0 24 24" width="22" height="22" style="width:22px;height:22px;min-width:22px;flex-shrink:0" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg> Request</a>
         </div>
         <div class="mm-footer">
-            <a href="#" class="mm-btn mm-btn-login">Login</a>
-            <a href="#" class="mm-btn mm-btn-register">Register</a>
+            <a href="login.html" class="mm-btn mm-btn-login">Login</a>
+            <a href="register.html" class="mm-btn mm-btn-register">Register</a>
         </div>
     </div>
 
@@ -704,145 +869,145 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- TRENDING -->
     <section id="trending">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Trending Now</h2>
-            <a href="trending.html" class="view-all">View All →</a>
+            <h2 class="section-title"><span class="bar"></span> 🔥 Trending Now</h2>
+            <a href="trending.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge r1">#1</span>
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
                 <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge r2">#2</span>
 <span class="rating-badge">★ 9.1</span>
                     🌌
                 </div>
                 <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge r3">#3</span>
 <span class="rating-badge">★ 8.9</span>
                     💖
                 </div>
                 <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#4</span>
 <span class="rating-badge">★ 9.2</span>
                     🗡️
                 </div>
                 <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#5</span>
 <span class="rating-badge">★ 9.0</span>
                     🔥
                 </div>
                 <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#6</span>
 <span class="rating-badge">★ 8.7</span>
                     🌀
                 </div>
                 <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#7</span>
 <span class="rating-badge">★ 8.8</span>
                     ⚡
                 </div>
                 <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#8</span>
 <span class="rating-badge">★ 8.6</span>
                     🕵️
                 </div>
                 <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#9</span>
 <span class="rating-badge">★ 9.3</span>
                     🏰
                 </div>
                 <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#10</span>
 <span class="rating-badge">★ 9.0</span>
                     🌟
                 </div>
                 <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#11</span>
 <span class="rating-badge">★ 9.5</span>
                     ⚔️
                 </div>
                 <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps · HSub · FanDub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#12</span>
 <span class="rating-badge">★ 9.3</span>
                     🍥
                 </div>
                 <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#13</span>
 <span class="rating-badge">★ 9.2</span>
                     🏴‍☠️
                 </div>
                 <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps · Hindi</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#14</span>
 <span class="rating-badge">★ 8.9</span>
                     🦸
                 </div>
                 <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#15</span>
 <span class="rating-badge">★ 8.7</span>
                     ⚽
                 </div>
                 <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#16</span>
 <span class="rating-badge">★ 8.8</span>
                     ⛓️
                 </div>
                 <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps · Hindi Dub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#17</span>
 <span class="rating-badge">★ 9.1</span>
                     🛡️
                 </div>
                 <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#18</span>
 <span class="rating-badge">★ 8.5</span>
                     👊
                 </div>
                 <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#19</span>
 <span class="rating-badge">★ 8.6</span>
                     💫
                 </div>
                 <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
-                <div class="card-poster">
+                <div class="card-poster"><span class="rank-badge">#20</span>
 <span class="rating-badge">★ 8.4</span>
                     🦖
                 </div>
@@ -856,7 +1021,6 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="continue">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> ▶ Continue Watching</h2>
-            <a href="continue.html" class="view-all">View All →</a>
         </div>
         
         <div class="scroll-row" id="continueRow">
@@ -902,27 +1066,42 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 
 
-    <!-- COMMUNITY -->
-
-    <!-- BROWSE BY LANGUAGE -->
+    
     
     <section id="language">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🌐 Browse by Language</h2>
         </div>
         <div class="lang-grid">
-            <a class="lang-btn" href="language.html?lang=Hindi"><span class="lang-icon" style="background:#7f1d1d;">🎤</span> Hindi Dub</a>
-            <a class="lang-btn" href="language.html?lang=HSub"><span class="lang-icon" style="background:#9a3412;">CC</span> Hindi Sub</a>
-            <a class="lang-btn" href="language.html?lang=FanDub"><span class="lang-icon" style="background:#5b21b6;">🎧</span> FanDub</a>
+            <a class="lang-btn" href="language.html?lang=Hindi">
+                <span class="lang-icon" style="background:linear-gradient(145deg,#be123c,#fb7185);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
+                </span>
+                Hindi Dub
+            </a>
+            <a class="lang-btn" href="language.html?lang=HSub">
+                <span class="lang-icon" style="background:linear-gradient(145deg,#c2410c,#fbbf24);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 12h4v2H4v-2zm10 6H4v-2h10v2zm6 0h-4v-2h4v2zm0-4H10v-2h10v2z"/></svg>
+                </span>
+                Hindi Sub
+            </a>
+            <a class="lang-btn" href="language.html?lang=FanDub">
+                <span class="lang-icon" style="background:linear-gradient(145deg,#6d28d9,#c084fc);">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                </span>
+                FanDub
+            </a>
         </div>
     </section>
+
+
 
 
     <!-- AIRING -->
     <section id="airing">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🔴 Currently Airing</h2>
-            <a href="airing.html" class="view-all">View All →</a>
+            <a href="airing.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1070,8 +1249,8 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- LATEST + TOP RANKED -->
     <section id="latest">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Latest Episodes</h2>
-            <a href="latest.html" class="view-all">View All →</a>
+            <h2 class="section-title"><span class="bar"></span> 📺 Latest Episodes</h2>
+            <a href="latest.html" class="view-all">View All ›</a>
         </div>
         <div class="episodes-grid">
             <div class="episode-list">
@@ -1114,7 +1293,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <section id="popular">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🏆 Top Ranking</h2>
-            <a href="trending.html" class="view-all">View All →</a>
+            <a href="toprated.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1268,7 +1447,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="new">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> ✨ New On AnimeFan</h2>
-            <a href="new.html" class="view-all">View All →</a>
+            <a href="new.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1424,7 +1603,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="upcoming">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 📅 Upcoming</h2>
-            <a href="upcoming.html" class="view-all">View All →</a>
+            <a href="upcoming.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1574,7 +1753,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="movies">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> 🎬 Movies</h2>
-            <a href="movies.html" class="view-all">View All →</a>
+            <a href="movies.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1724,7 +1903,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <section id="completed">
         <div class="section-header">
             <h2 class="section-title"><span class="bar"></span> ✅ Completed</h2>
-            <a href="completed.html" class="view-all">View All →</a>
+            <a href="completed.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
             <div class="anime-card">
@@ -1894,57 +2073,64 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 
     
+    
+    
+    
     <section id="genres">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> 🏷️ Browse by Genres</h2>
+            <h2 class="section-title"><span class="bar"></span> Browse by Genres</h2>
+            <a href="genres.html" class="view-all">All Genres ›</a>
         </div>
-        <div class="genre-grid">
-            <a class="genre-tile" href="genre.html?g=Action" style="background:linear-gradient(135deg,#7f1d1d,#b91c1c);">Action<span>12 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Comedy" style="background:linear-gradient(135deg,#92400e,#d97706);">Comedy<span>8 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Drama" style="background:linear-gradient(135deg,#065f46,#059669);">Drama<span>9 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Fantasy" style="background:linear-gradient(135deg,#4c1d95,#7c3aed);">Fantasy<span>14 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Horror" style="background:linear-gradient(135deg,#831843,#be185d);">Horror<span>4 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Romance" style="background:linear-gradient(135deg,#0e7490,#0891b2);">Romance<span>10 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Sci-Fi" style="background:linear-gradient(135deg,#3f6212,#65a30d);">Sci-Fi<span>6 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Mecha" style="background:linear-gradient(135deg,#1e3a5f,#2563eb);">Mecha<span>5 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Mystery" style="background:linear-gradient(135deg,#701a75,#a21caf);">Mystery<span>7 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Sports" style="background:linear-gradient(135deg,#5b21b6,#8b5cf6);">Sports<span>3 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Adventure" style="background:linear-gradient(135deg,#9a3412,#ea580c);">Adventure<span>11 anime</span></a>
-            <a class="genre-tile" href="genre.html?g=Slice%20of%20Life" style="background:linear-gradient(135deg,#0f766e,#14b8a6);">Slice of Life<span>6 anime</span></a>
+        <div class="genre-pills">
+            <a class="genre-pill" href="genre.html?g=Action">Action <span class="gp-count">(12)</span></a>
+            <a class="genre-pill" href="genre.html?g=Comedy">Comedy <span class="gp-count">(8)</span></a>
+            <a class="genre-pill" href="genre.html?g=Drama">Drama <span class="gp-count">(9)</span></a>
+            <a class="genre-pill" href="genre.html?g=Fantasy">Fantasy <span class="gp-count">(14)</span></a>
+            <a class="genre-pill" href="genre.html?g=Horror">Horror <span class="gp-count">(4)</span></a>
+            <a class="genre-pill" href="genre.html?g=Romance">Romance <span class="gp-count">(10)</span></a>
+            <a class="genre-pill" href="genre.html?g=Sci-Fi">Sci-Fi <span class="gp-count">(6)</span></a>
+            <a class="genre-pill" href="genre.html?g=Mecha">Mecha <span class="gp-count">(0)</span></a>
+            <a class="genre-pill" href="genre.html?g=Mystery">Mystery <span class="gp-count">(7)</span></a>
+            <a class="genre-pill" href="genre.html?g=Sports">Sports <span class="gp-count">(3)</span></a>
+            <a class="genre-pill" href="genre.html?g=Adventure">Adventure <span class="gp-count">(11)</span></a>
+            <a class="genre-pill" href="genre.html?g=Slice%20of%20Life">Slice of Life <span class="gp-count">(6)</span></a>
+            <a class="genre-pill" href="genre.html?g=Isekai">Isekai <span class="gp-count">(5)</span></a>
+            <a class="genre-pill" href="genre.html?g=Shonen">Shonen <span class="gp-count">(15)</span></a>
+            <a class="genre-pill" href="genre.html?g=Seinen">Seinen <span class="gp-count">(4)</span></a>
+            <a class="genre-pill" href="genre.html?g=Thriller">Thriller <span class="gp-count">(6)</span></a>
         </div>
     </section>
+
+
+
 
 
     
 
-    <section class="cta-section">
-        <div class="cta-box">
-            <h2>Join 2.5M+ Anime Fans</h2>
-            <p>Free account banao, watchlist banao, discussions join karo.</p>
-            <button class="btn-watch">Create Free Account →</button>
+    
+    
+    <section id="requestCta" style="padding:2.2rem 3%;">
+        <div style="max-width:960px;margin:0 auto;position:relative;overflow:hidden;border-radius:20px;border:1px solid rgba(168,85,247,0.3);background:radial-gradient(ellipse at top left,rgba(168,85,247,0.25),transparent 55%),radial-gradient(ellipse at bottom right,rgba(236,72,153,0.18),transparent 50%),#12121a;padding:1.75rem 1.5rem;">
+            <div style="position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.2rem;">
+                <div style="max-width:560px;">
+                    <div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#c4b5fd;margin-bottom:0.5rem;">Premium request</div>
+                    <h2 style="font-size:1.35rem;font-weight:800;margin-bottom:0.4rem;">Missing an anime?</h2>
+                    <p style="color:var(--muted);font-size:0.92rem;line-height:1.5;">Sirf naam likho — request bhejo. Pending / Approved status yahin track karo.</p>
+                </div>
+                <a href="request.html" class="btn-watch" style="text-decoration:none;white-space:nowrap;">Request Anime →</a>
+            </div>
         </div>
     </section>
 
-    
-    <section id="request" style="padding:2.5rem 3%;">
-        <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> ✉️ Request Anime</h2>
-        </div>
-        <div style="max-width:520px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.4rem;">
-            <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1rem;">Jo anime chahiye uska naam likho — hum try karenge add karne ka.</p>
-            <input id="reqInput" type="text" placeholder="Anime name..." style="width:100%;padding:0.75rem 1rem;border-radius:10px;border:1px solid var(--border);background:var(--elevated);color:#fff;font-family:inherit;margin-bottom:0.75rem;">
-            <button class="btn-watch" type="button" onclick="alert('Request received! Thanks 💜')">Submit Request</button>
-        </div>
-    </section>
 
     <footer>
         <div class="footer-grid">
             <div class="footer-brand">
                 <a href="#" class="logo">AnimeFan</a>
-                <p>2026 ka best anime fan community. Hindi Sub, Dub aur pure anime vibe.</p>
+                <p>2026 ka best anime streaming experience. Hindi Sub, Dub aur pure anime vibe.</p>
             </div>
             <div class="footer-col"><h4>Browse</h4><a href="#">Trending</a><a href="#">Latest</a><a href="#">Top Ranked</a><a href="#">Schedule</a></div>
-            <div class="footer-col"><h4>Community</h4><a href="#">Forums</a><a href="#">Fan Art</a><a href="#">Watch Parties</a><a href="#">Discord</a></div>
+            <div class="footer-col"><h4>More</h4><a href="request.html">Request</a><a href="anime.html">Anime</a><a href="schedule.html">Schedule</a><a href="genres.html">Genres</a></div>
             <div class="footer-col"><h4>Support</h4><a href="#">Help</a><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div>
         </div>
         <div class="footer-bottom">
@@ -1963,6 +2149,113 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         document.querySelectorAll('.btn-watch').forEach(b => {
           b.addEventListener('click', function(e){ e.stopPropagation(); });
         });
+
+        
+        
+        // Auth helpers
+        function getUser() {
+          try { return JSON.parse(localStorage.getItem('animefan_user') || 'null'); } catch(e) { return null; }
+        }
+        function setUser(u) {
+          if (u) localStorage.setItem('animefan_user', JSON.stringify(u));
+          else localStorage.removeItem('animefan_user');
+        }
+
+        // Profile menu (Aniflix style)
+        (function(){
+          const btn = document.getElementById('profileBtn');
+          const dd = document.getElementById('profileDd');
+          if (!btn || !dd) return;
+          function refreshProfile() {
+            const u = getUser();
+            const label = document.getElementById('pdLabel');
+            const sub = document.getElementById('pdSub');
+            const signIn = document.getElementById('pdSignIn');
+            const logout = document.getElementById('pdLogout');
+            const hist = document.getElementById('pdHistory');
+            const list = document.getElementById('pdList');
+            if (u) {
+              label.textContent = 'MEMBER';
+              sub.textContent = u.name || u.email || 'Signed in';
+              signIn.style.display = 'none';
+              logout.style.display = 'flex';
+              hist.href = 'continue.html';
+              list.href = 'mylist.html';
+            } else {
+              label.textContent = 'GUEST';
+              sub.textContent = 'Not signed in';
+              signIn.style.display = 'flex';
+              logout.style.display = 'none';
+              hist.href = 'login.html?next=continue.html';
+              list.href = 'login.html?next=mylist.html';
+            }
+          }
+          refreshProfile();
+          btn.addEventListener('click', function(e){
+            e.preventDefault(); e.stopPropagation();
+            dd.classList.toggle('open');
+          });
+          document.addEventListener('click', function(e){
+            if (!dd.contains(e.target) && !btn.contains(e.target)) dd.classList.remove('open');
+          });
+          document.getElementById('pdLogout')?.addEventListener('click', function(){
+            setUser(null); refreshProfile(); dd.classList.remove('open');
+          });
+        })();
+
+        // Aniflix-style search overlay
+        (function(){
+          const toggle = document.getElementById('searchToggle');
+          const overlay = document.getElementById('searchOverlay');
+          const input = document.getElementById('searchInput');
+          const results = document.getElementById('searchResults');
+          const closeBtn = document.getElementById('searchClose');
+          if (!toggle || !overlay || !input) return;
+          const catalog = [
+            {t:'Shadow of the Eternal Blade',e:'⚔️',m:'TV · HSub · ★ 9.4'},
+            {t:'Neon Horizon: Zero',e:'🌌',m:'TV · Hindi · ★ 9.1'},
+            {t:'Cherry Blossom Letters',e:'💖',m:'TV · HSub · ★ 8.9'},
+            {t:'Crimson Guild Chronicles',e:'🗡️',m:'TV · FanDub · ★ 9.2'},
+            {t:'Jujutsu Kaisen S3',e:'🔥',m:'TV · HSub · ★ 9.0'},
+            {t:'Solo Leveling S2',e:'🌀',m:'TV · Hindi · ★ 8.7'},
+            {t:'One Punch Man S3',e:'⚡',m:'TV · HSub · ★ 8.8'},
+            {t:'Spy x Family S3',e:'🕵️',m:'TV · Hindi · ★ 8.6'},
+            {t:'Frieren',e:'🏰',m:'TV · HSub · ★ 9.3'},
+            {t:'Demon Slayer S4',e:'🌟',m:'TV · FanDub · ★ 9.0'},
+            {t:'Attack on Titan',e:'⚔️',m:'TV · HSub · ★ 9.5'},
+            {t:'Naruto Shippuden',e:'🍥',m:'TV · Hindi · ★ 9.3'}
+          ];
+          function openSearch(){
+            overlay.classList.add('open');
+            document.body.style.overflow='hidden';
+            setTimeout(()=>input.focus(),50);
+            render('');
+          }
+          function closeSearch(){
+            overlay.classList.remove('open');
+            document.body.style.overflow='';
+            input.value='';
+          }
+          function render(q){
+            q = (q||'').toLowerCase().trim();
+            const hits = q ? catalog.filter(x => x.t.toLowerCase().includes(q)) : catalog.slice(0,6);
+            if (!hits.length) {
+              results.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">No results found</p>';
+              return;
+            }
+            results.innerHTML = hits.map(h => `
+              <a class="search-hit" href="anime-detail.html">
+                <div class="search-hit-thumb">${h.e}</div>
+                <div><h4>${h.t}</h4><p>${h.m}</p></div>
+              </a>`).join('');
+          }
+          toggle.addEventListener('click', openSearch);
+          closeBtn?.addEventListener('click', closeSearch);
+          overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
+          input.addEventListener('input', () => render(input.value));
+          document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+        })();
+
 
         (function initMenu(){
           const menuBtn = document.getElementById('menuBtn');

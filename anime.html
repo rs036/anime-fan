@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Schedule — AnimeFan</title>
-<style>
-
+<title>Anime — AnimeFan</title><style>
 :root{--bg:#0a0a0f;--card:#14141c;--elevated:#1a1a24;--border:rgba(255,255,255,0.08);--accent:#a855f7;--accent2:#ec4899;--muted:#a1a1aa;--grad:linear-gradient(135deg,#a855f7,#ec4899);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#fff;min-height:100vh;}
@@ -51,15 +49,40 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
 .genre-tile{display:flex;flex-direction:column;justify-content:center;min-height:64px;padding:0.7rem 0.85rem;border-radius:12px;text-decoration:none;color:#fff;font-weight:700;font-size:0.88rem;border:1px solid rgba(255,255,255,0.06);}
 .genre-tile span{font-size:0.68rem;font-weight:500;opacity:0.75;margin-top:0.2rem;}
 
-.sched-tabs{display:flex;gap:0.3rem;overflow-x:auto;margin-bottom:1rem;scrollbar-width:none;}
-.sched-tab{flex:0 0 auto;background:transparent;border:none;color:var(--muted);font-weight:700;font-size:0.85rem;padding:0.5rem 0.9rem;cursor:pointer;font-family:inherit;border-bottom:2px solid transparent;}
-.sched-tab.active{color:#fff;border-bottom-color:#ec4899;}
-.sched-item{display:flex;align-items:center;gap:0.85rem;background:var(--card);border-radius:12px;padding:0.65rem 0.85rem;border:1px solid var(--border);margin-bottom:0.55rem;}
-.sched-thumb{flex:0 0 52px;width:52px;height:70px;border-radius:8px;background:linear-gradient(145deg,#1e1e2e,#2a1a3a);display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
-.sched-info{flex:1;min-width:0;}
-.sched-info h4{font-size:0.88rem;font-weight:600;margin-bottom:0.35rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sched-ep{font-size:0.72rem;background:rgba(255,255,255,0.08);padding:0.2rem 0.5rem;border-radius:6px;color:var(--muted);}
-.sched-time{font-size:0.82rem;font-weight:600;color:var(--muted);white-space:nowrap;}
+
+
+
+
+
+.empty-state{
+  text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;
+  background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);
+  border-radius:16px;margin:1rem 0;
+}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.7;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+.empty-state p{font-size:0.9rem;}
+
+
+.pagination{
+  display:flex;flex-wrap:wrap;gap:0.45rem;
+  justify-content:center;align-items:center;
+  width:100%;margin:1.75rem auto 1rem;padding:0.5rem 0;
+  text-align:center;
+}
+.page-btn{
+  min-width:40px;height:40px;padding:0 0.6rem;border-radius:10px;
+  border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);
+  color:#e4e4e7;font-weight:600;font-size:0.9rem;cursor:pointer;font-family:inherit;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.page-btn:hover{border-color:rgba(168,85,247,0.55);color:#fff;}
+.page-btn.active{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:#fff;}
+.page-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.empty-state{text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);border-radius:16px;margin:1rem auto;grid-column:1/-1;max-width:520px;}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.5;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+
 </style></head><body>
 
 <nav class="navbar">
@@ -67,16 +90,15 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="anime.html">Anime</a></li>
-    <li><a href="schedule.html" class="active">Schedule</a></li>
+    <li><a href="schedule.html">Schedule</a></li>
     <li><a href="genres.html">Genres</a></li>
     <li><a href="request.html">Request</a></li>
   </ul>
 </nav>
 
 <div class="page">
-  <div class="page-header"><h1>Estimated Schedule</h1><p>Weekly airing times</p></div>
-  <div class="sched-tabs" id="tabs"></div>
-  <div id="list"></div>
+  <div class="page-header"><h1>Anime</h1><p>Browse all anime on AnimeFan</p></div>
+  <div class="grid" id="grid"></div>
 </div>
 
 <footer>
@@ -85,41 +107,54 @@ footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;
 </footer>
 
 <script>
-const days=['mon','tue','wed','thu','fri','sat','sun'];
-const labels={mon:'MON',tue:'TUE',wed:'WED',thu:'THU',fri:'FRI',sat:'SAT',sun:'SUN'};
-const data={
-  fri:[
-    {e:'🥊',t:"STEEL BALL RUN JoJo's",ep:'EP 1',time:'12:30 PM'},
-    {e:'⚡',t:'Pokémon Horizons',ep:'EP 151',time:'03:25 PM'},
-    {e:'🔍',t:'Meitantei Conan',ep:'EP 1',time:'05:30 PM'},
-    {e:'🟢',t:'Tensura Season 4',ep:'EP 24',time:'07:30 PM'},
-    {e:'⚔️',t:'The Elusive Samurai S2',ep:'EP 11',time:'08:00 PM'}
-  ],
-  mon:[{e:'⚔️',t:'Shadow of the Eternal Blade',ep:'EP 20',time:'06:30 PM'}],
-  tue:[{e:'🗡️',t:'Crimson Guild Chronicles',ep:'EP 9',time:'07:00 PM'}],
-  wed:[{e:'🌀',t:'Solo Leveling S2',ep:'EP 13',time:'06:00 PM'}],
-  thu:[{e:'⚡',t:'One Punch Man S3',ep:'EP 8',time:'08:30 PM'}],
-  sat:[{e:'🏰',t:'Frieren Special',ep:'OVA',time:'06:00 PM'}],
-  sun:[{e:'🌟',t:'Demon Slayer S4',ep:'EP 6',time:'05:00 PM'}]
-};
-const tabs=document.getElementById('tabs');
-const list=document.getElementById('list');
-function render(day){
-  tabs.querySelectorAll('.sched-tab').forEach(t=>t.classList.toggle('active',t.dataset.day===day));
-  const items=data[day]||[];
-  list.innerHTML=items.map(i=>`
-    <div class="sched-item">
-      <div class="sched-thumb">${i.e}</div>
-      <div class="sched-info"><h4>${i.t}</h4><span class="sched-ep">${i.ep}</span></div>
-      <div class="sched-time">${i.time}</div>
-    </div>`).join('')||'<p style="color:var(--muted)">No shows this day.</p>';
-}
-days.forEach(d=>{
-  const b=document.createElement('button');
-  b.className='sched-tab'+(d==='fri'?' active':'');
-  b.dataset.day=d; b.textContent=labels[d];
-  b.onclick=()=>render(d);
-  tabs.appendChild(b);
-});
-render('fri');
-</script></body></html>
+const list=[
+  {t:"Shadow of the Eternal Blade",r:"9.4",e:"⚔️",m:"TV · 24 Eps · HSub"},
+  {t:"Neon Horizon: Zero",r:"9.1",e:"🌌",m:"TV · 12 Eps · Hindi"},
+  {t:"Cherry Blossom Letters",r:"8.9",e:"💖",m:"TV · 12 Eps · HSub"},
+  {t:"Crimson Guild Chronicles",r:"9.2",e:"🗡️",m:"TV · 24 Eps · FanDub"},
+  {t:"Jujutsu Kaisen S3",r:"9.0",e:"🔥",m:"TV · 24 Eps · HSub"},
+  {t:"Solo Leveling S2",r:"8.7",e:"🌀",m:"TV · 13 Eps · Hindi"},
+  {t:"One Punch Man S3",r:"8.8",e:"⚡",m:"TV · 12 Eps · HSub"},
+  {t:"Spy x Family S3",r:"8.6",e:"🕵️",m:"TV · 12 Eps · Hindi"},
+  {t:"Frieren",r:"9.3",e:"🏰",m:"TV · 28 Eps · HSub"},
+  {t:"Demon Slayer S4",r:"9.0",e:"🌟",m:"TV · 11 Eps · FanDub"},
+  {t:"Attack on Titan",r:"9.5",e:"⚔️",m:"TV · 87 Eps · HSub"},
+  {t:"Naruto Shippuden",r:"9.3",e:"🍥",m:"TV · 500 Eps · Hindi"}
+];
+const params=new URLSearchParams(location.search);
+const q=(params.get('q')||'').toLowerCase();
+const filtered=q?list.filter(x=>x.t.toLowerCase().includes(q)):list;
+if(q){const h=document.querySelector('.page-header p');if(h)h.textContent='Results for: '+params.get('q');}
+document.getElementById("grid").innerHTML=filtered.map(a=>`
+  <a class="anime-card" href="anime-detail.html">
+    <div class="card-poster"><span class="rating-badge">★ ${a.r}</span>${a.e}</div>
+    <div class="card-body"><h3>${a.t}</h3><div class="card-meta">${a.m}</div></div>
+  </a>`).join("");
+</script>
+<script>
+(function(){
+  const grid=document.getElementById('grid')||document.querySelector('.grid');
+  const pager=document.getElementById('pager');
+  if(!grid) return;
+  const cards=[...grid.querySelectorAll('.anime-card, a.anime-card')];
+  if(!cards.length){
+    grid.innerHTML='<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">🎬</div><h3>No Anime Available</h3><p>Abhi is section mein anime nahi hai.</p></div>';
+    return;
+  }
+  const PER=36;
+  if(cards.length<=PER) return;
+  if(!pager) return;
+  let page=1;
+  function show(){
+    const pages=Math.ceil(cards.length/PER);
+    cards.forEach((c,i)=>{c.style.display=(i>=(page-1)*PER && i<page*PER)?'':'none';});
+    let h=`<button class="page-btn" ${page===1?'disabled':''} data-p="${page-1}">‹</button>`;
+    for(let i=1;i<=pages;i++) h+=`<button class="page-btn ${i===page?'active':''}" data-p="${i}">${i}</button>`;
+    h+=`<button class="page-btn" ${page===pages?'disabled':''} data-p="${page+1}">›</button>`;
+    pager.innerHTML=h;
+    pager.querySelectorAll('.page-btn').forEach(b=>b.onclick=()=>{const p=+b.dataset.p;if(p>=1&&p<=pages){page=p;show();window.scrollTo({top:0,behavior:'smooth'});}});
+  }
+  show();
+})();
+</script>
+</body></html>

@@ -112,7 +112,37 @@
             .grid { grid-template-columns:repeat(3, 1fr) !important; }
         }
 
-    </style>
+    
+
+
+
+
+
+.empty-state{text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);border-radius:16px;margin:1rem 0;grid-column:1/-1;}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.7;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+
+
+.pagination{
+  display:flex;flex-wrap:wrap;gap:0.45rem;
+  justify-content:center;align-items:center;
+  width:100%;margin:1.75rem auto 1rem;padding:0.5rem 0;
+  text-align:center;
+}
+.page-btn{
+  min-width:40px;height:40px;padding:0 0.6rem;border-radius:10px;
+  border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);
+  color:#e4e4e7;font-weight:600;font-size:0.9rem;cursor:pointer;font-family:inherit;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.page-btn:hover{border-color:rgba(168,85,247,0.55);color:#fff;}
+.page-btn.active{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:#fff;}
+.page-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.empty-state{text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);border-radius:16px;margin:1rem auto;grid-column:1/-1;max-width:520px;}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.5;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+
+</style>
 </head>
 <body>
     <nav class="navbar">
@@ -126,7 +156,6 @@
         </ul>
     </nav>
     <div class="page">
-        <a href="index.html" class="back-btn">← Back to Home</a>
         <div class="page-header">
             <h1>✅ Completed</h1>
             <p>Poori series jo complete ho chuki hain</p>
@@ -345,5 +374,36 @@
         </div>
     </div>
     <footer><span style="display:block;font-size:0.72rem;margin-bottom:0.5rem;opacity:0.85;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</span>© 2026 AnimeFan · Made with ❤️ for anime lovers</footer>
+
+<script>
+(function(){
+  const grid=document.querySelector('.grid')||document.getElementById('grid');
+  if(!grid) return;
+  let pager=document.getElementById('pager');
+  if(!pager){pager=document.createElement('div');pager.className='pagination';pager.id='pager';pager.style.width='100%';pager.style.gridColumn='1/-1';if(grid.parentElement)grid.parentElement.appendChild(pager);else grid.after(pager);}
+  const cards=[...grid.querySelectorAll('.anime-card')];
+  if(!cards.length){
+    grid.innerHTML='<div class="empty-state"><div class="es-icon">🎬</div><h3>No Anime Available</h3><p>Abhi is section mein anime nahi hai.</p></div>';
+    return;
+  }
+  const PER=36;
+  if(cards.length<=PER) return;
+  let page=1;
+  function show(){
+    const pages=Math.ceil(cards.length/PER);
+    cards.forEach((c,i)=>{c.style.display=(i>=(page-1)*PER&&i<page*PER)?'':'none';});
+    let h=`<button type="button" class="page-btn" ${page===1?'disabled':''} data-p="${page-1}">‹</button>`;
+    for(let i=1;i<=pages;i++){
+      if(pages>9 && Math.abs(i-page)>2 && i>1 && i<pages){ if(i===2||i===pages-1) h+='<span style="color:#a1a1aa;padding:0 2px">…</span>'; continue; }
+      h+=`<button type="button" class="page-btn ${i===page?'active':''}" data-p="${i}">${i}</button>`;
+    }
+    h+=`<button type="button" class="page-btn" ${page===pages?'disabled':''} data-p="${page+1}">›</button>`;
+    pager.innerHTML=h;
+    pager.querySelectorAll('.page-btn').forEach(b=>b.onclick=()=>{const p=+b.dataset.p;if(p>=1&&p<=pages){page=p;show();window.scrollTo({top:0,behavior:'smooth'});}});
+  }
+  show();
+})();
+</script>
+
 </body>
 </html>
