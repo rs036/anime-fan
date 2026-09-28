@@ -41,76 +41,34 @@
         .btn-primary { background:var(--grad); color:#fff; }
         .menu-btn { display:none; background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; }
 
-        /* HERO - cinematic single photo background */
-        .hero {
-            position: relative;
-            height: min(68vh, 620px);
-            min-height: 380px;
-            max-height: 680px;
-            display: flex;
-            align-items: flex-end;
-            padding: 0 4% 2.6rem;
-            margin-top: 58px;
-            overflow: hidden;
+        /* HERO - full poster bg, NO badges */
+        .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+        
+            position:relative; 
+            height: min(62vh, 580px);
+            min-height: 420px;
+            max-height: 620px;
+            display:flex; align-items:flex-end;
+            padding:0 4% 2.8rem; margin-top:58px; overflow:hidden;
         }
         .hero-bg {
-            position: absolute;
-            inset: 0;
-            background: #0b0b0f center 20% / cover no-repeat;
-            z-index: 0;
-            transition: opacity 0.55s ease;
+            position:absolute; inset:0;
+            background: url('https://cdn.myanimelist.net/images/anime/1015/138006.jpg') center top / cover no-repeat;
+            z-index:0;
         }
         .hero-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(to right, rgba(11,11,15,0.92) 0%, rgba(11,11,15,0.55) 42%, rgba(11,11,15,0.15) 100%),
-                linear-gradient(to top, rgba(11,11,15,0.95) 0%, rgba(11,11,15,0.35) 45%, transparent 70%);
+            content:''; position:absolute; inset:0;
+            background: linear-gradient(to right, rgba(11,11,15,0.78) 0%, rgba(11,11,15,0.35) 50%, rgba(11,11,15,0.12) 100%),
+                        linear-gradient(to top, rgba(11,11,15,0.88) 0%, rgba(11,11,15,0.2) 50%, transparent 75%);
         }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 620px;
-            transition: opacity 0.4s ease;
-        }
-        .hero-content.fade { opacity: 0; }
-        .hero h1 {
-            font-size: clamp(1.9rem, 4.8vw, 3.4rem);
-            font-weight: 800;
-            line-height: 1.12;
-            margin-bottom: 0.65rem;
-            text-shadow: 0 4px 24px rgba(0,0,0,0.55);
-        }
-        .hero-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.85rem;
-            align-items: center;
-            color: var(--muted);
-            font-size: 0.9rem;
-            margin-bottom: 0.85rem;
-        }
-        .hero-meta .rating { color: #fbbf24; font-weight: 600; }
-        .hero p {
-            color: #d4d4d8;
-            font-size: 0.95rem;
-            margin-bottom: 1.2rem;
-            max-width: 520px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            line-height: 1.5;
-        }
-        .hero-tags { display: flex; gap: 0.45rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
-        .tag {
-            background: rgba(255,255,255,0.1);
-            color: #e4e4e7;
-            padding: 0.28rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
+        .hero-content { position:relative; z-index:2; max-width:580px; }
+        .hero h1 { font-size:clamp(2rem,4.5vw,3.2rem); font-weight:800; line-height:1.15; margin-bottom:0.7rem; text-shadow:0 4px 20px rgba(0,0,0,0.5); }
+        .hero-meta { display:flex; flex-wrap:wrap; gap:0.9rem; align-items:center; color:var(--muted); font-size:0.9rem; margin-bottom:0.9rem; }
+        .hero-meta .rating { color:#fbbf24; font-weight:600; }
+        .hero p { color:#d4d4d8; font-size:0.95rem; margin-bottom:1.3rem; max-width:500px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+        .hero-tags { display:flex; gap:0.45rem; margin-bottom:1.3rem; flex-wrap:wrap; }
+        .tag { background:rgba(255,255,255,0.1); color:#e4e4e7; padding:0.28rem 0.75rem; border-radius:20px; font-size:0.8rem; }
+
         .lang-badge {
             display: inline-block;
             background: linear-gradient(90deg, #f59e0b, #ef4444);
@@ -121,38 +79,28 @@
             border-radius: 5px;
             letter-spacing: 0.8px;
             text-transform: uppercase;
-            margin-right: 0.2rem;
+            margin-right: 0.35rem;
         }
-        .hero-actions { display: flex; gap: 0.7rem; flex-wrap: wrap; }
-        .btn-watch {
-            background: var(--grad);
-            color: #fff;
-            border: none;
-            padding: 0.8rem 1.7rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            font-family: inherit;
-            transition: 0.2s;
-            text-decoration: none;
+
+        .hero-actions { display:flex; gap:0.7rem; flex-wrap:wrap; }
+        .btn-watch { background:var(--grad); color:#fff; border:none; padding:0.8rem 1.7rem; border-radius:50px; font-weight:700; font-size:0.95rem; cursor:pointer; display:inline-flex; align-items:center; gap:0.4rem; font-family:inherit; transition:0.2s; }
+        .btn-watch:hover { transform:scale(1.04); box-shadow:0 8px 28px rgba(168,85,247,0.4); }
+        .btn-more { background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.2); padding:0.8rem 1.4rem; border-radius:50px; font-weight:600; cursor:pointer; font-family:inherit; transition:0.2s; }
+        .btn-more:hover { background:rgba(255,255,255,0.18); }
+
+        .hero-poster {
+            display:block; flex:0 0 200px; width:200px; height:300px;
+            border-radius:14px; overflow:hidden; z-index:3; position:relative;
+            box-shadow:0 12px 40px rgba(0,0,0,0.5); border:2px solid rgba(255,255,255,0.12);
+            background:linear-gradient(145deg,#1e1e2e,#2a1a3a); margin-bottom:1rem;
         }
-        .btn-watch:hover { transform: scale(1.04); box-shadow: 0 8px 28px rgba(168,85,247,0.4); }
-        .btn-more {
-            background: rgba(255,255,255,0.1);
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 0.8rem 1.4rem;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            font-family: inherit;
-            transition: 0.2s;
+        .hero-poster img { width:100%; height:100%; object-fit:cover; }
+        @media(max-width:900px){
+            .hero { flex-direction:column; align-items:stretch; }
+            
         }
-        .btn-more:hover { background: rgba(255,255,255,0.18); }
+        .hero-poster{display:block;}
+        .hero-poster img { width:100%; height:100%; object-fit:cover; }
 
         .spotlight-badge {
             display: inline-flex;
@@ -170,38 +118,39 @@
             text-transform: uppercase;
         }
         .spotlight-badge span { color: #fff; }
-
-        .hero-dots {
-            display: flex;
-            gap: 0.4rem;
-            margin-top: 1.1rem;
-            position: relative;
-            z-index: 4;
+        .hero-content { transition: opacity 0.4s ease; }
+        .hero-content.fade { opacity: 0; }
+        
+        
+        
+        
+        @media(max-width:700px){
+            
         }
+        .hero-dots {
+            display:flex; gap:0.4rem; margin-top:1rem; position:relative; z-index:4;
+            padding:0; left:auto; bottom:auto;
+        }
+        .hero-dot {
+            width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.35);
+            cursor:pointer; transition:0.2s; border:none; padding:0;
+        }
+        .hero-dot.active { background:#a855f7; width:22px; border-radius:6px; }
         .hero-dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.32);
+            background: rgba(255,255,255,0.3);
             cursor: pointer;
             transition: 0.25s;
-            border: none;
-            padding: 0;
         }
         .hero-dot.active {
             background: #a855f7;
             width: 22px;
-            border-radius: 5px;
+            border-radius: 4px;
         }
-
-        @media (max-width: 700px) {
-            .hero {
-                height: auto;
-                min-height: 360px;
-                padding-bottom: 2rem;
-            }
-            .hero h1 { font-size: 1.7rem; }
-            .hero p { -webkit-line-clamp: 2; font-size: 0.88rem; }
+        .hero-bg {
+            transition: opacity 0.6s ease;
         }
 
 
@@ -463,13 +412,16 @@
         @media(max-width:900px){
             .nav-links { display:none; } .search-box { display:flex; max-width:120px; } .search-box input { width:70px; }
             .menu-btn { display:block; }
-            .hero { height: auto; min-height: 52vh; max-height: 480px; padding: 4rem 5% 2rem; }
-            .hero h1 { font-size: 1.85rem; }
-            .hero p { font-size: 0.88rem; -webkit-line-clamp: 2; }
+            .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+         height:auto; min-height:52vh; max-height:480px; padding:4rem 5% 2rem; }
+            .hero h1 { font-size:1.85rem; }
+            .hero p { font-size:0.88rem; -webkit-line-clamp:2; }
+            /* poster visible */
         }
         @media(max-width:480px){
-            .hero { min-height: 48vh; }
-            .hero h1 { font-size: 1.65rem; }
+            .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+         min-height:48vh; }
+            .hero h1 { font-size:1.65rem; }
         }
 
         
@@ -500,9 +452,10 @@
             .card-body { padding:0.5rem; }
             .card-body h3 { font-size:0.78rem; }
             .card-meta { font-size:0.65rem; }
-            .hero { min-height: auto; padding: 1.2rem 0.75rem 1.5rem; }
-            .hero-content h1 { font-size: 1.45rem; }
-            .hero-content p { font-size: 0.85rem; }
+            .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+         min-height:auto; padding:1.2rem 0.75rem 1.5rem; }
+            .hero-content h1 { font-size:1.45rem; }
+            .hero-content p { font-size:0.85rem; }
             .section-title { font-size:1.05rem; }
             .navbar { padding:0.55rem 0.75rem; }
 
@@ -553,7 +506,12 @@
         }
 
     
-/* hero cleaned - single bg image only */
+/* hero-poster-force */
+.hero-poster { display:block !important; }
+@media(max-width:800px){
+  .hero-poster { display:none !important; }
+  .hero-dots { margin-top:0.85rem; }
+}
 
 a.chip { text-decoration:none; color:inherit; display:inline-flex; align-items:center; }
 
@@ -875,33 +833,37 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         </div>
     </div>
 
-<!-- HERO - single cinematic photo background -->
+<!-- HERO - No ON AIR / HD / SUB / DUB badges -->
     <section class="hero" id="home">
-        <div class="hero-bg" id="heroBg"></div>
+
+<div class="hero-bg" id="heroBg"></div>
         <div class="hero-content" id="heroContent">
             <div class="spotlight-badge" id="spotlightBadge">#1 <span>Spotlight</span></div>
-            <h1 id="heroTitle">Shadow of the Eternal Blade</h1>
+            <h1 id="heroTitle">Frieren: Beyond Journey's End</h1>
             <div class="hero-meta" id="heroMeta">
-                <span class="rating">★ 9.4</span>
+                <span class="rating">★ 9.3</span>
                 <span>TV</span>
-                <span>24 Episodes</span>
-                <span>2026</span>
+                <span>28 Episodes</span>
+                <span>2023</span>
             </div>
-            <p id="heroDesc">Ek legendary swordsman ka dark journey jo broken world mein ancient magic ke against fight karta hai. Action, betrayal aur epic battles se bhara 2026 ka most hyped anime.</p>
+            <p id="heroDesc">Ek elf mage apne past journey ko reflect karti hai after the hero's party disbands. Beautiful, emotional storytelling aur stunning visuals se bhara masterpiece.</p>
             <div class="hero-tags" id="heroTags">
                 <span class="lang-badge">HINDI</span>
-                <span class="tag">Action</span>
-                <span class="tag">Fantasy</span>
                 <span class="tag">Adventure</span>
-                <span class="tag">Shonen</span>
+                <span class="tag">Drama</span>
+                <span class="tag">Fantasy</span>
             </div>
             <div class="hero-actions">
-                <a href="watch.html" class="btn-watch">▶ Watch Now</a>
+                <a href="watch.html" class="btn-watch" style="text-decoration:none;">▶ Watch Now</a>
+                
                 <button class="btn-more">+ Watchlist</button>
             </div>
             <div class="hero-dots" id="heroDots"></div>
         </div>
-    </section>
+        <div class="hero-poster">
+            <img id="heroPosterImg" src="https://cdn.myanimelist.net/images/anime/1015/138006.jpg" alt="Poster" onerror="this.style.display='none'">
+        </div>
+</section>
 
     <!-- TRENDING -->
     <section id="trending">
@@ -915,7 +877,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster"><span class="rank-badge r2">#2</span>
@@ -1064,7 +1026,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             <div class="cw-card" onclick="location.href='watch.html'">
                 <div class="cw-poster">⚔️
                     <div class="cw-overlay">
-                        <h3>Shadow of the Eternal Blade</h3>
+                        <h3>Frieren: Beyond Journey's End</h3>
                         <div class="cw-meta">EP 1 · 72% watched</div>
                     </div>
                     <div class="cw-progress"><span style="width:72%"></span></div>
@@ -1146,7 +1108,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
@@ -1294,7 +1256,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
                 <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
                     <div class="ep-thumb">⚔️<span class="ep-num">EP 24</span></div>
                     <div class="ep-info">
-                        <h4>Shadow of the Eternal Blade</h4>
+                        <h4>Frieren: Beyond Journey's End</h4>
                         <div class="ep-title">The Final Stand</div>
                         <div class="ep-meta"><span>24min</span><span>Sep 21, 2026</span></div>
                     </div>
@@ -1338,7 +1300,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster"><span class="rank-num rank-2">#2</span>
@@ -1492,7 +1454,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
@@ -1648,7 +1610,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
@@ -1798,7 +1760,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
@@ -1948,7 +1910,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 <span class="rating-badge">★ 9.4</span>
                     ⚔️
                 </div>
-                <div class="card-body"><h3>Shadow of the Eternal Blade</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps · HSub</div></div>
             </div>
             <div class="anime-card">
                 <div class="card-poster">
@@ -2249,7 +2211,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
           const closeBtn = document.getElementById('searchClose');
           if (!toggle || !overlay || !input) return;
           const catalog = [
-            {t:'Shadow of the Eternal Blade',e:'⚔️',m:'TV · HSub · ★ 9.4'},
+            {t:'Frieren: Beyond Journey's End',e:'⚔️',m:'TV · HSub · ★ 9.4'},
             {t:'Neon Horizon: Zero',e:'🌌',m:'TV · Hindi · ★ 9.1'},
             {t:'Cherry Blossom Letters',e:'💖',m:'TV · HSub · ★ 8.9'},
             {t:'Crimson Guild Chronicles',e:'🗡️',m:'TV · FanDub · ★ 9.2'},
@@ -2312,10 +2274,10 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         // Hero Auto Carousel - 10 Animes
         const animes = [
             {
-                title: "Shadow of the Eternal Blade",
-                rating: "★ 9.4", type: "TV", eps: "24 Episodes", year: "2026",
-                desc: "Ek legendary swordsman ka dark journey jo broken world mein ancient magic ke against fight karta hai. Action, betrayal aur epic battles se bhara 2026 ka most hyped anime.",
-                tags: ["Action","Fantasy","Adventure","Shonen"],
+                title: "Frieren: Beyond Journey's End",
+                rating: "★ 9.3", type: "TV", eps: "28 Episodes", year: "2023",
+                desc: "Ek elf mage apne past journey ko reflect karti hai after the hero's party disbands. Beautiful, emotional storytelling aur stunning visuals se bhara masterpiece.",
+                tags: ["Adventure","Drama","Fantasy"],
                 bg: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg",
                 poster: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg"
             },
@@ -2396,6 +2358,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         let current = 0;
         const content = document.getElementById('heroContent');
         const bg = document.getElementById('heroBg');
+        const posterImg = document.getElementById('heroPosterImg');
         const dotsContainer = document.getElementById('heroDots');
 
         // Create dots
@@ -2420,8 +2383,10 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
                 document.getElementById('heroDesc').textContent = a.desc;
                 document.getElementById('heroTags').innerHTML = '<span class="lang-badge">HINDI</span>' + a.tags.map(t => `<span class="tag">${t}</span>`).join('');
                 bg.style.backgroundImage = `url('${a.bg}')`;
-                bg.style.backgroundSize = 'cover';
-                bg.style.backgroundPosition = 'center 20%';
+                if (posterImg) {
+                    posterImg.src = a.poster;
+                    posterImg.style.display = '';
+                }
                 // Update dots
                 document.querySelectorAll('.hero-dot').forEach((d, i) => {
                     d.classList.toggle('active', i === index);
@@ -2466,7 +2431,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         // Schedule data + Aniflix-style renderer
         const scheduleData = {
             mon: [
-                {time:"06:30 PM", emoji:"⚔️", title:"Shadow of the Eternal Blade", sub:"EP 20 · Hindi Sub", badge:"Mon", badgeClass:"soon"},
+                {time:"06:30 PM", emoji:"⚔️", title:"Frieren: Beyond Journey's End", sub:"EP 20 · Hindi Sub", badge:"Mon", badgeClass:"soon"},
                 {time:"08:00 PM", emoji:"🌌", title:"Neon Horizon: Zero", sub:"EP 11 · Hindi Dub", badge:"Mon", badgeClass:"soon"}
             ],
             tue: [
@@ -2529,7 +2494,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
         // Browse by Language filter
         const langAnimeData = [
-          {title:"Shadow of the Eternal Blade", rating:"9.4", emoji:"⚔️", lang:"HSub", meta:"TV · 24 Eps · HSub"},
+          {title:"Frieren: Beyond Journey's End", rating:"9.4", emoji:"⚔️", lang:"HSub", meta:"TV · 24 Eps · HSub"},
           {title:"Neon Horizon: Zero", rating:"9.1", emoji:"🌌", lang:"Hindi", meta:"TV · 24 Eps · Hindi"},
           {title:"Cherry Blossom Letters", rating:"8.9", emoji:"💖", lang:"HSub", meta:"TV · 12 Eps · HSub"},
           {title:"Crimson Guild Chronicles", rating:"9.2", emoji:"🗡️", lang:"FanDub", meta:"TV · 24 Eps · FanDub"},
@@ -2567,7 +2532,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         if (typeof bg !== 'undefined' && animes[0]) {
           bg.style.backgroundImage = `url('${animes[0].bg}')`;
           bg.style.backgroundSize = 'cover';
-          bg.style.backgroundPosition = 'center 20%';
+          bg.style.backgroundPosition = 'center top';
         }
 
         // Card clicks
