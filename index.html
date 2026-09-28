@@ -21,20 +21,20 @@
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
         
-        /* NAV - premium transparent */
+        /* NAV - premium transparent like Aniflix */
         .navbar {
             position:fixed; top:0; left:0; right:0; z-index:100;
             display:flex; align-items:center; justify-content:space-between;
-            padding:0.7rem 2.5%;
-            background:transparent;
-            backdrop-filter:none;
-            border-bottom:none;
-            transition: background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+            padding:0.75rem 2.5%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 60%, transparent 100%);
+            backdrop-filter: none;
+            border-bottom: none;
+            transition: background 0.35s ease, backdrop-filter 0.35s ease;
         }
         .navbar.scrolled {
-            background:rgba(11,11,15,0.75);
-            backdrop-filter:blur(20px);
-            border-bottom:1px solid rgba(255,255,255,0.06);
+            background: rgba(11,11,15,0.82);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .logo { font-family:'Orbitron',sans-serif; font-size:1.4rem; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }
         .nav-links { display:flex; gap:1.5rem; list-style:none; align-items:center; }
@@ -74,7 +74,7 @@
             min-height: 420px;
             max-height: 620px;
             display:flex; align-items:flex-end;
-            padding:0 4% 2.8rem; margin-top:58px; overflow:hidden;
+            padding:0 4% 2.8rem; margin-top:0; padding-top:70px; overflow:hidden;
         }
         .hero-bg {
             position:absolute; inset:0;
@@ -203,6 +203,15 @@
         .card-poster { width:100%; height:235px; background:linear-gradient(145deg,#1e1e2e,#2a1a3a); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:2.8rem; }
         .card-poster img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
         .card-poster .status { position:absolute; top:7px; left:7px; font-size:0.6rem; font-weight:700; padding:0.18rem 0.45rem; border-radius:4px; text-transform:uppercase; z-index:2; }
+        .rank-badge {
+            position:absolute; top:8px; left:8px; z-index:3;
+            font-size:0.72rem; font-weight:800; padding:0.2rem 0.5rem;
+            border-radius:6px; background:rgba(0,0,0,0.7); color:#fff;
+            letter-spacing:0.02em;
+        }
+        .rank-badge.r1 { background:linear-gradient(135deg,#f59e0b,#fbbf24); color:#111; }
+        .rank-badge.r2 { background:linear-gradient(135deg,#94a3b8,#e2e8f0); color:#111; }
+        .rank-badge.r3 { background:linear-gradient(135deg,#b45309,#d97706); color:#fff; }
         .status-onair, .status-completed, .status-upcoming, .status { display:none !important; } /* status badges hidden */
         .status-onair-old { background:#ef4444; color:#fff; }
         .status-completed { background:#10b981; color:#fff; }
@@ -680,6 +689,32 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         .search-toggle:hover { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); }
         .search-toggle svg { width:18px; height:18px; stroke:#fff; fill:none; stroke-width:2; }
 
+        /* Search overlay - hidden by default */
+        .search-overlay {
+            display: none;
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.75); z-index: 200;
+            backdrop-filter: blur(8px);
+            flex-direction: column; align-items: center; padding-top: 80px;
+        }
+        .search-overlay.open { display: flex; }
+        .search-overlay-bar {
+            display: flex; align-items: center; gap: 0.75rem;
+            background: #1a1a24; border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50px; padding: 0.7rem 1.2rem; width: min(560px, 90vw);
+        }
+        .search-overlay-bar input {
+            flex: 1; background: transparent; border: none; color: #fff;
+            font-size: 1rem; outline: none; font-family: inherit;
+        }
+        .search-close {
+            background: none; border: none; color: #a1a1aa; font-size: 1.2rem;
+            cursor: pointer; padding: 0 0.3rem;
+        }
+        .search-results {
+            width: min(560px, 90vw); margin-top: 1rem; max-height: 60vh; overflow-y: auto;
+        }
+
         .profile-wrap { position:relative; z-index:250; }
         .profile-btn {
             width:38px; height:38px; border-radius:50%; border:2px solid rgba(168,85,247,0.55);
@@ -1156,7 +1191,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- AIRING -->
     <section id="airing">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> 🔴 Currently Airing</h2>
+            <h2 class="section-title"><span class="bar"></span> Currently Airing</h2>
             <a href="airing.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1305,7 +1340,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- LATEST + TOP RANKED -->
     <section id="latest">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> 📺 Latest Episodes</h2>
+            <h2 class="section-title"><span class="bar"></span> Latest Episodes</h2>
             <a href="latest.html" class="view-all">View All ›</a>
         </div>
         <div class="episodes-grid">
@@ -1502,7 +1537,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- NEW ON ANIMEFAN -->
     <section id="new">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> ✨ New On AnimeFan</h2>
+            <h2 class="section-title"><span class="bar"></span> New On AnimeFan</h2>
             <a href="new.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1658,7 +1693,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- UPCOMING -->
     <section id="upcoming">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> 📅 Upcoming</h2>
+            <h2 class="section-title"><span class="bar"></span> Upcoming</h2>
             <a href="upcoming.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1958,7 +1993,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- COMPLETED -->
     <section id="completed">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> ✅ Completed</h2>
+            <h2 class="section-title"><span class="bar"></span> Completed</h2>
             <a href="completed.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -2111,14 +2146,14 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="schedule">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> 📅 Estimated Schedule</h2>
+            <h2 class="section-title"><span class="bar"></span> Estimated Schedule</h2>
         </div>
         <div class="sched-tabs" id="schedTabs">
             <button class="sched-tab" data-day="mon">MON</button>
             <button class="sched-tab" data-day="tue">TUE</button>
             <button class="sched-tab" data-day="wed">WED</button>
             <button class="sched-tab" data-day="thu">THU</button>
-            <button class="sched-tab active" data-day="fri">FRI</button>
+            <button class="sched-tab" data-day="fri">FRI</button>
             <button class="sched-tab" data-day="sat">SAT</button>
             <button class="sched-tab" data-day="sun">SUN</button>
         </div>
@@ -2290,7 +2325,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
           const closeBtn = document.getElementById('searchClose');
           if (!toggle || !overlay || !input) return;
           const catalog = [
-            {t:'Frieren: Beyond Journey's End',e:'⚔️',m:'TV · HSub · ★ 9.4'},
+            {t:"Frieren: Beyond Journey's End",e:'⚔️',m:'TV · HSub · ★ 9.4'},
             {t:'Neon Horizon: Zero',e:'🌌',m:'TV · Hindi · ★ 9.1'},
             {t:'Cherry Blossom Letters',e:'💖',m:'TV · HSub · ★ 8.9'},
             {t:'Crimson Guild Chronicles',e:'🗡️',m:'TV · FanDub · ★ 9.2'},
