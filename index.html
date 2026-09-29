@@ -20,6 +20,25 @@
         }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+        html, body {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+            width: 0;
+            height: 0;
+        }
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
         
         /* NAV - premium transparent like Aniflix */
         .navbar {
@@ -591,33 +610,56 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
         
         .lang-grid {
-            display:flex; flex-wrap:wrap; gap:0.75rem;
+            display:grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap:0.7rem;
+            max-width:420px;
+        }
+        @media (min-width:640px) {
+            .lang-grid {
+                max-width:480px;
+                gap:0.85rem;
+            }
         }
         a.lang-btn {
-            display:inline-flex; align-items:center; justify-content:center;
-            padding:0.7rem 1.5rem;
+            display:flex; align-items:center; gap:0.55rem;
+            padding:0.45rem 0.85rem 0.45rem 0.45rem;
             border-radius:999px;
             text-decoration:none;
-            font-weight:700; font-size:0.95rem;
+            font-weight:600; font-size:0.88rem;
+            color:#e5e7eb;
+            background:rgba(12,12,18,0.85);
+            border:1.5px solid rgba(255,255,255,0.1);
             transition:0.2s;
-            border:1.5px solid transparent;
+            min-height:2.6rem;
         }
-        a.lang-btn:hover { transform:translateY(-2px); filter:brightness(1.15); }
-        a.lang-btn.lang-hindi {
-            color:#f59e0b;
-            background:rgba(245,158,11,0.08);
-            border-color:rgba(180,83,9,0.65);
+        a.lang-btn:hover { transform:translateY(-2px); border-color:rgba(255,255,255,0.22); background:rgba(22,22,32,0.95); }
+        a.lang-btn .lang-ico {
+            width:1.85rem; height:1.85rem; border-radius:50%;
+            display:inline-flex; align-items:center; justify-content:center;
+            flex-shrink:0;
         }
-        a.lang-btn.lang-hsub {
-            color:#38bdf8;
-            background:rgba(14,165,233,0.08);
-            border-color:rgba(14,116,144,0.65);
+        a.lang-btn .lang-ico svg {
+            width:0.95rem; height:0.95rem;
+            fill:none; stroke:currentColor; stroke-width:2;
+            stroke-linecap:round; stroke-linejoin:round;
         }
-        a.lang-btn.lang-fandub {
-            color:#c084fc;
-            background:rgba(168,85,247,0.1);
-            border-color:rgba(126,34,206,0.65);
+        @media (min-width:640px) {
+            a.lang-btn {
+                gap:0.7rem;
+                padding:0.55rem 1.1rem 0.55rem 0.55rem;
+                font-size:0.95rem;
+                min-height:2.9rem;
+            }
+            a.lang-btn .lang-ico { width:2.1rem; height:2.1rem; }
+            a.lang-btn .lang-ico svg { width:1.1rem; height:1.1rem; }
         }
+        a.lang-btn.lang-hindi .lang-ico { background:rgba(185,28,28,0.35); color:#f87171; }
+        a.lang-btn.lang-fandub .lang-ico { background:rgba(126,34,206,0.35); color:#c084fc; }
+        a.lang-btn.lang-hsub .lang-ico { background:rgba(154,52,18,0.4); color:#fb923c; }
+        a.lang-btn.lang-hindi { border-color:rgba(185,28,28,0.3); }
+        a.lang-btn.lang-fandub { border-color:rgba(126,34,206,0.35); }
+        a.lang-btn.lang-hsub { border-color:rgba(154,52,18,0.35); }
 
 
     
@@ -1264,11 +1306,10 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg></span> Browse by Language</h2>
         </div>
         <div class="lang-grid">
-            <a class="lang-btn lang-hindi" href="language.html?lang=Hindi">Hindi Dub</a>
-            <a class="lang-btn lang-hsub" href="language.html?lang=HSub">Hindi Sub</a>
-            <a class="lang-btn lang-fandub" href="language.html?lang=FanDub">FanDub</a>
-        </div>
-    </section>
+            <a class="lang-btn lang-hindi" href="language.html?lang=Hindi"><span class="lang-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span>Hindi Dub</a>
+            <a class="lang-btn lang-fandub" href="language.html?lang=FanDub"><span class="lang-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span>FanDub</a>
+            <a class="lang-btn lang-hsub" href="language.html?lang=HSub"><span class="lang-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2.5"/><path d="M10 10.5a2 2 0 1 0 0 3"/><path d="M16.5 10.5a2 2 0 1 0 0 3"/></svg></span>Hindi Sub</a>
+        </div></section>
 
 
 
