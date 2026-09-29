@@ -201,10 +201,18 @@
         .section-title { font-size:1.3rem; font-weight:700; display:flex; align-items:center; gap:0.45rem; }
         .section-title .bar { width:4px; height:1.2rem; background:var(--grad); border-radius:4px; flex-shrink:0; }
         .section-title .sec-icon {
-            width:1.15rem; height:1.15rem; flex-shrink:0; color:#a855f7;
+            width:1.4rem; height:1.4rem; flex-shrink:0; color:#a855f7;
             display:inline-flex; align-items:center; justify-content:center;
         }
-        .section-title .sec-icon svg { width:100%; height:100%; fill:currentColor; }
+        .section-title .sec-icon svg {
+            width:100%; height:100%;
+            fill:none;
+            stroke:currentColor;
+            stroke-width:1.8;
+            stroke-linecap:round;
+            stroke-linejoin:round;
+        }
+        .section-title .sec-icon svg [fill="currentColor"] { fill:currentColor; stroke:none; }
         .view-all { color:var(--accent); text-decoration:none; font-size:0.88rem; font-weight:500; }
 
         .scroll-row { display:flex; gap:0.9rem; overflow-x:auto; padding-bottom:0.8rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
@@ -1052,7 +1060,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- TRENDING -->
     <section id="trending">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c2.5 0 5-2.2 5-5.5 0-3.2-2-5.5-3.5-8-.4-.7-.7-1.5-.7-2.3 0 0-.5 1.8-1.5 3.5C9.5 12.5 7 14.8 7 16.5 7 19.8 9.5 22 12 22z"/></svg></span> Trending Now</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span> Trending Now</h2>
             <a href="trending.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1203,7 +1211,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- CONTINUE WATCHING (shown only if user has watch history) -->
     <section id="continue" style="display:none;">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l6-3.5-6-3.5z" fill="currentColor" stroke="none"/></svg></span> Continue Watching</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg></span> Continue Watching</h2>
         </div>
         
         <div class="scroll-row" id="continueRow">
@@ -1253,7 +1261,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="language">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M9 7c0 5-2.5 8-5 9"/><path d="M6 11c2 1.5 4 2 6 2"/><path d="M14 15l2-6h1l2 6"/><path d="M14.7 13h3.6"/></svg></span> Browse by Language</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg></span> Browse by Language</h2>
         </div>
         <div class="lang-grid">
             <a class="lang-btn lang-hindi" href="language.html?lang=Hindi">Hindi Dub</a>
@@ -1268,7 +1276,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- AIRING -->
     <section id="airing">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M8.2 8.2a5.4 5.4 0 0 1 0 7.6"/><path d="M15.8 8.2a5.4 5.4 0 0 0 0 7.6"/><path d="M5.5 5.5a9.2 9.2 0 0 1 0 13"/><path d="M18.5 5.5a9.2 9.2 0 0 0 0 13"/></svg></span> Currently Airing</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></svg></span> Currently Airing</h2>
             <a href="airing.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1417,7 +1425,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- LATEST + TOP RANKED -->
     <section id="latest">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span> Latest Episodes</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></span> Latest Episodes</h2>
             <a href="latest.html" class="view-all">View All ›</a>
         </div>
         <div class="episodes-grid">
@@ -1460,7 +1468,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 <section id="popular">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4"/><path d="M7 4h10v6a5 5 0 0 1-10 0V4z"/><path d="M7 4H4.5a2.5 2.5 0 0 0 2.5 5"/><path d="M17 4h2.5a2.5 2.5 0 0 1-2.5 5"/></svg></span> Top Ranking</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span> Top Ranking</h2>
             <a href="toprated.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1614,7 +1622,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- NEW ON ANIMEFAN -->
     <section id="new">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l1.8 5.6H19.5l-4.6 3.4 1.8 5.5L12 13.7 7.3 17l1.8-5.5L4.5 8.1h5.7L12 2.5z"/></svg></span> New On AnimeFan</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></span> New On AnimeFan</h2>
             <a href="new.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1770,7 +1778,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- UPCOMING -->
     <section id="upcoming">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span> Upcoming</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></span> Upcoming</h2>
             <a href="upcoming.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1920,7 +1928,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- MOVIES -->
     <section id="movies">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7z"/><path d="M7 7V5l2 2M12 7V4l2 3M17 7V5l2 2"/></svg></span> Movies</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span> Movies</h2>
             <a href="movies.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -2070,7 +2078,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- COMPLETED -->
     <section id="completed">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.5l2.5 2.5 4.5-4.5"/></svg></span> Completed</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span> Completed</h2>
             <a href="completed.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -2223,7 +2231,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="schedule">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></span> Anime Schedule</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></span> Anime Schedule</h2>
         </div>
         <div class="sched-tabs" id="schedTabs">
             <button class="sched-tab" data-day="mon">MON</button>
@@ -2246,7 +2254,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="genres">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></span> Browse by Genres</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></span> Browse by Genres</h2>
         </div>
         <div class="genre-pills">
             <a class="genre-pill" href="genre.html?g=Action">Action</a>
