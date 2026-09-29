@@ -199,7 +199,12 @@
         section { padding:2.2rem 3%; }
         .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
         .section-title { font-size:1.3rem; font-weight:700; display:flex; align-items:center; gap:0.45rem; }
-        .section-title .bar { width:4px; height:1.2rem; background:var(--grad); border-radius:4px; }
+        .section-title .bar { width:4px; height:1.2rem; background:var(--grad); border-radius:4px; flex-shrink:0; }
+        .section-title .sec-icon {
+            width:1.15rem; height:1.15rem; flex-shrink:0; color:#a855f7;
+            display:inline-flex; align-items:center; justify-content:center;
+        }
+        .section-title .sec-icon svg { width:100%; height:100%; fill:currentColor; }
         .view-all { color:var(--accent); text-decoration:none; font-size:0.88rem; font-weight:500; }
 
         .scroll-row { display:flex; gap:0.9rem; overflow-x:auto; padding-bottom:0.8rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
@@ -578,33 +583,32 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
         
         .lang-grid {
-            display:grid;
-            grid-template-columns:repeat(2, 1fr);
-            gap:0.75rem;
-        }
-        @media(min-width:800px){
-            .lang-grid { grid-template-columns:repeat(3, 1fr); max-width:720px; }
+            display:flex; flex-wrap:wrap; gap:0.75rem;
         }
         a.lang-btn {
-            display:flex; align-items:center; gap:0.85rem;
-            padding:1rem 1.15rem;
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.1);
+            display:inline-flex; align-items:center; justify-content:center;
+            padding:0.7rem 1.5rem;
             border-radius:999px;
-            text-decoration:none; color:#fff;
-            font-weight:600; font-size:0.95rem;
+            text-decoration:none;
+            font-weight:700; font-size:0.95rem;
             transition:0.2s;
+            border:1.5px solid transparent;
         }
-        a.lang-btn:hover {
-            border-color:rgba(168,85,247,0.55);
+        a.lang-btn:hover { transform:translateY(-2px); filter:brightness(1.15); }
+        a.lang-btn.lang-hindi {
+            color:#f59e0b;
+            background:rgba(245,158,11,0.08);
+            border-color:rgba(180,83,9,0.65);
+        }
+        a.lang-btn.lang-hsub {
+            color:#38bdf8;
+            background:rgba(14,165,233,0.08);
+            border-color:rgba(14,116,144,0.65);
+        }
+        a.lang-btn.lang-fandub {
+            color:#c084fc;
             background:rgba(168,85,247,0.1);
-            transform:translateY(-2px);
-        }
-        .lang-icon {
-            width:40px; height:40px; border-radius:50%;
-            display:flex; align-items:center; justify-content:center;
-            font-size:1.05rem; flex-shrink:0; font-weight:700;
-            box-shadow:0 4px 12px rgba(0,0,0,0.25);
+            border-color:rgba(126,34,206,0.65);
         }
 
 
@@ -1048,7 +1052,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- TRENDING -->
     <section id="trending">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Trending Now</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/></svg></span> Trending Now</h2>
             <a href="trending.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1199,7 +1203,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- CONTINUE WATCHING (shown only if user has watch history) -->
     <section id="continue" style="display:none;">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Continue Watching</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></span> Continue Watching</h2>
         </div>
         
         <div class="scroll-row" id="continueRow">
@@ -1249,27 +1253,12 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="language">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Browse by Language</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/></svg></span> Browse by Language</h2>
         </div>
         <div class="lang-grid">
-            <a class="lang-btn" href="language.html?lang=Hindi">
-                <span class="lang-icon" style="background:linear-gradient(145deg,#be123c,#fb7185);">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5-3c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-                </span>
-                Hindi Dub
-            </a>
-            <a class="lang-btn" href="language.html?lang=HSub">
-                <span class="lang-icon" style="background:linear-gradient(145deg,#c2410c,#fbbf24);">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 12h4v2H4v-2zm10 6H4v-2h10v2zm6 0h-4v-2h4v2zm0-4H10v-2h10v2z"/></svg>
-                </span>
-                Hindi Sub
-            </a>
-            <a class="lang-btn" href="language.html?lang=FanDub">
-                <span class="lang-icon" style="background:linear-gradient(145deg,#6d28d9,#c084fc);">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-                </span>
-                FanDub
-            </a>
+            <a class="lang-btn lang-hindi" href="language.html?lang=Hindi">Hindi Dub</a>
+            <a class="lang-btn lang-hsub" href="language.html?lang=HSub">Hindi Sub</a>
+            <a class="lang-btn lang-fandub" href="language.html?lang=FanDub">FanDub</a>
         </div>
     </section>
 
@@ -1279,7 +1268,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- AIRING -->
     <section id="airing">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Currently Airing</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 2l1.09 3.41L16.5 6.5l-3.41 1.09L12 11l-1.09-3.41L7.5 6.5l3.41-1.09L12 2zm6 8l.75 2.25L21 13l-2.25.75L18 16l-.75-2.25L15 13l2.25-.75L18 10zM6 12l.75 2.25L9 15l-2.25.75L6 18l-.75-2.25L3 15l2.25-.75L6 12z"/></svg></span> Currently Airing</h2>
             <a href="airing.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1428,7 +1417,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- LATEST + TOP RANKED -->
     <section id="latest">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Latest Episodes</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></span> Latest Episodes</h2>
             <a href="latest.html" class="view-all">View All ›</a>
         </div>
         <div class="episodes-grid">
@@ -1471,7 +1460,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
 
 <section id="popular">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Top Ranking</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.66 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.66 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"/></svg></span> Top Ranking</h2>
             <a href="toprated.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1625,7 +1614,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- NEW ON ANIMEFAN -->
     <section id="new">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> New On AnimeFan</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg></span> New On AnimeFan</h2>
             <a href="new.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1781,7 +1770,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- UPCOMING -->
     <section id="upcoming">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Upcoming</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg></span> Upcoming</h2>
             <a href="upcoming.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -1931,7 +1920,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- MOVIES -->
     <section id="movies">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Movies</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg></span> Movies</h2>
             <a href="movies.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -2081,7 +2070,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     <!-- COMPLETED -->
     <section id="completed">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Completed</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg></span> Completed</h2>
             <a href="completed.html" class="view-all">View All ›</a>
         </div>
         <div class="scroll-row">
@@ -2234,7 +2223,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="schedule">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Estimated Schedule</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/></svg></span> Estimated Schedule</h2>
         </div>
         <div class="sched-tabs" id="schedTabs">
             <button class="sched-tab" data-day="mon">MON</button>
@@ -2257,7 +2246,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     
     <section id="genres">
         <div class="section-header">
-            <h2 class="section-title"><span class="bar"></span> Browse by Genres</h2>
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg></span> Browse by Genres</h2>
         </div>
         <div class="genre-pills">
             <a class="genre-pill" href="genre.html?g=Action">Action</a>
