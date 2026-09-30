@@ -234,7 +234,7 @@
         .section-title .sec-icon svg [fill="currentColor"] { fill:currentColor; stroke:none; }
         .view-all { color:var(--accent); text-decoration:none; font-size:0.88rem; font-weight:500; }
 
-        .scroll-row { display:flex; gap:0.9rem; overflow-x:auto; padding-bottom:0.8rem; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scroll-behavior:smooth; }
+        .scroll-row { display:flex; gap:0.9rem; overflow-x:auto; padding-bottom:0.8rem; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; scroll-behavior:auto; }
         /* Extra right padding so last card can sit partially off-screen */
         .scroll-row::after { content:''; flex:0 0 40px; }
         .scroll-row::-webkit-scrollbar { display:none; height:0; }
@@ -561,6 +561,19 @@
         .sched-tabs {
             display:flex; gap:0.3rem; overflow-x:auto; margin-bottom:1rem;
             padding-bottom:0.3rem; scrollbar-width:none;
+            width:100%;
+        }
+        @media (min-width:768px) {
+            .sched-tabs {
+                gap:0;
+                overflow-x:visible;
+                justify-content:space-between;
+            }
+            .sched-tabs .sched-tab {
+                flex:1 1 0;
+                text-align:center;
+                padding:0.55rem 0.4rem;
+            }
         }
         .sched-tabs::-webkit-scrollbar { display:none; }
         .sched-tab {
@@ -617,8 +630,13 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         }
         @media (min-width:640px) {
             .lang-grid {
-                max-width:480px;
+                display:flex;
+                flex-wrap:nowrap;
                 gap:0.85rem;
+                max-width:none;
+            }
+            .lang-grid .lang-btn {
+                flex:0 0 auto;
             }
         }
         a.lang-btn {
@@ -798,30 +816,126 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         .search-toggle:hover { background:rgba(255,255,255,0.15); border-color:rgba(255,255,255,0.3); }
         .search-toggle svg { width:18px; height:18px; stroke:#fff; fill:none; stroke-width:2; }
 
-        /* Search overlay - hidden by default */
+        /* Premium search - expands from top */
         .search-overlay {
-            display: none;
             position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.75); z-index: 200;
-            backdrop-filter: blur(8px);
-            flex-direction: column; align-items: center; padding-top: 80px;
+            z-index: 200;
+            display: flex; flex-direction: column; align-items: center;
+            padding-top: 0;
+            background: rgba(0,0,0,0);
+            backdrop-filter: blur(0px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.28s ease, background 0.28s ease, backdrop-filter 0.28s ease, visibility 0.28s;
         }
-        .search-overlay.open { display: flex; }
+        .search-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            background: rgba(5,5,10,0.82);
+            backdrop-filter: blur(14px);
+        }
+        .search-overlay-panel {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 1rem 1.25rem 1.5rem;
+            transform: translateY(-24px) scale(0.96);
+            opacity: 0;
+            transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), opacity 0.28s ease;
+        }
+        .search-overlay.open .search-overlay-panel {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        @media (min-width:768px) {
+            .search-overlay-panel { padding-top: 1.4rem; }
+        }
         .search-overlay-bar {
             display: flex; align-items: center; gap: 0.75rem;
-            background: #1a1a24; border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 50px; padding: 0.7rem 1.2rem; width: min(560px, 90vw);
+            background: linear-gradient(180deg, rgba(30,30,42,0.95), rgba(18,18,28,0.98));
+            border: 1px solid rgba(168,85,247,0.35);
+            border-radius: 999px;
+            padding: 0.75rem 1.15rem;
+            width: 100%;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 12px 40px rgba(0,0,0,0.45), 0 0 30px rgba(168,85,247,0.12);
         }
         .search-overlay-bar input {
             flex: 1; background: transparent; border: none; color: #fff;
-            font-size: 1rem; outline: none; font-family: inherit;
+            font-size: 1.05rem; outline: none; font-family: inherit;
+            min-width: 0;
         }
-        .search-close {
-            background: none; border: none; color: #a1a1aa; font-size: 1.2rem;
-            cursor: pointer; padding: 0 0.3rem;
+        .search-overlay-bar input::placeholder { color: #71717a; }
+        .search-recent {
+            width: 100%; margin-top: 0.85rem;
+            display: none;
         }
+        .search-recent.show { display: block; }
+        .search-recent-title {
+            font-size: 0.72rem; font-weight: 700; color: #71717a;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            margin-bottom: 0.5rem; padding: 0 0.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .search-recent-title button {
+            background: none; border: none; color: #a855f7; font-size: 0.72rem;
+            font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: 0;
+        }
+        .search-recent-chips {
+            display: flex; flex-wrap: wrap; gap: 0.45rem;
+        }
+        .search-chip {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #e4e4e7; font-size: 0.82rem; font-weight: 500;
+            cursor: pointer; transition: 0.2s;
+        }
+        .search-chip:hover {
+            background: rgba(168,85,247,0.15);
+            border-color: rgba(168,85,247,0.35);
+        }
+        .search-chip svg { width: 14px; height: 14px; opacity: 0.6; flex-shrink: 0; }
         .search-results {
-            width: min(560px, 90vw); margin-top: 1rem; max-height: 60vh; overflow-y: auto;
+            width: 100%; margin-top: 0.9rem; max-height: min(60vh, 420px); overflow-y: auto;
+            display: flex; flex-direction: column; gap: 0.4rem;
+            scrollbar-width: none;
+        }
+        .search-results::-webkit-scrollbar { display: none; }
+        .search-hit {
+            display: flex; align-items: center; gap: 0.85rem;
+            padding: 0.65rem 0.85rem;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            text-decoration: none; color: inherit;
+            transition: 0.2s;
+            animation: searchHitIn 0.3s ease both;
+        }
+        .search-hit:hover {
+            background: rgba(168,85,247,0.12);
+            border-color: rgba(168,85,247,0.3);
+            transform: translateX(4px);
+        }
+        .search-hit-thumb {
+            width: 44px; height: 58px; border-radius: 8px;
+            background: linear-gradient(145deg,#1e1e2e,#2a1a3a);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; flex-shrink: 0;
+        }
+        .search-hit-info { flex: 1; min-width: 0; }
+        .search-hit-info strong {
+            display: block; font-size: 0.92rem; font-weight: 600;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            margin-bottom: 0.15rem;
+        }
+        .search-hit-info span { font-size: 0.75rem; color: var(--muted); }
+        @keyframes searchHitIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .profile-wrap { position:relative; z-index:250; }
@@ -1017,12 +1131,15 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
     </nav>
 
     <div class="search-overlay" id="searchOverlay">
+      <div class="search-overlay-panel">
         <div class="search-overlay-bar">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
             <input type="text" id="searchInput" placeholder="Search anime..." autocomplete="off">
-            <button type="button" class="search-close" id="searchClose">✕</button>
         </div>
+        <div class="search-recent" id="searchRecent"></div>
         <div class="search-results" id="searchResults"></div>
+    
+      </div>
     </div>
 
 
@@ -2473,8 +2590,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
           const overlay = document.getElementById('searchOverlay');
           const input = document.getElementById('searchInput');
           const results = document.getElementById('searchResults');
-          const closeBtn = document.getElementById('searchClose');
-          if (!toggle || !overlay || !input) return;
+                    if (!toggle || !overlay || !input) return;
           const catalog = [
             {t:"Frieren: Beyond Journey's End",e:'⚔️',m:'TV · HSub · ★ 9.4'},
             {t:'Neon Horizon: Zero',e:'🌌',m:'TV · Hindi · ★ 9.1'},
@@ -2489,34 +2605,102 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             {t:'Attack on Titan',e:'⚔️',m:'TV · HSub · ★ 9.5'},
             {t:'Naruto Shippuden',e:'🍥',m:'TV · Hindi · ★ 9.3'}
           ];
+          const recentEl = document.getElementById('searchRecent');
+          const RECENT_KEY = 'af_recent_searches';
+          function getRecent(){
+            try { return JSON.parse(localStorage.getItem(RECENT_KEY)||'[]'); } catch(e){ return []; }
+          }
+          function saveRecent(q){
+            q = (q||'').trim();
+            if (!q || q.length < 1) return;
+            let list = getRecent().filter(x => x.toLowerCase() !== q.toLowerCase());
+            list.unshift(q);
+            list = list.slice(0, 8);
+            localStorage.setItem(RECENT_KEY, JSON.stringify(list));
+          }
+          function clearRecent(){
+            localStorage.removeItem(RECENT_KEY);
+            renderRecent();
+          }
+          function renderRecent(){
+            const list = getRecent();
+            if (!list.length) {
+              recentEl.classList.remove('show');
+              recentEl.innerHTML = '';
+              return;
+            }
+            recentEl.classList.add('show');
+            recentEl.innerHTML = `
+              <div class="search-recent-title">
+                <span>Recent searches</span>
+                <button type="button" id="clearRecentBtn">Clear</button>
+              </div>
+              <div class="search-recent-chips">
+                ${list.map(q => `
+                  <button type="button" class="search-chip" data-q="${q.replace(/"/g,'&quot;')}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    ${q}
+                  </button>
+                `).join('')}
+              </div>`;
+            recentEl.querySelector('#clearRecentBtn')?.addEventListener('click', clearRecent);
+            recentEl.querySelectorAll('.search-chip').forEach(btn => {
+              btn.addEventListener('click', () => {
+                input.value = btn.dataset.q || '';
+                render(input.value);
+                input.focus();
+              });
+            });
+          }
           function openSearch(){
             overlay.classList.add('open');
             document.body.style.overflow='hidden';
-            setTimeout(()=>input.focus(),50);
-            render('');
+            setTimeout(()=>{ input.focus(); }, 180);
+            render(input.value||'');
           }
           function closeSearch(){
+            if (input.value.trim()) saveRecent(input.value);
             overlay.classList.remove('open');
             document.body.style.overflow='';
-            input.value='';
+            setTimeout(()=>{ input.value=''; results.innerHTML=''; recentEl.classList.remove('show'); }, 280);
           }
           function render(q){
             q = (q||'').toLowerCase().trim();
-            const hits = q ? catalog.filter(x => x.t.toLowerCase().includes(q)) : catalog.slice(0,6);
+            if (!q) {
+              renderRecent();
+              const hits = catalog.slice(0,6);
+              results.innerHTML = hits.map((h,i) => `
+                <a class="search-hit" href="anime-detail.html" style="animation-delay:${i*0.04}s">
+                  <div class="search-hit-thumb">${h.e}</div>
+                  <div class="search-hit-info"><strong>${h.t}</strong><span>${h.m}</span></div>
+                </a>`).join('');
+              return;
+            }
+            recentEl.classList.remove('show');
+            const hits = catalog.filter(x => x.t.toLowerCase().includes(q));
             if (!hits.length) {
               results.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">No results found</p>';
               return;
             }
-            results.innerHTML = hits.map(h => `
-              <a class="search-hit" href="anime-detail.html">
+            results.innerHTML = hits.map((h,i) => `
+              <a class="search-hit" href="anime-detail.html" style="animation-delay:${i*0.04}s">
                 <div class="search-hit-thumb">${h.e}</div>
-                <div><h4>${h.t}</h4><p>${h.m}</p></div>
+                <div class="search-hit-info"><strong>${h.t}</strong><span>${h.m}</span></div>
               </a>`).join('');
           }
           toggle.addEventListener('click', openSearch);
-          closeBtn?.addEventListener('click', closeSearch);
+          overlay.addEventListener('click', e => { if (e.target === overlay || e.target.classList.contains('search-overlay-panel') && e.target === e.currentTarget) closeSearch(); });
           overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
           input.addEventListener('input', () => render(input.value));
+          results.addEventListener('click', () => {
+            if (input.value.trim()) saveRecent(input.value);
+          });
+          input.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && input.value.trim()) {
+              saveRecent(input.value);
+              render(input.value);
+            }
+          });
           document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
         })();
 
@@ -2817,5 +3001,21 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         });
 
         </script>
+
+<script>
+// Fast horizontal card scrolling
+document.querySelectorAll('.scroll-row').forEach(row => {
+  row.addEventListener('wheel', (e) => {
+    // Prefer horizontal; convert vertical wheel to horizontal for rows
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      row.scrollLeft += e.deltaY * 2.8;
+    } else {
+      row.scrollLeft += e.deltaX * 2.2;
+    }
+  }, { passive: false });
+});
+</script>
+
 </body>
 </html>
