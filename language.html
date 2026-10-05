@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Browse by Language — AnimeFan</title>
+<style>
+:root{--bg:#0a0a0f;--card:#14141c;--elevated:#1a1a24;--border:rgba(255,255,255,0.08);--muted:#a1a1aa;--grad:linear-gradient(135deg,#a855f7,#ec4899);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:#fff;min-height:100vh;}
+.navbar{display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1.2rem;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px);z-index:50;}
+.logo{font-weight:800;font-size:1.25rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+.page{padding:1.2rem 1.2%;max-width:1200px;margin:0 auto;}
+.back-btn{color:var(--muted);text-decoration:none;font-size:0.9rem;}
+.page-header{margin:1rem 0;}
+.page-header h1{font-size:1.5rem;font-weight:800;}
+.page-header p{color:var(--muted);font-size:0.9rem;}
+.tabs{display:flex;gap:0.5rem;margin-bottom:1.1rem;flex-wrap:wrap;}
+.tab{background:var(--elevated);border:1px solid var(--border);color:var(--muted);padding:0.45rem 1rem;border-radius:50px;font-size:0.85rem;cursor:pointer;font-family:inherit;}
+.tab.active{background:var(--grad);color:#fff;border-color:transparent;font-weight:600;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:0.85rem;}
+@media(max-width:700px){.grid{grid-template-columns:repeat(2,1fr);gap:0.55rem;}}
+.anime-card{background:var(--card);border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;display:block;}
+.card-poster{aspect-ratio:2/3;background:linear-gradient(145deg,#1e1e2e,#2a1a3a);display:flex;align-items:center;justify-content:center;font-size:2rem;position:relative;}
+.rating-badge{position:absolute;top:7px;right:7px;background:rgba(0,0,0,0.7);color:#fbbf24;font-size:0.7rem;padding:0.15rem 0.4rem;border-radius:4px;}
+.card-body{padding:0.55rem;}
+.card-body h3{font-size:0.82rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-meta{font-size:0.7rem;color:var(--muted);}
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);margin-top:2rem;}
+
+
+
+
+
+
+.empty-state{
+  text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;
+  background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);
+  border-radius:16px;margin:1rem 0;
+}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.7;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+.empty-state p{font-size:0.9rem;}
+
+
+.pagination{
+  display:flex;flex-wrap:wrap;gap:0.45rem;
+  justify-content:center;align-items:center;
+  width:100%;margin:1.75rem auto 1rem;padding:0.5rem 0;
+  text-align:center;
+}
+.page-btn{
+  min-width:40px;height:40px;padding:0 0.6rem;border-radius:10px;
+  border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);
+  color:#e4e4e7;font-weight:600;font-size:0.9rem;cursor:pointer;font-family:inherit;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.page-btn:hover{border-color:rgba(168,85,247,0.55);color:#fff;}
+.page-btn.active{background:linear-gradient(135deg,#a855f7,#ec4899);border-color:transparent;color:#fff;}
+.page-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.empty-state{text-align:center;padding:3.5rem 1.5rem;color:#a1a1aa;background:rgba(255,255,255,0.02);border:1px dashed rgba(255,255,255,0.1);border-radius:16px;margin:1rem auto;grid-column:1/-1;max-width:520px;}
+.empty-state .es-icon{font-size:2.5rem;margin-bottom:0.75rem;opacity:0.5;}
+.empty-state h3{color:#fff;font-size:1.15rem;margin-bottom:0.4rem;}
+
+</style></head><body>
+<nav class="navbar"><a href="index.html" class="logo">AnimeFan</a></nav>
+<div class="page">
+  <div class="page-header"><h1 id="langTitle">Hindi</h1><p id="langSub">0 titles available</p></div>
+  <div class="tabs">
+    <button class="tab active" data-sort="popular">Popular</button>
+    <button class="tab" data-sort="newest">Newest</button>
+    <button class="tab" data-sort="rated">Top Rated</button>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="pagination" id="pager"></div>
+</div>
+<footer>
+  <p style="font-size:0.72rem;margin-bottom:0.5rem;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p>
+  <p>© 2026 AnimeFan. Made with ❤️ for anime lovers.</p>
+</footer>
+<script>
+const data={
+  Hindi:[
+    {t:"Neon Horizon: Zero",r:"9.1",e:"🌌",m:"TV · Hindi"},
+    {t:"Solo Leveling S2",r:"8.7",e:"🌀",m:"TV · Hindi"},
+    {t:"Spy x Family S3",r:"8.6",e:"🕵️",m:"TV · Hindi"},
+    {t:"Naruto Shippuden",r:"9.3",e:"🍥",m:"TV · Hindi"},
+    {t:"One Piece",r:"9.2",e:"🏴‍☠️",m:"TV · Hindi"},
+    {t:"Dragon Ball Super",r:"8.5",e:"🐉",m:"TV · Hindi"},
+    {t:"Bleach TYBW",r:"9.0",e:"⚔️",m:"TV · Hindi"},
+    {t:"Black Clover",r:"8.3",e:"🍀",m:"TV · Hindi"},
+    {t:"Fairy Tail",r:"8.0",e:"🧚",m:"TV · Hindi"},
+    {t:"Boruto",r:"7.5",e:"🌀",m:"TV · Hindi"},
+    {t:"Death Note",r:"9.0",e:"📓",m:"TV · Hindi"},
+    {t:"Tokyo Revengers",r:"8.1",e:"👊",m:"TV · Hindi"},
+    {t:"Demon Slayer",r:"9.0",e:"🌟",m:"TV · Hindi"}
+  ],
+  HSub:[
+    {t:"Shadow of the Eternal Blade",r:"9.4",e:"⚔️",m:"TV · HSub"},
+    {t:"Cherry Blossom Letters",r:"8.9",e:"💖",m:"TV · HSub"},
+    {t:"Jujutsu Kaisen S3",r:"9.0",e:"🔥",m:"TV · HSub"},
+    {t:"Frieren",r:"9.3",e:"🏰",m:"TV · HSub"},
+    {t:"Attack on Titan",r:"9.5",e:"⚔️",m:"TV · HSub"},
+    {t:"One Punch Man S3",r:"8.8",e:"⚡",m:"TV · HSub"},
+    {t:"Steins;Gate",r:"9.2",e:"⏳",m:"TV · HSub"},
+    {t:"Vinland Saga",r:"9.1",e:"🛡️",m:"TV · HSub"},
+    {t:"Mob Psycho 100",r:"8.9",e:"💫",m:"TV · HSub"},
+    {t:"Chainsaw Man",r:"8.7",e:"🪚",m:"TV · HSub"},
+    {t:"Hunter x Hunter",r:"9.4",e:"🃏",m:"TV · HSub"},
+    {t:"Cowboy Bebop",r:"8.9",e:"🚀",m:"TV · HSub"}
+  ],
+  FanDub:[
+    {t:"Crimson Guild Chronicles",r:"9.2",e:"🗡️",m:"TV · FanDub"},
+    {t:"Demon Slayer S4",r:"9.0",e:"🌟",m:"TV · FanDub"},
+    {t:"Blue Lock S2",r:"8.4",e:"⚽",m:"TV · FanDub"},
+    {t:"Kaiju No. 8",r:"8.7",e:"🦖",m:"TV · FanDub"}
+  ]
+};
+const labels={Hindi:"Hindi Dub",HSub:"Hindi Sub",FanDub:"FanDub"};
+const params=new URLSearchParams(location.search);
+let lang=params.get("lang")||"Hindi";
+if(!data[lang]) lang="Hindi";
+document.getElementById("langTitle").textContent=labels[lang]||lang;
+let list=data[lang]||[];
+document.getElementById("langSub").textContent=list.length+" titles available";
+const PER=12; let page=1, sort="popular";
+function sorted(){let a=[...list]; if(sort==="rated")a.sort((x,y)=>parseFloat(y.r)-parseFloat(x.r)); if(sort==="newest")a=a.slice().reverse(); return a;}
+function render(){
+  const grid=document.getElementById("grid"), pager=document.getElementById("pager");
+  const arr=sorted();
+  if(!arr.length){
+    grid.innerHTML=`<div class="empty-state" style="grid-column:1/-1"><div class="es-icon">🎬</div><h3>No Anime Available</h3><p>Is language mein abhi koi anime nahi hai.</p></div>`;
+    pager.innerHTML=""; return;
+  }
+  const pages=Math.ceil(arr.length/PER)||1;
+  if(page>pages) page=pages;
+  const slice=arr.slice((page-1)*PER,page*PER);
+  grid.innerHTML=slice.map(a=>`<a class="anime-card" href="anime-detail.html"><div class="card-poster"><span class="rating-badge">★ ${a.r}</span>${a.e}</div><div class="card-body"><h3>${a.t}</h3><div class="card-meta">${a.m}</div></div></a>`).join("");
+  if(pages<=1){pager.innerHTML="";return;}
+  let h=`<button class="page-btn" ${page===1?"disabled":""} data-p="${page-1}">‹</button>`;
+  for(let i=1;i<=pages;i++) h+=`<button class="page-btn ${i===page?"active":""}" data-p="${i}">${i}</button>`;
+  h+=`<button class="page-btn" ${page===pages?"disabled":""} data-p="${page+1}">›</button>`;
+  pager.innerHTML=h;
+  pager.querySelectorAll(".page-btn").forEach(b=>b.onclick=()=>{const p=+b.dataset.p; if(p>=1){page=p;render();window.scrollTo({top:0,behavior:"smooth"});}});
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));t.classList.add("active");sort=t.dataset.sort;page=1;render();});
+render();
+</script></body></html>

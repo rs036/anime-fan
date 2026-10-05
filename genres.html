@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>All Genres — AnimeFan</title>
+<style>
+:root{--bg:#0a0a0f;--muted:#a1a1aa;--grad:linear-gradient(135deg,#a855f7,#ec4899);}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:#fff;min-height:100vh}
+.navbar{display:flex;padding:0.85rem 1.2rem;border-bottom:1px solid rgba(255,255,255,0.08);position:sticky;top:0;background:rgba(10,10,15,0.92);backdrop-filter:blur(12px)}
+.logo{font-weight:800;font-size:1.25rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none}
+.page{padding:1.4rem 1.2%;max-width:900px;margin:0 auto}
+h1{font-size:1.5rem;font-weight:800;margin-bottom:0.35rem}
+.sub{color:var(--muted);font-size:0.9rem;margin-bottom:1.3rem}
+.genre-pills{display:flex;flex-wrap:wrap;gap:0.55rem}
+a.genre-pill{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  padding:0.55rem 1rem;border-radius:999px;text-decoration:none;color:#fff;
+  background:rgba(168,85,247,0.14);border:1px solid rgba(168,85,247,0.35);
+  font-weight:600;font-size:0.88rem;transition:0.2s;
+}
+a.genre-pill:hover{background:rgba(168,85,247,0.28);border-color:#a855f7;transform:translateY(-2px)}
+a.genre-pill .gp-count{font-size:0.72rem;font-weight:500;color:#c4b5fd}
+footer{text-align:center;padding:2rem 1rem;color:var(--muted);font-size:0.78rem;border-top:1px solid rgba(255,255,255,0.08);margin-top:2rem}
+</style></head><body>
+<nav class="navbar"><a href="index.html" class="logo">AnimeFan</a></nav>
+<div class="page">
+  <h1>All Genres</h1>
+  <p class="sub">Select a genre · numbers = available anime</p>
+  <div class="genre-pills">
+    <a class="genre-pill" href="genre.html?g=Action">Action <span class="gp-count">(12)</span></a>
+    <a class="genre-pill" href="genre.html?g=Comedy">Comedy <span class="gp-count">(8)</span></a>
+    <a class="genre-pill" href="genre.html?g=Drama">Drama <span class="gp-count">(9)</span></a>
+    <a class="genre-pill" href="genre.html?g=Fantasy">Fantasy <span class="gp-count">(14)</span></a>
+    <a class="genre-pill" href="genre.html?g=Horror">Horror <span class="gp-count">(4)</span></a>
+    <a class="genre-pill" href="genre.html?g=Romance">Romance <span class="gp-count">(10)</span></a>
+    <a class="genre-pill" href="genre.html?g=Sci-Fi">Sci-Fi <span class="gp-count">(6)</span></a>
+    <a class="genre-pill" href="genre.html?g=Mecha">Mecha <span class="gp-count">(0)</span></a>
+    <a class="genre-pill" href="genre.html?g=Mystery">Mystery <span class="gp-count">(7)</span></a>
+    <a class="genre-pill" href="genre.html?g=Sports">Sports <span class="gp-count">(3)</span></a>
+    <a class="genre-pill" href="genre.html?g=Adventure">Adventure <span class="gp-count">(11)</span></a>
+    <a class="genre-pill" href="genre.html?g=Slice%20of%20Life">Slice of Life <span class="gp-count">(6)</span></a>
+    <a class="genre-pill" href="genre.html?g=Isekai">Isekai <span class="gp-count">(5)</span></a>
+    <a class="genre-pill" href="genre.html?g=Shonen">Shonen <span class="gp-count">(15)</span></a>
+    <a class="genre-pill" href="genre.html?g=Seinen">Seinen <span class="gp-count">(4)</span></a>
+    <a class="genre-pill" href="genre.html?g=Thriller">Thriller <span class="gp-count">(6)</span></a>
+    <a class="genre-pill" href="genre.html?g=Supernatural">Supernatural <span class="gp-count">(8)</span></a>
+    <a class="genre-pill" href="genre.html?g=School">School <span class="gp-count">(7)</span></a>
+    <a class="genre-pill" href="genre.html?g=Military">Military <span class="gp-count">(3)</span></a>
+    <a class="genre-pill" href="genre.html?g=Music">Music <span class="gp-count">(2)</span></a>
+    <a class="genre-pill" href="genre.html?g=Psychological">Psychological <span class="gp-count">(5)</span></a>
+    <a class="genre-pill" href="genre.html?g=Historical">Historical <span class="gp-count">(4)</span></a>
+    <a class="genre-pill" href="genre.html?g=Martial%20Arts">Martial Arts <span class="gp-count">(6)</span></a>
+    <a class="genre-pill" href="genre.html?g=Game">Game <span class="gp-count">(3)</span></a>
+  </div>
+</div>
+<footer>
+  <p style="font-size:0.72rem;margin-bottom:0.5rem;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p>
+  <p>© 2026 AnimeFan. Made with ❤️ for anime lovers.</p>
+</footer>
+</body></html>

@@ -1,0 +1,4036 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AnimeFan 2026 | Ultimate Anime Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0b0b0f;
+            --card: #14141c;
+            --elevated: #1a1a24;
+            --accent: #a855f7;
+            --accent2: #ec4899;
+            --text: #fff;
+            --muted: #a1a1aa;
+            --border: rgba(255,255,255,0.08);
+            --grad: linear-gradient(90deg, #a855f7, #ec4899);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Inter',system-ui,sans-serif; background:var(--bg); color:var(--text); overflow-x:hidden; }
+        html, body {
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
+        html::-webkit-scrollbar,
+        body::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+            width: 0;
+            height: 0;
+        }
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
+        }
+        
+        /* NAV - premium transparent like Aniflix */
+        .navbar {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            display:flex; align-items:center; justify-content:space-between;
+            padding:0.75rem 2.5%;
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: none;
+            transition: background 0.35s ease, backdrop-filter 0.35s ease;
+        }
+        .navbar.scrolled {
+            background: rgba(7, 9, 14, 0.55);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: none;
+        }
+        .logo { font-family:'Orbitron',sans-serif; font-size:1.4rem; font-weight:800; background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; text-decoration:none; }
+        .nav-links { display:flex; gap:1.5rem; list-style:none; align-items:center; }
+        .nav-links a { color:var(--muted); text-decoration:none; font-size:0.9rem; font-weight:500; }
+        .nav-links a:hover, .nav-links a.active { color:#fff; }
+        .nav-dropdown { position:relative; }
+        .nav-drop-btn {
+            cursor:pointer; background:none; border:none; font:inherit; color:var(--muted);
+            font-size:0.9rem; font-weight:500; padding:0; display:inline-flex; align-items:center; gap:0.25rem;
+        }
+        .nav-drop-btn:hover, .nav-dropdown.open .nav-drop-btn { color:#fff; }
+        .nav-drop-menu {
+            display:none; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+            margin-top:0.4rem;
+            background:transparent !important;
+            border:none !important;
+            border-radius:0; padding:0; min-width:auto; width:max-content; max-width:420px;
+            z-index:200; box-shadow:none !important;
+            grid-template-columns:repeat(4, auto); gap:0.3rem;
+        }
+        .nav-dropdown:hover .nav-drop-menu, .nav-dropdown.open .nav-drop-menu { display:grid; }
+        .nav-drop-menu a {
+            display:block; padding:0.32rem 0.65rem; border-radius:50px; font-size:0.75rem;
+            color:#fff; text-align:center; white-space:nowrap;
+            background:rgba(30,20,50,0.75);
+            border:1px solid rgba(168,85,247,0.4);
+            backdrop-filter:blur(12px);
+            -webkit-backdrop-filter:blur(12px);
+            transition:0.15s; font-weight:600;
+            box-shadow:0 2px 8px rgba(0,0,0,0.25);
+        }
+        .nav-drop-menu a:hover {
+            background:linear-gradient(90deg,#a855f7,#ec4899);
+            color:#fff; border-color:transparent;
+            transform:translateY(-1px);
+        }
+        @media(max-width:900px){
+            .nav-drop-menu { display:none !important; }
+        }
+        .nav-right { display:flex; align-items:center; gap:14px; }
+        .search-box { display:flex; align-items:center; background:var(--elevated); border:1px solid var(--border); border-radius:50px; padding:0.35rem 0.9rem; gap:0.4rem; }
+        .search-box input { background:transparent; border:none; color:#fff; outline:none; width:150px; font-size:0.85rem; }
+        .btn-sm { padding:0.4rem 1rem; border-radius:50px; font-size:0.85rem; font-weight:600; cursor:pointer; border:none; font-family:inherit; }
+        .btn-outline { background:transparent; color:#fff; border:1px solid var(--border); }
+        .btn-primary { background:var(--grad); color:#fff; }
+        .menu-btn-OLD { display:none; background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; }
+
+        /* HERO - full poster bg, NO badges */
+        .hero { position:relative; display:flex; align-items:flex-end; justify-content:space-between; gap:1.5rem;
+        
+            position:relative; 
+            height: min(62vh, 580px);
+            min-height: 420px;
+            max-height: 620px;
+            display:flex; align-items:flex-end;
+            padding:0 4% 2.8rem; margin-top:0; padding-top:70px; overflow:hidden;
+        }
+        .hero-bg {
+            position:absolute; inset:0;
+            background: url('https://cdn.myanimelist.net/images/anime/1015/138006.jpg') center top / cover no-repeat;
+            z-index:0;
+        }
+        .hero-bg::after {
+            content:''; position:absolute; inset:0;
+            background: linear-gradient(to right, rgba(11,11,15,0.78) 0%, rgba(11,11,15,0.35) 50%, rgba(11,11,15,0.12) 100%),
+                        linear-gradient(to top, rgba(11,11,15,0.92) 0%, rgba(11,11,15,0.35) 45%, transparent 70%);
+        }
+        @media(max-width:900px){
+            .hero-bg::after {
+                background:
+                    linear-gradient(to top, rgba(8,8,12,0.88) 0%, rgba(8,8,12,0.45) 32%, rgba(8,8,12,0.15) 58%, rgba(8,8,12,0.05) 100%),
+                    linear-gradient(to right, rgba(8,8,12,0.25) 0%, transparent 75%);
+            }
+            .hero-content {
+                max-width: 100%;
+                padding-bottom: 0.5rem;
+            }
+            .hero h1 {
+                text-shadow: 0 2px 16px rgba(0,0,0,0.85), 0 0 2px rgba(0,0,0,0.8) !important;
+            }
+            .hero p, #heroDesc {
+                color: rgba(255,255,255,0.9) !important;
+                text-shadow: 0 1px 8px rgba(0,0,0,0.7);
+            }
+            .hero-meta span:not(.rating) {
+                color: rgba(255,255,255,0.88) !important;
+            }
+            .spotlight-badge {
+                text-shadow: 0 0 16px rgba(168,85,247,0.55) !important;
+            }
+        }
+        @media(max-width:600px){
+            .hero-bg::after {
+                background:
+                    linear-gradient(to top, rgba(8,8,12,0.9) 0%, rgba(8,8,12,0.5) 35%, rgba(8,8,12,0.18) 60%, rgba(8,8,12,0.06) 100%);
+            }
+            .hero h1 {
+                font-size: 1.75rem !important;
+                line-height: 1.2 !important;
+            }
+            .hero p, #heroDesc {
+                -webkit-line-clamp: 3 !important;
+                font-size: 0.9rem !important;
+            }
+        }
+        .hero-content { position:relative; z-index:2; max-width:580px; }
+        .hero h1 { font-size:clamp(2rem,4.5vw,3.2rem); font-weight:800; line-height:1.15; margin-bottom:0.7rem; text-shadow:0 4px 20px rgba(0,0,0,0.5); }
+        .hero-meta {
+            display:flex; flex-wrap:wrap; gap:0.35rem 0.55rem; align-items:center;
+            color: rgba(255,255,255,0.85); font-size:0.95rem; font-weight:500;
+            margin-bottom:0.95rem;
+            letter-spacing: 0.01em;
+        }
+        .hero-meta .rating {
+            color:#fbbf24; font-weight:700;
+            display:inline-flex; align-items:center; gap:0.25rem;
+            margin-right: 0.15rem;
+        }
+        .hero-meta span:not(.rating) {
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+        .hero p, #heroDesc {
+            color: rgba(255,255,255,0.82); font-size:1rem; line-height:1.55;
+            margin-bottom:1.15rem; max-width:520px;
+            display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+        }
+        .hero-tags { display:flex; gap:0.5rem; margin-bottom:1.35rem; flex-wrap:wrap; align-items:center; }
+        .tag {
+            background: transparent;
+            color: rgba(255,255,255,0.9);
+            padding: 0.32rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1.5px solid rgba(255,255,255,0.28);
+        }
+
+        .lang-badge {
+            display: inline-flex; align-items: center; justify-content: center;
+            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+            color: #fff;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 0.32rem 0.9rem;
+            border-radius: 999px;
+            letter-spacing: 0.06em;
+            border: none;
+            box-shadow: none;
+            text-transform: uppercase;
+            text-shadow: none;
+            margin-right: 0;
+        }
+
+        .hero-actions { display:flex; gap:0.85rem; flex-wrap:wrap; align-items:center; }
+        .btn-watch {
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+            color:#fff; border:none;
+            padding:0.85rem 1.85rem; border-radius:999px;
+            font-weight:700; font-size:0.98rem;
+            cursor:pointer; display:inline-flex; align-items:center; gap:0.5rem;
+            font-family:inherit; transition:0.2s;
+            box-shadow: 0 8px 24px rgba(168,85,247,0.35);
+        }
+        .btn-watch:hover { transform:scale(1.03); box-shadow:0 10px 32px rgba(168,85,247,0.5); }
+        .btn-more {
+            background: transparent; color:#fff;
+            border:1.5px solid rgba(255,255,255,0.35);
+            padding:0.85rem 1.6rem; border-radius:999px;
+            font-weight:600; font-size:0.95rem;
+            cursor:pointer; font-family:inherit; transition:0.2s;
+            display:inline-flex; align-items:center; gap:0.4rem;
+        }
+        .btn-more:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: rgba(255,255,255,0.55);
+        }
+        .btn-more:hover { background:rgba(255,255,255,0.18); }
+
+        .hero-poster {
+            display:block; flex:0 0 200px; width:200px; height:300px;
+            border-radius:14px; overflow:hidden; z-index:3; position:relative;
+            box-shadow:0 12px 40px rgba(0,0,0,0.5); border:2px solid rgba(255,255,255,0.12);
+            background:linear-gradient(145deg,#1e1e2e,#2a1a3a); margin-bottom:1rem;
+        }
+        .hero-poster img { width:100%; height:100%; object-fit:cover; }
+        .hero-poster img { width:100%; height:100%; object-fit:cover; }
+
+        .spotlight-badge {
+            display: inline-block;
+            background: none;
+            border: none;
+            color: #a855f7;
+            font-size: 0.95rem;
+            font-weight: 800;
+            padding: 0;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 12px rgba(168,85,247,0.35);
+        }
+        .spotlight-badge span { color: #a855f7; }
+        .hero-content { transition: opacity 0.4s ease; }
+        .hero-content.fade { opacity: 0; }
+        
+        
+        
+        
+        @media(max-width:700px){
+            
+        }
+        .hero-dots {
+            display:flex; gap:0.4rem; margin-top:1rem; position:relative; z-index:4;
+            padding:0; left:auto; bottom:auto;
+        }
+        .hero-dot {
+            width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.35);
+            cursor:pointer; transition:0.2s; border:none; padding:0;
+        }
+        .hero-dot.active { background:#a855f7; width:22px; border-radius:6px; }
+        .hero-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .hero-dot.active {
+            background: #a855f7;
+            width: 22px;
+            border-radius: 4px;
+        }
+        .hero-bg {
+            transition: opacity 0.6s ease;
+        }
+
+
+        /* SECTIONS */
+        section { padding:2.2rem 3%; }
+        .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:1.2rem; }
+        .section-title { font-size:1.3rem; font-weight:700; display:flex; align-items:center; gap:0.45rem; }
+        .section-title .bar { width:4px; height:1.2rem; background:var(--grad); border-radius:4px; flex-shrink:0; }
+        .section-title .sec-icon {
+            width:1.4rem; height:1.4rem; flex-shrink:0; color:#a855f7;
+            display:inline-flex; align-items:center; justify-content:center;
+        }
+        .section-title .sec-icon svg {
+            width:100%; height:100%;
+            fill:none;
+            stroke:currentColor;
+            stroke-width:1.8;
+            stroke-linecap:round;
+            stroke-linejoin:round;
+        }
+        .section-title .sec-icon svg [fill="currentColor"] { fill:currentColor; stroke:none; }
+        .view-all { color:var(--accent); text-decoration:none; font-size:0.88rem; font-weight:500; }
+
+        .scroll-row { display:flex; gap:0.9rem; overflow-x:auto; padding-bottom:0.8rem; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; scroll-behavior:auto; }
+        /* Extra right padding so last card can sit partially off-screen */
+        .scroll-row::after { content:''; flex:0 0 40px; }
+        .scroll-row::-webkit-scrollbar { display:none; height:0; }
+        .scroll-row { scrollbar-width:none; -ms-overflow-style:none; }
+
+        .anime-card { flex:0 0 178px; scroll-snap-align:start; background:var(--card); border-radius:12px; overflow:hidden; transition:0.25s; cursor:pointer; border:1px solid transparent; }
+        @media(min-width:1400px){
+            .anime-card { flex:0 0 188px; }
+        }
+        @media(min-width:1700px){
+            .anime-card { flex:0 0 198px; }
+        }
+        .anime-card:hover { transform:translateY(-5px); border-color:rgba(168,85,247,0.4); box-shadow:0 10px 25px rgba(0,0,0,0.35); }
+        .card-poster { width:100%; height:235px; background:linear-gradient(145deg,#1e1e2e,#2a1a3a); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center; font-size:2.8rem; }
+        .card-poster img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+        .card-poster .status { position:absolute; top:7px; left:7px; font-size:0.6rem; font-weight:700; padding:0.18rem 0.45rem; border-radius:4px; text-transform:uppercase; z-index:2; }
+        .rank-badge {
+            position:absolute; top:8px; left:8px; z-index:3;
+            font-size:0.72rem; font-weight:800; padding:0.2rem 0.5rem;
+            border-radius:6px;
+            background:linear-gradient(135deg,#7c3aed,#a855f7);
+            color:#fff;
+            letter-spacing:0.02em;
+            box-shadow:0 2px 8px rgba(168,85,247,0.35);
+        }
+        .rank-badge.r1 { background:linear-gradient(135deg,#f59e0b,#fbbf24); color:#111; box-shadow:0 2px 10px rgba(251,191,36,0.45); }
+        .rank-badge.r2 { background:linear-gradient(135deg,#94a3b8,#e2e8f0); color:#111; box-shadow:0 2px 8px rgba(148,163,184,0.4); }
+        .rank-badge.r3 { background:linear-gradient(135deg,#b45309,#d97706); color:#fff; box-shadow:0 2px 8px rgba(217,119,6,0.4); }
+        .status-onair, .status-completed, .status-upcoming, .status { display:none !important; } /* status badges hidden */
+        .status-onair-old { background:#ef4444; color:#fff; }
+        .status-completed { background:#10b981; color:#fff; }
+        .status-upcoming { background:#6366f1; color:#fff; }
+        .card-poster .rating-badge { position:absolute; top:7px; right:7px; background:rgba(0,0,0,0.7); color:#fbbf24; font-size:0.7rem; font-weight:600; padding:0.15rem 0.4rem; border-radius:4px; z-index:2; }
+
+        .card-lang {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            z-index: 2;
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.22rem 0.55rem;
+            border-radius: 6px;
+            letter-spacing: 0.02em;
+            border: none;
+        }
+        .card-lang.lang-hindi { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+        .card-lang.lang-hsub { background: linear-gradient(135deg, #d97706, #f59e0b); }
+        .card-lang.lang-fandub { background: linear-gradient(135deg, #db2777, #ec4899); }
+        .card-lang.lang-multi, .card-lang.lang-dual {
+            background: linear-gradient(135deg, #0ea5e9, #8b5cf6);
+            box-shadow: 0 2px 8px rgba(14,165,233,0.35);
+        }
+
+
+        /* Card play overlay - same as FloxAnimeIndia (stable hover) */
+        .card-poster .card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(8,8,16,0.95) 100%);
+            opacity: 0;
+            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            pointer-events: none;
+        }
+        .card-play {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: scale(0.75);
+            opacity: 0;
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+            z-index: 4;
+        }
+        .card-play svg {
+            width: 22px;
+            height: 22px;
+            fill: #fff;
+            margin-left: 3px;
+        }
+        .anime-card:hover .card-overlay,
+        .anime-card:active .card-overlay,
+        .anime-card.show-play .card-overlay {
+            opacity: 1;
+        }
+        .anime-card:hover .card-play,
+        .anime-card:active .card-play,
+        .anime-card.show-play .card-play {
+            transform: scale(1);
+            opacity: 1;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            .anime-card:hover .card-overlay { opacity: 1; }
+            .anime-card:hover .card-play { transform: scale(1); opacity: 1; }
+        }
+        @media (hover: none) {
+            .anime-card:hover .card-overlay { opacity: 0; }
+            .anime-card:hover .card-play { transform: scale(0.75); opacity: 0; }
+            .anime-card:active .card-overlay,
+            .anime-card.show-play .card-overlay { opacity: 1; }
+            .anime-card:active .card-play,
+            .anime-card.show-play .card-play { transform: scale(1); opacity: 1; }
+        }
+
+
+        .card-body { padding:0.65rem; }
+        .card-body h3 { font-size:0.88rem; font-weight:600; margin-bottom:0.25rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .card-meta { font-size:0.72rem; color:var(--muted); }
+
+        
+        
+        /* Continue Watching 16:9 */
+        .cw-card {
+            flex:0 0 280px;
+            scroll-snap-align:start;
+            background:var(--card);
+            border-radius:14px;
+            overflow:hidden;
+            border:1px solid var(--border);
+            position:relative;
+            cursor:pointer;
+            transition:0.25s;
+            text-decoration:none;
+            color:inherit;
+        }
+        .cw-card:hover { transform:translateY(-3px); border-color:rgba(168,85,247,0.4); }
+        .cw-poster {
+            width:100%;
+            aspect-ratio:16/9;
+            background:linear-gradient(145deg,#1e1e2e,#2a1a3a);
+            position:relative;
+            display:flex; align-items:center; justify-content:center;
+            font-size:2.4rem;
+        }
+        .cw-overlay {
+            position:absolute; left:0; right:0; bottom:0;
+            padding:0.65rem 0.75rem 0.85rem;
+            background:linear-gradient(to top, rgba(0,0,0,0.92), transparent);
+        }
+        .cw-overlay h3 { font-size:0.85rem; font-weight:600; margin-bottom:0.15rem;
+            white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .cw-overlay .cw-meta { font-size:0.7rem; color:#c4b5fd; }
+        .cw-progress {
+            position:absolute; bottom:0; left:0; right:0; height:3px;
+            background:rgba(255,255,255,0.12);
+        }
+        .cw-progress span {
+            display:block; height:100%; background:linear-gradient(90deg,#a855f7,#ec4899);
+        }
+        @media(max-width:700px){
+            .cw-card { flex:0 0 78vw; max-width:320px; }
+        }
+
+
+
+        .cw-img {
+            height: 124px;
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+        }
+        .cw-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 0 2px 0 0;
+        }
+        .cw-progress-bg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255,255,255,0.15);
+        }
+        .cw-body {
+            padding: 0.6rem 0.7rem;
+        }
+        .cw-body h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .cw-body .cw-meta {
+            font-size: 0.72rem;
+            color: var(--muted);
+        }
+
+
+        /* Latest + Top Ranked */
+        .episodes-grid { display:grid; grid-template-columns:1fr; gap:1.3rem; }
+        @media(max-width:900px){ .episodes-grid{grid-template-columns:1fr;} }
+        .episode-list { display:flex; flex-direction:column; gap:0.6rem; }
+        .episode-item { display:flex; gap:0.9rem; background:var(--card); border-radius:10px; padding:0.6rem; transition:0.2s; cursor:pointer; border:1px solid transparent; }
+        .episode-item:hover { background:var(--elevated); border-color:rgba(168,85,247,0.3); }
+        .ep-thumb { width:100px; height:64px; border-radius:7px; background:linear-gradient(135deg,#2a1a3a,#1a1a2a); flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:1.4rem; position:relative; }
+        .ep-thumb .ep-num { position:absolute; bottom:3px; left:3px; background:rgba(0,0,0,0.75); font-size:0.6rem; padding:0.1rem 0.35rem; border-radius:3px; }
+        .ep-info h4 { font-size:0.88rem; font-weight:600; margin-bottom:0.2rem; }
+        .ep-info .ep-title { font-size:0.78rem; color:var(--muted); margin-bottom:0.25rem; }
+        .ep-info .ep-meta { font-size:0.72rem; color:var(--muted); display:flex; gap:0.5rem; flex-wrap:wrap; }
+
+        .top-ranked { background:var(--card); border-radius:12px; padding:1.1rem; border:1px solid var(--border); }
+        .top-ranked h3 { font-size:1rem; margin-bottom:0.9rem; }
+        .rank-item { display:flex; align-items:center; gap:0.7rem; padding:0.5rem 0; border-bottom:1px solid var(--border); cursor:pointer; }
+        .rank-item:last-child { border-bottom:none; }
+        .rank-num {
+  position:absolute; top:8px; left:8px; z-index:5;
+  font-size:0.78rem; font-weight:800; padding:0.25rem 0.55rem;
+  border-radius:7px; background:linear-gradient(135deg,#7c3aed,#a855f7); color:#fff;
+  box-shadow:0 3px 12px rgba(168,85,247,0.55); line-height:1.2;
+}
+        .rank-poster { width:40px; height:54px; border-radius:5px; background:linear-gradient(135deg,#2a1a3a,#1a1a2a); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
+        .rank-info h4 { font-size:0.82rem; font-weight:600; margin-bottom:0.12rem; }
+        .rank-info span { font-size:0.72rem; color:var(--muted); }
+
+        /* More */
+        .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
+        .feature-card { background:var(--card); border-radius:14px; padding:1.3rem; text-align:center; border:1px solid var(--border); transition:0.25s; }
+        .feature-card:hover { border-color:rgba(168,85,247,0.4); transform:translateY(-4px); }
+        .feature-icon { width:50px; height:50px; margin:0 auto 0.9rem; border-radius:12px; background:var(--grad); display:flex; align-items:center; justify-content:center; font-size:1.4rem; }
+        .feature-card h3 { font-size:1rem; margin-bottom:0.35rem; }
+        .feature-card p { font-size:0.82rem; color:var(--muted); }
+
+        /* Language & Genre chips */
+        .chip-row { display:flex; flex-wrap:wrap; gap:0.6rem; margin-top:0.3rem; }
+        .chip {
+            display:inline-flex; align-items:center; gap:0.4rem;
+            background:var(--card); border:1px solid var(--border);
+            padding:0.55rem 1.1rem; border-radius:50px;
+            font-size:0.88rem; font-weight:500; cursor:pointer;
+            transition:0.2s; color:#e4e4e7;
+        }
+        .chip:hover { border-color:var(--accent); color:#fff; background:rgba(168,85,247,0.12); }
+        .chip.active { background:var(--grad); border-color:transparent; color:#fff; }
+        .chip .dot { width:8px; height:8px; border-radius:50%; }
+        .dot-hindi-dub { background:#f59e0b; }
+        .dot-hindi-sub { background:#a855f7; }
+        .dot-fan-dub { background:#22d3ee; }
+
+        
+        .genre-item {
+            background:var(--card); border:1px solid var(--border);
+            border-radius:12px; padding:1rem 0.8rem; text-align:center;
+            cursor:pointer; transition:0.2s; font-weight:600; font-size:0.9rem;
+        }
+        .genre-item:hover { border-color:var(--accent); transform:translateY(-3px); background:rgba(168,85,247,0.1); }
+        .genre-item span { display:block; font-size:1.4rem; margin-bottom:0.35rem; }
+
+        .schedule-grid {
+            display:grid;
+            grid-template-columns:repeat(7, 1fr);
+            gap:0.6rem;
+        }
+        @media(max-width:900px){ .schedule-grid{ grid-template-columns:repeat(3,1fr); } }
+        @media(max-width:500px){ .schedule-grid{ grid-template-columns:repeat(2,1fr); } }
+        .day-card {
+            background:var(--card); border:1px solid var(--border);
+            border-radius:12px; padding:0.9rem 0.7rem; min-height:140px;
+        }
+        .day-card h4 { font-size:0.85rem; margin-bottom:0.6rem; color:var(--accent); font-weight:700; }
+        .day-card .ep { font-size:0.75rem; color:var(--muted); margin-bottom:0.35rem; line-height:1.3; }
+        .day-card .ep strong { color:#e4e4e7; display:block; font-size:0.8rem; }
+
+        /* Anime Schedule */
+        .tracker-wrap { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+        .tracker-tabs { display:flex; gap:0; border-bottom:1px solid var(--border); overflow-x:auto; }
+        .tracker-tab {
+            flex:0 0 auto; padding:0.85rem 1.2rem; font-size:0.88rem; font-weight:600;
+            color:var(--muted); cursor:pointer; border-bottom:2px solid transparent;
+            transition:0.2s; white-space:nowrap;
+        }
+        .tracker-tab:hover { color:#fff; }
+        .tracker-tab.active { color:#fff; border-bottom-color:var(--accent); background:rgba(168,85,247,0.08); }
+        .tracker-body { padding:1.2rem; }
+        .tracker-list { display:flex; flex-direction:column; gap:0.65rem; }
+        .tracker-item {
+            display:flex; align-items:center; gap:1rem; padding:0.75rem 0.9rem;
+            background:var(--elevated); border-radius:12px; border:1px solid transparent;
+            transition:0.2s; cursor:pointer;
+        }
+        .tracker-item:hover { border-color:rgba(168,85,247,0.35); }
+        .tracker-time {
+            flex:0 0 70px; font-size:0.85rem; font-weight:700; color:var(--accent);
+        }
+        .tracker-poster {
+            width:48px; height:64px; border-radius:8px; background:linear-gradient(135deg,#2a1a3a,#1a1a2a);
+            display:flex; align-items:center; justify-content:center; font-size:1.3rem; flex-shrink:0;
+        }
+        .tracker-info { flex:1; min-width:0; }
+        .tracker-info h4 { font-size:0.92rem; font-weight:600; margin-bottom:0.2rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .tracker-info .sub { font-size:0.78rem; color:var(--muted); }
+        .tracker-badge {
+            flex-shrink:0; font-size:0.7rem; font-weight:700; padding:0.25rem 0.55rem;
+            border-radius:6px; background:rgba(239,68,68,0.2); color:#f87171;
+        }
+        .tracker-badge.soon { background:rgba(251,191,36,0.2); color:#fbbf24; }
+        .tracker-badge.done { background:rgba(16,185,129,0.2); color:#34d399; }
+        .tracker-day-label {
+            font-size:0.8rem; font-weight:700; color:var(--muted); text-transform:uppercase;
+            letter-spacing:0.5px; margin:1rem 0 0.5rem; padding-left:0.2rem;
+        }
+        .tracker-day-label:first-child { margin-top:0; }
+
+
+
+        /* CTA */
+        .cta-section { text-align:center; padding:3.5rem 3%; }
+        .cta-box { max-width:600px; margin:0 auto; background:linear-gradient(145deg,rgba(168,85,247,0.12),rgba(236,72,153,0.08)); border:1px solid rgba(168,85,247,0.25); border-radius:22px; padding:2.5rem 1.8rem; }
+        .cta-box h2 { font-size:1.7rem; margin-bottom:0.6rem; }
+        .cta-box p { color:var(--muted); margin-bottom:1.3rem; }
+
+        /* FOOTER */
+        footer { background:#08080c; padding:2.5rem 3% 1.3rem; border-top:1px solid var(--border); }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:1.8rem; max-width:1100px; margin:0 auto 1.5rem; }
+        @media(max-width:800px){ .footer-grid{grid-template-columns:1fr 1fr;} }
+        .footer-brand .logo { font-size:1.2rem; display:inline-block; margin-bottom:0.5rem; }
+        .footer-brand p { color:var(--muted); font-size:0.85rem; max-width:260px; }
+        .footer-col h4 { font-size:0.9rem; margin-bottom:0.7rem; }
+        .footer-col a { display:block; color:var(--muted); text-decoration:none; font-size:0.82rem; margin-bottom:0.4rem; }
+        .footer-col a:hover { color:var(--accent); }
+        .footer-bottom { text-align:center; padding-top:1.2rem; border-top:1px solid var(--border); color:var(--muted); font-size:0.78rem; }
+
+        /* MOBILE */
+        @media(max-width:900px){ /* nav handled by side menu */
+            .hero-bg {
+                background-position: center 20% !important;
+                background-size: cover !important;
+                filter: brightness(1.08) contrast(1.05);
+            }
+            .hero {
+                flex-direction: column;
+                align-items: stretch;
+                justify-content: flex-end;
+                height: auto;
+                min-height: 68vh;
+                max-height: none;
+                padding: 5.5rem 1.1rem 1.8rem;
+            }
+            .hero-content { max-width: 100%; }
+            .hero h1 { font-size: 1.75rem; line-height: 1.2; }
+            .hero p, #heroDesc { font-size: 0.92rem; -webkit-line-clamp: 3; margin-bottom: 1rem; }
+            .hero-meta { gap: 0.3rem 0.45rem; font-size: 0.88rem; margin-bottom: 0.75rem; }
+            .hero-tags { margin-bottom: 1rem; }
+            .hero-actions { gap: 0.55rem; }
+            .btn-watch, .btn-more { padding: 0.7rem 1.25rem; font-size: 0.88rem; }
+            .hero-poster { display: none !important; }
+            .spotlight-badge { font-size: 0.85rem; margin-bottom: 0.55rem; letter-spacing: 0.1em; }
+        }
+        @media(max-width:480px){
+            .hero {
+                min-height: 64vh;
+                padding: 5.2rem 0.9rem 1.6rem;
+            }
+            .hero h1 { font-size: 1.5rem; }
+            .hero p, #heroDesc { font-size: 0.88rem; }
+        }
+
+        
+        
+        
+        .overlay {
+            position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:105;
+            opacity:0; visibility:hidden; transition:0.25s;
+        }
+        .overlay.open { opacity:1; visibility:visible; }
+        .overlay.open { opacity:1; visibility:visible; }
+    
+        /* ===== MOBILE: 2 full cards ===== */
+        @media(max-width:700px){
+            .nav-links { display:none; }
+            section, .section { padding-left:0.75rem; padding-right:0.75rem; }
+            .scroll-row {
+                gap:0.65rem;
+                padding-bottom:0.5rem;
+                scroll-padding-left:0.75rem;
+            }
+            .scroll-row::after { flex:0 0 8px; }
+            .anime-card, .cw-card {
+                flex:0 0 calc((100vw - 1.5rem - 0.65rem) / 2.08);
+                max-width:none;
+            }
+            .card-poster { height:auto; aspect-ratio:2/3; font-size:2rem; }
+            .card-body { padding:0.5rem; }
+            .card-body h3 { font-size:0.78rem; }
+            .card-meta { font-size:0.65rem; }
+            .section-title { font-size:1.05rem; }
+            .navbar { padding:0.55rem 0.75rem; }
+        }
+
+    
+        .sched-tabs {
+            display:flex; gap:0.3rem; overflow-x:auto; margin-bottom:1rem;
+            padding-bottom:0.3rem; scrollbar-width:none;
+            width:100%;
+        }
+        @media (min-width:768px) {
+            .sched-tabs {
+                gap:0;
+                overflow-x:visible;
+                justify-content:space-between;
+            }
+            .sched-tabs .sched-tab {
+                flex:1 1 0;
+                text-align:center;
+                padding:0.55rem 0.4rem;
+            }
+        }
+        .sched-tabs::-webkit-scrollbar { display:none; }
+        .sched-tab {
+            flex:0 0 auto; background:transparent; border:none; color:var(--muted);
+            font-weight:700; font-size:0.85rem; padding:0.5rem 0.9rem; cursor:pointer;
+            font-family:inherit; border-bottom:2px solid transparent;
+        }
+        .sched-tab.active { color:#fff; border-bottom-color:#ec4899; }
+        .sched-list { display:flex; flex-direction:column; gap:0.55rem; }
+        .sched-item {
+            display:flex; align-items:center; gap:0.85rem;
+            background:var(--card); border-radius:12px; padding:0.65rem 0.85rem;
+            border:1px solid var(--border);
+        }
+        .sched-thumb {
+            flex:0 0 52px; width:52px; height:70px; border-radius:8px;
+            background:linear-gradient(145deg,#1e1e2e,#2a1a3a);
+            display:flex; align-items:center; justify-content:center; font-size:1.4rem;
+            overflow:hidden;
+        }
+        .sched-info { flex:1; min-width:0; }
+        .sched-info h4 {
+            font-size:0.88rem; font-weight:600; margin-bottom:0.35rem;
+            white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        }
+        .sched-ep {
+            display:inline-flex; align-items:center; gap:0.25rem;
+            font-size:0.72rem; background:rgba(255,255,255,0.08);
+            padding:0.2rem 0.5rem; border-radius:6px; color:var(--muted);
+        }
+        .sched-live {
+            display:inline-flex; align-items:center; gap:0.25rem;
+            font-size:0.68rem; font-weight:700; background:#ef4444;
+            color:#fff; padding:0.2rem 0.5rem; border-radius:6px; margin-left:0.35rem;
+        }
+        .sched-time {
+            flex:0 0 auto; font-size:0.82rem; font-weight:600; color:var(--muted);
+            white-space:nowrap;
+        }
+
+    
+
+
+a.chip { text-decoration:none; color:inherit; display:inline-flex; align-items:center; }
+
+a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0.35rem; }
+
+        
+        .lang-grid {
+            display:grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap:0.7rem;
+            max-width:420px;
+        }
+        @media (min-width:640px) {
+            .lang-grid {
+                display:flex;
+                flex-wrap:nowrap;
+                gap:0.85rem;
+                max-width:none;
+            }
+            .lang-grid .lang-btn {
+                flex:0 0 auto;
+            }
+        }
+        a.lang-btn {
+            display:flex; align-items:center; gap:0.55rem;
+            padding:0.45rem 0.85rem 0.45rem 0.45rem;
+            border-radius:999px;
+            text-decoration:none;
+            font-weight:600; font-size:0.88rem;
+            color:#e5e7eb;
+            background:rgba(12,12,18,0.85);
+            border:1.5px solid rgba(255,255,255,0.1);
+            transition:0.2s;
+            min-height:2.6rem;
+        }
+        a.lang-btn:hover { transform:translateY(-2px); border-color:rgba(255,255,255,0.22); background:rgba(22,22,32,0.95); }
+        a.lang-btn .lang-ico {
+            width:1.85rem; height:1.85rem; border-radius:50%;
+            display:inline-flex; align-items:center; justify-content:center;
+            flex-shrink:0;
+        }
+        a.lang-btn .lang-ico svg {
+            width:0.95rem; height:0.95rem;
+            fill:none; stroke:currentColor; stroke-width:2;
+            stroke-linecap:round; stroke-linejoin:round;
+        }
+        @media (min-width:640px) {
+            a.lang-btn {
+                gap:0.7rem;
+                padding:0.55rem 1.1rem 0.55rem 0.55rem;
+                font-size:0.95rem;
+                min-height:2.9rem;
+            }
+            a.lang-btn .lang-ico { width:2.1rem; height:2.1rem; }
+            a.lang-btn .lang-ico svg { width:1.1rem; height:1.1rem; }
+        }
+        a.lang-btn.lang-hindi .lang-ico { background:rgba(185,28,28,0.35); color:#f87171; }
+        a.lang-btn.lang-fandub .lang-ico { background:rgba(126,34,206,0.35); color:#c084fc; }
+        a.lang-btn.lang-hsub .lang-ico {
+          background: rgba(249,115,22,0.15);
+          color: #f97316;
+        }
+        a.lang-btn.lang-hindi { border-color:rgba(185,28,28,0.3); }
+        a.lang-btn.lang-fandub { border-color:rgba(126,34,206,0.35); }
+        a.lang-btn.lang-hsub { border-color:rgba(154,52,18,0.35); }
+        a.lang-btn.lang-hsub .lang-ico svg {
+          width: 1.15rem; height: 1.15rem;
+          fill: currentColor !important;
+          stroke: none !important;
+        }
+        a.lang-btn.lang-hsub .lang-ico svg path {
+          fill: currentColor !important;
+          stroke: none !important;
+        }
+        @media (min-width:640px) {
+          a.lang-btn.lang-hsub .lang-ico svg { width: 1.25rem; height: 1.25rem; }
+        }
+        @media (min-width:640px) {
+          a.lang-btn.lang-hsub .lang-ico svg { width:1.35rem; height:1.35rem; }
+        }
+        
+        
+        
+
+
+    
+.rank-num {
+  position:absolute; top:8px; left:8px; z-index:3;
+  font-size:0.75rem; font-weight:800; padding:0.22rem 0.5rem;
+  border-radius:6px; background:linear-gradient(135deg,#7c3aed,#a855f7); color:#fff;
+  box-shadow:0 2px 10px rgba(168,85,247,0.5);
+}
+.rank-num.rank-1 { background:linear-gradient(135deg,#f59e0b,#fbbf24); color:#111; box-shadow:0 2px 12px rgba(251,191,36,0.5); }
+.rank-num.rank-2 { background:linear-gradient(135deg,#94a3b8,#e2e8f0); color:#111; }
+.rank-num.rank-3 { background:linear-gradient(135deg,#b45309,#d97706); color:#fff; }
+.card-poster { position:relative; }
+
+         }
+        @media(min-width:1100px){  }
+        
+        
+        
+
+    
+        .mobile-menu {
+            position:fixed; top:0; right:-100%; width:min(320px,88vw); height:100vh;
+            background:rgba(14,14,20,0.96);
+            backdrop-filter:blur(24px);
+            -webkit-backdrop-filter:blur(24px);
+            z-index:120; padding:1.2rem 1.2rem 1.5rem;
+            transition:0.3s cubic-bezier(.4,0,.2,1); border-left:1px solid rgba(255,255,255,0.08);
+            display:flex; flex-direction:column;
+        }
+        .mobile-menu.open { right:0; }
+        .mobile-menu .mm-head {
+            display:flex; align-items:center; justify-content:space-between;
+            margin-bottom:1.2rem; padding-bottom:0.85rem; border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+        .mobile-menu .mm-close {
+            background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer; line-height:1;
+        }
+        .mobile-menu .mm-links { flex:1; overflow-y:auto; }
+        .mm-genres-btn {
+            display:flex; align-items:center; gap:1.1rem; width:100%;
+            background:none; border:none; color:#fff; font:inherit;
+            font-size:1.15rem; font-weight:500;
+            padding:1.15rem 0.5rem; cursor:pointer; text-align:left;
+        }
+        .mm-genres-btn .mm-arrow { margin-left:auto; color:var(--muted); transition:0.2s; }
+        .mm-genres-btn.open .mm-arrow { transform:rotate(180deg); color:#a855f7; }
+        .mm-genres-grid {
+            display:none; grid-template-columns:repeat(2, 1fr); gap:0.5rem;
+            padding:0.2rem 0.5rem 0.9rem;
+        }
+        .mm-genres-grid.open { display:grid; }
+        .mobile-menu .mm-links .mm-genres-grid a {
+            display:flex !important; align-items:center; justify-content:center;
+            text-align:center; padding:0.55rem 0.4rem !important;
+            background:rgba(168,85,247,0.15) !important;
+            border:1px solid rgba(168,85,247,0.28) !important;
+            border-radius:12px !important; font-size:0.88rem !important;
+            color:#f3e8ff !important; font-weight:600 !important;
+            line-height:1.25 !important; min-height:40px; gap:0 !important;
+            border-bottom:none !important;
+            text-decoration:none !important;
+        }
+        .mobile-menu .mm-links .mm-genres-grid a:hover {
+            background:linear-gradient(90deg,rgba(168,85,247,0.45),rgba(236,72,153,0.35)) !important;
+            color:#fff !important; border-color:rgba(168,85,247,0.5) !important;
+        }
+        .mobile-menu .mm-links > a {
+            display:flex; align-items:center; gap:1.1rem;
+            color:#fff; text-decoration:none;
+            padding:1.15rem 0.5rem;
+            font-size:1.15rem; font-weight:500;
+            border-bottom:none;
+            letter-spacing: 0.01em;
+        }
+        .mobile-menu .mm-links > a .mm-ico,
+        .mobile-menu .mm-genres-btn .mm-ico {
+            width: 26px; height: 26px;
+            min-width: 26px;
+            flex-shrink: 0;
+            stroke: #fff;
+            color: #fff;
+        }
+        .mobile-menu .mm-links > a span,
+        .mobile-menu .mm-genres-btn span {
+            color: #fff;
+        }
+        .mobile-menu .mm-links a:hover { color:#a855f7; }
+        .mobile-menu .mm-footer {
+            padding-top:1rem; border-top:1px solid var(--border);
+            display:flex; flex-direction:column; gap:0.65rem;
+        }
+        .mm-btn {
+            display:block; text-align:center; padding:0.85rem 1rem;
+            border-radius:50px; font-weight:600; font-size:0.95rem;
+            text-decoration:none; font-family:inherit; cursor:pointer; border:none;
+        }
+        .mm-btn-login {
+            background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.2);
+        }
+        .mm-btn-register {
+            background:linear-gradient(135deg,#a855f7,#ec4899); color:#fff;
+        }
+
+    
+        
+        
+        .genre-grid {
+            display:grid;
+            grid-template-columns:repeat(2, 1fr);
+            gap:0.7rem;
+        }
+        @media(min-width:600px){ .genre-grid { grid-template-columns:repeat(2, 1fr); } }
+        @media(min-width:900px){ .genre-grid { grid-template-columns:repeat(4, 1fr); gap:0.85rem; } }
+        a.genre-chip {
+            display:flex; align-items:center; gap:0.9rem;
+            padding:1rem 1.1rem;
+            border-radius:16px;
+            text-decoration:none; color:#fff;
+            background:linear-gradient(145deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            border:1px solid rgba(255,255,255,0.09);
+            transition:0.25s;
+        }
+        a.genre-chip:hover {
+            border-color:rgba(168,85,247,0.45);
+            background:rgba(168,85,247,0.12);
+            transform:translateY(-3px);
+            box-shadow:0 10px 28px rgba(0,0,0,0.28);
+        }
+        .genre-chip .g-icon {
+            width:44px; height:44px; border-radius:12px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:0.95rem; font-weight:800; letter-spacing:0.02em;
+            flex-shrink:0; color:#fff;
+            background:var(--g-bg, linear-gradient(135deg,#a855f7,#ec4899));
+        }
+        .genre-chip .g-text { display:flex; flex-direction:column; gap:0.2rem; min-width:0; }
+        .genre-chip .g-name { font-weight:700; font-size:0.95rem; }
+        .genre-chip .g-count { font-size:0.72rem; color:var(--muted); font-weight:500; }
+
+
+    
+        .nav-actions {
+            display:flex; align-items:center; gap:14px;
+            padding:0;
+            background:transparent;
+            border:none;
+            box-shadow:none;
+            backdrop-filter:none;
+        }
+        .search-toggle {
+            width:26px; height:26px; border-radius:0;
+            border:none;
+            background:transparent;
+            color:#fff; cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+            padding:0;
+            transition:opacity 0.2s;
+        }
+        .search-toggle:hover { opacity:0.8; background:transparent; border:none; }
+        .search-toggle:hover { opacity:0.85; background:transparent; }
+        .search-toggle svg { width:22px; height:22px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+        /* Premium search - expands from top */
+        .search-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 200;
+            display: flex; flex-direction: column; align-items: center;
+            padding-top: 0;
+            background: rgba(0,0,0,0);
+            backdrop-filter: blur(0px);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.28s ease, background 0.28s ease, backdrop-filter 0.28s ease, visibility 0.28s;
+        }
+        .search-overlay.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            background: rgba(5,5,10,0.82);
+            backdrop-filter: blur(14px);
+        }
+        .search-overlay-panel {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 1rem 1.25rem 1.5rem;
+            transform: translateY(-24px) scale(0.96);
+            opacity: 0;
+            transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), opacity 0.28s ease;
+        }
+        .search-overlay.open .search-overlay-panel {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        @media (min-width:768px) {
+            .search-overlay-panel { padding-top: 1.4rem; }
+        }
+        .search-overlay-bar {
+            display: flex; align-items: center; gap: 0.75rem;
+            background: linear-gradient(180deg, rgba(30,30,42,0.95), rgba(18,18,28,0.98));
+            border: 1px solid rgba(168,85,247,0.35);
+            border-radius: 999px;
+            padding: 0.75rem 1.15rem;
+            width: 100%;
+            box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 12px 40px rgba(0,0,0,0.45), 0 0 30px rgba(168,85,247,0.12);
+        }
+        .search-overlay-bar input {
+            flex: 1; background: transparent; border: none; color: #fff;
+            font-size: 1.05rem; outline: none; font-family: inherit;
+            min-width: 0;
+        }
+        .search-overlay-bar input::placeholder { color: #71717a; }
+        .search-recent {
+            width: 100%; margin-top: 0.85rem;
+            display: none;
+        }
+        .search-recent.show { display: block; }
+        .search-recent-title {
+            font-size: 0.72rem; font-weight: 700; color: #71717a;
+            text-transform: uppercase; letter-spacing: 0.06em;
+            margin-bottom: 0.5rem; padding: 0 0.25rem;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .search-recent-title button {
+            background: none; border: none; color: #a855f7; font-size: 0.72rem;
+            font-weight: 600; cursor: pointer; text-transform: none; letter-spacing: 0;
+        }
+        .search-recent-chips {
+            display: flex; flex-wrap: wrap; gap: 0.45rem;
+        }
+        .search-chip {
+            display: inline-flex; align-items: center; gap: 0.35rem;
+            padding: 0.4rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #e4e4e7; font-size: 0.82rem; font-weight: 500;
+            cursor: pointer; transition: 0.2s;
+        }
+        .search-chip:hover {
+            background: rgba(168,85,247,0.15);
+            border-color: rgba(168,85,247,0.35);
+        }
+        .search-chip svg { width: 14px; height: 14px; opacity: 0.6; flex-shrink: 0; }
+        .search-results {
+            width: 100%; margin-top: 0.9rem; max-height: min(60vh, 420px); overflow-y: auto;
+            display: flex; flex-direction: column; gap: 0.4rem;
+            scrollbar-width: none;
+        }
+        .search-results::-webkit-scrollbar { display: none; }
+        .search-hit {
+            display: flex; align-items: center; gap: 0.85rem;
+            padding: 0.65rem 0.85rem;
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            text-decoration: none; color: inherit;
+            transition: 0.2s;
+            animation: searchHitIn 0.3s ease both;
+        }
+        .search-hit:hover {
+            background: rgba(168,85,247,0.12);
+            border-color: rgba(168,85,247,0.3);
+            transform: translateX(4px);
+        }
+        .search-hit-thumb {
+            width: 44px; height: 58px; border-radius: 8px;
+            background: linear-gradient(145deg,#1e1e2e,#2a1a3a);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; flex-shrink: 0;
+        }
+        .search-hit-info { flex: 1; min-width: 0; }
+        .search-hit-info strong {
+            display: block; font-size: 0.92rem; font-weight: 600;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            margin-bottom: 0.15rem;
+        }
+        .search-hit-info span { font-size: 0.75rem; color: var(--muted); }
+        @keyframes searchHitIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-wrap { position:relative; z-index:250; }
+        .profile-btn {
+            width:27px; height:27px; border-radius:50%;
+            border:none;
+            background:#1a1a24; color:#fff;
+            cursor:pointer; display:flex; align-items:center; justify-content:center;
+            overflow:hidden; padding:0;
+            transition:transform 0.2s, opacity 0.2s;
+            box-shadow:  0 0 0 2px #000, 0 0 0 4px #ef4444;
+        }
+        .profile-btn:hover { transform:scale(0.97); opacity:0.9; }
+        .profile-btn svg { width:20px; height:20px; fill:#fff; pointer-events:none; }
+        .profile-btn img { width:100%; height:100%; object-fit:cover; display:block; }
+        .profile-btn svg { display:none; }
+        .profile-dd {
+            display:none !important;
+            position:absolute; right:0; top:calc(100% + 10px);
+            width:240px;
+            background:#12121a !important;
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:16px;
+            padding:0.4rem;
+            z-index:300;
+            box-shadow:0 16px 48px rgba(0,0,0,0.65);
+            flex-direction:column;
+        }
+        .profile-dd.open {
+            display:flex !important;
+        }
+        .pd-head {
+            padding:0.85rem 0.95rem 0.7rem;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+            margin-bottom:0.3rem;
+        }
+        .pd-label { font-size:0.68rem; font-weight:800; letter-spacing:0.08em; color:#a855f7; text-transform:uppercase; }
+        .pd-sub { font-size:0.82rem; color:#a1a1aa; margin-top:0.2rem; }
+        a.pd-item, button.pd-item {
+            display:flex !important;
+            align-items:center;
+            gap:0.75rem;
+            width:100%;
+            padding:0.75rem 0.9rem !important;
+            border-radius:10px;
+            color:#e4e4e7 !important;
+            text-decoration:none !important;
+            font-size:0.92rem;
+            font-weight:500;
+            border:none;
+            background:transparent;
+            cursor:pointer;
+            font-family:inherit;
+            text-align:left;
+            box-sizing:border-box;
+        }
+        a.pd-item:hover, button.pd-item:hover {
+            background:rgba(168,85,247,0.14) !important;
+            color:#fff !important;
+            text-decoration:none !important;
+        }
+        a.pd-item svg, button.pd-item svg {
+            width:20px; height:20px; flex-shrink:0; fill:currentColor; opacity:0.95;
+        }
+        button.pd-item.danger { color:#f87171 !important; }
+
+    
+        .genre-pills {
+            display:flex; flex-wrap:wrap; gap:0.55rem;
+        }
+        a.genre-pill {
+            display:inline-flex; align-items:center; gap:0.4rem;
+            padding:0.55rem 1rem;
+            border-radius:999px;
+            text-decoration:none; color:#fff;
+            background:rgba(168,85,247,0.14);
+            border:1px solid rgba(168,85,247,0.35);
+            font-weight:600; font-size:0.88rem;
+            transition:0.2s;
+        }
+        a.genre-pill:hover {
+            background:rgba(168,85,247,0.28);
+            border-color:#a855f7;
+            transform:translateY(-2px);
+        }
+        a.genre-pill .gp-count {
+            font-size:0.72rem; font-weight:500; color:#c4b5fd;
+            opacity:0.9;
+        }
+
+    
+        /* MOBILE MENU ICON FIX — force small icons (not genre chips) */
+        #mobileMenu .mm-links > a,
+        #mobileMenu .mm-links > .mm-genres-btn {
+            display:flex !important;
+            flex-direction:row !important;
+            align-items:center !important;
+            gap:1.1rem !important;
+            padding:1.05rem 0.5rem !important;
+            font-size:1.08rem !important;
+            font-weight:500 !important;
+            color:#fff !important;
+            border-bottom:none !important;
+            background:transparent !important;
+        }
+        #mobileMenu .mm-links > a svg,
+        #mobileMenu .mm-links > a .icon-svg,
+        #mobileMenu .mm-genres-btn svg,
+        #mobileMenu .mm-genres-btn .icon-svg {
+            width:24px !important;
+            height:24px !important;
+            min-width:24px !important;
+            max-width:24px !important;
+            flex:0 0 24px !important;
+            display:inline-block !important;
+            fill:none !important;
+            stroke:currentColor !important;
+            color:#fff !important;
+        }
+        #mobileMenu .mm-genres-btn {
+            width:100%;
+            border:none;
+            cursor:pointer;
+            font-family:inherit;
+            text-align:left;
+            display:flex !important;
+            align-items:center !important;
+            gap:1.1rem !important;
+            padding:1.05rem 0.5rem !important;
+            font-size:1.08rem !important;
+            font-weight:500 !important;
+            color:#fff !important;
+            background:transparent !important;
+            box-sizing:border-box;
+        }
+        #mobileMenu .mm-genres-btn .icon-svg {
+            width:24px !important;
+            height:24px !important;
+            min-width:24px !important;
+            flex:0 0 24px !important;
+        }
+        #mobileMenu .mm-genres-btn .mm-arrow {
+            margin-left:auto;
+            opacity:0.6;
+            font-size:0.85rem;
+        }
+        #mobileMenu .mm-genres-grid a {
+            display:flex !important;
+            align-items:center !important;
+            justify-content:center !important;
+            gap:0 !important;
+            padding:0.55rem 0.4rem !important;
+            font-size:0.88rem !important;
+            min-height:40px !important;
+            border-radius:12px !important;
+            text-decoration:none !important;
+            -webkit-text-decoration:none !important;
+        }
+
+    
+        /* Force Genres icon same visual size as other menu icons */
+        #mobileMenu .mm-genres-btn svg.icon-svg,
+        #mobileMenu .mm-genres-btn svg,
+        #mobileMenu #mmGenresBtn svg {
+            width: 26px !important;
+            height: 26px !important;
+            min-width: 26px !important;
+            max-width: 26px !important;
+            flex: 0 0 26px !important;
+            stroke-width: 2 !important;
+        }
+        #mobileMenu .mm-links > a svg.icon-svg,
+        #mobileMenu .mm-links > a svg {
+            width: 26px !important;
+            height: 26px !important;
+            min-width: 26px !important;
+            flex: 0 0 26px !important;
+        }
+
+    
+        /* ===== PREMIUM UI TRY (remove via bak restore) ===== */
+        :root {
+            --premium-purple: #8b5cf6;
+            --premium-pink: #ec4899;
+            --premium-glow: 0 0 24px rgba(139,92,246,0.35);
+        }
+        body {
+            background: #08080c !important;
+        }
+        /* Glass navbar */
+        .navbar, header.nav, nav.navbar, .nav-bar, .top-nav {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+            transition: background 0.25s ease, backdrop-filter 0.25s ease !important;
+        }
+        .navbar.scrolled, header.nav.scrolled, nav.navbar.scrolled {
+            background: rgba(7, 9, 14, 0.55) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border-bottom: none !important;
+        }
+        /* Hero polish */
+        .spotlight-badge {
+            color: #a855f7 !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.14em !important;
+            text-shadow: 0 0 20px rgba(168,85,247,0.4) !important;
+        }
+        .hero h1 {
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 28px rgba(0,0,0,0.55) !important;
+        }
+        .hero-meta {
+            gap: 0.35rem 0.6rem !important;
+        }
+        .hero-meta .rating { text-shadow: 0 0 12px rgba(251,191,36,0.35); }
+        .btn-watch {
+            background: linear-gradient(90deg, #8b5cf6, #ec4899) !important;
+            box-shadow: 0 8px 28px rgba(139,92,246,0.4) !important;
+        }
+        .btn-watch:hover {
+            box-shadow: 0 12px 36px rgba(139,92,246,0.55) !important;
+        }
+        .btn-more {
+            border: 1.5px solid rgba(255,255,255,0.4) !important;
+            background: rgba(255,255,255,0.04) !important;
+        }
+        /* Cards premium */
+        .anime-card {
+            border-radius: 14px !important;
+            border: 1px solid rgba(255,255,255,0.05) !important;
+            background: #12121a !important;
+            transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s ease, border-color 0.3s ease !important;
+        }
+        .anime-card:hover {
+            transform: translateY(-6px) scale(1.02) !important;
+            border-color: rgba(139,92,246,0.45) !important;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(139,92,246,0.2), var(--premium-glow) !important;
+        }
+        .card-poster {
+            border-radius: 14px 14px 0 0 !important;
+        }
+        .rating-badge, .card-poster .rating-badge {
+            background: rgba(0,0,0,0.75) !important;
+            backdrop-filter: blur(6px);
+            border-radius: 6px !important;
+            font-weight: 700 !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .card-lang {
+            border: none !important;
+            border-radius: 6px !important;
+            font-size: 0.65rem !important;
+            font-weight: 700 !important;
+            backdrop-filter: none !important;
+        }
+        /* Play overlay premium */
+        .card-overlay {
+            background: linear-gradient(to top, rgba(8,8,16,0.92) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.15) 100%) !important;
+        }
+        .card-play {
+            background: linear-gradient(135deg, #8b5cf6, #ec4899) !important;
+            box-shadow: 0 0 28px rgba(139,92,246,0.55), 0 8px 20px rgba(0,0,0,0.35) !important;
+            width: 54px !important;
+            height: 54px !important;
+        }
+        /* Section titles */
+        .section-title, h2.section-title {
+            font-weight: 800 !important;
+            letter-spacing: -0.01em;
+        }
+        /* Language pills */
+        a.lang-btn {
+            background: rgba(18,18,26,0.9) !important;
+            border: 1.5px solid rgba(255,255,255,0.1) !important;
+            transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s !important;
+        }
+        a.lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        a.lang-btn.lang-hindi:hover { border-color: rgba(239,68,68,0.5) !important; }
+        a.lang-btn.lang-fandub:hover { border-color: rgba(168,85,247,0.5) !important; }
+        a.lang-btn.lang-hsub:hover { border-color: rgba(249,115,22,0.5) !important; }
+        /* Rank badges */
+        .rank-badge {
+            font-weight: 800 !important;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+        }
+        /* View all */
+        .view-all, a.view-all {
+            border: 1px solid rgba(168,85,247,0.35);
+            border-radius: 999px;
+            padding: 0.35rem 0.9rem !important;
+            transition: background 0.2s, border-color 0.2s;
+        }
+        .view-all:hover, a.view-all:hover {
+            background: rgba(168,85,247,0.12);
+            border-color: rgba(168,85,247,0.55);
+        }
+        /* Mobile menu premium */
+        .mobile-menu {
+            background: rgba(10,10,16,0.97) !important;
+            border-left: 1px solid rgba(255,255,255,0.06);
+        }
+        .mobile-menu .mm-links > a:hover,
+        .mobile-menu .mm-genres-btn:hover {
+            color: #c4b5fd !important;
+        }
+        /* Smooth scroll rows */
+        .cards-row, .scroll-row, [class*="cards-"] {
+            scroll-behavior: smooth;
+        }
+        /* ===== END PREMIUM UI TRY ===== */
+
+    
+        /* 8 full cards + partial 9th peek */
+        @media(min-width:900px){
+            .scroll-row .anime-card {
+                flex: 0 0 calc((100% - 7 * 0.75rem) / 8.12) !important;
+                max-width: none !important;
+                width: auto !important;
+            }
+            .scroll-row { gap: 0.75rem !important; }
+        }
+        @media(min-width:1200px){
+            .scroll-row .anime-card {
+                flex: 0 0 calc((100% - 7 * 0.85rem) / 8.12) !important;
+            }
+            .scroll-row { gap: 0.85rem !important; }
+        }
+
+    
+        /* ===== Aniflix-style side menu (desktop + mobile) ===== */
+        .nav-left { display:flex; align-items:center; gap:0.75rem; z-index:5; }
+        .nav-links, ul.nav-links { display:none !important; visibility:hidden !important; }
+        .menu-btn {
+            display:flex !important;
+            flex-direction:column;
+            justify-content:center;
+            align-items:flex-start;
+            gap:6px;
+            width:36px; height:36px;
+            background:transparent !important;
+            border:none !important;
+            cursor:pointer;
+            padding:7px 6px;
+            color:#fff;
+            z-index:5;
+        }
+        .menu-btn span {
+            display:block;
+            height:2px;
+            background:#fff;
+            border-radius:10px;
+            transition: transform 0.25s ease, width 0.25s ease, opacity 0.2s;
+        }
+        .menu-btn span:nth-child(1) { width:22px; }
+        .menu-btn span:nth-child(2) { width:13px; }
+        .menu-btn.open span:nth-child(1) {
+            width:22px;
+            transform: translateY(4px) rotate(45deg);
+        }
+        .menu-btn.open span:nth-child(2) {
+            width:22px;
+            transform: translateY(-4px) rotate(-45deg);
+        }
+        .side-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 190;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.28s ease, visibility 0.28s;
+        }
+        .side-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+        .side-menu {
+            position: fixed;
+            top: 0; left: 0;
+            width: min(272px, 88vw);
+            height: 100vh;
+            height: 100dvh;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(165deg, rgba(16,16,22,0.97) 0%, rgba(8,8,12,0.98) 100%);
+            backdrop-filter: blur(24px) saturate(1.2);
+            -webkit-backdrop-filter: blur(24px) saturate(1.2);
+            border-right: 1px solid rgba(255,255,255,0.06);
+            box-shadow: 12px 0 48px rgba(0,0,0,0.55);
+            transform: translateX(-105%);
+            transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: hidden;
+            padding: 0.7rem 0 0;
+        }
+        .side-menu.open { transform: translateX(0); }
+        .side-menu-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 0.9rem;
+            margin: 0 0.7rem 0.55rem;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03));
+            border: 1px solid rgba(255,255,255,0.08);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+        .side-menu-brand .sm-logo {
+            width: 36px; height: 36px;
+            border-radius: 11px;
+            background: linear-gradient(145deg, #f43f5e, #e11d48 50%, #be123c);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: #fff;
+            flex-shrink: 0;
+            box-shadow: 0 3px 12px rgba(225,29,72,0.4);
+        }
+        .side-menu-brand .sm-text strong {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.01em;
+        }
+        .side-menu-brand .sm-text span {
+            font-size: 0.7rem;
+            color: #9ca3af;
+            font-weight: 500;
+        }
+        .side-menu-scroll {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255,255,255,0.12) transparent;
+        }
+        .side-menu-scroll::-webkit-scrollbar { width: 4px; }
+        .side-menu-scroll::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.12);
+            border-radius: 4px;
+        }
+        .side-menu-nav {
+            flex: 0 0 auto;
+            padding: 0.15rem 0.55rem 0.1rem;
+        }
+        .side-menu-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.68rem 0.85rem;
+            border-radius: 11px;
+            color: #b4b4be;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background 0.18s ease, color 0.18s ease, transform 0.15s;
+            margin-bottom: 2px;
+            position: relative;
+        }
+        .side-menu-nav a:hover {
+            background: rgba(255,255,255,0.055);
+            color: #f4f4f5;
+        }
+        .side-menu-nav a.active {
+            background: rgba(255,255,255,0.09);
+            color: #fff;
+            font-weight: 600;
+        }
+        .side-menu-nav a.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 22%;
+            bottom: 22%;
+            width: 3px;
+            border-radius: 0 3px 3px 0;
+            background: #e11d48;
+        }
+        .side-menu-nav a svg {
+            width: 19px;
+            height: 19px;
+            flex-shrink: 0;
+            opacity: 0.88;
+        }
+        .side-menu-nav a.active svg { opacity: 1; }
+        .side-menu-nav a svg * {
+            fill: none !important;
+            stroke: currentColor;
+        }
+        .side-menu-layout {
+            flex: 0 0 auto;
+            padding: 0.4rem 0.7rem 0.85rem;
+        }
+        .sm-layout-card {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.72rem 0.8rem;
+            border-radius: 13px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .sm-layout-card:hover {
+            border-color: rgba(255,255,255,0.12);
+            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+        }
+        .sm-layout-ico {
+            width: 30px; height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a1a1aa;
+            background: rgba(255,255,255,0.05);
+            flex-shrink: 0;
+        }
+        .sm-layout-text {
+            flex: 1;
+            min-width: 0;
+            line-height: 1.3;
+        }
+        .sm-layout-text strong {
+            display: block;
+            font-size: 0.83rem;
+            font-weight: 600;
+            color: #f4f4f5;
+        }
+        .sm-layout-text span {
+            font-size: 0.68rem;
+            color: #8b8b96;
+        }
+        .sm-layout-btn {
+            flex-shrink: 0;
+            padding: 0.32rem 0.75rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.06);
+            color: #e4e4e7;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            cursor: pointer;
+            font-family: inherit;
+            transition: 0.18s;
+        }
+        .sm-layout-btn:hover {
+            border-color: rgba(225,29,72,0.55);
+            background: rgba(225,29,72,0.15);
+            color: #fff;
+        }
+        .side-menu-foot {
+            padding: 0.6rem 0.7rem 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            margin-top: auto;
+            flex-shrink: 0;
+            background: rgba(0,0,0,0.15);
+        }
+        .side-menu-guest {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.7rem;
+            border-radius: 13px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.07);
+            text-decoration: none;
+            color: inherit;
+            transition: background 0.18s, border-color 0.18s;
+        }
+        .side-menu-guest:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(255,255,255,0.1);
+        }
+        .side-menu-guest img {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 0 2px #0c0c10, 0 0 0 3.5px #e11d48;
+            flex-shrink: 0;
+        }
+        .side-menu-guest strong {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #f4f4f5;
+        }
+        .side-menu-guest span {
+            font-size: 0.7rem;
+            color: #8b8b96;
+        }
+        /* ===== end side menu ===== */
+
+    
+            </style>
+</head>
+<body>
+    <nav class="navbar hide-inline-search">
+        <div class="nav-left">
+            <button type="button" class="menu-btn" id="menuBtn" aria-label="Open menu">
+                <span></span><span></span>
+            </button>
+            <a href="index.html" class="logo">AnimeFan</a>
+        </div>
+        <ul class="nav-links" style="display:none!important" hidden>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="anime.html">Anime</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li class="nav-dropdown" id="genresDrop">
+                <button type="button" class="nav-drop-btn" id="genresBtn">Genres ▾</button>
+                <div class="nav-drop-menu" id="genresMenu">
+                    <a href="genre.html?g=Action">Action</a>
+                    <a href="genre.html?g=Adventure">Adventure</a>
+                    <a href="genre.html?g=Comedy">Comedy</a>
+                    <a href="genre.html?g=Drama">Drama</a>
+                    <a href="genre.html?g=Fantasy">Fantasy</a>
+                    <a href="genre.html?g=Horror">Horror</a>
+                    <a href="genre.html?g=Isekai">Isekai</a>
+                    <a href="genre.html?g=Mecha">Mecha</a>
+                    <a href="genre.html?g=Mystery">Mystery</a>
+                    <a href="genre.html?g=Romance">Romance</a>
+                    <a href="genre.html?g=Sci-Fi">Sci-Fi</a>
+                    <a href="genre.html?g=Seinen">Seinen</a>
+                    <a href="genre.html?g=Shonen">Shonen</a>
+                    <a href="genre.html?g=Slice of Life">Slice of Life</a>
+                    <a href="genre.html?g=Sports">Sports</a>
+                    <a href="genre.html?g=Thriller">Thriller</a>
+                </div>
+            </li>
+            <li><a href="request.html">Request</a></li>
+        </ul>
+        
+        <div class="nav-right">
+            <div class="nav-actions">
+            <button type="button" class="search-toggle" id="searchToggle" aria-label="Search">
+                <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            </button>
+            <div class="profile-wrap">
+                <button type="button" class="profile-btn" id="profileBtn" aria-label="Profile">
+                    <img src="https://iili.io/fiPveqJ.md.jpg" alt="Profile" width="36" height="36">
+                    <svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v1.2h19.2v-1.2c0-3.2-6.4-4.8-9.6-4.8z"/></svg>
+                </button>
+                
+                
+                <div class="profile-dd" id="profileDd">
+                    <div class="pd-head">
+                        <div class="pd-label" id="pdLabel">GUEST</div>
+                        <div class="pd-sub" id="pdSub">Not signed in</div>
+                    </div>
+                    <a class="pd-item" id="pdSignIn" href="login.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                        Sign in
+                    </a>
+                    <a class="pd-item" id="pdHistory" href="continue.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.25 2.52.77-1.28-3.52-2.09V8H12z"/></svg>
+                        History
+                    </a>
+                    <a class="pd-item" id="pdList" href="mylist.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        My List
+                    </a>
+                    <a class="pd-item" href="help.html">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z"/></svg>
+                        Help &amp; Feedback
+                    </a>
+                    <button type="button" class="pd-item danger" id="pdLogout" style="display:none;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+                        Sign out
+                    </button>
+                </div>
+
+            </div>
+            </div><!-- /nav-actions -->
+            
+        </div>
+
+    </nav>
+
+    <div class="search-overlay" id="searchOverlay">
+      <div class="search-overlay-panel">
+        <div class="search-overlay-bar">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+            <input type="text" id="searchInput" placeholder="Search anime..." autocomplete="off">
+        </div>
+        <div class="search-recent" id="searchRecent"></div>
+        <div class="search-results" id="searchResults"></div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="overlay" id="overlay"></div>
+    
+    <div class="side-overlay" id="sideOverlay"></div>
+    <aside class="side-menu" id="sideMenu" aria-label="Main menu">
+        <div class="side-menu-brand">
+            <div class="sm-logo">A</div>
+            <div class="sm-text">
+                <strong>AnimeFan</strong>
+                <span>Platform</span>
+            </div>
+        </div>
+        <div class="side-menu-scroll">
+        <nav class="side-menu-nav">
+            <a href="index.html" class="active">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>
+                <span>Home</span>
+            </a>
+            <a href="anime.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+                <span>Browse Anime</span>
+            </a>
+            <a href="anime.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
+                <span>Anime</span>
+            </a>
+            <a href="trending.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17l5-5 4 4 5-7"/><path d="M15 9h4v4"/></svg>
+                <span>Discover</span>
+            </a>
+            <a href="schedule.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                <span>Schedule</span>
+            </a>
+            <a href="anime.html?sort=random">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>
+                <span>Random</span>
+            </a>
+            <a href="request.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                <span>Request</span>
+            </a>
+            <a href="history.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                <span>History</span>
+            </a>
+            <a href="settings.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                <span>Settings</span>
+            </a>
+        </nav>
+        <div class="side-menu-layout">
+            <div class="sm-layout-card">
+                <div class="sm-layout-ico">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+                </div>
+                <div class="sm-layout-text">
+                    <strong>Home Layout</strong>
+                    <span>Default and custom<br>order controls</span>
+                </div>
+                <button type="button" class="sm-layout-btn" id="homeLayoutBtn">OPEN</button>
+            </div>
+        </div>
+        </div>
+        <div class="side-menu-foot">
+            <a class="side-menu-guest" href="login.html">
+                <img src="https://iili.io/fiPveqJ.md.jpg" alt="Guest">
+                <div>
+                    <strong>Guest</strong>
+                    <span>Not signed in</span>
+                </div>
+            </a>
+        </div>
+</aside>
+
+
+<!-- HERO - No ON AIR / HD / SUB / DUB badges -->
+    <section class="hero" id="home">
+
+<div class="hero-bg" id="heroBg"></div>
+        <div class="hero-content" id="heroContent">
+            <div class="spotlight-badge" id="spotlightBadge">#1 <span>SPOTLIGHT</span></div>
+            <h1 id="heroTitle">Frieren: Beyond Journey's End</h1>
+            <div class="hero-meta" id="heroMeta">
+                <span class="rating">★ 9.3</span>
+                <span>TV</span>
+                <span>28 Episodes</span>
+                <span>2023</span>
+            </div>
+            <p id="heroDesc">Ek elf mage apne past journey ko reflect karti hai after the hero's party disbands. Beautiful, emotional storytelling aur stunning visuals se bhara masterpiece.</p>
+            <div class="hero-tags" id="heroTags">
+                <span class="lang-badge">HINDI</span>
+                <span class="tag">Adventure</span>
+                <span class="tag">Drama</span>
+                <span class="tag">Fantasy</span>
+            </div>
+            <div class="hero-actions">
+                <a href="watch.html" class="btn-watch" style="text-decoration:none;">▶ Watch Now</a>
+                
+                <button class="btn-more">+ Watchlist</button>
+            </div>
+
+        </div>
+        <div class="hero-poster">
+            <img id="heroPosterImg" src="https://cdn.myanimelist.net/images/anime/1015/138006.jpg" alt="Poster" onerror="this.style.display='none'">
+        </div>
+</section>
+
+    <!-- TRENDING -->
+    <section id="trending">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></span> Trending Now</h2>
+            <a href="trending.html" class="view-all">View All ›</a>
+        </div>
+        <div class="scroll-row">
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge r1">#1</span>
+<span class="rating-badge">★ 9.4</span>
+                    ⚔️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge r2">#2</span>
+<span class="rating-badge">★ 9.1</span>
+                    🌌
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge r3">#3</span>
+<span class="rating-badge">★ 8.9</span>
+                    💖
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#4</span>
+<span class="rating-badge">★ 9.2</span>
+                    🗡️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#5</span>
+<span class="rating-badge">★ 9.0</span>
+                    🔥
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#6</span>
+<span class="rating-badge">★ 8.7</span>
+                    🌀
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#7</span>
+<span class="rating-badge">★ 8.8</span>
+                    ⚡
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#8</span>
+<span class="rating-badge">★ 8.6</span>
+                    🕵️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#9</span>
+<span class="rating-badge">★ 9.3</span>
+                    🏰
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#10</span>
+<span class="rating-badge">★ 9.0</span>
+                    🌟
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#11</span>
+<span class="rating-badge">★ 9.5</span>
+                    ⚔️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#12</span>
+<span class="rating-badge">★ 9.3</span>
+                    🍥
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#13</span>
+<span class="rating-badge">★ 9.2</span>
+                    🏴‍☠️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#14</span>
+<span class="rating-badge">★ 8.9</span>
+                    🦸
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#15</span>
+<span class="rating-badge">★ 8.7</span>
+                    ⚽
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#16</span>
+<span class="rating-badge">★ 8.8</span>
+                    ⛓️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#17</span>
+<span class="rating-badge">★ 9.1</span>
+                    🛡️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#18</span>
+<span class="rating-badge">★ 8.5</span>
+                    👊
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#19</span>
+<span class="rating-badge">★ 8.6</span>
+                    💫
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-badge">#20</span>
+<span class="rating-badge">★ 8.4</span>
+                    🦖
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTINUE WATCHING (shown only if user has watch history) -->
+    <section id="continue" style="display:none;">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></svg></span> Continue Watching</h2>
+        </div>
+        
+        <div class="scroll-row" id="continueRow">
+            <div class="cw-card" onclick="location.href='watch.html'">
+                <div class="cw-poster">⚔️
+                    <div class="cw-overlay">
+                        <h3>Frieren: Beyond Journey's End</h3>
+                        <div class="cw-meta">EP 1 · 72% watched</div>
+                    </div>
+                    <div class="cw-progress"><span style="width:72%"></span></div>
+                </div>
+            </div>
+            <div class="cw-card" onclick="location.href='watch.html'">
+                <div class="cw-poster">🌌
+                    <div class="cw-overlay">
+                        <h3>Neon Horizon: Zero</h3>
+                        <div class="cw-meta">EP 2 · 45% watched</div>
+                    </div>
+                    <div class="cw-progress"><span style="width:45%"></span></div>
+                </div>
+            </div>
+            <div class="cw-card" onclick="location.href='watch.html'">
+                <div class="cw-poster">💖
+                    <div class="cw-overlay">
+                        <h3>Cherry Blossom Letters</h3>
+                        <div class="cw-meta">EP 3 · 88% watched</div>
+                    </div>
+                    <div class="cw-progress"><span style="width:88%"></span></div>
+                </div>
+            </div>
+            <div class="cw-card" onclick="location.href='watch.html'">
+                <div class="cw-poster">🗡️
+                    <div class="cw-overlay">
+                        <h3>Crimson Guild Chronicles</h3>
+                        <div class="cw-meta">EP 4 · 30% watched</div>
+                    </div>
+                    <div class="cw-progress"><span style="width:30%"></span></div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+    
+    
+    <section id="language">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg></span> Browse by Language</h2>
+        </div>
+        <div class="lang-grid">
+            <a class="lang-btn lang-hindi" href="language.html?lang=Hindi"><span class="lang-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span>Hindi</a>
+            <a class="lang-btn lang-fandub" href="language.html?lang=FanDub"><span class="lang-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg></span>FanDub</a>
+            <a class="lang-btn lang-hsub" href="language.html?lang=HSub"><span class="lang-ico"><svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M21 3C21.5523 3 22 3.44772 22 4V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V4C2 3.44772 2.44772 3 3 3H21ZM20 5H4V19H20V5ZM9 8C10.1045 8 11.1049 8.44841 11.829 9.173L10.4153 10.5866C10.0534 10.2241 9.55299 10 9 10C7.895 10 7 10.895 7 12C7 13.105 7.895 14 9 14C9.5525 14 10.0525 13.7762 10.4144 13.4144L11.828 14.828C11.104 15.552 10.104 16 9 16C6.792 16 5 14.208 5 12C5 9.792 6.792 8 9 8ZM16 8C17.1045 8 18.1049 8.44841 18.829 9.173L17.4153 10.5866C17.0534 10.2241 16.553 10 16 10C14.895 10 14 10.895 14 12C14 13.105 14.895 14 16 14C16.5525 14 17.0525 13.7762 17.4144 13.4144L18.828 14.828C18.104 15.552 17.104 16 16 16C13.792 16 12 14.208 12 12C12 9.792 13.792 8 16 8Z"/></svg></span>Hindi Sub</a>
+        </div></section>
+
+
+
+
+    <!-- AIRING -->
+    <section id="airing">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></svg></span> Currently Airing</h2>
+            <a href="airing.html" class="view-all">View All ›</a>
+        </div>
+        <div class="scroll-row">
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.4</span>
+                    ⚔️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🌌
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    💖
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🗡️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🔥
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    🌀
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⚡
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    🕵️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🏰
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🌟
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.5</span>
+                    ⚔️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🍥
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🏴‍☠️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    🦸
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    ⚽
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⛓️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🛡️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.5</span>
+                    👊
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    💫
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.4</span>
+                    🦖
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+        </div>
+    </section>
+    <!-- LATEST + TOP RANKED -->
+    <section id="latest">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></span> Latest Episodes</h2>
+            <a href="latest.html" class="view-all">View All ›</a>
+        </div>
+        <div class="episodes-grid">
+            <div class="episode-list">
+                <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
+                    <div class="ep-thumb">⚔️<span class="ep-num">EP 24</span></div>
+                    <div class="ep-info">
+                        <h4>Frieren: Beyond Journey's End</h4>
+                        <div class="ep-title">The Final Stand</div>
+                        <div class="ep-meta"><span>24min</span><span>Sep 21, 2026</span></div>
+                    </div>
+                </div>
+                <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
+                    <div class="ep-thumb">🌌<span class="ep-num">EP 11</span></div>
+                    <div class="ep-info">
+                        <h4>Neon Horizon: Zero</h4>
+                        <div class="ep-title">AI Rebellion Begins</div>
+                        <div class="ep-meta"><span>23min</span><span>Sep 20, 2026</span></div>
+                    </div>
+                </div>
+                <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
+                    <div class="ep-thumb">🗡️<span class="ep-num">EP 08</span></div>
+                    <div class="ep-info">
+                        <h4>Crimson Guild Chronicles</h4>
+                        <div class="ep-title">Dungeon of Forgotten Kings</div>
+                        <div class="ep-meta"><span>24min</span><span>Sep 19, 2026</span></div>
+                    </div>
+                </div>
+                <div class="episode-item" onclick="location.href='watch.html'" style="cursor:pointer">
+                    <div class="ep-thumb">🌀<span class="ep-num">EP 13</span></div>
+                    <div class="ep-info">
+                        <h4>Solo Leveling S2</h4>
+                        <div class="ep-title">Monarch's Awakening</div>
+                        <div class="ep-meta"><span>24min</span><span>Sep 18, 2026</span></div>
+                    </div>
+                </div>
+            </div>
+            </div>
+    </section>
+
+<section id="popular">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span> Top Ranking</h2>
+            <a href="toprated.html" class="view-all">View All ›</a>
+        </div>
+        <div class="scroll-row">
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num rank-1">#1</span>
+<span class="rating-badge">★ 9.4</span>
+                    ⚔️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num rank-2">#2</span>
+<span class="rating-badge">★ 9.1</span>
+                    🌌
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num rank-3">#3</span>
+<span class="rating-badge">★ 8.9</span>
+                    💖
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#4</span>
+<span class="rating-badge">★ 9.2</span>
+                    🗡️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#5</span>
+<span class="rating-badge">★ 9.0</span>
+                    🔥
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#6</span>
+<span class="rating-badge">★ 8.7</span>
+                    🌀
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#7</span>
+<span class="rating-badge">★ 8.8</span>
+                    ⚡
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#8</span>
+<span class="rating-badge">★ 8.6</span>
+                    🕵️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#9</span>
+<span class="rating-badge">★ 9.3</span>
+                    🏰
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#10</span>
+<span class="rating-badge">★ 9.0</span>
+                    🌟
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#11</span>
+<span class="rating-badge">★ 9.5</span>
+                    ⚔️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#12</span>
+<span class="rating-badge">★ 9.3</span>
+                    🍥
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#13</span>
+<span class="rating-badge">★ 9.2</span>
+                    🏴‍☠️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#14</span>
+<span class="rating-badge">★ 8.9</span>
+                    🦸
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#15</span>
+<span class="rating-badge">★ 8.7</span>
+                    ⚽
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#16</span>
+<span class="rating-badge">★ 8.8</span>
+                    ⛓️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#17</span>
+<span class="rating-badge">★ 9.1</span>
+                    🛡️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#18</span>
+<span class="rating-badge">★ 8.5</span>
+                    👊
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#19</span>
+<span class="rating-badge">★ 8.6</span>
+                    💫
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster"><span class="rank-num">#20</span>
+<span class="rating-badge">★ 8.4</span>
+                    🦖
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- LATEST EPISODES (already exists, keep) -->
+
+    <!-- NEW ON ANIMEFAN -->
+    <section id="new">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg></span> New On AnimeFan</h2>
+            <a href="new.html" class="view-all">View All ›</a>
+        </div>
+        <div class="scroll-row">
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.4</span>
+                    ⚔️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🌌
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    💖
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🗡️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🔥
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    🌀
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⚡
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    🕵️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🏰
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🌟
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.5</span>
+                    ⚔️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🍥
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🏴‍☠️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    🦸
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    ⚽
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⛓️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🛡️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.5</span>
+                    👊
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    💫
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.4</span>
+                    🦖
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALL TIME POPULAR -->
+    
+
+    <!-- TOP RATED -->
+    
+
+    <!-- UPCOMING -->
+    <section id="upcoming">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></span> Upcoming</h2>
+            <a href="upcoming.html" class="view-all">View All ›</a>
+        </div>
+        <div class="scroll-row">
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.4</span>
+                    ⚔️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🌌
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    💖
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🗡️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🔥
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    🌀
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⚡
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    🕵️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🏰
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🌟
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.5</span>
+                    ⚔️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🍥
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🏴‍☠️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    🦸
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    ⚽
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⛓️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🛡️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.5</span>
+                    👊
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    💫
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.4</span>
+                    🦖
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOVIES -->
+    <section id="movies">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3Z"/><path d="m6.2 5.3 3.1 3.9"/><path d="m12.4 3.4 3.1 4"/><path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/></svg></span> Movies</h2>
+            <a href="movies.html" class="view-all">View All ›</a>
+        </div>
+        <div class="scroll-row">
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.4</span>
+                    ⚔️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🌌
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    💖
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🗡️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🔥
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    🌀
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⚡
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    🕵️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🏰
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🌟
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.5</span>
+                    ⚔️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🍥
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🏴‍☠️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    🦸
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    ⚽
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⛓️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🛡️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.5</span>
+                    👊
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    💫
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.4</span>
+                    🦖
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">Movie · 1 Film</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPLETED -->
+    <section id="completed">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></span> Completed</h2>
+            <a href="completed.html" class="view-all">View All ›</a>
+        </div>
+        <div class="scroll-row">
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.4</span>
+                    ⚔️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren: Beyond Journey's End</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🌌
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Neon Horizon: Zero</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    💖
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Cherry Blossom Letters</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🗡️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Crimson Guild Chronicles</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🔥
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Jujutsu Kaisen S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    🌀
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Solo Leveling S2</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⚡
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Punch Man S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    🕵️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Spy x Family S3</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🏰
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Frieren</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.0</span>
+                    🌟
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Demon Slayer S4</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.5</span>
+                    ⚔️
+<span class="card-lang lang-dual">Dual</span>
+                </div>
+                <div class="card-body"><h3>Attack on Titan</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.3</span>
+                    🍥
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Naruto Shippuden</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.2</span>
+                    🏴‍☠️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>One Piece</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.9</span>
+                    🦸
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>My Hero Academia</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.7</span>
+                    ⚽
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Blue Lock</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.8</span>
+                    ⛓️
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Chainsaw Man</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 9.1</span>
+                    🛡️
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Vinland Saga</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.5</span>
+                    👊
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Tokyo Revengers</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.6</span>
+                    💫
+<span class="card-lang lang-hsub">Hindi Sub</span>
+                </div>
+                <div class="card-body"><h3>Oshi no Ko</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+            <div class="anime-card">
+                <div class="card-poster">
+<span class="rating-badge">★ 8.4</span>
+                    🦖
+<span class="card-lang lang-hindi">Hindi</span>
+                </div>
+                <div class="card-body"><h3>Kaiju No. 8</h3><div class="card-meta">TV · 24 Eps</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BROWSE BY GENRES -->
+
+    <!-- ANIME RELEASE SCHEDULE TRACKER -->
+    
+    <section id="schedule">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></svg></span> Anime Schedule</h2>
+        </div>
+        <div class="sched-tabs" id="schedTabs">
+            <button class="sched-tab" data-day="mon">MON</button>
+            <button class="sched-tab" data-day="tue">TUE</button>
+            <button class="sched-tab" data-day="wed">WED</button>
+            <button class="sched-tab" data-day="thu">THU</button>
+            <button class="sched-tab" data-day="fri">FRI</button>
+            <button class="sched-tab" data-day="sat">SAT</button>
+            <button class="sched-tab" data-day="sun">SUN</button>
+        </div>
+        <div class="sched-list" id="trackerList">
+            <!-- filled by JS -->
+        </div>
+    </section>
+
+
+    
+    
+    
+    
+    <section id="genres">
+        <div class="section-header">
+            <h2 class="section-title"><span class="bar"></span><span class="sec-icon"><svg viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></span> Browse by Genres</h2>
+        </div>
+        <div class="genre-pills">
+            <a class="genre-pill" href="genre.html?g=Action">Action</a>
+            <a class="genre-pill" href="genre.html?g=Comedy">Comedy</a>
+            <a class="genre-pill" href="genre.html?g=Drama">Drama</a>
+            <a class="genre-pill" href="genre.html?g=Fantasy">Fantasy</a>
+            <a class="genre-pill" href="genre.html?g=Horror">Horror</a>
+            <a class="genre-pill" href="genre.html?g=Romance">Romance</a>
+            <a class="genre-pill" href="genre.html?g=Sci-Fi">Sci-Fi</a>
+            <a class="genre-pill" href="genre.html?g=Mecha">Mecha</a>
+            <a class="genre-pill" href="genre.html?g=Mystery">Mystery</a>
+            <a class="genre-pill" href="genre.html?g=Sports">Sports</a>
+            <a class="genre-pill" href="genre.html?g=Adventure">Adventure</a>
+            <a class="genre-pill" href="genre.html?g=Slice%20of%20Life">Slice of Life</a>
+            <a class="genre-pill" href="genre.html?g=Isekai">Isekai</a>
+            <a class="genre-pill" href="genre.html?g=Shonen">Shonen</a>
+            <a class="genre-pill" href="genre.html?g=Seinen">Seinen</a>
+            <a class="genre-pill" href="genre.html?g=Thriller">Thriller</a>
+        </div>
+    </section>
+
+
+
+
+
+    
+
+    
+    
+    <section id="requestCta" style="padding:2.2rem 3%;">
+        <div style="max-width:960px;margin:0 auto;position:relative;overflow:hidden;border-radius:20px;border:1px solid rgba(168,85,247,0.3);background:radial-gradient(ellipse at top left,rgba(168,85,247,0.25),transparent 55%),radial-gradient(ellipse at bottom right,rgba(236,72,153,0.18),transparent 50%),#12121a;padding:1.75rem 1.5rem;">
+            <div style="position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1.2rem;">
+                <div style="max-width:560px;">
+                    <div style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#c4b5fd;margin-bottom:0.5rem;">Premium request</div>
+                    <h2 style="font-size:1.35rem;font-weight:800;margin-bottom:0.4rem;">Missing an anime?</h2>
+                    <p style="color:var(--muted);font-size:0.92rem;line-height:1.5;">Sirf naam likho — request bhejo. Pending / Approved status yahin track karo.</p>
+                </div>
+                <a href="request.html" class="btn-watch" style="text-decoration:none;white-space:nowrap;">Request Anime →</a>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">AnimeFan</a>
+                <p>2026 ka best anime streaming experience. Hindi Sub, Dub aur pure anime vibe.</p>
+            </div>
+            <div class="footer-col"><h4>Browse</h4><a href="#">Trending</a><a href="#">Latest</a><a href="#">Top Ranked</a><a href="#">Schedule</a></div>
+            <div class="footer-col"><h4>More</h4><a href="request.html">Request</a><a href="anime.html">Anime</a><a href="schedule.html">Schedule</a><a href="genres.html">Genres</a></div>
+            <div class="footer-col"><h4>Support</h4><a href="#">Help</a><a href="#">Contact</a><a href="#">Privacy</a><a href="#">Terms</a></div>
+        </div>
+        <div class="footer-bottom">
+            <p style="color:var(--muted);font-size:0.75rem;max-width:700px;margin:0 auto 0.75rem;line-height:1.5;">AnimeFan does not store any files on our server, we only linked to the media which is hosted on 3rd party services.</p>
+            <p>© 2026 AnimeFan. Made with ❤️ for anime lovers.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Premium navbar: transparent → glass on scroll
+        (function(){
+          const nav = document.querySelector('.navbar');
+          if (!nav) return;
+          function onScroll(){
+            if (window.scrollY > 40) nav.classList.add('scrolled');
+            else nav.classList.remove('scrolled');
+          }
+          window.addEventListener('scroll', onScroll, {passive:true});
+          onScroll();
+        })();
+
+        // Desktop Genres dropdown (click toggle)
+        (function(){
+          const drop = document.getElementById('genresDrop');
+          const btn = document.getElementById('genresBtn');
+          if (!drop || !btn) return;
+          btn.addEventListener('click', function(e){
+            e.preventDefault(); e.stopPropagation();
+            drop.classList.toggle('open');
+          });
+          document.addEventListener('click', function(e){
+            if (!drop.contains(e.target)) drop.classList.remove('open');
+          });
+        })();
+
+        // Mobile Genres expand
+        (function(){
+          const btn = document.getElementById('mmGenresBtn');
+          const grid = document.getElementById('mmGenresGrid');
+          if (!btn || !grid) return;
+          btn.addEventListener('click', function(){
+            btn.classList.toggle('open');
+            grid.classList.toggle('open');
+          });
+        })();
+
+        // Continue Watching: only if user has watched something
+        (function(){
+          try {
+            const hist = JSON.parse(localStorage.getItem('animefan_history') || '[]');
+            if (hist && hist.length > 0) {
+              const sec = document.getElementById('continue');
+              if (sec) sec.style.display = '';
+            }
+          } catch(e){}
+        })();
+
+        // Mobile menu
+        // Hero click → detail (except buttons/links)
+        document.querySelector('.hero')?.addEventListener('click', function(e) {
+          if (e.target.closest('a, button, .hero-dot, .hero-dots')) return;
+          window.location.href = 'anime-detail.html';
+        });
+        document.querySelectorAll('.btn-watch').forEach(b => {
+          b.addEventListener('click', function(e){ e.stopPropagation(); });
+        });
+
+        
+        
+        // Auth helpers
+        function getUser() {
+          try { return JSON.parse(localStorage.getItem('animefan_user') || 'null'); } catch(e) { return null; }
+        }
+        function setUser(u) {
+          if (u) localStorage.setItem('animefan_user', JSON.stringify(u));
+          else localStorage.removeItem('animefan_user');
+        }
+
+        // Profile menu (Aniflix style)
+        (function(){
+          const btn = document.getElementById('profileBtn');
+          const dd = document.getElementById('profileDd');
+          if (!btn || !dd) return;
+          function refreshProfile() {
+            const u = getUser();
+            const label = document.getElementById('pdLabel');
+            const sub = document.getElementById('pdSub');
+            const signIn = document.getElementById('pdSignIn');
+            const logout = document.getElementById('pdLogout');
+            const hist = document.getElementById('pdHistory');
+            const list = document.getElementById('pdList');
+            if (u) {
+              label.textContent = 'MEMBER';
+              sub.textContent = u.name || u.email || 'Signed in';
+              signIn.style.display = 'none';
+              logout.style.display = 'flex';
+              hist.href = 'continue.html';
+              list.href = 'mylist.html';
+            } else {
+              label.textContent = 'GUEST';
+              sub.textContent = 'Not signed in';
+              signIn.style.display = 'flex';
+              logout.style.display = 'none';
+              hist.href = 'login.html?next=continue.html';
+              list.href = 'login.html?next=mylist.html';
+            }
+          }
+          refreshProfile();
+          btn.addEventListener('click', function(e){
+            e.preventDefault(); e.stopPropagation();
+            dd.classList.toggle('open');
+          });
+          document.addEventListener('click', function(e){
+            if (!dd.contains(e.target) && !btn.contains(e.target)) dd.classList.remove('open');
+          });
+          document.getElementById('pdLogout')?.addEventListener('click', function(){
+            setUser(null); refreshProfile(); dd.classList.remove('open');
+          });
+        })();
+
+        // Aniflix-style search overlay
+        (function(){
+          const toggle = document.getElementById('searchToggle');
+          const overlay = document.getElementById('searchOverlay');
+          const input = document.getElementById('searchInput');
+          const results = document.getElementById('searchResults');
+                    if (!toggle || !overlay || !input) return;
+          const catalog = [
+            {t:"Frieren: Beyond Journey's End",e:'⚔️',m:'TV · HSub · ★ 9.4'},
+            {t:'Neon Horizon: Zero',e:'🌌',m:'TV · Hindi · ★ 9.1'},
+            {t:'Cherry Blossom Letters',e:'💖',m:'TV · HSub · ★ 8.9'},
+            {t:'Crimson Guild Chronicles',e:'🗡️',m:'TV · FanDub · ★ 9.2'},
+            {t:'Jujutsu Kaisen S3',e:'🔥',m:'TV · HSub · ★ 9.0'},
+            {t:'Solo Leveling S2',e:'🌀',m:'TV · Hindi · ★ 8.7'},
+            {t:'One Punch Man S3',e:'⚡',m:'TV · HSub · ★ 8.8'},
+            {t:'Spy x Family S3',e:'🕵️',m:'TV · Hindi · ★ 8.6'},
+            {t:'Frieren',e:'🏰',m:'TV · HSub · ★ 9.3'},
+            {t:'Demon Slayer S4',e:'🌟',m:'TV · FanDub · ★ 9.0'},
+            {t:'Attack on Titan',e:'⚔️',m:'TV · HSub · ★ 9.5'},
+            {t:'Naruto Shippuden',e:'🍥',m:'TV · Hindi · ★ 9.3'}
+          ];
+          const recentEl = document.getElementById('searchRecent');
+          const RECENT_KEY = 'af_recent_searches';
+          function getRecent(){
+            try { return JSON.parse(localStorage.getItem(RECENT_KEY)||'[]'); } catch(e){ return []; }
+          }
+          function saveRecent(q){
+            q = (q||'').trim();
+            if (!q || q.length < 1) return;
+            let list = getRecent().filter(x => x.toLowerCase() !== q.toLowerCase());
+            list.unshift(q);
+            list = list.slice(0, 8);
+            localStorage.setItem(RECENT_KEY, JSON.stringify(list));
+          }
+          function clearRecent(){
+            localStorage.removeItem(RECENT_KEY);
+            renderRecent();
+          }
+          function renderRecent(){
+            const list = getRecent();
+            if (!list.length) {
+              recentEl.classList.remove('show');
+              recentEl.innerHTML = '';
+              return;
+            }
+            recentEl.classList.add('show');
+            recentEl.innerHTML = `
+              <div class="search-recent-title">
+                <span>Recent searches</span>
+                <button type="button" id="clearRecentBtn">Clear</button>
+              </div>
+              <div class="search-recent-chips">
+                ${list.map(q => `
+                  <button type="button" class="search-chip" data-q="${q.replace(/"/g,'&quot;')}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    ${q}
+                  </button>
+                `).join('')}
+              </div>`;
+            recentEl.querySelector('#clearRecentBtn')?.addEventListener('click', clearRecent);
+            recentEl.querySelectorAll('.search-chip').forEach(btn => {
+              btn.addEventListener('click', () => {
+                input.value = btn.dataset.q || '';
+                render(input.value);
+                input.focus();
+              });
+            });
+          }
+          function openSearch(){
+            if (!overlay.classList.contains('open')) {
+              history.pushState({ afSearch: true }, '');
+            }
+            overlay.classList.add('open');
+            document.body.style.overflow='hidden';
+            setTimeout(()=>{ input.focus(); }, 180);
+            render(input.value||'');
+          }
+          function closeSearch(fromPop){
+            if (!overlay.classList.contains('open')) return;
+            if (input.value.trim()) saveRecent(input.value);
+            overlay.classList.remove('open');
+            document.body.style.overflow='';
+            setTimeout(()=>{ input.value=''; results.innerHTML=''; recentEl.classList.remove('show'); }, 280);
+            if (!fromPop && history.state && history.state.afSearch) {
+              history.back();
+            }
+          }
+          function render(q){
+            q = (q||'').toLowerCase().trim();
+            if (!q) {
+              renderRecent();
+              results.innerHTML = '';
+              return;
+            }
+            recentEl.classList.remove('show');
+            const hits = catalog.filter(x => x.t.toLowerCase().includes(q));
+            if (!hits.length) {
+              results.innerHTML = '<p style="color:var(--muted);text-align:center;padding:2rem;">No results found</p>';
+              return;
+            }
+            results.innerHTML = hits.map((h,i) => `
+              <a class="search-hit" href="anime-detail.html" style="animation-delay:${i*0.04}s">
+                <div class="search-hit-thumb">${h.e}</div>
+                <div class="search-hit-info"><strong>${h.t}</strong><span>${h.m}</span></div>
+              </a>`).join('');
+          }
+          toggle.addEventListener('click', openSearch);
+          overlay.addEventListener('click', e => { if (e.target === overlay || e.target.classList.contains('search-overlay-panel') && e.target === e.currentTarget) closeSearch(); });
+          overlay.addEventListener('click', e => { if (e.target === overlay) closeSearch(); });
+          input.addEventListener('input', () => render(input.value));
+          results.addEventListener('click', () => {
+            if (input.value.trim()) saveRecent(input.value);
+          });
+          input.addEventListener('keydown', e => {
+            if (e.key === 'Enter' && input.value.trim()) {
+              saveRecent(input.value);
+              render(input.value);
+            }
+          });
+          document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSearch(); });
+          window.addEventListener('popstate', () => {
+            if (overlay.classList.contains('open')) closeSearch(true);
+          });
+        })();
+
+
+        (function initMenu(){
+          const menuBtn = document.getElementById('menuBtn');
+          const sideMenu = document.getElementById('sideMenu');
+          const overlay = document.getElementById('sideOverlay');
+          if (!menuBtn || !sideMenu) return;
+          function closeMenu(){
+            sideMenu.classList.remove('open');
+            if (overlay) overlay.classList.remove('open');
+            menuBtn.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+          function openMenu(){
+            sideMenu.classList.add('open');
+            if (overlay) overlay.classList.add('open');
+            menuBtn.classList.add('open');
+            document.body.style.overflow = 'hidden';
+          }
+          function toggleMenu(){ sideMenu.classList.contains('open') ? closeMenu() : openMenu(); }
+          menuBtn.addEventListener('click', toggleMenu);
+          if (overlay) overlay.addEventListener('click', closeMenu);
+          sideMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+          document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+        })();
+
+        // Hero Auto Carousel - 10 Animes
+        const animes = [
+            {
+                title: "Frieren: Beyond Journey's End",
+                rating: "★ 9.3", type: "TV", eps: "28 Episodes", year: "2023",
+                desc: "Ek elf mage apne past journey ko reflect karti hai after the hero's party disbands. Beautiful, emotional storytelling aur stunning visuals se bhara masterpiece.",
+                tags: ["Adventure","Drama","Fantasy"],
+                bg: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg"
+            },
+            {
+                title: "Neon Horizon: Zero",
+                rating: "★ 9.1", type: "TV", eps: "12 Episodes", year: "2026",
+                desc: "2045 mein cyberpunk city ke mecha pilots jo AI rebellion ke against ladte hain. High-octane action aur stunning visuals.",
+                tags: ["Sci-Fi","Mecha","Action"],
+                bg: "https://cdn.myanimelist.net/images/anime/1948/138662.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1948/138662.jpg"
+            },
+            {
+                title: "Cherry Blossom Letters",
+                rating: "★ 8.9", type: "TV", eps: "13 Episodes", year: "2026",
+                desc: "Do strangers jo time-travel letters ke through pyaar mein pad jaate hain across centuries. Emotional aur heartwarming story.",
+                tags: ["Romance","Drama","Fantasy"],
+                bg: "https://cdn.myanimelist.net/images/anime/1764/138629.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1764/138629.jpg"
+            },
+            {
+                title: "Crimson Guild Chronicles",
+                rating: "★ 9.2", type: "TV", eps: "Ongoing", year: "2026",
+                desc: "Young adventurers ka group jo ancient dungeon secrets uncover karta hai aur legend ban jata hai. Epic fantasy adventure.",
+                tags: ["Adventure","Fantasy","Shonen"],
+                bg: "https://cdn.myanimelist.net/images/anime/1299/138067.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1299/138067.jpg"
+            },
+            {
+                title: "Jujutsu Kaisen Season 3",
+                rating: "★ 9.0", type: "TV", eps: "24 Episodes", year: "2026",
+                desc: "The battle against the strongest curses continues. Intense fights, dark themes aur unforgettable characters.",
+                tags: ["Action","Supernatural","Shonen"],
+                bg: "https://cdn.myanimelist.net/images/anime/1792/138022.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1792/138022.jpg"
+            },
+            {
+                title: "Solo Leveling Season 2",
+                rating: "★ 8.7", type: "TV", eps: "13 Episodes", year: "2026",
+                desc: "Sung Jinwoo returns stronger than ever. Monarchs awaken aur the fate of humanity hangs in the balance.",
+                tags: ["Action","Fantasy","Adventure"],
+                bg: "https://cdn.myanimelist.net/images/anime/1825/142014.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1825/142014.jpg"
+            },
+            {
+                title: "One Punch Man Season 3",
+                rating: "★ 8.8", type: "TV", eps: "12 Episodes", year: "2026",
+                desc: "Saitama continues his search for a worthy opponent. Hilarious action, epic fights aur classic parody.",
+                tags: ["Action","Comedy","Superhero"],
+                bg: "https://cdn.myanimelist.net/images/anime/12/76049.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/12/76049.jpg"
+            },
+            {
+                title: "Frieren: Beyond Journey's End",
+                rating: "★ 9.3", type: "TV", eps: "28 Episodes", year: "2026",
+                desc: "An elf mage reflects on her past journey after the hero's party disbands. Beautiful, emotional storytelling.",
+                tags: ["Adventure","Drama","Fantasy"],
+                bg: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg"
+            },
+            {
+                title: "Demon Slayer: Infinity Castle",
+                rating: "★ 9.5", type: "Movie", eps: "Movie", year: "2026",
+                desc: "The final battle against Muzan begins inside the Infinity Castle. Stunning animation aur emotional climax.",
+                tags: ["Action","Historical","Supernatural"],
+                bg: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg"
+            },
+            {
+                title: "Spy x Family Season 3",
+                rating: "★ 8.6", type: "TV", eps: "12 Episodes", year: "2026",
+                desc: "The Forger family returns with more spy missions, school adventures aur heartwarming chaos.",
+                tags: ["Comedy","Action","Family"],
+                bg: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg"
+            }
+        ];
+
+        let current = 0;
+        const content = document.getElementById('heroContent');
+        const bg = document.getElementById('heroBg');
+        const posterImg = document.getElementById('heroPosterImg');
+
+        function updateHero(index) {
+            const a = animes[index];
+            content.classList.add('fade');
+            setTimeout(() => {
+                document.getElementById('spotlightBadge').innerHTML = `#${index + 1} <span>SPOTLIGHT</span>`;
+                document.getElementById('heroTitle').textContent = a.title;
+                document.getElementById('heroMeta').innerHTML = `
+                    <span class="rating">${a.rating}</span>
+                    <span>${a.type}</span>
+                    <span>${a.eps}</span>
+                    <span>${a.year}</span>`;
+                document.getElementById('heroDesc').textContent = a.desc;
+                document.getElementById('heroTags').innerHTML = '<span class="lang-badge">HINDI</span>' + a.tags.map(t => `<span class="tag">${t}</span>`).join('');
+                bg.style.backgroundImage = `url('${a.bg}')`;
+                if (posterImg) {
+                    posterImg.src = a.poster;
+                    posterImg.style.display = '';
+                }
+                content.classList.remove('fade');
+            }, 280);
+        }
+
+        function next() {
+            current = (current + 1) % animes.length;
+            updateHero(current);
+            resetHeroTimer();
+        }
+        function prev() {
+            current = (current - 1 + animes.length) % animes.length;
+            updateHero(current);
+            resetHeroTimer();
+        }
+
+        // Auto rotate every 5.5s — resets on every slide change so each card gets full time
+        let heroTimer = null;
+        const HERO_MS = 5500;
+        function resetHeroTimer() {
+            if (heroTimer) clearInterval(heroTimer);
+            heroTimer = setInterval(() => {
+                current = (current + 1) % animes.length;
+                updateHero(current);
+            }, HERO_MS);
+        }
+        resetHeroTimer();
+
+        // Swipe + mouse drag support
+        (function(){
+          const hero = document.querySelector('.hero');
+          if (!hero) return;
+          let x0 = null;
+          const start = e => { x0 = (e.touches ? e.touches[0] : e).clientX; };
+          const end = e => {
+            if (x0 === null) return;
+            const x1 = (e.changedTouches ? e.changedTouches[0] : e).clientX;
+            const dx = x1 - x0;
+            if (Math.abs(dx) > 50) { dx < 0 ? next() : prev(); }
+            x0 = null;
+          };
+          hero.addEventListener('touchstart', start, {passive:true});
+          hero.addEventListener('touchend', end, {passive:true});
+          hero.addEventListener('mousedown', start);
+          hero.addEventListener('mouseup', end);
+        })();
+
+        // Schedule data + Aniflix-style renderer
+        const scheduleData = {
+            mon: [
+                {time:"06:30 PM", emoji:"⚔️", title:"Frieren: Beyond Journey's End", sub:"EP 20 · Hindi Sub", badge:"Mon", badgeClass:"soon"},
+                {time:"08:00 PM", emoji:"🌌", title:"Neon Horizon: Zero", sub:"EP 11 · Hindi Dub", badge:"Mon", badgeClass:"soon"}
+            ],
+            tue: [
+                {time:"07:00 PM", emoji:"🗡️", title:"Crimson Guild Chronicles", sub:"EP 9 · Hindi Sub", badge:"Tue", badgeClass:"soon"}
+            ],
+            wed: [
+                {time:"06:00 PM", emoji:"🌀", title:"Solo Leveling S2", sub:"EP 13 · Hindi Sub", badge:"Wed", badgeClass:"soon"},
+                {time:"09:00 PM", emoji:"🕵️", title:"Spy x Family S3", sub:"EP 7 · Hindi Dub", badge:"Wed", badgeClass:"soon"}
+            ],
+            thu: [
+                {time:"08:30 PM", emoji:"⚡", title:"One Punch Man S3", sub:"EP 8 · Hindi Sub", badge:"Thu", badgeClass:"soon"}
+            ],
+            fri: [
+                {time:"12:30 PM", emoji:"🥊", title:"STEEL BALL RUN JoJo's Bizarre Adventure", sub:"EP 1", badge:"LIVE", badgeClass:""},
+                {time:"03:25 PM", emoji:"⚡", title:"Pokémon Horizons: The Series", sub:"EP 151", badge:"", badgeClass:"soon"},
+                {time:"05:30 PM", emoji:"🔍", title:"Meitantei Conan", sub:"EP 1", badge:"", badgeClass:"soon"},
+                {time:"07:30 PM", emoji:"🟢", title:"That Time I Got Reincarnated as a Slime Season 4", sub:"EP 24", badge:"", badgeClass:"soon"},
+                {time:"08:00 PM", emoji:"⚔️", title:"The Elusive Samurai Season 2", sub:"EP 11", badge:"", badgeClass:"soon"},
+                {time:"08:00 PM", emoji:"✏️", title:"Draw This, Then Die!", sub:"EP 12", badge:"", badgeClass:"soon"}
+            ],
+            sat: [
+                {time:"06:00 PM", emoji:"🏰", title:"Frieren Special", sub:"OVA · Hindi Sub", badge:"Sat", badgeClass:"soon"},
+                {time:"09:00 PM", emoji:"💖", title:"Cherry Blossom Letters", sub:"EP 13 Finale · Hindi Dub", badge:"Sat", badgeClass:"soon"}
+            ],
+            sun: [
+                {time:"05:00 PM", emoji:"🌟", title:"Demon Slayer S4", sub:"EP 6 · Hindi Dub", badge:"Sun", badgeClass:"soon"},
+                {time:"08:00 PM", emoji:"⚽", title:"Blue Lock S2", sub:"EP 4 · Hindi Sub", badge:"Sun", badgeClass:"soon"}
+            ],
+            today: []
+        };
+        // Detect real today
+        const dayMap = ['sun','mon','tue','wed','thu','fri','sat'];
+        const realDay = dayMap[new Date().getDay()];
+        scheduleData.today = scheduleData[realDay] || [];
+
+        function renderTracker(day) {
+            const list = document.getElementById('trackerList');
+            if (!list) return;
+            const items = scheduleData[day] || [];
+            if (!items.length) {
+                const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                const d = new Date();
+                const label = months[d.getMonth()] + ' ' + d.getDate();
+                list.innerHTML = `<div style="padding:2rem 1rem;text-align:center;color:var(--muted);font-size:0.95rem;">No Episode Found For ${label}</div>`;
+                return;
+            }
+            list.innerHTML = items.map(i => {
+                const epMatch = (i.sub || '').match(/EP\s*\d+/i);
+                const ep = epMatch ? epMatch[0] : 'EP 1';
+                const live = (i.badge === 'LIVE') ? '<span class="sched-live">● LIVE</span>' : '';
+                return `<div class="sched-item">
+                    <div class="sched-thumb">${i.emoji}</div>
+                    <div class="sched-info">
+                        <h4>${i.title}</h4>
+                        <span class="sched-ep">▶ ${ep}</span>${live}
+                    </div>
+                    <div class="sched-time">${i.time}</div>
+                </div>`;
+            }).join('');
+        }
+
+        document.querySelectorAll('.sched-tab').forEach(tab => {
+            tab.classList.toggle('active', tab.dataset.day === realDay);
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.sched-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderTracker(tab.dataset.day);
+            });
+        });
+        renderTracker(realDay);
+
+        // Browse by Language filter
+        const langAnimeData = [
+          {title:"Frieren: Beyond Journey's End", rating:"9.4", emoji:"⚔️", lang:"HSub", meta:"TV · 24 Eps · HSub"},
+          {title:"Neon Horizon: Zero", rating:"9.1", emoji:"🌌", lang:"Hindi", meta:"TV · 24 Eps · Hindi"},
+          {title:"Cherry Blossom Letters", rating:"8.9", emoji:"💖", lang:"HSub", meta:"TV · 12 Eps · HSub"},
+          {title:"Crimson Guild Chronicles", rating:"9.2", emoji:"🗡️", lang:"FanDub", meta:"TV · 24 Eps · FanDub"},
+          {title:"Jujutsu Kaisen S3", rating:"9.0", emoji:"🔥", lang:"HSub", meta:"TV · 24 Eps · HSub"},
+          {title:"Solo Leveling S2", rating:"8.7", emoji:"🌀", lang:"Hindi", meta:"TV · 13 Eps · Hindi"},
+          {title:"One Punch Man S3", rating:"8.8", emoji:"⚡", lang:"HSub", meta:"TV · 12 Eps · HSub"},
+          {title:"Spy x Family S3", rating:"8.6", emoji:"🕵️", lang:"Hindi", meta:"TV · 12 Eps · Hindi"},
+          {title:"Frieren", rating:"9.3", emoji:"🏰", lang:"HSub", meta:"TV · 28 Eps · HSub"},
+          {title:"Demon Slayer S4", rating:"9.0", emoji:"🌟", lang:"FanDub", meta:"TV · 11 Eps · FanDub"},
+          {title:"Attack on Titan", rating:"9.5", emoji:"⚔️", lang:"HSub", meta:"TV · 87 Eps · HSub"},
+          {title:"Naruto Shippuden", rating:"9.3", emoji:"🍥", lang:"Hindi", meta:"TV · 500 Eps · Hindi"}
+        ];
+        function renderLangRow(lang) {
+          const row = document.getElementById('langAnimeRow');
+          if (!row) return;
+          const map = {Hindi:['Hindi','Hindi Dub'], HSub:['HSub','Hindi Sub'], FanDub:['FanDub','Fan Dub']};
+          const keys = map[lang] || [lang];
+          const filtered = langAnimeData.filter(a => keys.some(k => a.lang.includes(k) || a.meta.includes(k)));
+          row.innerHTML = filtered.map(a => {
+            const parts = (a.meta||'').split('·').map(s => s.trim());
+            const isLang = x => /sub|dub|hindi|japanese|english|fandub/i.test(x);
+            const metaClean = parts.filter(x => !isLang(x)).join(' · ');
+            const norm = (raw) => {
+              const low = raw.toLowerCase().replace(/\s+/g,'');
+              if (low === 'hsub' || low === 'hindisub') return 'Hindi Sub';
+              if (low === 'hindidub') return 'Hindi';
+              if (low === 'fandub') return 'FanDub';
+              if (low === 'hindi') return 'Hindi';
+              if (low === 'englishdub' || low === 'engdub') return 'English Dub';
+              if (low === 'englishsub' || low === 'esub') return 'English Sub';
+              return raw;
+            };
+            const langList = parts.filter(isLang).map(norm).filter((v,i,a)=>a.indexOf(v)===i);
+            let lang = '';
+            let langCls = 'card-lang';
+            if (langList.length >= 2) {
+              lang = 'Dual';
+              langCls += ' lang-dual';
+            } else if (langList.length === 1) {
+              lang = langList[0];
+              if (lang === 'Hindi') langCls += ' lang-hindi';
+              else if (lang === 'Hindi Sub') langCls += ' lang-hsub';
+              else if (lang === 'FanDub') langCls += ' lang-fandub';
+              else langCls += ' lang-dual';
+            }
+            return `
+            <div class="anime-card" onclick="location.href='anime-detail.html'">
+              <div class="card-poster"><span class="rating-badge">★ ${a.rating}</span>${a.emoji}${lang?`<span class="${langCls}">${lang}</span>`:''}</div>
+                <div class="card-body"><h3>${a.title}</h3><div class="card-meta">${metaClean}</div></div>
+            </div>`;
+            }).join('');
+        }
+        document.querySelectorAll('#langChips .chip').forEach(chip => {
+          chip.addEventListener('click', () => {
+            document.querySelectorAll('#langChips .chip').forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            renderLangRow(chip.dataset.lang);
+          });
+        });
+        renderLangRow('Hindi');
+
+        // Initial hero bg
+        if (typeof bg !== 'undefined' && animes[0]) {
+          bg.style.backgroundImage = `url('${animes[0].bg}')`;
+          bg.style.backgroundSize = 'cover';
+          bg.style.backgroundPosition = 'center top';
+        }
+
+        // Card clicks
+        document.querySelectorAll('.cw-card').forEach(c => {
+          c.style.cursor = 'pointer';
+          c.onclick = () => { window.location.href = 'watch.html'; };
+        });
+        document.querySelectorAll('#latest .anime-card, #latest .episode-item').forEach(c => {
+          c.style.cursor = 'pointer';
+          c.addEventListener('click', () => { window.location.href = 'watch.html'; });
+        });
+        document.querySelectorAll('.anime-card').forEach(c => {
+          if (c.closest('#latest') || c.closest('#continue') || c.closest('#langAnimeRow')) return;
+          c.style.cursor = 'pointer';
+          c.addEventListener('click', () => { window.location.href = 'anime-detail.html'; });
+        });
+        document.querySelectorAll('.btn-watch').forEach(b => {
+          if (!b.getAttribute('href')) {
+            b.addEventListener('click', e => { e.preventDefault(); window.location.href = 'watch.html'; });
+          }
+        });
+
+        </script>
+
+<script>
+// Fast horizontal card scrolling
+document.querySelectorAll('.scroll-row').forEach(row => {
+  row.addEventListener('wheel', (e) => {
+    // Prefer horizontal; convert vertical wheel to horizontal for rows
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault();
+      row.scrollLeft += e.deltaY * 2.8;
+    } else {
+      row.scrollLeft += e.deltaX * 2.2;
+    }
+  }, { passive: false });
+});
+</script>
+
+
+<script>
+(function(){
+  const playSVG = '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+  function enhanceCards(){
+    document.querySelectorAll('.anime-card .card-poster').forEach(poster => {
+      if (poster.querySelector('.card-overlay')) return;
+      const overlay = document.createElement('div');
+      overlay.className = 'card-overlay';
+      const btn = document.createElement('div');
+      btn.className = 'card-play';
+      btn.innerHTML = playSVG;
+      overlay.appendChild(btn);
+      poster.appendChild(overlay);
+    });
+  }
+  enhanceCards();
+  // show play immediately on touch/click (FloxAnime style)
+  let activeCard = null;
+  let hideTimer = null;
+  function showPlay(card) {
+    if (!card) return;
+    clearTimeout(hideTimer);
+    if (activeCard && activeCard !== card) activeCard.classList.remove('show-play');
+    activeCard = card;
+    card.classList.add('show-play');
+  }
+  function scheduleHide(card) {
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => {
+      if (card) card.classList.remove('show-play');
+      if (activeCard === card) activeCard = null;
+    }, 500);
+  }
+  document.addEventListener('touchstart', e => {
+    const card = e.target.closest('.anime-card');
+    if (!card) return;
+    showPlay(card);
+  }, {passive:true});
+  document.addEventListener('touchend', e => {
+    const card = e.target.closest('.anime-card') || activeCard;
+    scheduleHide(card);
+  }, {passive:true});
+  document.addEventListener('touchmove', e => {
+    // if finger moves away from card while scrolling, hide
+    if (!activeCard) return;
+    const t = e.touches[0];
+    if (!t) return;
+    const el = document.elementFromPoint(t.clientX, t.clientY);
+    if (!el || !activeCard.contains(el)) {
+      activeCard.classList.remove('show-play');
+      activeCard = null;
+    }
+  }, {passive:true});
+  document.addEventListener('touchcancel', () => {
+    if (activeCard) {
+      activeCard.classList.remove('show-play');
+      activeCard = null;
+    }
+  }, {passive:true});
+  // desktop: mousedown also shows instantly
+  document.addEventListener('mousedown', e => {
+    const card = e.target.closest('.anime-card');
+    if (!card) return;
+    showPlay(card);
+  });
+  document.addEventListener('mouseup', e => {
+    const card = e.target.closest('.anime-card') || activeCard;
+    scheduleHide(card);
+  });
+  document.addEventListener('mouseleave', e => {
+    const card = e.target.closest?.('.anime-card');
+    if (card) card.classList.remove('show-play');
+  }, true);
+  // observe dynamic rows
+  const obs = new MutationObserver(() => enhanceCards());
+  obs.observe(document.body, {childList:true, subtree:true});
+})();
+</script>
+
+</body>
+</html>
