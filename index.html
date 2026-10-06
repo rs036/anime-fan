@@ -274,6 +274,9 @@
             width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.35);
             cursor:pointer; transition:0.2s; border:none; padding:0;
         }
+
+        /* Hero ads-style progress */
+
         .hero-dot.active { background:#a855f7; width:22px; border-radius:6px; }
         .hero-dot {
             width: 8px;
@@ -1564,7 +1567,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
         .side-menu-brand .sm-logo {
             width: 36px; height: 36px;
             border-radius: 11px;
-            background: linear-gradient(145deg, #f43f5e, #e11d48 50%, #be123c);
+            background: linear-gradient(145deg, #c084fc, #a855f7 45%, #ec4899);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1572,7 +1575,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             font-size: 1.1rem;
             color: #fff;
             flex-shrink: 0;
-            box-shadow: 0 3px 12px rgba(225,29,72,0.4);
+            box-shadow: 0 3px 12px rgba(168,85,247,0.4);
         }
         .side-menu-brand .sm-text strong {
             display: block;
@@ -1635,7 +1638,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             bottom: 22%;
             width: 3px;
             border-radius: 0 3px 3px 0;
-            background: #e11d48;
+            background: #a855f7;
         }
         .side-menu-nav a svg {
             width: 19px;
@@ -1706,8 +1709,8 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             transition: 0.18s;
         }
         .sm-layout-btn:hover {
-            border-color: rgba(225,29,72,0.55);
-            background: rgba(225,29,72,0.15);
+            border-color: rgba(168,85,247,0.55);
+            background: rgba(168,85,247,0.15);
             color: #fff;
         }
         .side-menu-foot {
@@ -1737,7 +1740,7 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             width: 36px; height: 36px;
             border-radius: 50%;
             object-fit: cover;
-            box-shadow: 0 0 0 2px #0c0c10, 0 0 0 3.5px #e11d48;
+            box-shadow: 0 0 0 2px #0c0c10, 0 0 0 3.5px #a855f7;
             flex-shrink: 0;
         }
         .side-menu-guest strong {
@@ -1751,9 +1754,66 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             color: #8b8b96;
         }
         /* ===== end side menu ===== */
+            .network-row { gap: 0.9rem; }
+        }
 
     
-            </style>
+        /* ===== Network ===== */
+        .network-section { padding: 1.4rem 0 0.6rem; }
+        .network-section .section-header {
+            padding: 0 4% 0.85rem; margin: 0;
+        }
+        .network-section .section-header h2 {
+            font-size: 1.2rem; font-weight: 700; margin: 0;
+            display: flex; align-items: center; gap: 0.45rem;
+        }
+        .network-section .sec-icon {
+            display: inline-flex; color: #a855f7; line-height: 0;
+        }
+        .network-section .sec-icon svg { width: 22px; height: 22px; }
+        .network-row {
+            display: flex;
+            gap: 1.35rem;
+            overflow-x: auto;
+            padding: 0.4rem 4% 1rem;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .network-row::-webkit-scrollbar { display: none; }
+        .network-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.55rem;
+            text-decoration: none;
+            color: #d4d4d8;
+            flex: 0 0 auto;
+            transition: transform 0.2s, color 0.2s;
+        }
+        .network-card:hover { color: #fff; transform: translateY(-3px); }
+        img.network-ico {
+            width: 72px !important;
+            height: 72px !important;
+            border-radius: 16px !important;
+            object-fit: cover !important;
+            display: block !important;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.45);
+            background: #111;
+        }
+        .network-card .label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+            max-width: 90px;
+            line-height: 1.25;
+        }
+        @media (max-width: 600px) {
+            img.network-ico { width: 64px !important; height: 64px !important; border-radius: 14px !important; }
+            .network-row { gap: 1.05rem; }
+        }
+        /* ===== end Network ===== */
+
+    </style>
 </head>
 <body>
     <nav class="navbar hide-inline-search">
@@ -1868,17 +1928,9 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V20a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>
                 <span>Home</span>
             </a>
-            <a href="anime.html">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-                <span>Browse Anime</span>
-            </a>
-            <a href="anime.html">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
-                <span>Anime</span>
-            </a>
             <a href="trending.html">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17l5-5 4 4 5-7"/><path d="M15 9h4v4"/></svg>
-                <span>Discover</span>
+                <span>Trending</span>
             </a>
             <a href="schedule.html">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
@@ -1895,10 +1947,6 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             <a href="history.html">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
                 <span>History</span>
-            </a>
-            <a href="settings.html">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-                <span>Settings</span>
             </a>
         </nav>
         <div class="side-menu-layout">
@@ -1951,12 +1999,56 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
                 
                 <button class="btn-more">+ Watchlist</button>
             </div>
-
-        </div>
+            <div class="hero-dots" id="heroDots" aria-label="Hero slides">
+                <button type="button" class="hero-dot active" data-i="0" aria-label="Slide 1"></button>
+                <button type="button" class="hero-dot" data-i="1" aria-label="Slide 2"></button>
+                <button type="button" class="hero-dot" data-i="2" aria-label="Slide 3"></button>
+                <button type="button" class="hero-dot" data-i="3" aria-label="Slide 4"></button>
+                <button type="button" class="hero-dot" data-i="4" aria-label="Slide 5"></button>
+            </div>
+</div>
         <div class="hero-poster">
             <img id="heroPosterImg" src="https://cdn.myanimelist.net/images/anime/1015/138006.jpg" alt="Poster" onerror="this.style.display='none'">
         </div>
 </section>
+<!-- NETWORK -->
+    <section class="network-section" id="network">
+        <div class="section-header">
+            <h2>
+                <span class="sec-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="2"/>
+                        <path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49"/>
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/>
+                    </svg>
+                </span>
+                Network
+            </h2>
+        </div>
+        <div class="network-row">
+            <a class="network-card" href="https://www.crunchyroll.com" target="_blank" rel="noopener">
+                <img class="network-ico" src="assets/network/crunchyroll-play.png" alt="Crunchyroll" width="72" height="72">
+                <span class="label">Crunchyroll</span>
+            </a>
+            <a class="network-card" href="https://www.netflix.com" target="_blank" rel="noopener">
+                <img class="network-ico" src="assets/network/netflix-play.png" alt="Netflix" width="72" height="72">
+                <span class="label">Netflix</span>
+            </a>
+            <a class="network-card" href="https://www.primevideo.com" target="_blank" rel="noopener">
+                <img class="network-ico" src="assets/network/prime-play.png" alt="Prime Video" width="72" height="72">
+                <span class="label">Prime Video</span>
+            </a>
+            <a class="network-card" href="https://www.hotstar.com" target="_blank" rel="noopener">
+                <img class="network-ico" src="assets/network/hotstar-play.png" alt="Hotstar" width="72" height="72">
+                <span class="label">Hotstar</span>
+            </a>
+            <a class="network-card" href="https://t.me" target="_blank" rel="noopener">
+                <img class="network-ico" src="assets/network/telegram-play.png" alt="Telegram" width="72" height="72">
+                <span class="label">Telegram</span>
+            </a>
+        </div>
+    </section>
+
 
     <!-- TRENDING -->
     <section id="trending">
@@ -3629,74 +3721,74 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             {
                 title: "Neon Horizon: Zero",
                 rating: "★ 9.1", type: "TV", eps: "12 Episodes", year: "2026",
-                desc: "2045 mein cyberpunk city ke mecha pilots jo AI rebellion ke against ladte hain. High-octane action aur stunning visuals.",
-                tags: ["Sci-Fi","Mecha","Action"],
-                bg: "https://cdn.myanimelist.net/images/anime/1948/138662.jpg",
-                poster: "https://cdn.myanimelist.net/images/anime/1948/138662.jpg"
+                desc: "2045 mein cyber city ke underworld mein ek rogue hacker system ke against ladta hai.",
+                tags: ["Sci-Fi","Action"],
+                bg: "https://cdn.myanimelist.net/images/anime/1935/150391.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1935/150391.jpg"
             },
             {
                 title: "Cherry Blossom Letters",
                 rating: "★ 8.9", type: "TV", eps: "13 Episodes", year: "2026",
-                desc: "Do strangers jo time-travel letters ke through pyaar mein pad jaate hain across centuries. Emotional aur heartwarming story.",
-                tags: ["Romance","Drama","Fantasy"],
-                bg: "https://cdn.myanimelist.net/images/anime/1764/138629.jpg",
-                poster: "https://cdn.myanimelist.net/images/anime/1764/138629.jpg"
+                desc: "Do strangers sakura season mein letters exchange karte hain — slow-burn romance.",
+                tags: ["Romance","Drama"],
+                bg: "https://cdn.myanimelist.net/images/anime/13/17405.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/13/17405.jpg"
             },
             {
                 title: "Crimson Guild Chronicles",
-                rating: "★ 9.2", type: "TV", eps: "Ongoing", year: "2026",
-                desc: "Young adventurers ka group jo ancient dungeon secrets uncover karta hai aur legend ban jata hai. Epic fantasy adventure.",
-                tags: ["Adventure","Fantasy","Shonen"],
-                bg: "https://cdn.myanimelist.net/images/anime/1299/138067.jpg",
-                poster: "https://cdn.myanimelist.net/images/anime/1299/138067.jpg"
+                rating: "★ 9.2", type: "TV", eps: "24 Episodes", year: "2026",
+                desc: "Fantasy realm mein guild warriors dark forces se ladte hain.",
+                tags: ["Fantasy","Action"],
+                bg: "https://cdn.myanimelist.net/images/anime/1948/120625.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1948/120625.jpg"
             },
             {
                 title: "Jujutsu Kaisen Season 3",
                 rating: "★ 9.0", type: "TV", eps: "24 Episodes", year: "2026",
-                desc: "The battle against the strongest curses continues. Intense fights, dark themes aur unforgettable characters.",
-                tags: ["Action","Supernatural","Shonen"],
-                bg: "https://cdn.myanimelist.net/images/anime/1792/138022.jpg",
-                poster: "https://cdn.myanimelist.net/images/anime/1792/138022.jpg"
+                desc: "Cursed energy battles intensify as new threats emerge.",
+                tags: ["Action","Shonen"],
+                bg: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg"
             },
             {
                 title: "Solo Leveling Season 2",
                 rating: "★ 8.7", type: "TV", eps: "13 Episodes", year: "2026",
-                desc: "Sung Jinwoo returns stronger than ever. Monarchs awaken aur the fate of humanity hangs in the balance.",
-                tags: ["Action","Fantasy","Adventure"],
-                bg: "https://cdn.myanimelist.net/images/anime/1825/142014.jpg",
-                poster: "https://cdn.myanimelist.net/images/anime/1825/142014.jpg"
+                desc: "Sung Jinwoo returns stronger — shadow army grows.",
+                tags: ["Action","Fantasy"],
+                bg: "https://cdn.myanimelist.net/images/anime/1825/142172.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1825/142172.jpg"
             },
             {
                 title: "One Punch Man Season 3",
-                rating: "★ 8.8", type: "TV", eps: "12 Episodes", year: "2026",
-                desc: "Saitama continues his search for a worthy opponent. Hilarious action, epic fights aur classic parody.",
-                tags: ["Action","Comedy","Superhero"],
+                rating: "★ 8.8", type: "TV", eps: "12 Episodes", year: "2025",
+                desc: "Saitama still one-punches every threat in his path.",
+                tags: ["Action","Comedy"],
                 bg: "https://cdn.myanimelist.net/images/anime/12/76049.jpg",
                 poster: "https://cdn.myanimelist.net/images/anime/12/76049.jpg"
             },
             {
-                title: "Frieren: Beyond Journey's End",
-                rating: "★ 9.3", type: "TV", eps: "28 Episodes", year: "2026",
-                desc: "An elf mage reflects on her past journey after the hero's party disbands. Beautiful, emotional storytelling.",
-                tags: ["Adventure","Drama","Fantasy"],
-                bg: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg",
-                poster: "https://cdn.myanimelist.net/images/anime/1015/138006.jpg"
-            },
-            {
                 title: "Demon Slayer: Infinity Castle",
-                rating: "★ 9.5", type: "Movie", eps: "Movie", year: "2026",
-                desc: "The final battle against Muzan begins inside the Infinity Castle. Stunning animation aur emotional climax.",
-                tags: ["Action","Historical","Supernatural"],
+                rating: "★ 9.0", type: "Movie", eps: "1 Film", year: "2025",
+                desc: "Tanjiro faces the final battle inside the Infinity Castle.",
+                tags: ["Action","Fantasy"],
                 bg: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg",
                 poster: "https://cdn.myanimelist.net/images/anime/1286/99889.jpg"
             },
             {
                 title: "Spy x Family Season 3",
                 rating: "★ 8.6", type: "TV", eps: "12 Episodes", year: "2026",
-                desc: "The Forger family returns with more spy missions, school adventures aur heartwarming chaos.",
-                tags: ["Comedy","Action","Family"],
+                desc: "Forger family balances spy missions and school life.",
+                tags: ["Action","Comedy"],
                 bg: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
                 poster: "https://cdn.myanimelist.net/images/anime/1441/122795.jpg"
+            },
+            {
+                title: "Chainsaw Man",
+                rating: "★ 8.7", type: "TV", eps: "12 Episodes", year: "2022",
+                desc: "Denji becomes Chainsaw Man and hunts devils for a living.",
+                tags: ["Action","Horror"],
+                bg: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg",
+                poster: "https://cdn.myanimelist.net/images/anime/1806/126216.jpg"
             }
         ];
 
@@ -3724,7 +3816,16 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
                     posterImg.style.display = '';
                 }
                 content.classList.remove('fade');
+                updateHeroDots(index);
             }, 280);
+        }
+
+        function updateHeroDots(index) {
+            const dots = document.querySelectorAll('#heroDots .hero-dot');
+            if (!dots.length) return;
+            const n = dots.length; // 5
+            const active = index % n;
+            dots.forEach((d, i) => d.classList.toggle('active', i === active));
         }
 
         function next() {
@@ -3749,6 +3850,23 @@ a.genre-item { text-decoration:none; color:inherit; display:flex; flex-direction
             }, HERO_MS);
         }
         resetHeroTimer();
+
+        // Hero dots click
+        (function heroDotsClick(){
+          const wrap = document.getElementById('heroDots');
+          if (!wrap) return;
+          wrap.addEventListener('click', (e) => {
+            const btn = e.target.closest('.hero-dot');
+            if (!btn) return;
+            const i = +btn.dataset.i;
+            // map 5 dots across 10 slides: stay in same half
+            if (animes.length > 5 && current >= 5) current = i + 5;
+            else current = i;
+            if (current >= animes.length) current = i;
+            updateHero(current);
+            resetHeroTimer();
+          });
+        })();
 
         // Swipe + mouse drag support
         (function(){
